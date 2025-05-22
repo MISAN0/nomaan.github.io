@@ -1,10 +1,46 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Nomaan's Site</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Nomaan is learning HTML now.</title>
+  <style>
+    html, body {
+      height: 100%;
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      background: #fff;
+      color: #222;
+      width: 100vw;
+      min-height: 100vh;
+    }
+    body {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      font-family: 'Inter', 'Segoe UI', Arial, sans-serif;
+      background: linear-gradient(120deg, #f8fafc 0%, #e0e7ff 100%);
+    }
+    .fancy-text {
+      font-size: clamp(2rem, 6vw, 5rem);
+      font-weight: 700;
+      letter-spacing: 0.03em;
+      background: linear-gradient(90deg, #6366f1 0%, #0ea5e9 100%);
+      color: transparent;
+      -webkit-background-clip: text;
+      background-clip: text;
+      text-align: center;
+      text-shadow: 0 4px 32px rgba(99, 102, 241, 0.15);
+      margin: 0;
+      padding: 0 1rem;
+      border-radius: 12px;
+      user-select: none;
+    }
+  </style>
 </head>
 <body>
-    <h1>Nomaan currently learning how to build a website</h1>
+  <div class="fancy-text">Nomaan is learning HTML now.</div>
 </body>
 </html>
