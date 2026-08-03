@@ -197,13 +197,18 @@ main { position: relative; z-index: 1; }
 .radar-dot { fill: var(--cyan); }
 .radar-label { fill: var(--txt-mute); font-family: var(--mono); font-size: 9px; letter-spacing: .1em; }
 
-.stat-list { list-style: none; display: grid; gap: 8px; }
-.stat-list li { display: grid; grid-template-columns: 34px 1fr 60px 20px; align-items: center; gap: 8px; font-size: 12px; }
+.stat-list { list-style: none; display: grid; gap: 14px; }
+.stat-list li {
+  display: grid; grid-template-columns: 46px 1fr auto; align-items: baseline;
+  column-gap: 8px; row-gap: 5px; font-size: 12px;
+}
 .stat-key { font-family: var(--mono); font-size: 9.5px; color: var(--cyan); letter-spacing: .08em; }
-.stat-label { color: var(--txt-dim); }
-.stat-bar { height: 5px; border-radius: 99px; background: var(--panel-2); overflow: hidden; }
+.stat-label { color: var(--txt); font-size: 13px; }
+.stat-bar { grid-column: 1 / -1; height: 5px; border-radius: 99px; background: var(--panel-2); overflow: hidden; }
 .stat-bar i { display: block; height: 100%; width: var(--w); background: linear-gradient(90deg, var(--violet), var(--cyan)); }
-.stat-num { font-family: var(--mono); text-align: right; color: var(--txt-mute); }
+.stat-num { font-family: var(--mono); font-size: 13px; text-align: right; color: var(--txt); }
+.stat-num em { font-style: normal; font-size: 9.5px; color: var(--txt-mute); }
+.stat-desc { grid-column: 1 / -1; font-size: 11.5px; line-height: 1.45; color: var(--txt-mute); }
 
 /* ── Reveal ─────────────────────────────────────────────── */
 .reveal { opacity: 0; transform: translateY(18px); transition: opacity .6s ease, transform .6s cubic-bezier(.2,.8,.2,1); transition-delay: calc(var(--i, 0) * 60ms); }
@@ -263,9 +268,9 @@ main { position: relative; z-index: 1; }
 .tree { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 18px; }
 .branch { background: var(--panel); border: 1px solid var(--line-2); border-radius: var(--radius); padding: 18px; }
 .branch-name { font-family: var(--mono); font-size: 11px; letter-spacing: .16em; text-transform: uppercase; color: var(--violet); margin-bottom: 14px; }
-.branch[data-branch="Security"] .branch-name { color: var(--magenta); }
+.branch[data-branch="Cyber Security"] .branch-name { color: var(--magenta); }
 .branch[data-branch="Systems"]  .branch-name { color: var(--cyan); }
-.branch[data-branch="Data"]     .branch-name { color: var(--amber); }
+.branch[data-branch="AI & Data"]     .branch-name { color: var(--amber); }
 .branch[data-branch="Web"]      .branch-name { color: var(--lime); }
 .branch[data-branch="Big Data"] .branch-name { color: var(--red); }
 .branch[data-branch="Process"]  .branch-name { color: #7fb0ff; }
@@ -281,9 +286,9 @@ main { position: relative; z-index: 1; }
 .node-pips i { width: 6px; height: 6px; border-radius: 99px; background: var(--line-2); }
 .node-pips i.on { background: currentColor; box-shadow: 0 0 8px currentColor; }
 .branch[data-branch="Code"]     .node-pips i.on { color: var(--violet); }
-.branch[data-branch="Security"] .node-pips i.on { color: var(--magenta); }
+.branch[data-branch="Cyber Security"] .node-pips i.on { color: var(--magenta); }
 .branch[data-branch="Systems"]  .node-pips i.on { color: var(--cyan); }
-.branch[data-branch="Data"]     .node-pips i.on { color: var(--amber); }
+.branch[data-branch="AI & Data"]     .node-pips i.on { color: var(--amber); }
 .branch[data-branch="Web"]      .node-pips i.on { color: var(--lime); }
 .branch[data-branch="Big Data"] .node-pips i.on { color: var(--red); }
 .branch[data-branch="Process"]  .node-pips i.on { color: #7fb0ff; }

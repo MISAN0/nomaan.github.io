@@ -58,19 +58,19 @@ function renderSheet(data, xp) {
   const hds = data.codex.filter(u => u.grade === 'HD').length;
   const chips = [
     ['Level', xp.level],
-    ['GPA', `${data.academic.gpa} / ${data.academic.gpaScale}`],
-    ['Units passed', data.codex.filter(u => u.grade !== 'IP').length],
+    [`GPA (out of ${data.academic.gpaScale})`, data.academic.gpa],
+    ['University units passed', data.codex.filter(u => u.grade !== 'IP').length],
     ['High Distinctions', hds],
-    ['Degree', `${xp.degreePct}%`],
-    ['Location', p.location]
+    ['Graduating', data.academic.graduating],
+    ['Based in', p.location]
   ];
   $('#playerChips').innerHTML = chips
     .map(([k, v], i) => `<li style="--i:${i}"><span>${esc(k)}</span><b>${esc(v)}</b></li>`)
     .join('');
 
-  $('#degreeVal').textContent = xp.degreePct + '%';
+  $('#degreeVal').textContent = xp.degreePct + '% complete';
   $('#degreeNote').textContent =
-    `${xp.donePts} of ${xp.coursePts} credit points · GPA ${data.academic.gpa} as at ${data.academic.gpaDate}`;
+    `${xp.donePts} of ${xp.coursePts} credit points passed · ${data.academic.degreeName}, graduating ${data.academic.graduating}`;
   requestAnimationFrame(() => { $('#degreeFill').style.width = xp.degreePct + '%'; });
 
   $('#ghLink').href = p.links.github;
@@ -80,8 +80,9 @@ function renderSheet(data, xp) {
     <li style="--i:${i}">
       <span class="stat-key">${esc(a.key)}</span>
       <span class="stat-label">${esc(a.label)}</span>
+      <span class="stat-num">${a.value}<em>/10</em></span>
       <span class="stat-bar"><i style="--w:${a.value * 10}%"></i></span>
-      <span class="stat-num">${a.value}</span>
+      <span class="stat-desc">${esc(a.desc)}</span>
     </li>`).join('');
 
   $('#contactLinks').innerHTML = `
@@ -95,7 +96,8 @@ function renderSheet(data, xp) {
 /* ---------- Radar chart ---------- */
 function renderRadar(attrs) {
   const svg = $('#radar');
-  const cx = 110, cy = 110, R = 82, n = attrs.length;
+  // Wider than tall so the outer key labels have room either side.
+  const cx = 130, cy = 108, R = 76, n = attrs.length;
   const pt = (i, r) => {
     const a = (Math.PI * 2 * i) / n - Math.PI / 2;
     return [cx + Math.cos(a) * r, cy + Math.sin(a) * r];
@@ -119,7 +121,7 @@ function renderRadar(attrs) {
     out += `<circle cx="${x}" cy="${y}" r="3" class="radar-dot"/>`;
   });
   attrs.forEach((a, i) => {
-    const [x, y] = pt(i, R + 18);
+    const [x, y] = pt(i, R + 20);
     out += `<text x="${x}" y="${y}" class="radar-label" text-anchor="middle" dominant-baseline="middle">${esc(a.key)}</text>`;
   });
 

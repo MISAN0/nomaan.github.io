@@ -13,27 +13,38 @@ const DATA = {
   player: {
     name: "Mir Salman Nomaan",
     handle: "MISAN0",
-    class: "Security Engineer",
-    subclass: "Data & Secure Systems",
+    class: "ICT Student",
+    subclass: "Cyber Security & Computer Science",
     location: "Hobart, Tasmania",
     avatar: "photo.jpg",
-    status: "Open to graduate roles",
+    status: "Open to graduate, ICT support and help desk roles",
     // one-liner under the name
-    tagline: "Final-year ICT student building REST APIs, security tooling, and data-driven systems.",
+    tagline: "A computer enthusiast on the road to mastery — levelling up through cyber security, networking, and AI, one lab at a time.",
     links: {
       github: "https://github.com/MISAN0",
       linkedin: "https://linkedin.com/in/nomaan00"
     }
   },
 
-  /* ---------- Attributes (0–10) — drives the radar chart ---------- */
+  /* ---------- Attributes (0–10) — drives the radar chart ----------
+     key   = short label on the radar (keep to 5 characters or fewer)
+     label = full name shown in the list
+     desc  = what the score actually covers, so nobody has to guess     */
   attributes: [
-    { key: "SEC", label: "Security",   value: 8 },
-    { key: "NET", label: "Networking", value: 7 },
-    { key: "CODE", label: "Code",      value: 7 },
-    { key: "DATA", label: "Data / ML", value: 8 },
-    { key: "SYS", label: "Systems",    value: 8 },
-    { key: "COMM", label: "Comms",     value: 8 }
+    { key: "CYBER", label: "Cyber Security", value: 8,
+      desc: "Network defence, API security, ethical hacking, incident response, digital forensics" },
+    { key: "NET",   label: "Networking", value: 7,
+      desc: "TCP/IP, routing and switching, subnetting and VLSM, LAN/WAN configuration — CCNA in progress" },
+    { key: "PROG",  label: "Programming", value: 7,
+      desc: "Python, C, Java, C# and Bash — data structures, algorithms, automated testing" },
+    { key: "AI",    label: "AI & Machine Learning", value: 7,
+      desc: "Neural networks, deep learning, natural language processing, reinforcement learning" },
+    { key: "DATA",  label: "Data Engineering", value: 7,
+      desc: "SQL, Pandas, PySpark and Hadoop — wrangling, statistics, visualisation at scale" },
+    { key: "SYS",   label: "Systems & Servers", value: 8,
+      desc: "Linux administration, operating system internals, server hardening, cloud fundamentals" },
+    { key: "COMM",  label: "Communication", value: 8,
+      desc: "Technical writing, documentation, teamwork, and client-facing project work" }
   ],
 
   /* ---------- Active quests ----------
@@ -66,7 +77,7 @@ const DATA = {
   goals: [
     {
       title: "Graduate — Bachelor of ICT",
-      detail: "Computer Science & Cybersecurity double major, University of Tasmania. 262.5 of 300 credit points cleared.",
+      detail: "Computer Science & Cyber Security double major, University of Tasmania. 262.5 of 300 credit points cleared.",
       target: "Dec 2026",
       steps: [
         { label: "21 units passed", done: true },
@@ -88,7 +99,7 @@ const DATA = {
     },
     {
       title: "Graduate role in ICT",
-      detail: "Open across ICT, cybersecurity, computer science, networking, and AI. Australia-based, and happy to start on a service desk — the fastest way into the industry is through the door.",
+      detail: "Open across ICT, cyber security, computer science, networking, and AI. Australia-based, and happy to start on a service desk — the fastest way into the industry is through the door.",
       target: "2026 / 2027",
       steps: [
         { label: "Portfolio live", done: true },
@@ -123,17 +134,17 @@ const DATA = {
     { name: "Web Scraping",       branch: "Web",      tier: 3, level: 3 },  // cheerio + node-fetch
     { name: "Firebase",           branch: "Web",      tier: 3, level: 2 },
 
-    { name: "Network Security",   branch: "Security", tier: 1, level: 4 },
-    { name: "API Security",       branch: "Security", tier: 2, level: 4 },
-    { name: "OWASP API Top 10",   branch: "Security", tier: 2, level: 3 },
-    { name: "Threat Modelling",   branch: "Security", tier: 2, level: 3 },  // unlocked — KIT304 risk analysis
-    { name: "TLS / Certificates", branch: "Security", tier: 2, level: 3 },
-    { name: "Cryptography",       branch: "Security", tier: 2, level: 3 },  // hashing, one-way functions
-    { name: "Incident Response",  branch: "Security", tier: 3, level: 3 },  // ACSC IR plan, KIT325
-    { name: "MITM Analysis",      branch: "Security", tier: 3, level: 3 },
-    { name: "eForensics",         branch: "Security", tier: 3, level: 3 },
-    { name: "Ethical Hacking",    branch: "Security", tier: 3, level: 3 },
-    { name: "Cloud Security",     branch: "Security", tier: 3, level: 0 },  // locked = next unlock
+    { name: "Network Security",   branch: "Cyber Security", tier: 1, level: 4 },
+    { name: "API Security",       branch: "Cyber Security", tier: 2, level: 4 },
+    { name: "OWASP API Top 10",   branch: "Cyber Security", tier: 2, level: 3 },
+    { name: "Threat Modelling",   branch: "Cyber Security", tier: 2, level: 3 },  // unlocked — KIT304 risk analysis
+    { name: "TLS / Certificates", branch: "Cyber Security", tier: 2, level: 3 },
+    { name: "Cryptography",       branch: "Cyber Security", tier: 2, level: 3 },  // hashing, one-way functions
+    { name: "Incident Response",  branch: "Cyber Security", tier: 3, level: 3 },  // ACSC IR plan, KIT325
+    { name: "MITM Analysis",      branch: "Cyber Security", tier: 3, level: 3 },
+    { name: "eForensics",         branch: "Cyber Security", tier: 3, level: 3 },
+    { name: "Ethical Hacking",    branch: "Cyber Security", tier: 3, level: 3 },
+    { name: "Cloud Security",     branch: "Cyber Security", tier: 3, level: 0 },  // locked = next unlock
 
     { name: "TCP/IP",             branch: "Systems",  tier: 1, level: 4 },
     { name: "Linux / Kali",       branch: "Systems",  tier: 1, level: 4 },
@@ -144,18 +155,18 @@ const DATA = {
     { name: "Cisco IOS",          branch: "Systems",  tier: 3, level: 2 },  // CCNA in progress
     { name: "OSPF / Routing",     branch: "Systems",  tier: 3, level: 0 },  // locked — CCNA month 2
 
-    { name: "Pandas",             branch: "Data",     tier: 1, level: 4 },
-    { name: "scikit-learn",       branch: "Data",     tier: 1, level: 4 },
-    { name: "Statistics",         branch: "Data",     tier: 1, level: 3 },  // ANOVA, chi-square
-    { name: "TensorFlow / Keras", branch: "Data",     tier: 2, level: 4 },
-    { name: "CNN / LSTM",         branch: "Data",     tier: 2, level: 4 },
-    { name: "PyTorch",            branch: "Data",     tier: 2, level: 3 },
-    { name: "NLP",                branch: "Data",     tier: 2, level: 3 },
-    { name: "Visualisation",      branch: "Data",     tier: 2, level: 3 },
-    { name: "GANs / VAEs",        branch: "Data",     tier: 3, level: 3 },
-    { name: "Reinforcement Lrn",  branch: "Data",     tier: 3, level: 3 },  // DQN, tf_agents, gym
-    { name: "XGBoost",            branch: "Data",     tier: 3, level: 2 },
-    { name: "OpenCV",             branch: "Data",     tier: 3, level: 2 },
+    { name: "Pandas",             branch: "AI & Data", tier: 1, level: 4 },
+    { name: "scikit-learn",       branch: "AI & Data", tier: 1, level: 4 },
+    { name: "Statistics",         branch: "AI & Data", tier: 1, level: 3 },  // ANOVA, chi-square
+    { name: "TensorFlow / Keras", branch: "AI & Data", tier: 2, level: 4 },
+    { name: "CNN / LSTM",         branch: "AI & Data", tier: 2, level: 4 },
+    { name: "PyTorch",            branch: "AI & Data", tier: 2, level: 3 },
+    { name: "NLP",                branch: "AI & Data", tier: 2, level: 3 },
+    { name: "Visualisation",      branch: "AI & Data", tier: 2, level: 3 },
+    { name: "GANs / VAEs",        branch: "AI & Data", tier: 3, level: 3 },
+    { name: "Reinforcement Lrn",  branch: "AI & Data", tier: 3, level: 3 },  // DQN, tf_agents, gym
+    { name: "XGBoost",            branch: "AI & Data", tier: 3, level: 2 },
+    { name: "OpenCV",             branch: "AI & Data", tier: 3, level: 2 },
 
     { name: "PySpark",            branch: "Big Data", tier: 2, level: 3 },
     { name: "Hadoop / MapReduce", branch: "Big Data", tier: 2, level: 3 },
@@ -176,7 +187,7 @@ const DATA = {
     {
       name: "API Exposure Auditor",
       rarity: "legendary",
-      type: "Security Tool",
+      type: "Cyber Security Tool",
       blurb: "Python tool that audits API endpoints for security misconfigurations — exposed OpenAPI/Swagger documentation, weak headers, CORS issues — and emits structured JSON reports for triage. Grounded in my own research on information disclosure from publicly exposed API specifications, framed against the OWASP API Security Top 10 and CWE-200.",
       stats: ["Python", "REST APIs", "OpenAPI", "OWASP", "CWE-200"],
       link: "https://github.com/MISAN0"
@@ -277,8 +288,10 @@ const DATA = {
   academic: {
     gpa: 5.04,
     gpaScale: 7,
-    coursePoints: 300,     // total credit points in the degree
-    gpaDate: "24 Jun 2026"
+    coursePoints: 300,      // total credit points in the degree
+    gpaDate: "24 Jun 2026",
+    graduating: "Dec 2026",
+    degreeName: "Bachelor of ICT"
   },
 
   /* ---------- Campaign log: experience + education ---------- */
@@ -311,7 +324,7 @@ const DATA = {
       period: "2023 – Dec 2026",
       kind: "edu",
       lines: [
-        "Double major: Computer Science and Cybersecurity · GPA 5.04 / 7",
+        "Double major: Computer Science and Cyber Security · GPA 5.04 / 7",
         "High Distinctions in Operating Systems (91), Data Science (85), Professional Practices (83), Secure Web Development (80), and Cybersecurity Policies & Practices (80)",
         "262.5 of 300 credit points completed — capstone and graphics remaining"
       ]

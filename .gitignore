@@ -6,3 +6,6 @@ desktop.ini
 # never publish private documents or local test output
 *.pdf
 _test/
+
+# local tooling
+.claude-flow/
