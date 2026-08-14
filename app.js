@@ -227,23 +227,41 @@ function renderGoals(goals) {
 }
 
 /* ---------- Skill tree ---------- */
+const LEVEL_WORD = ['Not started', 'Aware', 'Familiar', 'Working', 'Confident', 'Strong'];
+
 function renderSkills(skills) {
+  // Legend first — pips mean nothing without it.
+  $('#skillLegend').innerHTML = `
+    ${[1, 2, 3, 4, 5].map(l => `
+      <span class="legend-item">
+        <span class="node-pips">${Array.from({ length: 5 }, (_, k) =>
+          `<i class="${k < l ? 'on' : ''}"></i>`).join('')}</span>
+        ${esc(LEVEL_WORD[l])}
+      </span>`).join('')}
+    <span class="legend-item legend-locked"><span class="legend-lock">🔒</span> Learning next</span>`;
+
   const branches = [...new Set(skills.map(s => s.branch))];
   $('#skillTree').innerHTML = branches.map((b, bi) => {
-    const nodes = skills.filter(s => s.branch === b).sort((a, x) => a.tier - x.tier);
+    // Strongest first, so the top of each card is the most useful part.
+    const nodes = skills.filter(s => s.branch === b)
+      .sort((a, x) => x.level - a.level || a.name.localeCompare(x.name));
+    const live = nodes.filter(s => s.level > 0);
     return `
     <div class="branch reveal" style="--i:${bi}" data-branch="${esc(b)}">
-      <h3 class="branch-name">${esc(b)}</h3>
+      <div class="branch-head">
+        <h3 class="branch-name">${esc(b)}</h3>
+        <span class="branch-count">${live.length}</span>
+      </div>
       <div class="branch-nodes">
         ${nodes.map(s => `
-          <button class="node ${s.level === 0 ? 'locked' : ''}" type="button"
-                  aria-label="${esc(s.name)}, level ${s.level} of 5">
+          <div class="node ${s.level === 0 ? 'locked' : ''}"
+               title="${esc(s.name)} — ${esc(LEVEL_WORD[s.level])}${s.evidence ? ' · ' + esc(s.evidence) : ''}">
             <span class="node-name">${esc(s.name)}</span>
-            <span class="node-pips">${
+            ${s.evidence ? `<span class="node-evidence">${esc(s.evidence)}</span>` : ''}
+            <span class="node-pips" role="img" aria-label="${esc(LEVEL_WORD[s.level])}, ${s.level} of 5">${
               Array.from({ length: 5 }, (_, k) => `<i class="${k < s.level ? 'on' : ''}"></i>`).join('')
             }</span>
-            <span class="node-tier">T${s.tier}</span>
-          </button>`).join('')}
+          </div>`).join('')}
       </div>
     </div>`;
   }).join('');

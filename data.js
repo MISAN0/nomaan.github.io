@@ -174,75 +174,85 @@ const DATA = {
   ],
 
   /* ---------- Skill tree ----------
-     tier 1 = foundation, 3 = advanced. level 0–5.
-     level 0 renders as a locked node (a "next unlock").           */
+     level: 1 Aware · 2 Familiar · 3 Working · 4 Confident · 5 Strong
+            0 renders as a locked node — the next thing being unlocked.
+     evidence: where the skill came from. A unit code, a certification,
+            or a project. This is the citation behind the rating, and it
+            is what stops the tree being a list of unbacked claims.
+     Branch names mirror the attributes on the character sheet, so the
+     radar and the tree tell the same story.                            */
   skills: [
-    { name: "Python",             branch: "Code",     tier: 1, level: 5 },
-    { name: "C",                  branch: "Code",     tier: 1, level: 4 },  // KIT205/KIT107
-    { name: "Java",               branch: "Code",     tier: 1, level: 3 },
-    { name: "Bash / Shell",       branch: "Code",     tier: 2, level: 4 },  // KIT213 scripting
-    { name: "C# / Unity",         branch: "Code",     tier: 2, level: 3 },  // KIT109/KIT208
-    { name: "Git / GitHub",       branch: "Code",     tier: 2, level: 4 },
-    { name: "pytest",             branch: "Code",     tier: 2, level: 3 },
-    { name: "Docker",             branch: "Code",     tier: 3, level: 2 },
+    { name: "Python",                  branch: "Programming", level: 5, evidence: "KIT101 · KIT315" },
+    { name: "C",                       branch: "Programming", level: 4, evidence: "KIT205 · KIT107" },
+    { name: "Bash / Shell",            branch: "Programming", level: 4, evidence: "KIT213" },
+    { name: "Git & GitHub",            branch: "Programming", level: 4, evidence: "Projects" },
+    { name: "Java",                    branch: "Programming", level: 3, evidence: "KIT101" },
+    { name: "C# / Unity",              branch: "Programming", level: 3, evidence: "KIT208 · KIT307" },
+    { name: "pytest",                  branch: "Programming", level: 3, evidence: "Projects" },
+    { name: "Docker",                  branch: "Programming", level: 2, evidence: "Self-taught" },
 
-    { name: "REST APIs",          branch: "Web",      tier: 1, level: 4 },
-    { name: "HTTP / JSON",        branch: "Web",      tier: 1, level: 4 },
-    { name: "Node.js / Express",  branch: "Web",      tier: 2, level: 4 },  // KIT214
-    { name: "FastAPI",            branch: "Web",      tier: 2, level: 4 },
-    { name: "PHP / MySQL",        branch: "Web",      tier: 2, level: 3 },  // KIT202
-    { name: "SQL",                branch: "Web",      tier: 1, level: 4 },
-    { name: "Authentication",     branch: "Web",      tier: 2, level: 4 },
-    { name: "Input Validation",   branch: "Web",      tier: 2, level: 3 },
-    { name: "Web Scraping",       branch: "Web",      tier: 3, level: 3 },  // cheerio + node-fetch
-    { name: "Firebase",           branch: "Web",      tier: 3, level: 2 },
+    { name: "REST APIs",               branch: "Web & APIs", level: 4, evidence: "KIT214 · KIT304" },
+    { name: "HTTP & JSON",             branch: "Web & APIs", level: 4, evidence: "KIT214" },
+    { name: "Node.js & Express",       branch: "Web & APIs", level: 4, evidence: "KIT214" },
+    { name: "FastAPI",                 branch: "Web & APIs", level: 4, evidence: "Projects" },
+    { name: "Authentication",          branch: "Web & APIs", level: 4, evidence: "KIT214" },
+    { name: "PHP & MySQL",             branch: "Web & APIs", level: 3, evidence: "KIT202" },
+    { name: "Input Validation",        branch: "Web & APIs", level: 3, evidence: "KIT214" },
+    { name: "Web Scraping",            branch: "Web & APIs", level: 3, evidence: "KIT214" },
+    { name: "Firebase",                branch: "Web & APIs", level: 2, evidence: "KIT305" },
 
-    { name: "Network Security",   branch: "Cyber Security", tier: 1, level: 4 },
-    { name: "API Security",       branch: "Cyber Security", tier: 2, level: 4 },
-    { name: "OWASP API Top 10",   branch: "Cyber Security", tier: 2, level: 3 },
-    { name: "Threat Modelling",   branch: "Cyber Security", tier: 2, level: 3 },  // unlocked — KIT304 risk analysis
-    { name: "TLS / Certificates", branch: "Cyber Security", tier: 2, level: 3 },
-    { name: "Cryptography",       branch: "Cyber Security", tier: 2, level: 3 },  // hashing, one-way functions
-    { name: "Incident Response",  branch: "Cyber Security", tier: 3, level: 3 },  // ACSC IR plan, KIT325
-    { name: "MITM Analysis",      branch: "Cyber Security", tier: 3, level: 3 },
-    { name: "eForensics",         branch: "Cyber Security", tier: 3, level: 3 },
-    { name: "Ethical Hacking",    branch: "Cyber Security", tier: 3, level: 3 },
-    { name: "Cloud Security",     branch: "Cyber Security", tier: 3, level: 0 },  // locked = next unlock
+    { name: "Network Security",        branch: "Cyber Security", level: 4, evidence: "KIT111 · KIT215" },
+    { name: "API Security",            branch: "Cyber Security", level: 4, evidence: "KIT304" },
+    { name: "OWASP API Top 10",        branch: "Cyber Security", level: 3, evidence: "KIT304 research" },
+    { name: "Threat Modelling",        branch: "Cyber Security", level: 3, evidence: "KIT304 research" },
+    { name: "Cryptography",            branch: "Cyber Security", level: 3, evidence: "KIT103 · KIT214" },
+    { name: "TLS & Certificates",      branch: "Cyber Security", level: 3, evidence: "KIT214" },
+    { name: "Digital Forensics",       branch: "Cyber Security", level: 3, evidence: "KIT325" },
+    { name: "Incident Response",       branch: "Cyber Security", level: 3, evidence: "KIT325" },
+    { name: "MITM Analysis",           branch: "Cyber Security", level: 3, evidence: "KIT325" },
+    { name: "Ethical Hacking",         branch: "Cyber Security", level: 3, evidence: "KIT215" },
+    { name: "Cloud Security",          branch: "Cyber Security", level: 0, evidence: "Next unlock" },
 
-    { name: "TCP/IP",             branch: "Systems",  tier: 1, level: 4 },
-    { name: "Linux / Kali",       branch: "Systems",  tier: 1, level: 4 },
-    { name: "OS Internals",       branch: "Systems",  tier: 2, level: 4 },
-    { name: "Subnetting / VLSM",  branch: "Systems",  tier: 2, level: 4 },  // CCNA drill
-    { name: "LAN / WAN Config",   branch: "Systems",  tier: 2, level: 3 },
-    { name: "Server Admin",       branch: "Systems",  tier: 3, level: 3 },  // KIT304 DN
-    { name: "Cisco IOS",          branch: "Systems",  tier: 3, level: 2 },  // CCNA in progress
-    { name: "OSPF / Routing",     branch: "Systems",  tier: 3, level: 0 },  // locked — CCNA month 2
+    { name: "TCP/IP",                  branch: "Networking", level: 4, evidence: "KIT111 · KIT213" },
+    { name: "Subnetting & VLSM",       branch: "Networking", level: 4, evidence: "CCNA" },
+    { name: "LAN / WAN Configuration", branch: "Networking", level: 3, evidence: "KIT111" },
+    { name: "Routing & Switching",     branch: "Networking", level: 3, evidence: "CCNA" },
+    { name: "Cisco IOS",               branch: "Networking", level: 2, evidence: "CCNA" },
+    { name: "OSPF",                    branch: "Networking", level: 0, evidence: "Next unlock" },
 
-    { name: "Pandas",             branch: "AI & Data", tier: 1, level: 4 },
-    { name: "scikit-learn",       branch: "AI & Data", tier: 1, level: 4 },
-    { name: "Statistics",         branch: "AI & Data", tier: 1, level: 3 },  // ANOVA, chi-square
-    { name: "TensorFlow / Keras", branch: "AI & Data", tier: 2, level: 4 },
-    { name: "CNN / LSTM",         branch: "AI & Data", tier: 2, level: 4 },
-    { name: "PyTorch",            branch: "AI & Data", tier: 2, level: 3 },
-    { name: "NLP",                branch: "AI & Data", tier: 2, level: 3 },
-    { name: "Visualisation",      branch: "AI & Data", tier: 2, level: 3 },
-    { name: "GANs / VAEs",        branch: "AI & Data", tier: 3, level: 3 },
-    { name: "Reinforcement Lrn",  branch: "AI & Data", tier: 3, level: 3 },  // DQN, tf_agents, gym
-    { name: "XGBoost",            branch: "AI & Data", tier: 3, level: 2 },
-    { name: "OpenCV",             branch: "AI & Data", tier: 3, level: 2 },
+    { name: "Linux",                   branch: "Systems & Servers", level: 4, evidence: "KIT213" },
+    { name: "Operating System Internals", branch: "Systems & Servers", level: 4, evidence: "KIT213 (HD, 91)" },
+    { name: "Server Administration",   branch: "Systems & Servers", level: 3, evidence: "KIT304" },
+    { name: "Server Hardening",        branch: "Systems & Servers", level: 3, evidence: "KIT304" },
+    { name: "Cloud Computing",         branch: "Systems & Servers", level: 3, evidence: "KIT318" },
+    { name: "Kubernetes",              branch: "Systems & Servers", level: 0, evidence: "Next unlock" },
 
-    { name: "PySpark",            branch: "Big Data", tier: 2, level: 3 },
-    { name: "Hadoop / MapReduce", branch: "Big Data", tier: 2, level: 3 },
-    { name: "Spark MLlib",        branch: "Big Data", tier: 3, level: 3 },
-    { name: "Kafka",              branch: "Big Data", tier: 3, level: 0 },  // locked = next unlock
+    { name: "scikit-learn",            branch: "AI & Machine Learning", level: 4, evidence: "KIT315" },
+    { name: "TensorFlow & Keras",      branch: "AI & Machine Learning", level: 4, evidence: "KIT315" },
+    { name: "CNNs & LSTMs",            branch: "AI & Machine Learning", level: 4, evidence: "KIT315" },
+    { name: "PyTorch",                 branch: "AI & Machine Learning", level: 3, evidence: "KIT315" },
+    { name: "Natural Language Processing", branch: "AI & Machine Learning", level: 3, evidence: "KIT315" },
+    { name: "GANs & Autoencoders",     branch: "AI & Machine Learning", level: 3, evidence: "KIT315" },
+    { name: "Reinforcement Learning",  branch: "AI & Machine Learning", level: 3, evidence: "KIT315" },
+    { name: "XGBoost",                 branch: "AI & Machine Learning", level: 2, evidence: "KIT315" },
+    { name: "OpenCV",                  branch: "AI & Machine Learning", level: 2, evidence: "KIT315" },
 
-    { name: "Technical Writing",  branch: "Process",  tier: 1, level: 4 },
-    { name: "Agile / Scrum",      branch: "Process",  tier: 1, level: 4 },
-    { name: "Research & Analysis",branch: "Process",  tier: 1, level: 4 },
-    { name: "UML Modelling",      branch: "Process",  tier: 2, level: 3 },
-    { name: "UX Evaluation",      branch: "Process",  tier: 2, level: 3 },
-    { name: "PRINCE2",            branch: "Process",  tier: 2, level: 3 },
-    { name: "SFIA Framework",     branch: "Process",  tier: 3, level: 3 }
+    { name: "SQL",                     branch: "Data Engineering", level: 4, evidence: "KIT102 · KIT214" },
+    { name: "Pandas",                  branch: "Data Engineering", level: 4, evidence: "KIT102 · KIT318" },
+    { name: "PySpark",                 branch: "Data Engineering", level: 3, evidence: "KIT318" },
+    { name: "Hadoop & MapReduce",      branch: "Data Engineering", level: 3, evidence: "KIT318" },
+    { name: "Spark MLlib",             branch: "Data Engineering", level: 3, evidence: "KIT318" },
+    { name: "Statistics",              branch: "Data Engineering", level: 3, evidence: "KMA153" },
+    { name: "Data Visualisation",      branch: "Data Engineering", level: 3, evidence: "KIT102 · KIT315" },
+    { name: "Kafka",                   branch: "Data Engineering", level: 0, evidence: "Next unlock" },
+
+    { name: "Technical Writing",       branch: "Practice & Process", level: 4, evidence: "KIT105 (HD, 83)" },
+    { name: "Agile & Scrum",           branch: "Practice & Process", level: 4, evidence: "KIT203 · KIT219" },
+    { name: "Research & Analysis",     branch: "Practice & Process", level: 4, evidence: "KIT304 research" },
+    { name: "UML Modelling",           branch: "Practice & Process", level: 3, evidence: "KIT219" },
+    { name: "UX Evaluation",           branch: "Practice & Process", level: 3, evidence: "KIT219" },
+    { name: "PRINCE2",                 branch: "Practice & Process", level: 3, evidence: "KIT203" },
+    { name: "SFIA Framework",          branch: "Practice & Process", level: 3, evidence: "KIT105" }
   ],
 
   /* ---------- Artifacts (projects). rarity: legendary | epic | rare | common ---------- */

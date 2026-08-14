@@ -323,36 +323,61 @@ main { position: relative; z-index: 1; }
 .goal-pct { font-family: var(--mono); font-size: 10.5px; color: var(--txt-mute); display: block; margin-top: 7px; }
 
 /* ── Skill tree ─────────────────────────────────────────── */
-.tree { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 18px; }
+.tree { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 18px; }
 .branch { background: var(--panel); border: 1px solid var(--line-2); border-radius: var(--radius); padding: 18px; }
-.branch-name { font-family: var(--mono); font-size: 11px; letter-spacing: .16em; text-transform: uppercase; color: var(--violet); margin-bottom: 14px; }
-.branch[data-branch="Cyber Security"] .branch-name { color: var(--magenta); }
-.branch[data-branch="Systems"]  .branch-name { color: var(--cyan); }
-.branch[data-branch="AI & Data"]     .branch-name { color: var(--amber); }
-.branch[data-branch="Web"]      .branch-name { color: var(--lime); }
-.branch[data-branch="Big Data"] .branch-name { color: var(--red); }
-.branch[data-branch="Process"]  .branch-name { color: #7fb0ff; }
-.branch-nodes { display: grid; gap: 8px; }
+.branch-head { display: flex; align-items: center; justify-content: space-between; gap: 10px; margin-bottom: 14px; }
+.branch-name { font-family: var(--mono); font-size: 11px; letter-spacing: .16em; text-transform: uppercase; color: var(--violet); }
+.branch-count {
+  font-family: var(--mono); font-size: 10px; color: var(--txt-mute);
+  padding: 2px 8px; border-radius: 99px; border: 1px solid var(--line); background: var(--panel-2);
+}
+.branch[data-branch="Cyber Security"]      .branch-name { color: var(--magenta); }
+.branch[data-branch="Networking"]          .branch-name { color: var(--cyan); }
+.branch[data-branch="Systems & Servers"]   .branch-name { color: #6fa8ff; }
+.branch[data-branch="AI & Machine Learning"] .branch-name { color: var(--amber); }
+.branch[data-branch="Data Engineering"]    .branch-name { color: var(--red); }
+.branch[data-branch="Web & APIs"]          .branch-name { color: var(--lime); }
+.branch[data-branch="Practice & Process"]  .branch-name { color: #a9b4d6; }
+
+.branch-nodes { display: grid; gap: 7px; }
 .node {
-  display: grid; grid-template-columns: 1fr auto auto; align-items: center; gap: 10px;
-  width: 100%; text-align: left; cursor: default;
+  display: grid; grid-template-columns: 1fr auto; align-items: center;
+  column-gap: 10px; row-gap: 4px;
   background: var(--panel-2); border: 1px solid var(--line); border-radius: 10px;
-  padding: 9px 12px; color: var(--txt); font-family: inherit; font-size: 13px; transition: .18s;
+  padding: 9px 12px; color: var(--txt); font-size: 13px; transition: .18s;
 }
 .node:hover { border-color: var(--line-2); transform: translateX(3px); }
-.node-pips { display: flex; gap: 3px; }
+.node-name { min-width: 0; }
+.node-evidence {
+  grid-column: 1; font-family: var(--mono); font-size: 9.5px; color: var(--txt-mute);
+  letter-spacing: .04em;
+}
+.node-pips { grid-column: 2; grid-row: 1 / span 2; display: flex; gap: 3px; align-self: center; }
 .node-pips i { width: 6px; height: 6px; border-radius: 99px; background: var(--line-2); }
 .node-pips i.on { background: currentColor; box-shadow: 0 0 8px currentColor; }
-.branch[data-branch="Code"]     .node-pips i.on { color: var(--violet); }
-.branch[data-branch="Cyber Security"] .node-pips i.on { color: var(--magenta); }
-.branch[data-branch="Systems"]  .node-pips i.on { color: var(--cyan); }
-.branch[data-branch="AI & Data"]     .node-pips i.on { color: var(--amber); }
-.branch[data-branch="Web"]      .node-pips i.on { color: var(--lime); }
-.branch[data-branch="Big Data"] .node-pips i.on { color: var(--red); }
-.branch[data-branch="Process"]  .node-pips i.on { color: #7fb0ff; }
-.node-tier { font-family: var(--mono); font-size: 9.5px; color: var(--txt-mute); }
-.node.locked { opacity: .5; border-style: dashed; }
+.branch[data-branch="Programming"]         .node-pips i.on { color: var(--violet); }
+.branch[data-branch="Cyber Security"]      .node-pips i.on { color: var(--magenta); }
+.branch[data-branch="Networking"]          .node-pips i.on { color: var(--cyan); }
+.branch[data-branch="Systems & Servers"]   .node-pips i.on { color: #6fa8ff; }
+.branch[data-branch="AI & Machine Learning"] .node-pips i.on { color: var(--amber); }
+.branch[data-branch="Data Engineering"]    .node-pips i.on { color: var(--red); }
+.branch[data-branch="Web & APIs"]          .node-pips i.on { color: var(--lime); }
+.branch[data-branch="Practice & Process"]  .node-pips i.on { color: #a9b4d6; }
+.node.locked { opacity: .55; border-style: dashed; }
 .node.locked .node-name::after { content: ' 🔒'; font-size: 10px; }
+
+/* Legend — the pips are meaningless without it */
+.legend {
+  display: flex; flex-wrap: wrap; align-items: center; gap: 8px 16px; margin-top: 18px;
+  padding: 12px 16px; border: 1px solid var(--line); border-radius: 10px; background: var(--panel);
+}
+.legend-item {
+  display: inline-flex; align-items: center; gap: 7px;
+  font-family: var(--mono); font-size: 10px; letter-spacing: .06em; color: var(--txt-mute);
+}
+.legend .node-pips i.on { color: var(--cyan); }
+.legend-locked { color: var(--txt-mute); }
+.legend-lock { font-size: 10px; }
 
 /* ── Artifacts ──────────────────────────────────────────── */
 .artifacts { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 18px; }
@@ -485,7 +510,12 @@ body.plain .portrait-status, body.plain .hud-lvl b, body.plain .branch-name,
 body.plain .rarity, body.plain .artifact-link { color: #43464f; }
 body.plain .portrait-status::before { background: #43464f; animation: none; }
 body.plain .rarity { background: #f6f6f8; }
-body.plain .node-pips i.on { color: #101014; box-shadow: none; }
+/* The branch colour rules carry an attribute selector, so the plain-mode
+   override has to out-specify them rather than merely follow them. */
+body.plain .node-pips i.on,
+body.plain .branch[data-branch] .node-pips i.on { color: #101014; box-shadow: none; }
+body.plain .branch[data-branch] .branch-name { color: #43464f; }
+body.plain .branch-count { color: #43464f; background: #f6f6f8; border-color: #d3d5dd; }
 body.plain .goal-steps .done i { background: #101014; border-color: #101014; box-shadow: none; }
 body.plain .quest-bar i, body.plain .goal-bar i, body.plain .stat-bar i,
 body.plain .degree-bar i { background: #101014; box-shadow: none; }
