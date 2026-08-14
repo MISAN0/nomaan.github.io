@@ -643,6 +643,17 @@ const DATA = {
 
     activities: [],
 
+    /* Referees are listed by name and role only. Their phone numbers and
+       email addresses are other people's personal information and are
+       deliberately not published on a public page — they go in the
+       application, on request. */
+    references: [
+      { name: "Dr James Montgomery", role: "Senior Lecturer in ICT", org: "University of Tasmania" },
+      { name: "Azaz Gondal", role: "ICT Academic Staff & Cyber Security Analyst", org: "University of Tasmania · Intuit" },
+      { name: "Samuel Horton", role: "ICT Academic Staff", org: "University of Tasmania" },
+      { name: "M Haneef", role: "Security Manager", org: "Kevlar Security Services" }
+    ],
+
     keywords: [
       "Cyber Security", "Information Security", "Network Security", "Application Security",
       "Incident Response", "Risk Assessment", "Threat Analysis", "Vulnerability Assessment",

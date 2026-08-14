@@ -435,7 +435,7 @@ function renderCV(data) {
       </header>
 
       <div class="cv-avail">
-        <span><b>Available</b> ${esc(ac.graduating)}</span>
+        <span><b>Graduating</b> ${esc(ac.graduating)}</span>
         <span><b>Seeking</b> ${esc(p.status.replace(/^Open to /, ''))}</span>
         <span><b>Location</b> ${esc(p.location)}</span>
       </div>
@@ -468,15 +468,15 @@ function renderCV(data) {
       </section>
 
       <section class="cv-sec">
-        <h2>Professional Experience</h2>
-        ${cv.experience.map(e => `
-          <div class="cv-role">
+        <h2>Selected Projects</h2>
+        ${projects.map(a => `
+          <div class="cv-proj">
             <div class="cv-role-head">
-              <h3>${esc(e.role)} <span class="cv-org">— ${esc(e.org)}</span></h3>
-              <span class="cv-dates">${esc(e.period)}</span>
+              <h3>${esc(a.name)} <span class="cv-org">— ${esc(a.type)}</span></h3>
+              <span class="cv-dates">${esc(a.year)}</span>
             </div>
-            <p class="cv-loc">${esc(e.location)}</p>
-            <ul class="cv-list">${e.bullets.map(b => `<li>${esc(b)}</li>`).join('')}</ul>
+            <p>${esc(a.blurb)}</p>
+            <p class="cv-tech"><b>Technologies:</b> ${a.stats.map(esc).join(', ')}</p>
           </div>`).join('')}
       </section>
 
@@ -500,15 +500,15 @@ function renderCV(data) {
       </section>
 
       <section class="cv-sec">
-        <h2>Selected Projects</h2>
-        ${projects.map(a => `
-          <div class="cv-proj">
+        <h2>Professional Experience</h2>
+        ${cv.experience.map(e => `
+          <div class="cv-role">
             <div class="cv-role-head">
-              <h3>${esc(a.name)} <span class="cv-org">— ${esc(a.type)}</span></h3>
-              <span class="cv-dates">${esc(a.year)}</span>
+              <h3>${esc(e.role)} <span class="cv-org">— ${esc(e.org)}</span></h3>
+              <span class="cv-dates">${esc(e.period)}</span>
             </div>
-            <p>${esc(a.blurb)}</p>
-            <p class="cv-tech"><b>Technologies:</b> ${a.stats.map(esc).join(', ')}</p>
+            <p class="cv-loc">${esc(e.location)}</p>
+            <ul class="cv-list">${e.bullets.map(b => `<li>${esc(b)}</li>`).join('')}</ul>
           </div>`).join('')}
       </section>
 
@@ -516,6 +516,20 @@ function renderCV(data) {
       <section class="cv-sec">
         <h2>Activities &amp; Involvement</h2>
         <ul class="cv-list">${cv.activities.map(a => `<li>${esc(a)}</li>`).join('')}</ul>
+      </section>` : ''}
+
+      ${cv.references && cv.references.length ? `
+      <section class="cv-sec">
+        <h2>References</h2>
+        <div class="cv-refs">
+          ${cv.references.map(r => `
+            <div class="cv-ref">
+              <b>${esc(r.name)}</b>
+              <span>${esc(r.role)}</span>
+              <em>${esc(r.org)}</em>
+            </div>`).join('')}
+        </div>
+        <p class="cv-ref-note">Contact details available on request.</p>
       </section>` : ''}
 
       <section class="cv-sec cv-sec-keywords">
