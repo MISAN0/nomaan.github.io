@@ -129,22 +129,69 @@ function renderRadar(attrs) {
 }
 
 /* ---------- Quests ---------- */
+const QUEST_STATE = {
+  active: '◈ In progress',
+  queued: '◇ Queued',
+  paused: '❚❚ Paused',
+  done:   '✔ Complete'
+};
+
+/* Progress comes from the objectives, so the bar can never disagree with
+   the checklist printed directly above it. */
+function questProgress(q) {
+  if (!q.objectives || !q.objectives.length) return q.progress ?? 0;
+  const done = q.objectives.filter(o => o.done).length;
+  return Math.round((done / q.objectives.length) * 100);
+}
+
 function renderQuests(quests) {
-  $('#questList').innerHTML = quests.map((q, i) => `
+  const count = s => quests.filter(q => q.status === s).length;
+  const tally = [
+    [count('active'), 'active'],
+    [count('queued'), 'queued'],
+    [count('done'), 'complete']
+  ].filter(([n]) => n > 0).map(([n, label]) => `${n} ${label}`).join(' · ');
+  $('#questTally').textContent = tally;
+
+  $('#questList').innerHTML = quests.map((q, i) => {
+    const pct = questProgress(q);
+    const done = (q.objectives || []).filter(o => o.done).length;
+    const total = (q.objectives || []).length;
+    return `
     <article class="quest reveal is-${esc(q.status)}" style="--i:${i}">
       <div class="quest-top">
-        <span class="quest-state">${q.status === 'active' ? '◈ In progress' : q.status === 'done' ? '✔ Complete' : '❚❚ Paused'}</span>
+        <span class="quest-state">${QUEST_STATE[q.status] || q.status}</span>
         <span class="quest-due">${esc(q.due)}</span>
       </div>
-      <h3 class="quest-title">${esc(q.title)}</h3>
+
+      <div class="quest-head">
+        <h3 class="quest-title">${esc(q.title)}</h3>
+        ${q.rank ? `<span class="quest-rank" title="Difficulty rank">${esc(q.rank)}</span>` : ''}
+      </div>
       <p class="quest-role">${esc(q.role)}</p>
       <p class="quest-blurb">${esc(q.blurb)}</p>
+
+      ${total ? `
+      <ul class="quest-objectives">
+        ${q.objectives.map(o => `<li class="${o.done ? 'done' : ''}"><i></i>${esc(o.label)}</li>`).join('')}
+      </ul>` : ''}
+
       <div class="quest-tags">${q.tags.map(t => `<span>${esc(t)}</span>`).join('')}</div>
-      <div class="quest-bar" role="progressbar" aria-valuenow="${q.progress}" aria-valuemin="0" aria-valuemax="100">
-        <i style="--w:${q.progress}%"></i>
+
+      <div class="quest-bar" role="progressbar" aria-valuenow="${pct}" aria-valuemin="0" aria-valuemax="100"
+           aria-label="${esc(q.title)} progress">
+        <i style="--w:${pct}%"></i>
       </div>
-      <div class="quest-foot"><span>Next: ${esc(q.next)}</span><b>${q.progress}%</b></div>
-    </article>`).join('');
+      <div class="quest-foot">
+        <span>${total ? `${done} of ${total} objectives` : 'In progress'}</span>
+        <b>${pct}%</b>
+      </div>
+      <div class="quest-meta">
+        <span class="quest-next">Next: ${esc(q.next)}</span>
+        ${q.reward ? `<span class="quest-reward">+${q.reward} XP</span>` : ''}
+      </div>
+    </article>`;
+  }).join('');
 }
 
 /* ---------- Goals ---------- */

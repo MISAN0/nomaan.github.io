@@ -224,14 +224,42 @@ main { position: relative; z-index: 1; }
 .quest::before { content: ''; position: absolute; inset: 0 auto 0 0; width: 3px; background: var(--magenta); }
 .quest.is-done::before { background: var(--lime); }
 .quest.is-paused::before { background: var(--txt-mute); }
+.quest.is-queued::before { background: var(--violet); }
+.quest.is-queued { border-style: dashed; }
 .quest:hover { transform: translateY(-3px); border-color: var(--magenta); }
+.quest.is-queued:hover { border-color: var(--violet); }
 .quest-top { display: flex; justify-content: space-between; font-family: var(--mono); font-size: 10.5px; letter-spacing: .06em; }
 .quest-state { color: var(--magenta); }
 .quest.is-done .quest-state { color: var(--lime); }
+.quest.is-queued .quest-state { color: var(--violet); }
 .quest-due { color: var(--txt-mute); }
-.quest-title { font-size: 19px; margin: 12px 0 2px; letter-spacing: -.01em; }
+
+.quest-head { display: flex; align-items: center; justify-content: space-between; gap: 10px; margin: 12px 0 2px; }
+.quest-title { font-size: 19px; letter-spacing: -.01em; }
+.quest-rank {
+  flex: none; width: 26px; height: 26px; border-radius: 8px;
+  display: grid; place-items: center;
+  font-family: var(--mono); font-size: 13px; font-weight: 700;
+  color: var(--amber); background: rgba(255,182,72,.12); border: 1px solid rgba(255,182,72,.4);
+}
 .quest-role { font-family: var(--mono); font-size: 11px; color: var(--cyan); margin-bottom: 10px; }
 .quest-blurb { font-size: 14px; color: var(--txt-dim); }
+
+.quest-objectives { list-style: none; display: grid; gap: 7px; margin: 16px 0 4px; }
+.quest-objectives li {
+  display: grid; grid-template-columns: 14px 1fr; align-items: start; gap: 9px;
+  font-size: 13px; color: var(--txt-mute); line-height: 1.45;
+}
+.quest-objectives i {
+  width: 13px; height: 13px; margin-top: 3px; border-radius: 4px;
+  border: 1px solid var(--line-2); flex: none;
+}
+.quest-objectives .done { color: var(--txt); }
+.quest-objectives .done i {
+  background: var(--lime); border-color: var(--lime);
+  box-shadow: 0 0 10px rgba(139,239,90,.35);
+}
+
 .quest-tags { display: flex; flex-wrap: wrap; gap: 6px; margin: 14px 0 16px; }
 .quest-tags span {
   font-family: var(--mono); font-size: 10px; padding: 3px 8px; border-radius: 6px;
@@ -246,6 +274,20 @@ main { position: relative; z-index: 1; }
 @keyframes fill { to { width: var(--w); } }
 .quest-foot { display: flex; justify-content: space-between; margin-top: 8px; font-family: var(--mono); font-size: 10.5px; color: var(--txt-mute); }
 .quest-foot b { color: var(--txt); }
+.quest-meta {
+  display: flex; justify-content: space-between; align-items: center; gap: 12px;
+  margin-top: 14px; padding-top: 12px; border-top: 1px solid var(--line);
+  font-family: var(--mono); font-size: 10.5px; color: var(--txt-mute);
+}
+.quest-next { min-width: 0; }
+.quest-reward { flex: none; color: var(--amber); }
+
+.section-tally {
+  font-family: var(--mono); font-size: 10.5px; letter-spacing: .08em;
+  text-transform: uppercase; color: var(--txt-mute);
+  padding: 3px 9px; border-radius: 99px; border: 1px solid var(--line-2);
+  background: var(--panel); margin-left: 8px; white-space: nowrap;
+}
 
 /* ── Goals ──────────────────────────────────────────────── */
 .goals { display: grid; grid-template-columns: repeat(auto-fit, minmax(290px, 1fr)); gap: 18px; }
@@ -408,6 +450,10 @@ body.plain .hud-sigil { background: #f6f6f8; }
 body.plain .sheet-card, body.plain .contact-card { background: #fff; box-shadow: none; }
 body.plain .portrait-frame { background: #f6f6f8; }
 body.plain .quest::before { display: none; }
+body.plain .quest.is-queued { border-style: solid; }
+body.plain .quest-rank { color: #101014; background: #f6f6f8; border-color: #d3d5dd; }
+body.plain .quest-reward { color: #43464f; }
+body.plain .quest-objectives .done i { background: #101014; border-color: #101014; box-shadow: none; }
 body.plain .reveal { opacity: 1; transform: none; }
 body.plain .hud-nav a.is-cta { color: #fff; background: #101014; }
 body.plain .btn-primary { background: #101014; color: #fff; border-color: #101014; }

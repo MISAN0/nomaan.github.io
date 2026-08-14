@@ -48,28 +48,64 @@ const DATA = {
   ],
 
   /* ---------- Active quests ----------
-     progress: 0–100. status: active | paused | done
+     status:     active | queued | paused | done
+     rank:       S / A / B / C — how demanding the quest is
+     reward:     XP added to the running total once it is finished
+     objectives: the checkpoints inside the quest; progress is calculated
+                 from these, so tick one and the bar moves on its own
      Deliberately kept general — no live coursework or client work here.  */
   quests: [
     {
       title: "CCNA 200-301",
-      role: "Certification study",
-      blurb: "Cisco networking certification. Two hours a day: video, Packet Tracer lab, Anki, practice questions. Subnetting drilled to under 60 seconds on any prefix.",
-      tags: ["Cisco", "Networking", "Packet Tracer"],
-      progress: 12,          // EDIT as you work through the plan
+      role: "Cisco certification",
+      rank: "A",
+      reward: 400,
+      blurb: "Two hours a day: lecture, Packet Tracer lab, Anki review, practice questions. Every hour of video is matched by an hour of hands-on configuration.",
+      tags: ["Cisco", "Networking", "Packet Tracer", "Subnetting"],
       status: "active",
       due: "Oct 2026",
-      next: "Section 5 — TCP/UDP and the transport layer"
+      next: "Section 5 — TCP/UDP and the transport layer",
+      objectives: [
+        { label: "Subnet any prefix in under 60 seconds", done: true },
+        { label: "Network fundamentals and switching", done: false },
+        { label: "VLANs, trunking and spanning tree", done: false },
+        { label: "OSPFv2 configured and troubleshot from scratch", done: false },
+        { label: "Practice exams at 85% twice running", done: false }
+      ]
     },
     {
-      title: "Portfolio v2",
-      role: "Side build",
-      blurb: "This site. Static, no build step, data-driven — one file drives every panel.",
-      tags: ["JS", "CSS", "Design"],
-      progress: 90,
+      title: "This Portfolio",
+      role: "Personal project",
+      rank: "B",
+      reward: 150,
+      blurb: "The site you are reading. Static HTML, CSS and JavaScript with no build step and no framework — every panel renders from a single data file.",
+      tags: ["JavaScript", "CSS", "SVG", "Design"],
       status: "active",
-      due: "2026",
-      next: "Ship + iterate"
+      due: "Ongoing",
+      next: "Refine each section, then keep it current",
+      objectives: [
+        { label: "Data-driven rebuild — one file drives the site", done: true },
+        { label: "Live on a custom domain", done: true },
+        { label: "Plain CV view for recruiters", done: true },
+        { label: "Refine every section", done: false }
+      ]
+    },
+    {
+      title: "CompTIA Security+ SY0-701",
+      role: "Cyber security certification",
+      rank: "A",
+      reward: 400,
+      blurb: "Phase two of the certification plan, starting once the CCNA is passed. Scenario-driven rather than lab-driven: threats, architecture, operations, and governance.",
+      tags: ["CompTIA", "Cyber Security", "Incident Response"],
+      status: "queued",
+      due: "Dec 2026",
+      next: "Unlocks when the CCNA is passed",
+      objectives: [
+        { label: "General security concepts", done: false },
+        { label: "Threats, vulnerabilities and mitigations", done: false },
+        { label: "Security architecture and operations", done: false },
+        { label: "Practice exams at 80% twice running", done: false }
+      ]
     }
   ],
 
