@@ -501,40 +501,61 @@ const DATA = {
     { code: "IP", name: "In progress",      range: "enrolled now" }
   ],
 
-  /* ---------- Campaign log: experience + education ---------- */
+  /* ---------- Campaign log: work and study ----------
+     current:   true keeps a "Now" marker on the entry.
+     highlight: one line worth pulling out of the list.
+     Keep `lines` to three at most — this is a summary, not a duty
+     statement.                                                        */
   campaign: [
     {
       title: "Security Officer",
-      org: "Kevlar Security · Hobart City Security",
+      org: "KSS · Hobart",
       period: "2023 – Present",
       kind: "work",
+      current: true,
       lines: [
-        "Maintained situational awareness and followed strict operational protocols in high-responsibility environments",
-        "Responded to incidents quickly and ensured safety compliance across multiple sites",
-        "Built the attention to detail and risk instinct that carries into secure systems work"
-      ]
+        "Crowd control at sporting events, concerts, music festivals, clubs and pubs",
+        "Static guarding and access control across maritime, construction, mall and office sites",
+        "Venue control for local festivals"
+      ],
+      tags: ["Crowd Control", "Access Control", "Static Guarding", "Maritime"]
+    },
+    {
+      title: "Security Officer",
+      org: "MA Security · Hobart",
+      period: "Dec 2023 – Dec 2025",
+      kind: "work",
+      highlight: "Maritime security at TasPorts — critical infrastructure under regulated access control.",
+      lines: [
+        "Retail security, asset protection and undercover loss prevention",
+        "Crowd control across licensed and public venues"
+      ],
+      tags: ["Maritime · TasPorts", "Asset Protection", "Undercover", "Retail"]
     },
     {
       title: "Retail Team Member",
       org: "Coles Supermarket · Hobart",
       period: "Oct 2023 – Present",
       kind: "work",
+      current: true,
       lines: [
-        "Delivered customer service in a high-volume environment with fast issue resolution",
-        "Worked collaboratively to maintain operations, stock accuracy, and store organisation",
-        "Sharpened communication and problem-solving under time pressure"
-      ]
+        "Customer service and fast issue resolution in a high-volume store",
+        "Team operations, stock accuracy and floor organisation"
+      ],
+      tags: ["Customer Service", "Operations"]
     },
     {
       title: "Bachelor of Information and Communication Technology",
       org: "University of Tasmania · Hobart",
       period: "2023 – Dec 2026",
       kind: "edu",
+      current: true,
       lines: [
         "Double major: Computer Science and Cyber Security · GPA 5.04 / 7",
-        "High Distinctions in Operating Systems (91), Data Science (85), Professional Practices (83), Secure Web Development (80), and Cybersecurity Policies & Practices (80)",
-        "262.5 of 300 credit points completed — capstone and graphics remaining"
-      ]
+        "High Distinctions in Operating Systems, Data Science, Professional Practices, Secure Web Development and Cyber Security Policies",
+        "262.5 of 300 credit points completed"
+      ],
+      tags: ["Cyber Security", "Computer Science"]
     }
   ],
 
