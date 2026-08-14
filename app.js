@@ -430,6 +430,163 @@ function renderAchievements(list) {
     </div>`).join('');
 }
 
+/* ============================================================
+   CV MODE
+   A separate document for a hiring audience, built from the same
+   data. Not a restyle of the game page: different sections,
+   different order, different language.
+   ============================================================ */
+function renderCV(data) {
+  const p = data.player, cv = data.cv, ac = data.academic;
+
+  /* --- Contact line: only what is actually set --- */
+  const contact = [
+    p.links.email ? `<a href="mailto:${esc(p.links.email)}">${esc(p.links.email)}</a>` : '',
+    `<a href="${esc(p.links.linkedin)}" target="_blank" rel="noopener">${esc(p.links.linkedin.replace('https://', ''))}</a>`,
+    `<a href="${esc(p.links.github)}" target="_blank" rel="noopener">${esc(p.links.github.replace('https://', ''))}</a>`,
+    `<span>${esc(p.location)}</span>`
+  ].filter(Boolean).join('<i aria-hidden="true">·</i>');
+
+  /* --- Download button, only when a file exists --- */
+  const download = cv.file
+    ? `<a class="cv-download" href="${esc(cv.file)}" download>
+         <span class="cv-dl-icon" aria-hidden="true">↓</span>
+         <span><b>Download CV</b><em>${esc(cv.fileLabel || 'PDF')}</em></span>
+       </a>`
+    : '';
+
+  /* --- Key skills, grouped, strongest first, from the skill tree --- */
+  const branches = [...new Set(data.skills.map(s => s.branch))];
+  const skillGroups = branches.map(b => ({
+    name: b,
+    items: data.skills.filter(s => s.branch === b && s.level >= 3)
+      .sort((a, x) => x.level - a.level).map(s => s.name)
+  })).filter(g => g.items.length);
+
+  /* --- Education: degree plus the units worth naming --- */
+  const topUnits = data.codex.filter(u => u.grade === 'HD' || u.grade === 'DN')
+    .sort((a, b) => b.mark - a.mark).slice(0, 8);
+
+  /* --- Certifications, from the certification quests --- */
+  const certs = data.quests.filter(q => /certification/i.test(q.role));
+
+  /* --- Projects: the substantial ones --- */
+  const projects = data.artifacts.filter(a => a.rarity !== 'rare').slice(0, 5);
+
+  document.getElementById('cvDoc').innerHTML = `
+    <article class="cv-paper">
+
+      <header class="cv-head">
+        <div class="cv-head-main">
+          <h1 class="cv-name">${esc(p.name)}</h1>
+          <p class="cv-headline">${esc(cv.headline)}</p>
+          <p class="cv-contact">${contact}</p>
+        </div>
+        ${download}
+      </header>
+
+      <div class="cv-avail">
+        <span><b>Available</b> ${esc(ac.graduating)}</span>
+        <span><b>Seeking</b> ${esc(p.status.replace(/^Open to /, ''))}</span>
+        <span><b>Location</b> ${esc(p.location)}</span>
+      </div>
+
+      <section class="cv-sec">
+        <h2>Professional Summary</h2>
+        <p class="cv-summary">${esc(cv.summary)}</p>
+      </section>
+
+      <section class="cv-sec">
+        <h2>Key Achievements</h2>
+        <ul class="cv-list cv-list-tight">
+          ${cv.highlights.map(h => `<li>${esc(h)}</li>`).join('')}
+        </ul>
+      </section>
+
+      <section class="cv-sec">
+        <h2>Key Skills</h2>
+        <div class="cv-skills">
+          ${skillGroups.map(g => `
+            <div class="cv-skill-group">
+              <h3>${esc(g.name)}</h3>
+              <p>${g.items.map(esc).join(' · ')}</p>
+            </div>`).join('')}
+        </div>
+      </section>
+
+      <section class="cv-sec">
+        <h2>Professional Experience</h2>
+        ${cv.experience.map(e => `
+          <div class="cv-role">
+            <div class="cv-role-head">
+              <h3>${esc(e.role)} <span class="cv-org">— ${esc(e.org)}</span></h3>
+              <span class="cv-dates">${esc(e.period)}</span>
+            </div>
+            <p class="cv-loc">${esc(e.location)}</p>
+            <ul class="cv-list">${e.bullets.map(b => `<li>${esc(b)}</li>`).join('')}</ul>
+          </div>`).join('')}
+      </section>
+
+      <section class="cv-sec">
+        <h2>Education &amp; Qualifications</h2>
+        <div class="cv-role">
+          <div class="cv-role-head">
+            <h3>Bachelor of Information and Communication Technology
+              <span class="cv-org">— University of Tasmania</span></h3>
+            <span class="cv-dates">2023 – ${esc(ac.graduating)}</span>
+          </div>
+          <p class="cv-loc">Hobart, Tasmania · Double major: Computer Science and Cyber Security</p>
+          <ul class="cv-list">
+            <li>GPA ${esc(ac.gpa)} / ${esc(ac.gpaScale)} · ${data.codex.filter(u => u.grade !== 'IP').length} units passed · ${
+              data.codex.filter(u => u.grade !== 'IP').reduce((t, u) => t + u.pts, 0)} of ${ac.coursePoints} credit points completed</li>
+            <li>Relevant coursework: ${topUnits.map(u => esc(u.name) + ' (' + esc(u.grade) + ')').join(', ')}</li>
+          </ul>
+        </div>
+      </section>
+
+      <section class="cv-sec">
+        <h2>Certifications</h2>
+        <ul class="cv-list cv-list-tight">
+          ${certs.map(c => {
+            const done = (c.objectives || []).filter(o => o.done).length;
+            const total = (c.objectives || []).length;
+            return `<li><b>${esc(c.title)}</b> — in progress, targeting ${esc(c.due)}
+              <span class="cv-muted">(${done} of ${total} study milestones complete)</span></li>`;
+          }).join('')}
+        </ul>
+      </section>
+
+      <section class="cv-sec">
+        <h2>Selected Projects</h2>
+        ${projects.map(a => `
+          <div class="cv-proj">
+            <div class="cv-role-head">
+              <h3>${esc(a.name)} <span class="cv-org">— ${esc(a.type)}</span></h3>
+              <span class="cv-dates">${esc(a.year)}</span>
+            </div>
+            <p>${esc(a.blurb)}</p>
+            <p class="cv-tech"><b>Technologies:</b> ${a.stats.map(esc).join(', ')}</p>
+          </div>`).join('')}
+      </section>
+
+      ${cv.activities && cv.activities.length ? `
+      <section class="cv-sec">
+        <h2>Activities &amp; Involvement</h2>
+        <ul class="cv-list">${cv.activities.map(a => `<li>${esc(a)}</li>`).join('')}</ul>
+      </section>` : ''}
+
+      <section class="cv-sec cv-sec-keywords">
+        <h2>Technical Keywords</h2>
+        <p class="cv-keywords">${cv.keywords.map(esc).join(' · ')}</p>
+      </section>
+
+      <footer class="cv-foot">
+        <span>${esc(p.name)} · ${esc(p.location)}</span>
+        <span>Last updated ${esc(data.meta.updated)}</span>
+      </footer>
+    </article>`;
+}
+
 /* ---------- Scroll reveal ---------- */
 let revealObserver;
 function observeReveals() {
@@ -471,13 +628,22 @@ function wireChrome() {
   });
 
   const plain = $('#plainToggle');
-  const saved = localStorage.getItem('cvMode') === '1';
-  if (saved) document.body.classList.add('plain');
-  plain.setAttribute('aria-pressed', saved);
-  plain.addEventListener('click', () => {
-    const on = document.body.classList.toggle('plain');
+  const label = on => { plain.textContent = on ? 'Interactive view' : 'Recruiter view'; };
+
+  const apply = on => {
+    document.body.classList.toggle('plain', on);
     plain.setAttribute('aria-pressed', on);
+    label(on);
+  };
+
+  const saved = localStorage.getItem('cvMode') === '1';
+  apply(saved);
+
+  plain.addEventListener('click', () => {
+    const on = !document.body.classList.contains('plain');
+    apply(on);
     localStorage.setItem('cvMode', on ? '1' : '0');
+    window.scrollTo({ top: 0, behavior: 'auto' });
   });
 }
 
@@ -493,6 +659,7 @@ function wireChrome() {
   renderCodex(DATA.codex, DATA.academic, DATA.gradeScale);
   renderCampaign(DATA.campaign);
   renderAchievements(DATA.achievements);
+  renderCV(DATA);
   observeReveals();
   wireChrome();
 })();

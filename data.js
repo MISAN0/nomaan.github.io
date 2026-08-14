@@ -561,6 +561,93 @@ const DATA = {
     }
   ],
 
+  /* ============================================================
+     CV MODE — the recruiter document.
+     A separate document, not a restyled version of the game page.
+     Everything here is written for a hiring audience: plain language,
+     quantified where possible, and ordered the way a recruiter reads.
+     ============================================================ */
+  cv: {
+    // EDIT: drop a PDF in this folder and put its filename here. The
+    // download button appears only when this is set, so it can never
+    // link to a missing file.
+    file: "",
+    fileLabel: "PDF · 1 page",
+
+    headline: "ICT Graduate — Cyber Security & Computer Science",
+
+    summary: "Final-year Information and Communication Technology student at the University of Tasmania, majoring in Computer Science and Cyber Security, graduating December 2026. Builds and secures software end to end: REST APIs hardened with TLS and security headers, a Python tool that audits APIs for information disclosure, and machine learning models evaluated on imbalanced real-world data. Three years of concurrent frontline security operations, including regulated maritime access control at TasPorts, alongside full-time study. Seeking a graduate or entry-level ICT role — service desk, technical support, cyber security, or networking — where analytical skill and a security-first mindset add value from day one.",
+
+    // Quantified wherever the number is real and verifiable.
+    highlights: [
+      "GPA 5.04 / 7 across 21 university units, 262.5 of 300 credit points completed",
+      "Five High Distinctions, including 91 in Operating Systems",
+      "Security research drawing on 13 academic and industry sources, mapped to OWASP API Security Top 10 and MITRE CWE-200",
+      "Full-stack web application of roughly 1,000 lines built without a framework",
+      "Three years of frontline security operations delivered alongside full-time study",
+      "Working code shipped in seven languages"
+    ],
+
+    experience: [
+      {
+        role: "Security Officer",
+        org: "Kevlar Security Services",
+        location: "Hobart, Tasmania",
+        period: "2023 – Present",
+        bullets: [
+          "Deliver crowd control for sporting events, concerts, music festivals and licensed venues, managing public safety across crowds of varying scale",
+          "Perform access control and static guarding across maritime, construction, retail and commercial office sites",
+          "Apply incident response procedures and escalation protocols under time pressure, documenting events accurately for client reporting",
+          "Coordinate with venue management, emergency services and team members in high-pressure environments"
+        ]
+      },
+      {
+        role: "Security Officer",
+        org: "MA Security",
+        location: "Hobart, Tasmania",
+        period: "Dec 2023 – Dec 2025",
+        bullets: [
+          "Delivered maritime security at TasPorts, enforcing regulated access controls across critical port infrastructure",
+          "Conducted retail security, asset protection and undercover loss prevention, identifying and de-escalating theft incidents",
+          "Monitored surveillance systems and controlled site access, maintaining accurate incident records",
+          "Built the risk assessment and situational awareness habits that transfer directly to security operations work"
+        ]
+      },
+      {
+        role: "Retail Team Member",
+        org: "Coles Supermarket",
+        location: "Hobart, Tasmania",
+        period: "Oct 2023 – Present",
+        bullets: [
+          "Resolve customer issues quickly in a high-volume retail environment, consistently meeting service standards",
+          "Maintain stock accuracy, inventory organisation and floor presentation as part of a rotating team",
+          "Communicate clearly with colleagues and customers from diverse backgrounds under time pressure"
+        ]
+      }
+    ],
+
+    // Extracurricular, volunteering, associations and leadership.
+    // EDIT: add entries here — recruiters value this and it is currently
+    // the one section with nothing to show.
+    activities: [],
+
+    // ATS keywords. These appear naturally in the text above as well;
+    // this block makes them explicit for automated screening.
+    keywords: [
+      "Cyber Security", "Information Security", "Network Security", "Application Security",
+      "Incident Response", "Risk Assessment", "Threat Analysis", "Vulnerability Assessment",
+      "Digital Forensics", "Penetration Testing", "Access Control", "OWASP", "TCP/IP",
+      "Routing and Switching", "Subnetting", "Cisco IOS", "Firewalls", "TLS", "Encryption",
+      "Linux", "Windows", "Server Administration", "System Hardening", "Active Directory",
+      "Cloud Computing", "Virtualisation", "Technical Support", "Service Desk", "Troubleshooting",
+      "Python", "Java", "C", "C#", "JavaScript", "PHP", "Bash", "SQL", "Git",
+      "REST APIs", "Node.js", "Express", "FastAPI", "MySQL", "Docker",
+      "Machine Learning", "Deep Learning", "TensorFlow", "PyTorch", "Data Analysis",
+      "Pandas", "PySpark", "Hadoop", "Data Visualisation",
+      "Agile", "Scrum", "PRINCE2", "Technical Documentation", "Stakeholder Communication"
+    ]
+  },
+
   /* ---------- Achievements ----------
      Earned only. Anything still ahead lives in `quests` and `goals`;
      repeating it here as a locked tile would be the third copy.
