@@ -574,18 +574,28 @@ const DATA = {
     file: "",
     fileLabel: "PDF · 1 page",
 
+    // EDIT: a phone number is what recruiters reach for first. Left
+    // empty it is simply not shown.
+    phone: "",
+
     headline: "ICT Graduate — Cyber Security & Computer Science",
 
-    summary: "Final-year Information and Communication Technology student at the University of Tasmania, majoring in Computer Science and Cyber Security, graduating December 2026. Builds and secures software end to end: REST APIs hardened with TLS and security headers, a Python tool that audits APIs for information disclosure, and machine learning models evaluated on imbalanced real-world data. Three years of concurrent frontline security operations, including regulated maritime access control at TasPorts, alongside full-time study. Seeking a graduate or entry-level ICT role — service desk, technical support, cyber security, or networking — where analytical skill and a security-first mindset add value from day one.",
+    summary: "Final-year Information and Communication Technology student at the University of Tasmania, majoring in Computer Science and Cyber Security and graduating December 2026. Builds and secures software end to end: REST APIs hardened with TLS and security headers, a Python tool that audits APIs for information disclosure, and machine learning models evaluated on imbalanced real-world data. Brings three years of concurrent frontline security operations, including regulated maritime access control at TasPorts, delivered alongside full-time study. Seeking a graduate or entry-level ICT role — service desk, technical support, cyber security or networking — where analytical thinking and a security-first mindset add value from day one.",
 
-    // Quantified wherever the number is real and verifiable.
+    // Accomplishments only. No grades, marks or academic results.
     highlights: [
-      "GPA 5.04 / 7 across 21 university units, 262.5 of 300 credit points completed",
-      "Five High Distinctions, including 91 in Operating Systems",
-      "Security research drawing on 13 academic and industry sources, mapped to OWASP API Security Top 10 and MITRE CWE-200",
-      "Full-stack web application of roughly 1,000 lines built without a framework",
-      "Three years of frontline security operations delivered alongside full-time study",
-      "Working code shipped in seven languages"
+      "Delivered three years of frontline security operations while studying full time, with no break in enrolment",
+      "Built a Python security auditing tool from original research spanning 13 academic and industry sources",
+      "Developed a full-stack web application of roughly 1,000 lines without relying on a framework",
+      "Shipped production-style code in seven programming languages across 11 documented projects",
+      "Implemented Dijkstra and A-star pathfinding from first principles, with no external libraries",
+      "Trained and evaluated deep learning models, including convolutional, recurrent and generative networks"
+    ],
+
+    softSkills: [
+      "Communication under pressure", "Team collaboration", "Problem solving",
+      "Attention to detail", "Time management", "Customer service",
+      "Conflict de-escalation", "Technical documentation", "Adaptability"
     ],
 
     experience: [
@@ -595,10 +605,9 @@ const DATA = {
         location: "Hobart, Tasmania",
         period: "2023 – Present",
         bullets: [
-          "Deliver crowd control for sporting events, concerts, music festivals and licensed venues, managing public safety across crowds of varying scale",
-          "Perform access control and static guarding across maritime, construction, retail and commercial office sites",
-          "Apply incident response procedures and escalation protocols under time pressure, documenting events accurately for client reporting",
-          "Coordinate with venue management, emergency services and team members in high-pressure environments"
+          "Manage crowd control at sporting events, concerts, festivals and licensed venues, maintaining public safety across large crowds",
+          "Enforce access control and static guarding across maritime, construction, retail and commercial office sites",
+          "Execute incident response and escalation procedures under pressure, documenting events for client reporting"
         ]
       },
       {
@@ -608,9 +617,8 @@ const DATA = {
         period: "Dec 2023 – Dec 2025",
         bullets: [
           "Delivered maritime security at TasPorts, enforcing regulated access controls across critical port infrastructure",
-          "Conducted retail security, asset protection and undercover loss prevention, identifying and de-escalating theft incidents",
-          "Monitored surveillance systems and controlled site access, maintaining accurate incident records",
-          "Built the risk assessment and situational awareness habits that transfer directly to security operations work"
+          "Conducted asset protection and undercover loss prevention, identifying and de-escalating theft incidents",
+          "Monitored surveillance systems and maintained accurate incident records for client review"
         ]
       },
       {
@@ -619,26 +627,30 @@ const DATA = {
         location: "Hobart, Tasmania",
         period: "Oct 2023 – Present",
         bullets: [
-          "Resolve customer issues quickly in a high-volume retail environment, consistently meeting service standards",
-          "Maintain stock accuracy, inventory organisation and floor presentation as part of a rotating team",
-          "Communicate clearly with colleagues and customers from diverse backgrounds under time pressure"
+          "Resolve customer issues in a high-volume retail environment while meeting service standards",
+          "Maintain stock accuracy and floor presentation as part of a rotating team"
         ]
       }
     ],
 
-    // Extracurricular, volunteering, associations and leadership.
-    // EDIT: add entries here — recruiters value this and it is currently
-    // the one section with nothing to show.
+    // Coursework named without grades — relevance, not results.
+    coursework: [
+      "Intelligent and Secure Web Development", "Advanced Cyber Security and eForensics",
+      "Cyber Security and Ethical Hacking", "Cyber Security Policies and Practices",
+      "Data Networks and Security", "Server Administration and Security Assurance",
+      "Operating Systems", "Big Data and Cloud Computing",
+      "Machine Learning and Applications", "Introduction to Data Science",
+      "Data Structures and Algorithms", "ICT Project Management and Modelling"
+    ],
+
     activities: [],
 
-    // ATS keywords. These appear naturally in the text above as well;
-    // this block makes them explicit for automated screening.
     keywords: [
       "Cyber Security", "Information Security", "Network Security", "Application Security",
       "Incident Response", "Risk Assessment", "Threat Analysis", "Vulnerability Assessment",
       "Digital Forensics", "Penetration Testing", "Access Control", "OWASP", "TCP/IP",
       "Routing and Switching", "Subnetting", "Cisco IOS", "Firewalls", "TLS", "Encryption",
-      "Linux", "Windows", "Server Administration", "System Hardening", "Active Directory",
+      "Linux", "Windows", "Server Administration", "System Hardening", "Help Desk",
       "Cloud Computing", "Virtualisation", "Technical Support", "Service Desk", "Troubleshooting",
       "Python", "Java", "C", "C#", "JavaScript", "PHP", "Bash", "SQL", "Git",
       "REST APIs", "Node.js", "Express", "FastAPI", "MySQL", "Docker",

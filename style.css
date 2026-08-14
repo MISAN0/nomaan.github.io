@@ -684,6 +684,9 @@ body.plain .hud-btn:hover { background: #16394f; }
   color: var(--ink-3); margin-bottom: 4px; font-weight: 500;
 }
 .cv-skill-group p { color: var(--ink-2); font-size: 13.5px; }
+.cv-soft { margin-top: 14px; padding-top: 13px; border-top: 1px solid var(--rule); }
+.cv-course { font-size: 13.5px; color: var(--ink-2); margin-top: 4px; }
+.cv-course b { color: var(--ink); font-weight: 600; }
 
 .cv-role, .cv-proj { margin-bottom: 20px; }
 .cv-role:last-child, .cv-proj:last-child { margin-bottom: 0; }

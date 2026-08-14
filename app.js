@@ -442,12 +442,12 @@ function renderCV(data) {
   /* --- Contact line: only what is actually set --- */
   const contact = [
     p.links.email ? `<a href="mailto:${esc(p.links.email)}">${esc(p.links.email)}</a>` : '',
+    cv.phone ? `<a href="tel:${esc(cv.phone.replace(/\s/g, ''))}">${esc(cv.phone)}</a>` : '',
     `<a href="${esc(p.links.linkedin)}" target="_blank" rel="noopener">${esc(p.links.linkedin.replace('https://', ''))}</a>`,
     `<a href="${esc(p.links.github)}" target="_blank" rel="noopener">${esc(p.links.github.replace('https://', ''))}</a>`,
     `<span>${esc(p.location)}</span>`
   ].filter(Boolean).join('<i aria-hidden="true">·</i>');
 
-  /* --- Download button, only when a file exists --- */
   const download = cv.file
     ? `<a class="cv-download" href="${esc(cv.file)}" download>
          <span class="cv-dl-icon" aria-hidden="true">↓</span>
@@ -455,7 +455,7 @@ function renderCV(data) {
        </a>`
     : '';
 
-  /* --- Key skills, grouped, strongest first, from the skill tree --- */
+  /* --- Technical skills, grouped, from the skill tree --- */
   const branches = [...new Set(data.skills.map(s => s.branch))];
   const skillGroups = branches.map(b => ({
     name: b,
@@ -463,14 +463,7 @@ function renderCV(data) {
       .sort((a, x) => x.level - a.level).map(s => s.name)
   })).filter(g => g.items.length);
 
-  /* --- Education: degree plus the units worth naming --- */
-  const topUnits = data.codex.filter(u => u.grade === 'HD' || u.grade === 'DN')
-    .sort((a, b) => b.mark - a.mark).slice(0, 8);
-
-  /* --- Certifications, from the certification quests --- */
   const certs = data.quests.filter(q => /certification/i.test(q.role));
-
-  /* --- Projects: the substantial ones --- */
   const projects = data.artifacts.filter(a => a.rarity !== 'rare').slice(0, 5);
 
   document.getElementById('cvDoc').innerHTML = `
@@ -497,20 +490,24 @@ function renderCV(data) {
       </section>
 
       <section class="cv-sec">
-        <h2>Key Achievements</h2>
+        <h2>Selected Achievements</h2>
         <ul class="cv-list cv-list-tight">
           ${cv.highlights.map(h => `<li>${esc(h)}</li>`).join('')}
         </ul>
       </section>
 
       <section class="cv-sec">
-        <h2>Key Skills</h2>
+        <h2>Technical Skills</h2>
         <div class="cv-skills">
           ${skillGroups.map(g => `
             <div class="cv-skill-group">
               <h3>${esc(g.name)}</h3>
               <p>${g.items.map(esc).join(' · ')}</p>
             </div>`).join('')}
+        </div>
+        <div class="cv-skill-group cv-soft">
+          <h3>Professional Skills</h3>
+          <p>${cv.softSkills.map(esc).join(' · ')}</p>
         </div>
       </section>
 
@@ -528,31 +525,21 @@ function renderCV(data) {
       </section>
 
       <section class="cv-sec">
-        <h2>Education &amp; Qualifications</h2>
+        <h2>Education</h2>
         <div class="cv-role">
           <div class="cv-role-head">
-            <h3>Bachelor of Information and Communication Technology
-              <span class="cv-org">— University of Tasmania</span></h3>
+            <h3>Bachelor of Information and Communication Technology<span class="cv-org"> — University of Tasmania</span></h3>
             <span class="cv-dates">2023 – ${esc(ac.graduating)}</span>
           </div>
           <p class="cv-loc">Hobart, Tasmania · Double major: Computer Science and Cyber Security</p>
-          <ul class="cv-list">
-            <li>GPA ${esc(ac.gpa)} / ${esc(ac.gpaScale)} · ${data.codex.filter(u => u.grade !== 'IP').length} units passed · ${
-              data.codex.filter(u => u.grade !== 'IP').reduce((t, u) => t + u.pts, 0)} of ${ac.coursePoints} credit points completed</li>
-            <li>Relevant coursework: ${topUnits.map(u => esc(u.name) + ' (' + esc(u.grade) + ')').join(', ')}</li>
-          </ul>
+          <p class="cv-course"><b>Relevant coursework:</b> ${cv.coursework.map(esc).join(', ')}</p>
         </div>
       </section>
 
       <section class="cv-sec">
         <h2>Certifications</h2>
         <ul class="cv-list cv-list-tight">
-          ${certs.map(c => {
-            const done = (c.objectives || []).filter(o => o.done).length;
-            const total = (c.objectives || []).length;
-            return `<li><b>${esc(c.title)}</b> — in progress, targeting ${esc(c.due)}
-              <span class="cv-muted">(${done} of ${total} study milestones complete)</span></li>`;
-          }).join('')}
+          ${certs.map(c => `<li><b>${esc(c.title)}</b> — in progress, targeting ${esc(c.due)}</li>`).join('')}
         </ul>
       </section>
 
