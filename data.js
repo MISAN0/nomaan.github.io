@@ -444,37 +444,40 @@ const DATA = {
   ],
 
   /* ---------- Codex: every unit, straight off the faculty record ----------
-     mark = the actual mark, and the mark IS the XP for that unit.
-     grade: HD / DN / CR / PP, or IP for currently enrolled.
-     pts = credit points (KIT300 is a 25pt double unit).                      */
+     mark  = the actual mark, and the mark IS the XP for that unit.
+     grade = HD / DN / CR / PP, or IP for currently enrolled. The grade
+             scale is spelled out in `gradeScale` below, because these
+             codes mean nothing outside Australia.
+     pts   = credit points (KIT300 is a 25pt double unit).
+     theme = groups the unit with the matching skill-tree branch.          */
   codex: [
-    { code: "KIT101", name: "Programming Fundamentals",             grade: "CR", mark: 60, year: 2023, sem: 1, pts: 12.5 },
-    { code: "KIT105", name: "ICT Professional Practices",           grade: "HD", mark: 83, year: 2023, sem: 1, pts: 12.5 },
-    { code: "KIT111", name: "Data Networks & Security",             grade: "DN", mark: 76, year: 2023, sem: 1, pts: 12.5 },
-    { code: "KIT118", name: "Cybersecurity Policies & Practices",   grade: "HD", mark: 80, year: 2023, sem: 1, pts: 12.5 },
-    { code: "KIT102", name: "Introduction to Data Science",         grade: "HD", mark: 85, year: 2023, sem: 2, pts: 12.5 },
-    { code: "KIT103", name: "Computational Science",                grade: "PP", mark: 57, year: 2023, sem: 2, pts: 12.5 },
-    { code: "KIT107", name: "Programming",                          grade: "PP", mark: 55, year: 2023, sem: 2, pts: 12.5 },
-    { code: "KMA153", name: "Data Handling & Statistics 1",         grade: "DN", mark: 75, year: 2023, sem: 2, pts: 12.5 },
+    { code: "KIT101", name: "Programming Fundamentals",             grade: "CR", mark: 60, year: 2023, sem: 1, pts: 12.5, theme: "Programming" },
+    { code: "KIT105", name: "ICT Professional Practices",           grade: "HD", mark: 83, year: 2023, sem: 1, pts: 12.5, theme: "Professional" },
+    { code: "KIT111", name: "Data Networks & Security",             grade: "DN", mark: 76, year: 2023, sem: 1, pts: 12.5, theme: "Networking" },
+    { code: "KIT118", name: "Cybersecurity Policies & Practices",   grade: "HD", mark: 80, year: 2023, sem: 1, pts: 12.5, theme: "Cyber Security" },
+    { code: "KIT102", name: "Introduction to Data Science",         grade: "HD", mark: 85, year: 2023, sem: 2, pts: 12.5, theme: "Data & AI" },
+    { code: "KIT103", name: "Computational Science",                grade: "PP", mark: 57, year: 2023, sem: 2, pts: 12.5, theme: "Programming" },
+    { code: "KIT107", name: "Programming",                          grade: "PP", mark: 55, year: 2023, sem: 2, pts: 12.5, theme: "Programming" },
+    { code: "KMA153", name: "Data Handling & Statistics 1",         grade: "DN", mark: 75, year: 2023, sem: 2, pts: 12.5, theme: "Data & AI" },
 
-    { code: "KIT202", name: "Web Programming Fundamentals",         grade: "DN", mark: 72, year: 2024, sem: 1, pts: 12.5 },
-    { code: "KIT203", name: "ICT Project Management & Modelling",   grade: "DN", mark: 72, year: 2024, sem: 1, pts: 12.5 },
-    { code: "KIT208", name: "Virtual & Mixed Reality Technology",   grade: "DN", mark: 71, year: 2024, sem: 2, pts: 12.5 },
-    { code: "KIT213", name: "Operating Systems",                    grade: "HD", mark: 91, year: 2024, sem: 2, pts: 12.5 },
-    { code: "KIT215", name: "Cybersecurity & Ethical Hacking",      grade: "CR", mark: 66, year: 2024, sem: 2, pts: 12.5 },
-    { code: "KIT219", name: "Development Methodologies & UX",       grade: "CR", mark: 64, year: 2024, sem: 2, pts: 12.5 },
+    { code: "KIT202", name: "Web Programming Fundamentals",         grade: "DN", mark: 72, year: 2024, sem: 1, pts: 12.5, theme: "Web" },
+    { code: "KIT203", name: "ICT Project Management & Modelling",   grade: "DN", mark: 72, year: 2024, sem: 1, pts: 12.5, theme: "Professional" },
+    { code: "KIT208", name: "Virtual & Mixed Reality Technology",   grade: "DN", mark: 71, year: 2024, sem: 2, pts: 12.5, theme: "Programming" },
+    { code: "KIT213", name: "Operating Systems",                    grade: "HD", mark: 91, year: 2024, sem: 2, pts: 12.5, theme: "Systems" },
+    { code: "KIT215", name: "Cybersecurity & Ethical Hacking",      grade: "CR", mark: 66, year: 2024, sem: 2, pts: 12.5, theme: "Cyber Security" },
+    { code: "KIT219", name: "Development Methodologies & UX",       grade: "CR", mark: 64, year: 2024, sem: 2, pts: 12.5, theme: "Professional" },
 
-    { code: "KIT205", name: "Data Structures & Algorithms",         grade: "PP", mark: 56, year: 2025, sem: 1, pts: 12.5 },
-    { code: "KIT305", name: "Mobile Application Development",       grade: "CR", mark: 62, year: 2025, sem: 1, pts: 12.5 },
-    { code: "KIT214", name: "Intelligent & Secure Web Development", grade: "HD", mark: 80, year: 2025, sem: 2, pts: 12.5 },
-    { code: "KIT315", name: "Machine Learning & Applications",      grade: "DN", mark: 72, year: 2025, sem: 2, pts: 12.5 },
-    { code: "KIT325", name: "Advanced Cybersecurity & eForensics",  grade: "DN", mark: 79, year: 2025, sem: 2, pts: 12.5 },
+    { code: "KIT205", name: "Data Structures & Algorithms",         grade: "PP", mark: 56, year: 2025, sem: 1, pts: 12.5, theme: "Programming" },
+    { code: "KIT305", name: "Mobile Application Development",       grade: "CR", mark: 62, year: 2025, sem: 1, pts: 12.5, theme: "Programming" },
+    { code: "KIT214", name: "Intelligent & Secure Web Development", grade: "HD", mark: 80, year: 2025, sem: 2, pts: 12.5, theme: "Web" },
+    { code: "KIT315", name: "Machine Learning & Applications",      grade: "DN", mark: 72, year: 2025, sem: 2, pts: 12.5, theme: "Data & AI" },
+    { code: "KIT325", name: "Advanced Cybersecurity & eForensics",  grade: "DN", mark: 79, year: 2025, sem: 2, pts: 12.5, theme: "Cyber Security" },
 
-    { code: "KIT304", name: "Server Administration & Security Assurance", grade: "DN", mark: 74, year: 2026, sem: 1, pts: 12.5 },
-    { code: "KIT318", name: "Big Data & Cloud Computing",           grade: "DN", mark: 73, year: 2026, sem: 1, pts: 12.5 },
+    { code: "KIT304", name: "Server Administration & Security Assurance", grade: "DN", mark: 74, year: 2026, sem: 1, pts: 12.5, theme: "Systems" },
+    { code: "KIT318", name: "Big Data & Cloud Computing",           grade: "DN", mark: 73, year: 2026, sem: 1, pts: 12.5, theme: "Data & AI" },
 
-    { code: "KIT300", name: "ICT Project (Capstone)",               grade: "IP", year: 2026, sem: 2, pts: 25   },
-    { code: "KIT307", name: "Computer Graphics & Animation",        grade: "IP", year: 2026, sem: 2, pts: 12.5 }
+    { code: "KIT300", name: "ICT Project (Capstone)",               grade: "IP", year: 2026, sem: 2, pts: 25, theme: "Professional" },
+    { code: "KIT307", name: "Computer Graphics & Animation",        grade: "IP", year: 2026, sem: 2, pts: 12.5, theme: "Programming" }
   ],
 
   /* ---------- Academic record: shown as HUD chips ---------- */
@@ -486,6 +489,17 @@ const DATA = {
     graduating: "Dec 2026",
     degreeName: "Bachelor of ICT"
   },
+
+  /* ---------- Grade scale ----------
+     Australian grade codes are meaningless to a reader outside the
+     system, so the site prints the name and the mark range.            */
+  gradeScale: [
+    { code: "HD", name: "High Distinction", range: "80–100" },
+    { code: "DN", name: "Distinction",      range: "70–79"  },
+    { code: "CR", name: "Credit",           range: "60–69"  },
+    { code: "PP", name: "Pass",             range: "50–59"  },
+    { code: "IP", name: "In progress",      range: "enrolled now" }
+  ],
 
   /* ---------- Campaign log: experience + education ---------- */
   campaign: [

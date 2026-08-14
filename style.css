@@ -427,6 +427,40 @@ main { position: relative; z-index: 1; }
 }
 
 /* ── Codex ──────────────────────────────────────────────── */
+/* Summary strip: the headline numbers, the shape of the record, and a
+   key for grade codes that mean nothing outside Australia. */
+.codex-summary {
+  border: 1px solid var(--line-2); border-radius: var(--radius);
+  background: var(--panel); padding: 20px; margin-bottom: 18px;
+}
+.cx-stats { display: flex; flex-wrap: wrap; gap: 28px; margin-bottom: 16px; }
+.cx-stat { display: flex; flex-direction: column; gap: 2px; }
+.cx-stat b { font-size: 26px; letter-spacing: -.02em; line-height: 1.1; }
+.cx-stat span { font-family: var(--mono); font-size: 9.5px; letter-spacing: .14em; text-transform: uppercase; color: var(--txt-mute); }
+
+.cx-dist { display: flex; gap: 3px; height: 10px; margin-bottom: 14px; }
+.cx-seg { border-radius: 3px; min-width: 6px; }
+.cx-seg.g-HD { background: var(--lime); }
+.cx-seg.g-DN { background: var(--cyan); }
+.cx-seg.g-CR { background: var(--violet); }
+.cx-seg.g-PP { background: var(--line-2); }
+.cx-seg.g-IP { background: transparent; border: 1px dashed var(--amber); }
+
+.cx-key { display: flex; flex-wrap: wrap; gap: 8px 20px; }
+.cx-key-item {
+  display: inline-flex; align-items: center; gap: 7px;
+  font-size: 12px; color: var(--txt-dim);
+}
+.cx-key-item i { width: 9px; height: 9px; border-radius: 3px; flex: none; }
+.cx-key-item i.g-HD { background: var(--lime); }
+.cx-key-item i.g-DN { background: var(--cyan); }
+.cx-key-item i.g-CR { background: var(--violet); }
+.cx-key-item i.g-PP { background: var(--line-2); }
+.cx-key-item i.g-IP { border: 1px dashed var(--amber); }
+.cx-key-item b { font-family: var(--mono); font-size: 11px; color: var(--txt); }
+.cx-key-item em { font-style: normal; font-family: var(--mono); font-size: 10px; color: var(--txt-mute); }
+.cx-key-n { font-family: var(--mono); font-size: 10px; color: var(--txt-mute); }
+
 .codex-filters { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 18px; }
 .chip {
   font-family: var(--mono); font-size: 11px; letter-spacing: .08em; cursor: pointer;
@@ -437,22 +471,32 @@ main { position: relative; z-index: 1; }
 .chip.on { background: var(--cyan); color: #0a0b12; border-color: var(--cyan); font-weight: 700; }
 .codex { display: grid; gap: 6px; }
 .codex-row {
-  display: grid; grid-template-columns: 78px 1fr 70px 76px 32px 46px; align-items: center; gap: 14px;
+  position: relative; overflow: hidden;
+  display: grid; grid-template-columns: 78px 1fr 128px 70px 32px 46px; align-items: center; gap: 14px;
   padding: 12px 16px; border-radius: 10px; background: var(--panel); border: 1px solid var(--line);
   font-size: 14px; transition: .18s;
 }
+.codex-row::before { content: ''; position: absolute; inset: 0 auto 0 0; width: 3px; background: var(--line-2); }
 .codex-row:hover { border-color: var(--line-2); background: var(--panel-2); }
 .codex-code { font-family: var(--mono); font-size: 11.5px; color: var(--txt-mute); }
+.codex-theme { font-family: var(--mono); font-size: 9.5px; letter-spacing: .1em; text-transform: uppercase; color: var(--txt-mute); }
 .codex-when { font-family: var(--mono); font-size: 10.5px; color: var(--txt-mute); }
-.codex-xp { font-family: var(--mono); font-size: 10.5px; color: var(--txt-mute); text-align: right; }
 .codex-mark { font-family: var(--mono); font-size: 13px; text-align: right; color: var(--txt); }
+
+/* Theme stripe ties a unit back to its skill-tree branch. */
+.codex-row.t-Cyber-Security::before { background: var(--magenta); }
+.codex-row.t-Networking::before     { background: var(--cyan); }
+.codex-row.t-Programming::before    { background: var(--violet); }
+.codex-row.t-Web::before            { background: var(--lime); }
+.codex-row.t-Data-AI::before        { background: var(--amber); }
+.codex-row.t-Systems::before        { background: #6fa8ff; }
+.codex-row.t-Professional::before   { background: #a9b4d6; }
 .codex-grade { font-family: var(--mono); font-size: 11px; font-weight: 700; text-align: center; padding: 3px 0; border-radius: 6px; }
 .g-HD .codex-grade { color: #0a0b12; background: var(--lime); }
 .g-DN .codex-grade { color: #0a0b12; background: var(--cyan); }
 .g-CR .codex-grade { color: #0a0b12; background: var(--violet); }
 .g-PP .codex-grade { color: var(--txt-dim); background: var(--panel-2); border: 1px solid var(--line-2); }
 .g-IP .codex-grade { color: var(--amber); background: rgba(255,182,72,.14); border: 1px dashed var(--amber); }
-.g-HD .codex-xp { color: var(--lime); }
 
 /* ── Campaign ───────────────────────────────────────────── */
 .campaign { display: grid; gap: 4px; }
@@ -527,6 +571,10 @@ body.plain .artifact-link { color: #101014; text-decoration: underline; }
 body.plain .reveal { opacity: 1; transform: none; }
 body.plain .hud-nav a.is-cta { color: #fff; background: #101014; }
 body.plain .btn-primary { background: #101014; color: #fff; border-color: #101014; }
+body.plain .cx-seg.g-HD, body.plain .cx-key-item i.g-HD { background: #101014; }
+body.plain .cx-seg.g-DN, body.plain .cx-key-item i.g-DN { background: #43464f; }
+body.plain .cx-seg.g-CR, body.plain .cx-key-item i.g-CR { background: #8b8e99; }
+body.plain .codex-row::before { display: none; }
 body.plain .g-HD .codex-grade, body.plain .g-DN .codex-grade, body.plain .g-CR .codex-grade { background: #101014; color: #fff; }
 body.plain .quest-state, body.plain .quest-role, body.plain .goal-target,
 body.plain .camp-period, body.plain .title-idx, body.plain .stat-key,
@@ -568,6 +616,6 @@ body.plain .degree-head b { color: #101014; }
   .goals { grid-template-columns: 1fr; }
   .goal { padding: 20px; }
   .codex-row { grid-template-columns: 66px 1fr 30px 42px; gap: 10px; }
-  .codex-xp, .codex-when { display: none; }
+  .codex-theme, .codex-when { display: none; }
   .degree { max-width: none; }
 }

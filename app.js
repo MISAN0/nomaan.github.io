@@ -307,13 +307,39 @@ function renderArtifacts(list) {
 }
 
 /* ---------- Codex + filters ---------- */
-function renderCodex(codex) {
-  const grades = [...new Set(codex.map(u => u.grade))];
-  const years = [...new Set(codex.map(u => u.year))].sort();
+function renderCodex(codex, academic, gradeScale) {
+  const passed = codex.filter(u => u.grade !== 'IP');
+
+  /* Summary: the numbers a reader wants before reading 23 rows. */
+  const counts = gradeScale
+    .map(g => ({ ...g, n: codex.filter(u => u.grade === g.code).length }))
+    .filter(g => g.n > 0);
+
+  $('#codexSummary').innerHTML = `
+    <div class="cx-stats">
+      <div class="cx-stat"><b>${passed.length}</b><span>units passed</span></div>
+      <div class="cx-stat"><b>${academic.gpa}</b><span>GPA out of ${academic.gpaScale}</span></div>
+      <div class="cx-stat"><b>${Math.round(passed.reduce((t, u) => t + u.mark, 0) / passed.length)}</b><span>average mark</span></div>
+    </div>
+    <div class="cx-dist" role="img" aria-label="Grade distribution">
+      ${counts.map(g => `<span class="cx-seg g-${esc(g.code)}" style="flex:${g.n}" title="${g.n} × ${esc(g.name)}"></span>`).join('')}
+    </div>
+    <div class="cx-key">
+      ${counts.map(g => `
+        <span class="cx-key-item">
+          <i class="g-${esc(g.code)}"></i>
+          <b>${esc(g.code)}</b> ${esc(g.name)}
+          <em>${esc(g.range)}</em>
+          <span class="cx-key-n">× ${g.n}</span>
+        </span>`).join('')}
+    </div>`;
+
+  const themes = [...new Set(codex.map(u => u.theme))];
   const filters = [
-    { key: 'ALL', label: 'All' },
-    ...grades.map(g => ({ key: 'g:' + g, label: g })),
-    ...years.map(y => ({ key: 'y:' + y, label: y }))
+    { key: 'ALL', label: `All ${codex.length}` },
+    ...themes.map(t => ({ key: 't:' + t, label: t })),
+    ...gradeScale.filter(g => g.code !== 'IP' && codex.some(u => u.grade === g.code))
+      .map(g => ({ key: 'g:' + g.code, label: g.code }))
   ];
   $('#codexFilters').innerHTML = filters
     .map((f, i) => `<button type="button" class="chip ${i === 0 ? 'on' : ''}" data-key="${esc(f.key)}">${esc(f.label)}</button>`)
@@ -322,18 +348,19 @@ function renderCodex(codex) {
   const match = (u, key) => {
     if (key === 'ALL') return true;
     const [kind, val] = key.split(':');
-    return kind === 'g' ? u.grade === val : String(u.year) === val;
+    return kind === 'g' ? u.grade === val : u.theme === val;
   };
 
   const draw = key => {
     const rows = codex.filter(u => match(u, key));
     $('#codexList').innerHTML = rows.map((u, i) => `
-      <div class="codex-row reveal g-${esc(u.grade)}" style="--i:${Math.min(i, 12)}">
+      <div class="codex-row reveal g-${esc(u.grade)} t-${esc(u.theme.replace(/\W+/g, '-'))}"
+           style="--i:${Math.min(i, 12)}" title="${esc(u.theme)} · ${esc(u.pts)} credit points">
         <span class="codex-code">${esc(u.code)}</span>
         <span class="codex-name">${esc(u.name)}</span>
+        <span class="codex-theme">${esc(u.theme)}</span>
         <span class="codex-when">${esc(u.year)} S${esc(u.sem)}</span>
-        <span class="codex-xp">${u.grade === 'IP' ? 'enrolled' : '+' + unitXp(u) + ' XP'}</span>
-        <span class="codex-mark">${u.mark ?? '—'}</span>
+        <span class="codex-mark">${u.grade === 'IP' ? '—' : u.mark}</span>
         <span class="codex-grade">${esc(u.grade)}</span>
       </div>`).join('');
     observeReveals();
@@ -434,7 +461,7 @@ function wireChrome() {
   renderGoals(DATA.goals);
   renderSkills(DATA.skills);
   renderArtifacts(DATA.artifacts);
-  renderCodex(DATA.codex);
+  renderCodex(DATA.codex, DATA.academic, DATA.gradeScale);
   renderCampaign(DATA.campaign);
   renderAchievements(DATA.achievements);
   observeReveals();
