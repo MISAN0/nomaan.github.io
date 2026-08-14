@@ -511,11 +511,6 @@ main { position: relative; z-index: 1; }
 }
 .camp-title { font-size: 19px; letter-spacing: -.01em; }
 .camp-org { font-size: 13.5px; color: var(--txt-mute); margin-bottom: 12px; }
-.camp-highlight {
-  font-size: 14px; color: var(--txt); margin: 0 0 12px;
-  padding: 9px 14px; border-radius: 10px;
-  background: rgba(53,230,208,.08); border: 1px solid rgba(53,230,208,.28);
-}
 .camp-lines { list-style: none; display: grid; gap: 7px; }
 .camp-lines li { position: relative; padding-left: 18px; font-size: 14px; color: var(--txt-dim); }
 .camp-lines li::before { content: '▸'; position: absolute; left: 0; color: var(--violet); }
@@ -584,8 +579,7 @@ body.plain .goal.is-done .goal-horizon { color: #43464f; background: #f6f6f8; bo
 body.plain .goal-target { color: #43464f; }
 body.plain .artifact-points li::before { color: #43464f; }
 body.plain .artifact-link { color: #101014; text-decoration: underline; }
-body.plain .camp-highlight { background: #f6f6f8; border-color: #d3d5dd; }
-body.plain .camp-now { color: #101014; background: #f6f6f8; border-color: #d3d5dd; }
+body.plain body.plain .camp-now { color: #101014; background: #f6f6f8; border-color: #d3d5dd; }
 body.plain .reveal { opacity: 1; transform: none; }
 body.plain .hud-nav a.is-cta { color: #fff; background: #101014; }
 body.plain .btn-primary { background: #101014; color: #fff; border-color: #101014; }

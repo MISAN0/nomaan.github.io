@@ -502,14 +502,13 @@ const DATA = {
   ],
 
   /* ---------- Campaign log: work and study ----------
-     current:   true keeps a "Now" marker on the entry.
-     highlight: one line worth pulling out of the list.
+     current: true keeps a "Now" marker on the entry.
      Keep `lines` to three at most — this is a summary, not a duty
      statement.                                                        */
   campaign: [
     {
       title: "Security Officer",
-      org: "KSS · Hobart",
+      org: "Kevlar Security Services · Hobart",
       period: "2023 – Present",
       kind: "work",
       current: true,
@@ -525,8 +524,8 @@ const DATA = {
       org: "MA Security · Hobart",
       period: "Dec 2023 – Dec 2025",
       kind: "work",
-      highlight: "Maritime security at TasPorts — critical infrastructure under regulated access control.",
       lines: [
+        "Maritime security at TasPorts, working to regulated port access controls",
         "Retail security, asset protection and undercover loss prevention",
         "Crowd control across licensed and public venues"
       ],

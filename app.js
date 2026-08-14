@@ -388,7 +388,6 @@ function renderCampaign(list) {
       <div class="camp-body">
         <h3 class="camp-title">${esc(c.title)}</h3>
         <p class="camp-org">${esc(c.org)}</p>
-        ${c.highlight ? `<p class="camp-highlight">${esc(c.highlight)}</p>` : ''}
         <ul class="camp-lines">${c.lines.map(l => `<li>${esc(l)}</li>`).join('')}</ul>
         ${c.tags && c.tags.length
           ? `<div class="camp-tags">${c.tags.map(t => `<span>${esc(t)}</span>`).join('')}</div>`
