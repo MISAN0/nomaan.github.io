@@ -30,7 +30,10 @@ const DATA = {
     tagline: "A computer enthusiast on the road to mastery — levelling up through cyber security, networking, and AI, one lab at a time.",
     links: {
       github: "https://github.com/MISAN0",
-      linkedin: "https://linkedin.com/in/nomaan00"
+      linkedin: "https://linkedin.com/in/nomaan00",
+      // EDIT: add an address here and the contact card gains an email
+      // row. Left empty it is simply not rendered — no dead link.
+      email: ""
     }
   },
 
@@ -558,18 +561,56 @@ const DATA = {
     }
   ],
 
-  /* ---------- Achievements: unlocked = true shows lit ---------- */
+  /* ---------- Achievements ----------
+     Earned only. Anything still ahead lives in `quests` and `goals`;
+     repeating it here as a locked tile would be the third copy.
+     tier: gold | silver | bronze — how hard it was to earn.
+     proof: the fact behind the badge, so it is checkable.            */
   achievements: [
-    { icon: "★", name: "Distinction Streak",  desc: "5 High Distinctions earned",              unlocked: true },
-    { icon: "⚔", name: "Dual Wield",          desc: "Full-time study alongside two jobs",      unlocked: true },
-    { icon: "🛡", name: "Blue Team",           desc: "Security operations experience on site",  unlocked: true },
-    { icon: "🧪", name: "Model Builder",       desc: "Shipped ML models on real datasets",      unlocked: true },
-    { icon: "🎓", name: "Graduate",            desc: "Finish the degree",                       unlocked: false },
-    { icon: "🌐", name: "Packet Pusher",        desc: "Pass CCNA 200-301",                       unlocked: false },
-    { icon: "📜", name: "Certified",           desc: "Pass CompTIA Security+ SY0-701",          unlocked: false },
-    { icon: "💼", name: "First Role",          desc: "Land a graduate position in security",    unlocked: false }
+    {
+      icon: "◆", name: "Top of the Class", tier: "gold", when: "2024",
+      desc: "Highest mark of the degree",
+      proof: "91 in Operating Systems"
+    },
+    {
+      icon: "★", name: "Distinction Streak", tier: "gold", when: "2023 – 2026",
+      desc: "Five High Distinctions across security, systems and data",
+      proof: "KIT213, KIT102, KIT105, KIT214, KIT118"
+    },
+    {
+      icon: "◈", name: "Published Researcher", tier: "gold", when: "2026",
+      desc: "A structured security study built on peer-reviewed sources",
+      proof: "13 sources, OWASP and MITRE CWE mapped"
+    },
+    {
+      icon: "⚔", name: "Dual Wield", tier: "silver", when: "2023 – now",
+      desc: "Full-time study carried alongside two jobs",
+      proof: "Three years, no break in enrolment"
+    },
+    {
+      icon: "🛡", name: "Critical Infrastructure", tier: "silver", when: "2023 – 2025",
+      desc: "Security operations on a regulated port",
+      proof: "Maritime security at TasPorts"
+    },
+    {
+      icon: "◇", name: "Polyglot", tier: "silver", when: "2023 – 2026",
+      desc: "Shipped working code in seven languages",
+      proof: "Python, C, Java, C#, PHP, JavaScript, Bash"
+    },
+    {
+      icon: "⬢", name: "Deep Learner", tier: "silver", when: "2025",
+      desc: "Trained neural networks beyond the tutorial level",
+      proof: "CNNs, LSTMs, GANs and reinforcement learning agents"
+    },
+    {
+      icon: "⬡", name: "Scaled Up", tier: "bronze", when: "2026",
+      desc: "Took an analysis from one machine to a cluster",
+      proof: "PySpark and Hadoop over multi-table data"
+    },
+    {
+      icon: "▲", name: "Shipped It", tier: "bronze", when: "2026",
+      desc: "Built and published this site on its own domain",
+      proof: "Static, no framework, one data file"
+    }
   ]
 };
-
-/* Fallback XP if a unit has no mark recorded. A unit's mark is its XP. */
-const GRADE_XP = { HD: 85, DN: 75, CR: 63, PP: 55, IP: 0 };

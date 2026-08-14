@@ -85,11 +85,27 @@ function renderSheet(data, xp) {
       <span class="stat-desc">${esc(a.desc)}</span>
     </li>`).join('');
 
-  $('#contactLinks').innerHTML = `
-    <a class="contact-link" href="${esc(p.links.linkedin)}" target="_blank" rel="noopener">
-      <span>LinkedIn</span><b>${esc(p.links.linkedin.replace('https://', ''))}</b></a>
-    <a class="contact-link" href="${esc(p.links.github)}" target="_blank" rel="noopener">
-      <span>GitHub</span><b>${esc(p.links.github.replace('https://', ''))}</b></a>`;
+  /* Email renders only once it is set, so the card never shows an empty
+     row or a mailto: link that goes nowhere. */
+  const contacts = [
+    p.links.email ? {
+      label: 'Email', value: p.links.email, href: 'mailto:' + p.links.email
+    } : null,
+    { label: 'LinkedIn', value: p.links.linkedin.replace('https://', ''), href: p.links.linkedin },
+    { label: 'GitHub', value: p.links.github.replace('https://', ''), href: p.links.github }
+  ].filter(Boolean);
+
+  $('#contactLinks').innerHTML = contacts.map(c => `
+    <a class="contact-link" href="${esc(c.href)}"${c.href.startsWith('mailto:') ? '' : ' target="_blank" rel="noopener"'}>
+      <span>${esc(c.label)}</span><b>${esc(c.value)}</b>
+    </a>`).join('');
+
+  $('#contactFacts').innerHTML = [
+    ['Open to', p.status.replace(/^Open to /, '')],
+    ['Based in', p.location],
+    ['Graduating', data.academic.graduating]
+  ].map(([k, v]) => `<div class="fact"><span>${esc(k)}</span><b>${esc(v)}</b></div>`).join('');
+
   $('#footHint').textContent = `${p.location} · Last updated ${data.meta.updated}`;
 }
 
@@ -398,12 +414,19 @@ function renderCampaign(list) {
 
 /* ---------- Achievements ---------- */
 function renderAchievements(list) {
+  const byTier = t => list.filter(a => a.tier === t).length;
+  $('#achTally').textContent =
+    `${byTier('gold')} gold · ${byTier('silver')} silver · ${byTier('bronze')} bronze`;
+
   $('#achievementList').innerHTML = list.map((a, i) => `
-    <div class="ach reveal ${a.unlocked ? 'on' : ''}" style="--i:${i}">
-      <span class="ach-icon">${esc(a.icon)}</span>
+    <div class="ach reveal t-${esc(a.tier)}" style="--i:${Math.min(i, 8)}">
+      <div class="ach-top">
+        <span class="ach-icon">${esc(a.icon)}</span>
+        <span class="ach-when">${esc(a.when)}</span>
+      </div>
       <span class="ach-name">${esc(a.name)}</span>
       <span class="ach-desc">${esc(a.desc)}</span>
-      <span class="ach-state">${a.unlocked ? 'Unlocked' : 'Locked'}</span>
+      <span class="ach-proof">${esc(a.proof)}</span>
     </div>`).join('');
 }
 
