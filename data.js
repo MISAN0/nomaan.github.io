@@ -255,71 +255,191 @@ const DATA = {
     { name: "SFIA Framework",          branch: "Practice & Process", level: 3, evidence: "KIT105" }
   ],
 
-  /* ---------- Artifacts (projects). rarity: legendary | epic | rare | common ---------- */
+  /* ---------- Artifacts (projects) ----------
+     rarity: legendary | epic | rare — how substantial the build is.
+     code:   "published" once the repository is public and `repo` is set,
+             "private" while it still lives on disk, "writeup" for work
+             whose output is a document rather than a program.
+     repo:   full URL. Leave empty until the repository actually exists —
+             the card renders a "code coming" note instead of a dead link.
+     TO DO:  as each repository goes up on GitHub, set code to "published"
+             and paste the URL into `repo`. Nothing else needs changing.  */
   artifacts: [
     {
       name: "API Exposure Auditor",
       rarity: "legendary",
       type: "Cyber Security Tool",
-      blurb: "Python tool that audits API endpoints for security misconfigurations — exposed OpenAPI/Swagger documentation, weak headers, CORS issues — and emits structured JSON reports for triage. Grounded in my own research on information disclosure from publicly exposed API specifications, framed against the OWASP API Security Top 10 and CWE-200.",
-      stats: ["Python", "REST APIs", "OpenAPI", "OWASP", "CWE-200"],
-      link: "https://github.com/MISAN0"
+      year: "2026",
+      team: "Solo",
+      blurb: "Audits REST API endpoints for information disclosure — exposed OpenAPI and Swagger documentation, permissive CORS policies, missing security headers — and emits structured JSON reports for triage.",
+      highlights: [
+        "Built on my own research into what publicly exposed API specifications leak",
+        "Findings framed against the OWASP API Security Top 10 and MITRE CWE-200",
+        "Machine-readable output, so results can feed a pipeline rather than a person"
+      ],
+      stats: ["Python", "REST APIs", "OpenAPI", "OWASP"],
+      code: "private",
+      repo: ""
+    },
+    {
+      name: "OpenAPI Exposure Research",
+      rarity: "epic",
+      type: "Security Research",
+      year: "2026",
+      team: "Solo",
+      blurb: "A structured investigation into the information disclosure risk created by publicly exposed Swagger and OpenAPI endpoints in production APIs, and what actually reduces it.",
+      highlights: [
+        "Thirteen sources: ten peer-reviewed papers plus OWASP, MITRE CWE and the OpenAPI specification",
+        "Traced how specification-driven fuzzers turn a published schema into an attack surface",
+        "Produced the risk framing the API Exposure Auditor was then built against"
+      ],
+      stats: ["Research", "OWASP API Top 10", "CWE-200", "Threat Analysis"],
+      code: "writeup",
+      repo: ""
     },
     {
       name: "Hardened Node.js API Server",
       rarity: "epic",
       type: "Backend",
-      blurb: "Express API served over HTTPS with its own TLS certificates, hardened with Helmet, CORS policy, and request logging. Paired with a Cheerio scraper that pulls and normalises showcase data into JSON.",
+      year: "2025",
+      team: "Solo",
+      blurb: "An Express API served over HTTPS using its own TLS certificates, hardened with Helmet security headers, an explicit CORS policy, and request logging.",
+      highlights: [
+        "TLS terminated by the application itself rather than assumed from a proxy",
+        "Secure defaults applied deliberately: headers, origin policy, audit logging",
+        "Paired with a Cheerio scraper that normalises fetched pages into JSON"
+      ],
       stats: ["Node.js", "Express", "Helmet", "TLS", "Cheerio"],
-      link: ""
+      code: "private",
+      repo: ""
     },
     {
       name: "Spam Detection Classifier",
       rarity: "epic",
-      type: "Deep Learning",
-      blurb: "TensorFlow/Keras text classifier on an imbalanced spam dataset. Class weighting, ROC and precision-recall curves, confusion matrices, and fixed seeds so results reproduce run to run.",
+      type: "Machine Learning",
+      year: "2025",
+      team: "Solo",
+      blurb: "A text classifier trained on a deliberately imbalanced spam dataset, evaluated on the metrics that survive class imbalance rather than on raw accuracy.",
+      highlights: [
+        "Class weighting applied so the minority class is not simply ignored",
+        "Assessed on ROC and precision-recall curves with confusion matrices",
+        "Seeds fixed throughout, so a rerun reproduces the reported numbers"
+      ],
       stats: ["TensorFlow", "Keras", "NLP", "scikit-learn"],
-      link: ""
+      code: "private",
+      repo: ""
     },
     {
       name: "Distributed Data Pipelines",
       rarity: "epic",
-      type: "Big Data",
-      blurb: "PySpark pipelines over multi-table flight and weather data — SparkSession configuration, VectorAssembler feature pipelines, MLlib classifiers, and MapReduce fundamentals on Hadoop.",
-      stats: ["PySpark", "Hadoop", "MapReduce", "MLlib"],
-      link: ""
+      type: "Data Engineering",
+      year: "2026",
+      team: "Solo",
+      blurb: "PySpark pipelines over multi-table flight and weather data, taking the same analysis from a single machine to a distributed engine.",
+      highlights: [
+        "SparkSession and cluster configuration tuned for the workload",
+        "VectorAssembler feature pipelines feeding Spark MLlib classifiers",
+        "MapReduce fundamentals implemented directly, not just called"
+      ],
+      stats: ["PySpark", "Hadoop", "MapReduce", "Spark MLlib"],
+      code: "private",
+      repo: ""
+    },
+    {
+      name: "Full-Stack Web Application",
+      rarity: "epic",
+      type: "Web Application",
+      year: "2024",
+      team: "Solo",
+      blurb: "A database-backed PHP application with user registration and login, session handling, content creation, search, and an archive — around a thousand lines, built without a framework.",
+      highlights: [
+        "Registration and authentication with server-side validation on every route",
+        "MySQL schema behind the create, search, archive and post views",
+        "Shared header and footer components rather than copied markup"
+      ],
+      stats: ["PHP", "MySQL", "JavaScript", "Sessions"],
+      code: "private",
+      repo: ""
     },
     {
       name: "Graph Pathfinding Engine",
       rarity: "rare",
       type: "Algorithms",
-      blurb: "Dijkstra and A* implemented from scratch in C over a custom graph structure, with a heuristic function and closed-set tracking. Built alongside BSTs, hash tables, and priority queues.",
-      stats: ["C", "Dijkstra", "A*", "Data Structures"],
-      link: ""
+      year: "2025",
+      team: "Solo",
+      blurb: "Dijkstra and A-star written from scratch in C over a custom graph structure, with a heuristic function and explicit closed-set tracking.",
+      highlights: [
+        "No library containers — the graph, queue and sets are all hand-built",
+        "Two search strategies over one structure, so their behaviour is directly comparable",
+        "Built alongside binary search trees, hash tables and priority queues"
+      ],
+      stats: ["C", "Dijkstra", "A-star", "Data Structures"],
+      code: "private",
+      repo: ""
+    },
+    {
+      name: "Steganography & Cipher Tool",
+      rarity: "rare",
+      type: "Cryptography",
+      year: "2023",
+      team: "Solo",
+      blurb: "Hides a message inside a carrier by encoding characters to binary and applying a multiplicative cipher over modular arithmetic, with a matching decoder.",
+      highlights: [
+        "Encryption and extraction implemented as exact inverses of one another",
+        "Modular arithmetic chosen so each key maps reversibly across the symbol set",
+        "Written test cases drive the implementation rather than following it"
+      ],
+      stats: ["Python", "Cryptography", "Modular Arithmetic"],
+      code: "private",
+      repo: ""
     },
     {
       name: "UNIX Records Manager",
       rarity: "rare",
       type: "Systems",
-      blurb: "POSIX shell toolset for employee record management — menu-driven search, add, and delete, plus log rotation and a user access-deny list. Written for portability across shells.",
-      stats: ["Bash", "POSIX", "Linux", "Access Control"],
-      link: ""
+      year: "2024",
+      team: "Solo",
+      blurb: "A POSIX shell toolset for employee record management — menu-driven search, add and delete, with log rotation and a user access-deny list.",
+      highlights: [
+        "Portable POSIX shell rather than bash-only syntax",
+        "Access control enforced through a deny list at the entry point",
+        "Log management handled by the tool instead of left to grow"
+      ],
+      stats: ["Shell", "POSIX", "Linux", "Access Control"],
+      code: "private",
+      repo: ""
     },
     {
       name: "Game AI & Pathfinding",
       rarity: "rare",
-      type: "Game Dev",
-      blurb: "Unity game with hand-written AI: A* navigation over a generated node graph, seek and wander steering behaviours, and path-following agents. Shipped with a build and development log.",
-      stats: ["C#", "Unity", "A*", "Steering AI"],
-      link: ""
+      type: "Game Development",
+      year: "2024",
+      team: "Solo",
+      blurb: "A Unity game with hand-written agent AI: A-star navigation across a generated node graph, seek and wander steering behaviours, and path-following agents.",
+      highlights: [
+        "Node graph generated from the level rather than placed by hand",
+        "Steering behaviours composed instead of scripted per enemy",
+        "Shipped with a playable build and a development log"
+      ],
+      stats: ["C#", "Unity", "A-star", "Steering AI"],
+      code: "private",
+      repo: ""
     },
     {
-      name: "Network Risk Assessment",
+      name: "Incident Response & Threat Analysis",
       rarity: "rare",
-      type: "Analysis",
-      blurb: "Analysed network configurations in a simulated environment, identified vulnerabilities, and wrote mitigation recommendations.",
-      stats: ["TCP/IP", "Risk Analysis", "LAN/WAN"],
-      link: ""
+      type: "Security Analysis",
+      year: "2025",
+      team: "Team",
+      blurb: "Breakdowns of real intrusions — NotPetya and the Sony Pictures compromise — traced from initial access through to impact, with a response plan built on the Australian Cyber Security Centre template.",
+      highlights: [
+        "Attack paths reconstructed from public incident reporting",
+        "Man-in-the-middle attack analysis with practical defences",
+        "Response plan mapped to a recognised national framework"
+      ],
+      stats: ["Incident Response", "MITM", "ACSC", "Forensics"],
+      code: "writeup",
+      repo: ""
     }
   ],
 

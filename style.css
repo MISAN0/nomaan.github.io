@@ -380,7 +380,7 @@ main { position: relative; z-index: 1; }
 .legend-lock { font-size: 10px; }
 
 /* ── Artifacts ──────────────────────────────────────────── */
-.artifacts { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 18px; }
+.artifacts { display: grid; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); gap: 18px; align-items: stretch; }
 .artifact {
   position: relative; padding: 22px; border-radius: var(--radius);
   background: var(--panel); border: 1px solid var(--line-2); transition: .2s;
@@ -397,12 +397,34 @@ main { position: relative; z-index: 1; }
 .r-rare:hover { border-color: var(--cyan); }
 .r-common .rarity { color: var(--txt-mute); background: var(--panel-2); }
 .artifact-type { font-family: var(--mono); font-size: 10.5px; color: var(--txt-mute); }
-.artifact-name { font-size: 19px; margin: 12px 0 8px; letter-spacing: -.01em; }
+.artifact { display: flex; flex-direction: column; }
+.artifact-name { font-size: 19px; margin: 12px 0 3px; letter-spacing: -.01em; }
+.artifact-meta { font-family: var(--mono); font-size: 10.5px; color: var(--txt-mute); margin-bottom: 10px; }
 .artifact-blurb { font-size: 14px; color: var(--txt-dim); }
-.artifact-stats { display: flex; flex-wrap: wrap; gap: 6px; margin: 14px 0; }
+
+.artifact-points { list-style: none; display: grid; gap: 6px; margin: 14px 0 0; }
+.artifact-points li {
+  position: relative; padding-left: 16px;
+  font-size: 12.5px; line-height: 1.5; color: var(--txt-mute);
+}
+.artifact-points li::before {
+  content: '▹'; position: absolute; left: 0; color: var(--violet);
+}
+
+.artifact-stats { display: flex; flex-wrap: wrap; gap: 6px; margin: 16px 0 0; }
 .artifact-stats code { font-family: var(--mono); font-size: 10.5px; padding: 3px 8px; border-radius: 6px; background: var(--panel-2); border: 1px solid var(--line); color: var(--txt-dim); }
+
+.artifact-foot { margin-top: auto; padding-top: 14px; }
 .artifact-link { font-family: var(--mono); font-size: 11.5px; color: var(--cyan); text-decoration: none; }
 .artifact-link:hover { text-decoration: underline; }
+.artifact-note {
+  display: inline-flex; align-items: center; gap: 7px;
+  font-family: var(--mono); font-size: 10.5px; color: var(--txt-mute);
+}
+.artifact-note::before {
+  content: ''; width: 6px; height: 6px; border-radius: 99px;
+  background: var(--txt-mute); opacity: .7;
+}
 
 /* ── Codex ──────────────────────────────────────────────── */
 .codex-filters { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 18px; }
@@ -500,6 +522,8 @@ body.plain .goal-horizon,
 body.plain .goal.is-started .goal-horizon,
 body.plain .goal.is-done .goal-horizon { color: #43464f; background: #f6f6f8; border-color: #d3d5dd; }
 body.plain .goal-target { color: #43464f; }
+body.plain .artifact-points li::before { color: #43464f; }
+body.plain .artifact-link { color: #101014; text-decoration: underline; }
 body.plain .reveal { opacity: 1; transform: none; }
 body.plain .hud-nav a.is-cta { color: #fff; background: #101014; }
 body.plain .btn-primary { background: #101014; color: #fff; border-color: #101014; }

@@ -268,17 +268,41 @@ function renderSkills(skills) {
 }
 
 /* ---------- Artifacts ---------- */
+/* Footer of an artifact card: a real link once the repo exists, an
+   honest placeholder until then. Never a dead link. */
+function artifactCode(a) {
+  if (a.code === 'published' && a.repo) {
+    return `<a class="artifact-link" href="${esc(a.repo)}" target="_blank" rel="noopener">Inspect the code ↗</a>`;
+  }
+  if (a.code === 'writeup') {
+    return `<span class="artifact-note">Written work — available on request</span>`;
+  }
+  return `<span class="artifact-note">Code being prepared for GitHub</span>`;
+}
+
 function renderArtifacts(list) {
+  const published = list.filter(a => a.code === 'published' && a.repo).length;
+  $('#artifactTally').textContent =
+    `${list.length} projects · ${published} on GitHub`;
+
   $('#artifactList').innerHTML = list.map((a, i) => `
-    <article class="artifact reveal r-${esc(a.rarity)}" style="--i:${i}">
+    <article class="artifact reveal r-${esc(a.rarity)}" style="--i:${Math.min(i, 8)}">
       <div class="artifact-top">
         <span class="rarity">${esc(a.rarity)}</span>
         <span class="artifact-type">${esc(a.type)}</span>
       </div>
+
       <h3 class="artifact-name">${esc(a.name)}</h3>
+      <p class="artifact-meta">${esc(a.year)} · ${esc(a.team)}</p>
       <p class="artifact-blurb">${esc(a.blurb)}</p>
+
+      ${a.highlights && a.highlights.length ? `
+        <ul class="artifact-points">
+          ${a.highlights.map(h => `<li>${esc(h)}</li>`).join('')}
+        </ul>` : ''}
+
       <div class="artifact-stats">${a.stats.map(s => `<code>${esc(s)}</code>`).join('')}</div>
-      ${a.link ? `<a class="artifact-link" href="${esc(a.link)}" target="_blank" rel="noopener">Inspect ↗</a>` : ''}
+      <div class="artifact-foot">${artifactCode(a)}</div>
     </article>`).join('');
 }
 
