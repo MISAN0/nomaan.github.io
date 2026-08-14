@@ -130,7 +130,7 @@ const DATA = {
       title: "Finish the degree",
       horizon: "In progress",
       target: "Dec 2026",
-      detail: "Bachelor of Information and Communication Technology at the University of Tasmania, double major in Computer Science and Cyber Security. 262.5 of 300 credit points cleared at a GPA of 5.04.",
+      detail: "Bachelor of Information and Communication Technology at the University of Tasmania, double major in Computer Science and Cyber Security. 262.5 of 300 credit points cleared.",
       why: "The foundation everything else is built on.",
       steps: [
         { label: "21 units passed", done: true },
@@ -224,7 +224,7 @@ const DATA = {
     { name: "OSPF",                    branch: "Networking", level: 0, evidence: "Next unlock" },
 
     { name: "Linux",                   branch: "Systems & Servers", level: 4, evidence: "KIT213" },
-    { name: "Operating System Internals", branch: "Systems & Servers", level: 4, evidence: "KIT213 (HD, 91)" },
+    { name: "Operating System Internals", branch: "Systems & Servers", level: 4, evidence: "KIT213" },
     { name: "Server Administration",   branch: "Systems & Servers", level: 3, evidence: "KIT304" },
     { name: "Server Hardening",        branch: "Systems & Servers", level: 3, evidence: "KIT304" },
     { name: "Cloud Computing",         branch: "Systems & Servers", level: 3, evidence: "KIT318" },
@@ -249,7 +249,7 @@ const DATA = {
     { name: "Data Visualisation",      branch: "Data Engineering", level: 3, evidence: "KIT102 · KIT315" },
     { name: "Kafka",                   branch: "Data Engineering", level: 0, evidence: "Next unlock" },
 
-    { name: "Technical Writing",       branch: "Practice & Process", level: 4, evidence: "KIT105 (HD, 83)" },
+    { name: "Technical Writing",       branch: "Practice & Process", level: 4, evidence: "KIT105" },
     { name: "Agile & Scrum",           branch: "Practice & Process", level: 4, evidence: "KIT203 · KIT219" },
     { name: "Research & Analysis",     branch: "Practice & Process", level: 4, evidence: "KIT304 research" },
     { name: "UML Modelling",           branch: "Practice & Process", level: 3, evidence: "KIT219" },
@@ -485,6 +485,8 @@ const DATA = {
 
   /* ---------- Academic record: shown as HUD chips ---------- */
   academic: {
+    // Kept for reference only — deliberately not rendered anywhere on
+    // the site. Academic results are not published.
     gpa: 5.04,
     gpaScale: 7,
     coursePoints: 300,      // total credit points in the degree
@@ -516,8 +518,8 @@ const DATA = {
       kind: "edu",
       current: true,
       lines: [
-        "Double major: Computer Science and Cyber Security · GPA 5.04 / 7",
-        "High Distinctions in Operating Systems, Data Science, Professional Practices, Secure Web Development and Cyber Security Policies",
+        "Double major: Computer Science and Cyber Security",
+        "Coursework across cyber security, networking, systems, software and data",
         "262.5 of 300 credit points completed"
       ],
       tags: ["Cyber Security", "Computer Science"]
