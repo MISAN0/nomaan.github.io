@@ -242,7 +242,18 @@ function renderGoals(goals) {
 /* ---------- Skill tree ---------- */
 const LEVEL_WORD = ['Not started', 'Aware', 'Familiar', 'Working', 'Confident', 'Strong'];
 
-function renderSkills(skills) {
+/* Evidence is written as unit codes to stay compact. Expand them to
+   "KIT213 — Operating Systems" for the tooltip and the key below the
+   tree, so a reader is never left guessing what a code means. */
+function expandEvidence(evidence, codex) {
+  return String(evidence).split('·').map(part => {
+    const code = part.trim();
+    const unit = codex.find(u => u.code === code);
+    return unit ? `${code} — ${unit.name}` : code;
+  }).join(' · ');
+}
+
+function renderSkills(skills, codex) {
   // Legend first — pips mean nothing without it.
   $('#skillLegend').innerHTML = `
     ${[1, 2, 3, 4, 5].map(l => `
@@ -268,7 +279,8 @@ function renderSkills(skills) {
       <div class="branch-nodes">
         ${nodes.map(s => `
           <div class="node ${s.level === 0 ? 'locked' : ''}"
-               title="${esc(s.name)} — ${esc(LEVEL_WORD[s.level])}${s.evidence ? ' · ' + esc(s.evidence) : ''}">
+               title="${esc(s.name)} — ${esc(LEVEL_WORD[s.level])}${
+                 s.evidence ? '\n' + esc(expandEvidence(s.evidence, codex)) : ''}">
             <span class="node-name">${esc(s.name)}</span>
             ${s.evidence ? `<span class="node-evidence">${esc(s.evidence)}</span>` : ''}
             <span class="node-pips" role="img" aria-label="${esc(LEVEL_WORD[s.level])}, ${s.level} of 5">${
@@ -278,6 +290,25 @@ function renderSkills(skills) {
       </div>
     </div>`;
   }).join('');
+
+  /* Collapsed by default, so the codes can be looked up without the key
+     taking any room on the page. */
+  const used = new Set();
+  skills.forEach(s => String(s.evidence || '').split('·')
+    .forEach(c => used.add(c.trim())));
+  const units = codex.filter(u => used.has(u.code))
+    .sort((a, b) => a.code.localeCompare(b.code));
+
+  $('#unitKey').innerHTML = `
+    <details class="unit-key">
+      <summary>What the unit codes mean <span>${units.length} units</span></summary>
+      <div class="unit-key-grid">
+        ${units.map(u => `
+          <div class="unit-key-row">
+            <code>${esc(u.code)}</code><span>${esc(u.name)}</span>
+          </div>`).join('')}
+      </div>
+    </details>`;
 }
 
 /* ---------- Artifacts ---------- */
@@ -368,16 +399,16 @@ function renderCV(data) {
   /* --- Contact line: only what is actually set --- */
   const contact = [
     p.links.email ? `<a href="mailto:${esc(p.links.email)}">${esc(p.links.email)}</a>` : '',
-    cv.phone ? `<a href="tel:${esc(cv.phone.replace(/\s/g, ''))}">${esc(cv.phone)}</a>` : '',
     `<a href="${esc(p.links.linkedin)}" target="_blank" rel="noopener">${esc(p.links.linkedin.replace('https://', ''))}</a>`,
     `<a href="${esc(p.links.github)}" target="_blank" rel="noopener">${esc(p.links.github.replace('https://', ''))}</a>`,
     `<span>${esc(p.location)}</span>`
   ].filter(Boolean).join('<i aria-hidden="true">·</i>');
 
-  const download = cv.file
-    ? `<a class="cv-download" href="${esc(cv.file)}" download>
-         <span class="cv-dl-icon" aria-hidden="true">↓</span>
-         <span><b>Download CV</b><em>${esc(cv.fileLabel || 'PDF')}</em></span>
+  /* The download sits in the top bar beside the view toggle, so it is
+     reachable from anywhere on the page rather than only at the top. */
+  document.getElementById('hudDownload').innerHTML = cv.file
+    ? `<a class="hud-dl" href="${esc(cv.file)}" download>
+         <span aria-hidden="true">↓</span> Download CV
        </a>`
     : '';
 
@@ -401,7 +432,6 @@ function renderCV(data) {
           <p class="cv-headline">${esc(cv.headline)}</p>
           <p class="cv-contact">${contact}</p>
         </div>
-        ${download}
       </header>
 
       <div class="cv-avail">
@@ -567,7 +597,7 @@ function wireChrome() {
   renderRadar(DATA.attributes);
   renderQuests(DATA.quests);
   renderGoals(DATA.goals);
-  renderSkills(DATA.skills);
+  renderSkills(DATA.skills, DATA.codex);
   renderArtifacts(DATA.artifacts);
   renderCampaign(DATA.campaign);
   renderAchievements(DATA.achievements);

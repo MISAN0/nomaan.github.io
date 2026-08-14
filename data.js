@@ -576,10 +576,6 @@ const DATA = {
     file: "Mir-Salman-Nomaan-CV.pdf",
     fileLabel: "PDF · 1 page",
 
-    // EDIT: a phone number is what recruiters reach for first. Left
-    // empty it is simply not shown.
-    phone: "+61 475 231 052",
-
     headline: "ICT Graduate — Cyber Security & Computer Science",
 
     summary: "Final-year Information and Communication Technology student at the University of Tasmania, majoring in Computer Science and Cyber Security and graduating December 2026. Builds and secures software end to end: REST APIs hardened with TLS and security headers, a Python tool that audits APIs for information disclosure, and machine learning models evaluated on imbalanced real-world data. Brings three years of concurrent frontline security operations, including regulated maritime access control at TasPorts, delivered alongside full-time study. Seeking a graduate or entry-level ICT role — service desk, technical support, cyber security or networking — where analytical thinking and a security-first mindset add value from day one.",

@@ -379,6 +379,26 @@ main { position: relative; z-index: 1; }
 .legend-locked { color: var(--txt-mute); }
 .legend-lock { font-size: 10px; }
 
+/* ── Unit key: collapsed, so codes can be looked up for free ── */
+.unit-key { margin-top: 18px; border: 1px solid var(--line); border-radius: 10px; background: var(--panel); }
+.unit-key summary {
+  cursor: pointer; padding: 12px 16px; list-style: none;
+  font-family: var(--mono); font-size: 11px; letter-spacing: .06em; color: var(--txt-dim);
+  display: flex; justify-content: space-between; align-items: center; gap: 12px;
+}
+.unit-key summary::-webkit-details-marker { display: none; }
+.unit-key summary::before { content: '▸ '; color: var(--cyan); }
+.unit-key[open] summary::before { content: '▾ '; }
+.unit-key summary:hover { color: var(--txt); }
+.unit-key summary span { font-size: 10px; color: var(--txt-mute); }
+.unit-key-grid {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 6px 22px; padding: 4px 16px 16px;
+}
+.unit-key-row { display: grid; grid-template-columns: 62px 1fr; gap: 10px; font-size: 12.5px; }
+.unit-key-row code { font-family: var(--mono); font-size: 10.5px; color: var(--cyan); }
+.unit-key-row span { color: var(--txt-dim); }
+
 /* ── Artifacts ──────────────────────────────────────────── */
 .artifacts { display: grid; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); gap: 18px; align-items: stretch; }
 .artifact {
@@ -539,8 +559,9 @@ body.plain .hud-sigil { background: var(--paper-2); border-color: var(--rule); c
 body.plain .hud-lvl { display: none; }
 body.plain .hud-brand { color: var(--ink); }
 body.plain .hud-btn {
-  margin-left: auto; color: #fff; background: var(--accent); border-color: var(--accent);
+  color: var(--accent); background: transparent; border-color: var(--rule);
 }
+body.plain .hud-btn:hover { border-color: var(--accent); background: rgba(31,78,107,.06); }
 body.plain .hud-btn:hover { background: #16394f; }
 
 /* ── The page ──────────────────────────────────────────── */
@@ -553,6 +574,18 @@ body.plain .hud-btn:hover { background: #16394f; }
 }
 
 .cv-head { display: flex; align-items: flex-start; justify-content: space-between; gap: 30px; }
+
+/* Download button, top bar, recruiter view only */
+#hudDownload { display: none; margin-left: auto; }
+body.plain #hudDownload { display: inline-flex; }
+.hud-dl {
+  display: inline-flex; align-items: center; gap: 7px;
+  font-family: var(--mono); font-size: 11px; letter-spacing: .06em;
+  padding: 7px 13px; border-radius: 8px; text-decoration: none;
+  color: #fff; background: var(--accent); border: 1px solid var(--accent);
+  transition: background .18s;
+}
+.hud-dl:hover { background: #16394f; }
 .cv-name { font-size: 38px; font-weight: 700; letter-spacing: -.025em; line-height: 1.05; color: var(--ink); }
 .cv-headline {
   font-family: var(--mono); font-size: 12px; letter-spacing: .12em; text-transform: uppercase;
@@ -563,19 +596,6 @@ body.plain .hud-btn:hover { background: #16394f; }
 .cv-contact a:hover { color: var(--accent); border-color: var(--accent); }
 .cv-contact i { margin: 0 9px; color: var(--ink-3); font-style: normal; }
 
-.cv-download {
-  flex: none; display: inline-flex; align-items: center; gap: 11px;
-  padding: 12px 18px; border-radius: 6px; text-decoration: none;
-  background: var(--accent); color: #fff;
-  transition: background .18s, transform .18s;
-}
-.cv-download:hover { background: #16394f; transform: translateY(-1px); }
-.cv-dl-icon { font-size: 17px; line-height: 1; }
-.cv-download b { display: block; font-size: 14px; font-weight: 600; }
-.cv-download em {
-  display: block; font-style: normal; font-family: var(--mono);
-  font-size: 10px; letter-spacing: .08em; opacity: .8;
-}
 
 .cv-avail {
   display: flex; flex-wrap: wrap; gap: 10px 32px;
@@ -645,8 +665,7 @@ body.plain .hud-btn:hover { background: #16394f; }
     border: 0; border-radius: 0; box-shadow: none; background: #fff;
     font-size: 10.5pt; line-height: 1.45;
   }
-  .cv-download { display: none; }
-  .cv-sec { margin-top: 18px; page-break-inside: avoid; }
+    .cv-sec { margin-top: 18px; page-break-inside: avoid; }
   .cv-role, .cv-proj { page-break-inside: avoid; }
   .cv-sec h2 { font-size: 9pt; }
   .cv-name { font-size: 24pt; }
