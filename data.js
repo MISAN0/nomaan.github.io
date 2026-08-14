@@ -568,14 +568,14 @@ const DATA = {
      proof: the fact behind the badge, so it is checkable.            */
   achievements: [
     {
-      icon: "◆", name: "Top of the Class", tier: "gold", when: "2024",
-      desc: "Highest mark of the degree",
-      proof: "91 in Operating Systems"
+      icon: "◆", name: "Breaker and Builder", tier: "gold", when: "2025 – 2026",
+      desc: "Works both sides of security — finds the weakness, then closes it",
+      proof: "Ethical hacking and hardened, secure-by-default builds"
     },
     {
-      icon: "★", name: "Distinction Streak", tier: "gold", when: "2023 – 2026",
-      desc: "Five High Distinctions across security, systems and data",
-      proof: "KIT213, KIT102, KIT105, KIT214, KIT118"
+      icon: "✦", name: "From First Principles", tier: "gold", when: "2025",
+      desc: "Built the fundamentals by hand instead of importing them",
+      proof: "Dijkstra, A-star, hash tables and priority queues in C"
     },
     {
       icon: "◈", name: "Published Researcher", tier: "gold", when: "2026",
