@@ -110,7 +110,7 @@ const DATA = {
       next: "Threats, vulnerabilities and mitigations",
       objectives: [
         { label: "General security concepts", done: true },
-        { label: "Threats, vulnerabilities and mitigations", done: false },
+        { label: "Threats, vulnerabilities and mitigations", done: true },
         { label: "Security architecture and operations", done: false },
         { label: "Practice exams at 80% twice running", done: false }
       ]
