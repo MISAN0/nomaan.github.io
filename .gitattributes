@@ -1,0 +1,8 @@
+# Text files get normalised line endings.
+* text=auto
+
+# Binaries must never be line-ending converted — doing so corrupts them.
+*.pdf binary
+*.jpg binary
+*.png binary
+*.ico binary
