@@ -33,7 +33,7 @@ const DATA = {
       linkedin: "https://linkedin.com/in/nomaan00",
       // EDIT: add an address here and the contact card gains an email
       // row. Left empty it is simply not rendered — no dead link.
-      email: ""
+      email: "mirsalmannomaan@gmail.com"
     }
   },
 
@@ -573,12 +573,12 @@ const DATA = {
     // EDIT: drop a PDF in this folder and put its filename here. The
     // download button appears only when this is set, so it can never
     // link to a missing file.
-    file: "",
+    file: "Mir-Salman-Nomaan-CV.pdf",
     fileLabel: "PDF · 1 page",
 
     // EDIT: a phone number is what recruiters reach for first. Left
     // empty it is simply not shown.
-    phone: "",
+    phone: "+61 475 231 052",
 
     headline: "ICT Graduate — Cyber Security & Computer Science",
 
