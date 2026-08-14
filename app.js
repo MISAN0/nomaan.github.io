@@ -90,7 +90,7 @@ function renderSheet(data, xp) {
       <span>LinkedIn</span><b>${esc(p.links.linkedin.replace('https://', ''))}</b></a>
     <a class="contact-link" href="${esc(p.links.github)}" target="_blank" rel="noopener">
       <span>GitHub</span><b>${esc(p.links.github.replace('https://', ''))}</b></a>`;
-  $('#footHint').textContent = p.location;
+  $('#footHint').textContent = `${p.location} · Last updated ${data.meta.updated}`;
 }
 
 /* ---------- Radar chart ---------- */

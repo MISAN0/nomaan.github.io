@@ -9,6 +9,14 @@
 
 const DATA = {
 
+  /* ---------- Site meta ----------
+     Bump `updated` whenever you change anything real on this page.
+     It is deliberately manual: a build date would claim the content is
+     current when only the code changed.                                */
+  meta: {
+    updated: "14 August 2026"   // EDIT when you update the site
+  },
+
   /* ---------- Character ---------- */
   player: {
     name: "Mir Salman Nomaan",
