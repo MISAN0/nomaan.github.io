@@ -507,6 +507,19 @@ const DATA = {
      statement.                                                        */
   campaign: [
     {
+      title: "Bachelor of Information and Communication Technology",
+      org: "University of Tasmania · Hobart",
+      period: "2023 – Dec 2026",
+      kind: "edu",
+      current: true,
+      lines: [
+        "Double major: Computer Science and Cyber Security · GPA 5.04 / 7",
+        "High Distinctions in Operating Systems, Data Science, Professional Practices, Secure Web Development and Cyber Security Policies",
+        "262.5 of 300 credit points completed"
+      ],
+      tags: ["Cyber Security", "Computer Science"]
+    },
+    {
       title: "Security Officer",
       org: "Kevlar Security Services · Hobart",
       period: "2023 – Present",
@@ -542,19 +555,6 @@ const DATA = {
         "Team operations, stock accuracy and floor organisation"
       ],
       tags: ["Customer Service", "Operations"]
-    },
-    {
-      title: "Bachelor of Information and Communication Technology",
-      org: "University of Tasmania · Hobart",
-      period: "2023 – Dec 2026",
-      kind: "edu",
-      current: true,
-      lines: [
-        "Double major: Computer Science and Cyber Security · GPA 5.04 / 7",
-        "High Distinctions in Operating Systems, Data Science, Professional Practices, Secure Web Development and Cyber Security Policies",
-        "262.5 of 300 credit points completed"
-      ],
-      tags: ["Cyber Security", "Computer Science"]
     }
   ],
 
