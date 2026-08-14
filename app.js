@@ -43,7 +43,7 @@ function renderSheet(data, xp) {
 
   $('#hudLevel').textContent = xp.level;
   $('#hudXpText').textContent = `${xp.total} / ${xp.nextXp} XP`;
-  requestAnimationFrame(() => { $('#hudXpFill').style.width = xp.pct + '%'; });
+  requestAnimationFrame(() => { $('#hudXpFill').style.transform = `scaleX(${xp.pct / 100})`; });
 
   const img = $('#avatar');
   img.src = p.avatar;
@@ -68,7 +68,7 @@ function renderSheet(data, xp) {
   $('#degreeVal').textContent = xp.degreePct + '% complete';
   $('#degreeNote').textContent =
     `${xp.donePts} of ${xp.coursePts} credit points passed · ${data.academic.degreeName}, graduating ${data.academic.graduating}`;
-  requestAnimationFrame(() => { $('#degreeFill').style.width = xp.degreePct + '%'; });
+  requestAnimationFrame(() => { $('#degreeFill').style.transform = `scaleX(${xp.degreePct / 100})`; });
 
   $('#ghLink').href = p.links.github;
   $('#liLink').href = p.links.linkedin;
@@ -193,7 +193,7 @@ function renderQuests(quests) {
 
       <div class="quest-bar" role="progressbar" aria-valuenow="${pct}" aria-valuemin="0" aria-valuemax="100"
            aria-label="${esc(q.title)} progress">
-        <i style="--w:${pct}%"></i>
+        <i style="--p:${pct / 100}"></i>
       </div>
       <div class="quest-foot">
         <span>${total ? `${done} of ${total} objectives` : 'In progress'}</span>
@@ -233,7 +233,7 @@ function renderGoals(goals) {
       </ol>
 
       <div class="goal-bar" role="progressbar" aria-valuenow="${pct}" aria-valuemin="0" aria-valuemax="100"
-           aria-label="${esc(g.title)} progress"><i style="--w:${pct}%"></i></div>
+           aria-label="${esc(g.title)} progress"><i style="--p:${pct / 100}"></i></div>
       <span class="goal-pct">${done} of ${g.steps.length} checkpoints</span>
     </article>`;
   }).join('');
@@ -279,8 +279,8 @@ function renderSkills(skills, codex) {
       <div class="branch-nodes">
         ${nodes.map(s => `
           <div class="node ${s.level === 0 ? 'locked' : ''}"
-               title="${esc(s.name)} — ${esc(LEVEL_WORD[s.level])}${
-                 s.evidence ? '\n' + esc(expandEvidence(s.evidence, codex)) : ''}">
+               data-tip="${esc(LEVEL_WORD[s.level])}${
+                 s.evidence ? ' · ' + esc(expandEvidence(s.evidence, codex)) : ''}">
             <span class="node-name">${esc(s.name)}</span>
             ${s.evidence ? `<span class="node-evidence">${esc(s.evidence)}</span>` : ''}
             <span class="node-pips" role="img" aria-label="${esc(LEVEL_WORD[s.level])}, ${s.level} of 5">${
@@ -544,6 +544,82 @@ function renderCV(data) {
     </article>`;
 }
 
+/* ============================================================
+   TOOLTIPS
+   Native title= waits about a second, cannot be styled, and never
+   appears on touch. This is the same idea done properly: a delay
+   before the first one so passing the cursor over a card does not
+   trigger it, then no delay and no animation while moving between
+   neighbours — which is what makes a row of them feel instant.
+   ============================================================ */
+function initTooltips() {
+  const tip = el('div', 'tip');
+  tip.setAttribute('role', 'tooltip');
+  tip.hidden = true;
+  document.body.appendChild(tip);
+
+  let showTimer, hideTimer, active = null, warm = false, warmTimer;
+
+  const place = target => {
+    const r = target.getBoundingClientRect();
+    tip.style.transform = 'none';           // measure unrotated
+    const t = tip.getBoundingClientRect();
+    const margin = 8;
+    let left = r.left + r.width / 2 - t.width / 2;
+    left = Math.max(10, Math.min(left, window.innerWidth - t.width - 10));
+
+    // Above by default; below when there is no room up top.
+    const above = r.top > t.height + margin + 10;
+    const top = above ? r.top - t.height - margin : r.bottom + margin;
+    tip.classList.toggle('below', !above);
+
+    tip.style.left = `${Math.round(left)}px`;
+    tip.style.top = `${Math.round(top)}px`;
+    // Point the scale origin at the trigger, not the tooltip's centre.
+    const originX = Math.round(r.left + r.width / 2 - left);
+    tip.style.setProperty('--tip-origin-x', `${originX}px`);
+  };
+
+  const show = target => {
+    tip.textContent = target.dataset.tip;
+    tip.hidden = false;
+    place(target);
+    // Warm: skip the entrance so neighbours feel immediate.
+    tip.classList.toggle('instant', warm);
+    requestAnimationFrame(() => tip.classList.add('on'));
+    active = target;
+    warm = true;
+    clearTimeout(warmTimer);
+  };
+
+  const hide = () => {
+    clearTimeout(showTimer);
+    tip.classList.remove('on');
+    active = null;
+    clearTimeout(hideTimer);
+    hideTimer = setTimeout(() => { tip.hidden = true; }, 140);
+    // Stay warm briefly, so moving to the next node is instant.
+    clearTimeout(warmTimer);
+    warmTimer = setTimeout(() => { warm = false; }, 400);
+  };
+
+  document.addEventListener('pointerover', e => {
+    if (e.pointerType !== 'mouse') return;      // touch has the unit key instead
+    const target = e.target.closest('[data-tip]');
+    if (!target || target === active) return;
+    clearTimeout(showTimer);
+    showTimer = setTimeout(() => show(target), warm ? 0 : 380);
+  });
+
+  document.addEventListener('pointerout', e => {
+    const target = e.target.closest('[data-tip]');
+    if (target && !target.contains(e.relatedTarget)) hide();
+  });
+
+  window.addEventListener('scroll', () => { if (active) hide(); }, { passive: true });
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') hide(); });
+}
+
 /* ---------- Scroll reveal ---------- */
 let revealObserver;
 function observeReveals() {
@@ -596,11 +672,24 @@ function wireChrome() {
   const saved = localStorage.getItem('cvMode') === '1';
   apply(saved);
 
+  /* The two views are the same person seen two ways, so the swap gets a
+     short cross-fade rather than a hard cut. */
   plain.addEventListener('click', () => {
     const on = !document.body.classList.contains('plain');
-    apply(on);
-    localStorage.setItem('cvMode', on ? '1' : '0');
-    window.scrollTo({ top: 0, behavior: 'auto' });
+    const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    const swap = () => {
+      apply(on);
+      localStorage.setItem('cvMode', on ? '1' : '0');
+      window.scrollTo({ top: 0, behavior: 'auto' });
+      document.body.classList.remove('view-out');
+      document.body.classList.add('view-in');
+      setTimeout(() => document.body.classList.remove('view-in'), 260);
+    };
+
+    if (reduce) return swap();
+    document.body.classList.add('view-out');
+    setTimeout(swap, 120);
   });
 }
 
@@ -618,4 +707,5 @@ function wireChrome() {
   renderCV(DATA);
   observeReveals();
   wireChrome();
+  initTooltips();
 })();
