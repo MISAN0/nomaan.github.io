@@ -117,39 +117,58 @@ const DATA = {
     }
   ],
 
-  /* ---------- Goals: the longer arc, with checkpoints ---------- */
+  /* ---------- Objectives: the long arc ----------
+     These are OUTCOMES, not tasks. Day-to-day milestones belong in
+     `quests` above — anything appearing in both places is duplication.
+     horizon: short phrase placing the goal in time, shown as a badge.
+     why:     one line on why the goal is worth having.                 */
   goals: [
     {
-      title: "Graduate — Bachelor of ICT",
-      detail: "Computer Science & Cyber Security double major, University of Tasmania. 262.5 of 300 credit points cleared.",
+      title: "Finish the degree",
+      horizon: "In progress",
       target: "Dec 2026",
+      detail: "Bachelor of Information and Communication Technology at the University of Tasmania, double major in Computer Science and Cyber Security. 262.5 of 300 credit points cleared at a GPA of 5.04.",
+      why: "The foundation everything else is built on.",
       steps: [
         { label: "21 units passed", done: true },
-        { label: "KIT307 Graphics", done: false },
-        { label: "KIT300 Capstone (25pt)", done: false }
+        { label: "Final two units, including the capstone", done: false },
+        { label: "Graduate", done: false }
       ]
     },
     {
-      title: "CCNA, then Security+",
-      detail: "Cisco CCNA 200-301 first, CompTIA Security+ SY0-701 second. Six-month plan, active learning only — every hour of video is matched by an hour of lab.",
+      title: "Get certified",
+      horizon: "In progress",
       target: "Oct & Dec 2026",
+      detail: "Networking first, then security. Vendor certifications that stand on their own in front of an employer, independent of the degree.",
+      why: "A degree shows I can learn. A certification shows I can do the work.",
       steps: [
-        { label: "Subnetting under 60s, any prefix", done: true },
-        { label: "Domains 1+2 practice test 75%+", done: false },
-        { label: "OSPFv2 from scratch in under 15 min", done: false },
-        { label: "Boson 85%+ twice → CCNA passed", done: false },
-        { label: "Security+ SY0-701 passed", done: false }
+        { label: "CCNA 200-301", done: false },
+        { label: "CompTIA Security+ SY0-701", done: false },
+        { label: "CySA+ or a cloud security certification", done: false }
       ]
     },
     {
-      title: "Graduate role in ICT",
-      detail: "Open across ICT, cyber security, computer science, networking, and AI. Australia-based, and happy to start on a service desk — the fastest way into the industry is through the door.",
+      title: "First role in ICT",
+      horizon: "Next",
       target: "2026 / 2027",
+      detail: "Service desk, technical support, or a junior role anywhere across ICT, cyber security, networking, or AI. Australia-based, and ready to start at the bottom of a good team.",
+      why: "The fastest way into the industry is through the door. Specialisation comes after.",
       steps: [
         { label: "Portfolio live", done: true },
-        { label: "Applications out", done: false },
-        { label: "First IT role — service desk or support", done: false },
-        { label: "Offer signed", done: false }
+        { label: "CV ready and applications out", done: false },
+        { label: "First ICT role", done: false }
+      ]
+    },
+    {
+      title: "Grow into security engineering",
+      horizon: "Longer term",
+      target: "2028 onward",
+      detail: "Move from support into security or network operations — SOC analysis, network security, or infrastructure engineering — and keep stacking certifications on top of real experience.",
+      why: "Where the two majors actually meet.",
+      steps: [
+        { label: "Operations experience in a SOC or network team", done: false },
+        { label: "CCNP Security or CySA+", done: false },
+        { label: "Specialise", done: false }
       ]
     }
   ],

@@ -196,21 +196,32 @@ function renderQuests(quests) {
 
 /* ---------- Goals ---------- */
 function renderGoals(goals) {
+  const allSteps = goals.reduce((n, g) => n + g.steps.length, 0);
+  const allDone = goals.reduce((n, g) => n + g.steps.filter(s => s.done).length, 0);
+  $('#goalTally').textContent = `${allDone} of ${allSteps} checkpoints cleared`;
+
   $('#goalList').innerHTML = goals.map((g, i) => {
     const done = g.steps.filter(s => s.done).length;
     const pct = Math.round((done / g.steps.length) * 100);
+    const state = pct === 100 ? 'is-done' : done > 0 ? 'is-started' : 'is-open';
     return `
-    <article class="goal reveal" style="--i:${i}">
-      <div class="goal-head">
-        <h3 class="goal-title">${esc(g.title)}</h3>
+    <article class="goal reveal ${state}" style="--i:${i}">
+      <div class="goal-top">
+        <span class="goal-horizon">${esc(g.horizon)}</span>
         <span class="goal-target">${esc(g.target)}</span>
       </div>
+
+      <h3 class="goal-title">${esc(g.title)}</h3>
+      <p class="goal-why">${esc(g.why)}</p>
       <p class="goal-detail">${esc(g.detail)}</p>
+
       <ol class="goal-steps">
         ${g.steps.map(s => `<li class="${s.done ? 'done' : ''}"><i></i>${esc(s.label)}</li>`).join('')}
       </ol>
-      <div class="goal-bar"><i style="--w:${pct}%"></i></div>
-      <span class="goal-pct">${done}/${g.steps.length} checkpoints</span>
+
+      <div class="goal-bar" role="progressbar" aria-valuenow="${pct}" aria-valuemin="0" aria-valuemax="100"
+           aria-label="${esc(g.title)} progress"><i style="--w:${pct}%"></i></div>
+      <span class="goal-pct">${done} of ${g.steps.length} checkpoints</span>
     </article>`;
   }).join('');
 }
