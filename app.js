@@ -253,7 +253,17 @@ function expandEvidence(evidence, codex) {
   }).join(' · ');
 }
 
-function renderSkills(skills, codex) {
+/* Branch order and the one-line note come from DATA.skillBranches.
+   Any branch used in `skills` but missing from that list still renders,
+   at the end, so adding a skill can never make it disappear. */
+function branchOrder(skills, meta) {
+  const used = [...new Set(skills.map(s => s.branch))];
+  const listed = (meta || []).filter(b => used.includes(b.name));
+  const rest = used.filter(u => !listed.some(b => b.name === u)).map(name => ({ name }));
+  return [...listed, ...rest];
+}
+
+function renderSkills(skills, codex, meta) {
   // Legend first — pips mean nothing without it.
   $('#skillLegend').innerHTML = `
     ${[1, 2, 3, 4, 5].map(l => `
@@ -264,32 +274,62 @@ function renderSkills(skills, codex) {
       </span>`).join('')}
     <span class="legend-item legend-locked"><span class="legend-lock">🔒</span> Learning next</span>`;
 
-  const branches = [...new Set(skills.map(s => s.branch))];
+  const branches = branchOrder(skills, meta);
   $('#skillTree').innerHTML = branches.map((b, bi) => {
     // Strongest first, so the top of each card is the most useful part.
-    const nodes = skills.filter(s => s.branch === b)
+    const nodes = skills.filter(s => s.branch === b.name)
       .sort((a, x) => x.level - a.level || a.name.localeCompare(x.name));
     const live = nodes.filter(s => s.level > 0);
+    const next = nodes.filter(s => s.level === 0);
+    const strong = live.filter(s => s.level >= 4).length;
+
+    /* A <details> rather than a div: eight branches of nine skills is a
+       wall of text on arrival, and the browser gives us open/close,
+       keyboard support and find-in-page for free. */
     return `
-    <div class="branch reveal" style="--i:${bi}" data-branch="${esc(b)}">
-      <div class="branch-head">
-        <h3 class="branch-name">${esc(b)}</h3>
-        <span class="branch-count">${live.length}</span>
-      </div>
+    <details class="branch reveal" style="--i:${bi}" data-branch="${esc(b.name)}"${b.open ? ' open' : ''}>
+      <summary class="branch-head">
+        <h3 class="branch-name">${esc(b.name)}</h3>
+        <span class="branch-count" title="${live.length} skills, ${strong} at Confident or above">
+          ${live.length}${strong ? ` · ${strong} strong` : ''}
+        </span>
+        <span class="branch-chev" aria-hidden="true"></span>
+      </summary>
+      ${b.note ? `<p class="branch-note">${esc(b.note)}</p>` : ''}
       <div class="branch-nodes">
         ${nodes.map(s => `
           <div class="node ${s.level === 0 ? 'locked' : ''}"
                data-tip="${esc(LEVEL_WORD[s.level])}${
                  s.evidence ? ' · ' + esc(expandEvidence(s.evidence, codex)) : ''}">
             <span class="node-name">${esc(s.name)}</span>
+            <span class="node-level">${esc(LEVEL_WORD[s.level])}</span>
             ${s.evidence ? `<span class="node-evidence">${esc(s.evidence)}</span>` : ''}
             <span class="node-pips" role="img" aria-label="${esc(LEVEL_WORD[s.level])}, ${s.level} of 5">${
               Array.from({ length: 5 }, (_, k) => `<i class="${k < s.level ? 'on' : ''}"></i>`).join('')
             }</span>
           </div>`).join('')}
       </div>
-    </div>`;
+      ${next.length ? `<p class="branch-next">Learning next: ${next.map(s => esc(s.name)).join(', ')}</p>` : ''}
+    </details>`;
   }).join('');
+
+  /* One control for all eight, because opening them one at a time to
+     read the whole tree is eight clicks. */
+  const treeEl = $('#skillTree');
+  const toggle = el('button', 'tree-toggle');
+  const sync = () => {
+    const anyClosed = [...treeEl.querySelectorAll('.branch')].some(d => !d.open);
+    toggle.textContent = anyClosed ? 'Expand all branches' : 'Collapse all branches';
+    toggle.dataset.action = anyClosed ? 'open' : 'close';
+  };
+  toggle.addEventListener('click', () => {
+    const open = toggle.dataset.action === 'open';
+    treeEl.querySelectorAll('.branch').forEach(d => { d.open = open; });
+    sync();
+  });
+  treeEl.addEventListener('toggle', sync, true);
+  sync();
+  treeEl.before(toggle);
 
   /* Collapsed by default, so the codes can be looked up without the key
      taking any room on the page. */
@@ -326,11 +366,21 @@ function artifactCode(a) {
 
 function renderArtifacts(list) {
   const published = list.filter(a => a.code === 'published' && a.repo).length;
-  $('#artifactTally').textContent =
-    `${list.length} projects · ${published} on GitHub`;
+  const tally = $('#artifactTally');
+  const baseTally = `${list.length} projects · ${published} on GitHub`;
+  tally.textContent = baseTally;
+
+  /* Filter by category rather than by `type`: every project has a
+     different type, so a type filter would be eleven buttons that each
+     match one card. Categories stay useful as the list grows. */
+  const cats = [...new Set(list.map(a => a.cat).filter(Boolean))];
+  const count = c => list.filter(a => a.cat === c).length;
+  $('#artifactFilters').innerHTML = cats.length ? `
+    <button class="filter on" data-cat="all">All <b>${list.length}</b></button>
+    ${cats.map(c => `<button class="filter" data-cat="${esc(c)}">${esc(c)} <b>${count(c)}</b></button>`).join('')}` : '';
 
   $('#artifactList').innerHTML = list.map((a, i) => `
-    <article class="artifact reveal r-${esc(a.rarity)}" style="--i:${Math.min(i, 8)}">
+    <article class="artifact reveal r-${esc(a.rarity)}" style="--i:${Math.min(i, 8)}" data-cat="${esc(a.cat || '')}">
       <div class="artifact-top">
         <span class="rarity">${esc(a.rarity)}</span>
         <span class="artifact-type">${esc(a.type)}</span>
@@ -348,6 +398,25 @@ function renderArtifacts(list) {
       <div class="artifact-stats">${a.stats.map(s => `<code>${esc(s)}</code>`).join('')}</div>
       <div class="artifact-foot">${artifactCode(a)}</div>
     </article>`).join('');
+
+  const filters = $('#artifactFilters');
+  const cards = [...$('#artifactList').children];
+  filters.addEventListener('click', e => {
+    const btn = e.target.closest('.filter');
+    if (!btn) return;
+    const cat = btn.dataset.cat;
+    filters.querySelectorAll('.filter').forEach(b => b.classList.toggle('on', b === btn));
+
+    let shown = 0;
+    cards.forEach(card => {
+      const match = cat === 'all' || card.dataset.cat === cat;
+      card.hidden = !match;
+      // A hidden card never intersects, so the scroll observer would
+      // leave it at opacity 0 when the filter brings it back.
+      if (match) { shown++; card.classList.add('in'); }
+    });
+    tally.textContent = cat === 'all' ? baseTally : `Showing ${shown} of ${list.length} projects`;
+  });
 }
 
 /* ---------- Campaign ---------- */
@@ -640,13 +709,33 @@ function observeReveals() {
 function wireChrome() {
   const links = [...document.querySelectorAll('.hud-nav a')];
   const sections = [...document.querySelectorAll('main section[id]')];
-  const secObs = new IntersectionObserver(entries => {
-    entries.forEach(e => {
-      if (!e.isIntersecting) return;
-      links.forEach(l => l.classList.toggle('on', l.getAttribute('href') === '#' + e.target.id));
-    });
-  }, { threshold: 0.35 });
-  sections.forEach(s => secObs.observe(s));
+
+  /* Position-based, not IntersectionObserver with a ratio threshold:
+     the skill tree is several screens tall, so it could never show 35%
+     of itself at once and its nav link never lit up. The active section
+     is simply the last one whose top has passed under the HUD. */
+  let ticking = false;
+  const markActive = () => {
+    ticking = false;
+    const line = 140;                       // just below the HUD
+    let current = sections[0];
+    for (const s of sections) {
+      if (s.getBoundingClientRect().top <= line) current = s;
+    }
+    // At the very bottom the last section wins, however short it is.
+    if (window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 2) {
+      current = sections[sections.length - 1];
+    }
+    links.forEach(l => l.classList.toggle('on', l.getAttribute('href') === '#' + current.id));
+  };
+  const onScroll = () => {
+    if (ticking) return;
+    ticking = true;
+    requestAnimationFrame(markActive);
+  };
+  window.addEventListener('scroll', onScroll, { passive: true });
+  window.addEventListener('resize', onScroll, { passive: true });
+  markActive();
 
   const burger = $('#burger'), nav = $('#hudNav');
   burger.addEventListener('click', () => {
@@ -700,7 +789,7 @@ function wireChrome() {
   renderRadar(DATA.attributes);
   renderQuests(DATA.quests);
   renderGoals(DATA.goals);
-  renderSkills(DATA.skills, DATA.codex);
+  renderSkills(DATA.skills, DATA.codex, DATA.skillBranches);
   renderArtifacts(DATA.artifacts);
   renderCampaign(DATA.campaign);
   renderAchievements(DATA.achievements);

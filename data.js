@@ -117,6 +117,58 @@ const DATA = {
         { label: "Security architecture and operations", done: false },
         { label: "Practice exams at 80% twice running", done: false }
       ]
+    },
+    {
+      title: "Open the Vault",
+      role: "Open source",
+      rank: "B",
+      reward: 200,
+      blurb: "Move the projects in the Artifacts section out of local folders and onto public GitHub repositories — credentials stripped, READMEs written, and licences attached, so the code can be read rather than described.",
+      tags: ["Git", "GitHub", "Documentation", "Code Review"],
+      status: "active",
+      due: "Ongoing",
+      next: "Scrub credentials, then publish the first repository",
+      objectives: [
+        { label: "Audit every project for keys, certificates and connection strings", done: false },
+        { label: "README and licence written for each repository", done: false },
+        { label: "First three repositories public", done: false },
+        { label: "Every artifact on this page links to its source", done: false }
+      ]
+    },
+    {
+      title: "First Contact",
+      role: "Job search",
+      rank: "A",
+      reward: 300,
+      blurb: "The search for the first ICT role. Service desk, technical support, or a junior position anywhere across ICT — applications going out, interviews prepared for, and every rejection turned into a fix.",
+      tags: ["Service Desk", "Technical Support", "Interviews"],
+      status: "active",
+      due: "2026 / 2027",
+      next: "Applications out to Hobart and remote graduate intakes",
+      objectives: [
+        { label: "Portfolio live on its own domain", done: true },
+        { label: "One-page CV written and downloadable", done: true },
+        { label: "Applications sent", done: false },
+        { label: "Interview reached", done: false },
+        { label: "Offer signed", done: false }
+      ]
+    },
+    {
+      title: "The Home Lab",
+      role: "Hands-on practice",
+      rank: "B",
+      reward: 250,
+      blurb: "A small lab to practise on hardware that is allowed to break: virtualised hosts, a segmented network, a firewall in front of it, and a log collector behind it. Somewhere to actually run the attacks and defences the units only describe.",
+      tags: ["Virtualisation", "Firewalls", "VLANs", "Logging"],
+      status: "queued",
+      due: "2027",
+      next: "Hypervisor host and the first two virtual machines",
+      objectives: [
+        { label: "Hypervisor host running", done: false },
+        { label: "Segmented VLANs behind a firewall", done: false },
+        { label: "Linux and Windows servers to attack and defend", done: false },
+        { label: "Central logging and alerting", done: false }
+      ]
     }
   ],
 
@@ -163,15 +215,16 @@ const DATA = {
       ]
     },
     {
-      title: "Grow into security engineering",
+      title: "Become the person on call",
       horizon: "Longer term",
       target: "2028 onward",
-      detail: "Move from support into security or network operations — SOC analysis, network security, or infrastructure engineering — and keep stacking certifications on top of real experience.",
-      why: "Where the two majors actually meet.",
+      detail: "Move off the service desk and into a security operations or network team — triaging real alerts, reading real packet captures, and owning a slice of the infrastructure. Long enough in that seat to be the one others escalate to, rather than the one escalating.",
+      why: "Support teaches you the systems. Operations is where you defend them.",
       steps: [
-        { label: "Operations experience in a SOC or network team", done: false },
-        { label: "CCNP Security or CySA+", done: false },
-        { label: "Specialise", done: false }
+        { label: "Two years of hands-on ICT experience", done: false },
+        { label: "Move into a SOC, network or infrastructure team", done: false },
+        { label: "CySA+ or CCNP Security on top of real work", done: false },
+        { label: "Own an incident end to end", done: false }
       ]
     }
   ],
@@ -184,6 +237,33 @@ const DATA = {
             is what stops the tree being a list of unbacked claims.
      Branch names mirror the attributes on the character sheet, so the
      radar and the tree tell the same story.                            */
+  /* ---------- Skill branches ----------
+     Sets the ORDER the branches appear in and gives each one a line of
+     context, so a reader knows what the group is before reading 9 names.
+     `open: true` leaves that branch expanded on load; the rest start
+     collapsed so the whole tree fits on one screen.
+     A branch listed here but absent from `skills` is simply skipped, and
+     a branch used in `skills` but missing here still renders — at the
+     end, without a note.                                               */
+  skillBranches: [
+    { name: "Cyber Security", open: true,
+      note: "Defensive and offensive work across the same systems — finding the weakness, then closing it." },
+    { name: "Networking", open: true,
+      note: "The layer everything else runs on. Addressing, routing and switching, learnt in the CLI." },
+    { name: "Systems & Servers",
+      note: "What happens under the application: processes, memory, filesystems, and the servers they run on." },
+    { name: "Programming",
+      note: "Languages picked up per problem rather than per fashion — systems work in C, everything else in Python." },
+    { name: "Web & APIs",
+      note: "Building services and then attacking them: authentication, transport security, and what an API leaks." },
+    { name: "AI & Machine Learning",
+      note: "Models trained and evaluated properly — on the metrics that survive imbalanced data, not on accuracy." },
+    { name: "Data Engineering",
+      note: "Moving analysis from one machine to a cluster, and querying what lands there." },
+    { name: "Practice & Process",
+      note: "How the work gets planned, documented and handed over — the half that is not code." }
+  ],
+
   skills: [
     { name: "Python",                  branch: "Programming", level: 5, evidence: "KIT101 · KIT315" },
     { name: "C",                       branch: "Programming", level: 4, evidence: "KIT205 · KIT107" },
@@ -270,6 +350,7 @@ const DATA = {
   artifacts: [
     {
       name: "API Exposure Auditor",
+      cat: "Security",
       rarity: "legendary",
       type: "Cyber Security Tool",
       year: "2026",
@@ -286,6 +367,7 @@ const DATA = {
     },
     {
       name: "OpenAPI Exposure Research",
+      cat: "Security",
       rarity: "epic",
       type: "Security Research",
       year: "2026",
@@ -302,6 +384,7 @@ const DATA = {
     },
     {
       name: "Hardened Node.js API Server",
+      cat: "Web & APIs",
       rarity: "epic",
       type: "Backend",
       year: "2025",
@@ -318,6 +401,7 @@ const DATA = {
     },
     {
       name: "Spam Detection Classifier",
+      cat: "AI & Data",
       rarity: "epic",
       type: "Machine Learning",
       year: "2025",
@@ -334,6 +418,7 @@ const DATA = {
     },
     {
       name: "Distributed Data Pipelines",
+      cat: "AI & Data",
       rarity: "epic",
       type: "Data Engineering",
       year: "2026",
@@ -350,6 +435,7 @@ const DATA = {
     },
     {
       name: "Full-Stack Web Application",
+      cat: "Web & APIs",
       rarity: "epic",
       type: "Web Application",
       year: "2024",
@@ -366,6 +452,7 @@ const DATA = {
     },
     {
       name: "Graph Pathfinding Engine",
+      cat: "Software",
       rarity: "rare",
       type: "Algorithms",
       year: "2025",
@@ -382,6 +469,7 @@ const DATA = {
     },
     {
       name: "Steganography & Cipher Tool",
+      cat: "Security",
       rarity: "rare",
       type: "Cryptography",
       year: "2023",
@@ -398,6 +486,7 @@ const DATA = {
     },
     {
       name: "UNIX Records Manager",
+      cat: "Systems",
       rarity: "rare",
       type: "Systems",
       year: "2024",
@@ -414,6 +503,7 @@ const DATA = {
     },
     {
       name: "Game AI & Pathfinding",
+      cat: "Software",
       rarity: "rare",
       type: "Game Development",
       year: "2024",
@@ -430,6 +520,7 @@ const DATA = {
     },
     {
       name: "Incident Response & Threat Analysis",
+      cat: "Security",
       rarity: "rare",
       type: "Security Analysis",
       year: "2025",

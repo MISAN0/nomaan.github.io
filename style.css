@@ -362,10 +362,53 @@ main { position: relative; z-index: 1; }
 .goal-pct { font-family: var(--mono); font-size: 10.5px; color: var(--txt-mute); display: block; margin-top: 7px; }
 
 /* ── Skill tree ─────────────────────────────────────────── */
-.tree { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 18px; }
-.branch { background: var(--panel); border: 1px solid var(--line-2); border-radius: var(--radius); padding: 18px; }
-.branch-head { display: flex; align-items: center; justify-content: space-between; gap: 10px; margin-bottom: 14px; }
-.branch-name { font-family: var(--mono); font-size: 11px; letter-spacing: .16em; text-transform: uppercase; color: var(--violet); }
+/* Columns, not grid: a collapsed branch is a fraction of the height of
+   an open one, and in a grid row that difference is left as a hole.
+   Multicol packs each column independently instead. */
+.tree { columns: 3 300px; column-gap: 18px; }
+.branch {
+  background: var(--panel); border: 1px solid var(--line-2); border-radius: var(--radius);
+  padding: 18px; break-inside: avoid; margin-bottom: 18px;
+}
+.branch-head {
+  display: flex; align-items: center; gap: 10px; cursor: pointer; list-style: none;
+  margin: -18px -18px 0; padding: 18px; border-radius: var(--radius);
+  transition: background-color 160ms ease;
+}
+.branch-head::-webkit-details-marker { display: none; }
+.branch-head:hover { background: var(--panel-2); }
+.branch-head:active { transform: scale(0.995); }
+.branch[open] .branch-head { margin-bottom: 8px; }
+.branch-name { font-family: var(--mono); font-size: 11px; letter-spacing: .16em; text-transform: uppercase; color: var(--violet); flex: 1; }
+
+/* Chevron rotates with the disclosure — the only moving part of it. */
+.branch-chev {
+  width: 8px; height: 8px; flex: none; margin-left: 2px;
+  border-right: 1.5px solid var(--txt-mute); border-bottom: 1.5px solid var(--txt-mute);
+  transform: rotate(45deg) translate(-1px, -1px);
+  transition: transform 200ms var(--ease-out);
+}
+.branch[open] .branch-chev { transform: rotate(-135deg) translate(-1px, -1px); }
+
+.branch-note {
+  font-size: 12.5px; line-height: 1.55; color: var(--txt-dim);
+  margin: 0 0 14px; padding-bottom: 12px; border-bottom: 1px solid var(--line);
+}
+.branch-next {
+  font-family: var(--mono); font-size: 10px; letter-spacing: .04em;
+  color: var(--txt-mute); margin: 12px 0 0;
+}
+
+/* One control beats opening eight branches by hand. */
+.tree-toggle {
+  display: inline-flex; align-items: center; gap: 7px; margin-bottom: 14px;
+  font-family: var(--mono); font-size: 10px; letter-spacing: .1em; text-transform: uppercase;
+  color: var(--txt-dim); background: var(--panel); border: 1px solid var(--line);
+  border-radius: 99px; padding: 7px 14px; cursor: pointer;
+  transition: color 160ms ease, border-color 160ms ease, transform 160ms var(--ease-out);
+}
+.tree-toggle:hover { color: var(--txt); border-color: var(--line-2); }
+.tree-toggle:active { transform: scale(0.97); }
 .branch-count {
   font-family: var(--mono); font-size: 10px; color: var(--txt-mute);
   padding: 2px 8px; border-radius: 99px; border: 1px solid var(--line); background: var(--panel-2);
@@ -391,7 +434,12 @@ main { position: relative; z-index: 1; }
   grid-column: 1; font-family: var(--mono); font-size: 9.5px; color: var(--txt-mute);
   letter-spacing: .04em;
 }
-.node-pips { grid-column: 2; grid-row: 1 / span 2; display: flex; gap: 3px; align-self: center; }
+.node-level {
+  grid-column: 2; grid-row: 1; justify-self: end;
+  font-family: var(--mono); font-size: 9.5px; letter-spacing: .06em; color: var(--txt-mute);
+}
+.node.locked .node-level { color: var(--amber); }
+.node-pips { grid-column: 2; grid-row: 2; display: flex; gap: 3px; align-self: center; justify-content: flex-end; }
 .node-pips i { width: 6px; height: 6px; border-radius: 99px; background: var(--line-2); }
 .node-pips i.on { background: currentColor; box-shadow: 0 0 8px currentColor; }
 .branch[data-branch="Programming"]         .node-pips i.on { color: var(--violet); }
@@ -437,6 +485,22 @@ main { position: relative; z-index: 1; }
 .unit-key-row { display: grid; grid-template-columns: 62px 1fr; gap: 10px; font-size: 12.5px; }
 .unit-key-row code { font-family: var(--mono); font-size: 10.5px; color: var(--cyan); }
 .unit-key-row span { color: var(--txt-dim); }
+
+/* ── Filters ────────────────────────────────────────────── */
+.filters { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 18px; }
+.filter {
+  font-family: var(--mono); font-size: 10px; letter-spacing: .1em; text-transform: uppercase;
+  color: var(--txt-dim); background: var(--panel); border: 1px solid var(--line);
+  border-radius: 99px; padding: 7px 13px; cursor: pointer;
+  display: inline-flex; align-items: center; gap: 7px;
+  transition: color 160ms ease, background-color 160ms ease, border-color 160ms ease, transform 160ms var(--ease-out);
+}
+.filter b { font-weight: 500; color: var(--txt-mute); font-size: 9.5px; }
+.filter:hover { color: var(--txt); border-color: var(--line-2); }
+.filter:active { transform: scale(0.97); }
+.filter.on { color: var(--bg); background: var(--cyan); border-color: var(--cyan); }
+.filter.on b { color: var(--bg); opacity: .7; }
+@media (hover: none) { .filter:hover { color: var(--txt-dim); border-color: var(--line); } }
 
 /* ── Artifacts ──────────────────────────────────────────── */
 .artifacts { display: grid; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); gap: 18px; align-items: stretch; }
