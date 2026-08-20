@@ -33,6 +33,11 @@
 
 * { box-sizing: border-box; margin: 0; padding: 0; }
 
+/* Any author rule setting `display` beats the browser's own
+   [hidden] { display: none }, so an element with a display of its own
+   ignores the attribute entirely. This puts it back. */
+[hidden] { display: none !important; }
+
 html { scroll-behavior: smooth; scroll-padding-top: 84px; }
 
 body {
