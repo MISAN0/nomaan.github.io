@@ -722,7 +722,7 @@ body.plain #hudDownload { display: inline-flex; }
 .cv-contact { margin-top: 12px; font-size: 13.5px; color: var(--ink-2); }
 .cv-contact a { color: var(--ink-2); text-decoration: none; border-bottom: 1px solid var(--rule); }
 .cv-contact a:hover { color: var(--accent); border-color: var(--accent); }
-.cv-contact i { margin: 0 9px; color: var(--ink-3); font-style: normal; }
+.cv-contact i { margin: 0 5px; color: var(--ink-3); font-style: normal; }
 
 
 .cv-avail {
@@ -929,4 +929,61 @@ body.plain .hud { border-bottom: 1px solid var(--rule); }
   .goals { grid-template-columns: 1fr; }
   .goal { padding: 20px; }
   .degree { max-width: none; }
+}
+
+/* `screen and` matters here: an A4 print viewport is about 794px, which
+   is inside this breakpoint, so without it these phone rules would also
+   reshape the CV when someone prints the recruiter page. */
+@media screen and (max-width: 860px) {
+  /* ── Recruiter view ──────────────────────────────────
+     This document had no mobile treatment at all: 120px of horizontal
+     paper padding and a 330px minimum skills column inside a 390px
+     screen, which pushed the layout out to 669px and left the page
+     scrolling sideways. */
+  .cv-paper { padding: 32px 20px 30px; }
+  .cv-head { flex-direction: column; gap: 14px; }
+  .cv-name { font-size: clamp(26px, 7.5vw, 34px); }
+  .cv-contact { font-size: 12.5px; line-height: 2; }
+  .cv-contact i { margin: 0 6px; }
+  .cv-avail { flex-direction: column; gap: 7px; padding: 12px 14px; font-size: 13px; }
+  .cv-skills { grid-template-columns: 1fr; gap: 13px; }
+  .cv-refs { grid-template-columns: 1fr; gap: 11px; }
+  /* Role and dates side by side leaves each about ten characters wide. */
+  .cv-role-head { flex-direction: column; align-items: flex-start; gap: 1px; }
+  .cv-role-head h3 { font-size: 15px; }
+  .cv-sec { margin-top: 26px; }
+  .cv-foot { flex-direction: column; gap: 4px; }
+
+  /* ── Small text floor ────────────────────────────────
+     A 9px mono label is legible on a 27-inch monitor and not on a
+     phone held at arm's length. Nothing drops below 11px here. */
+  .stat-key, .goal-horizon, .node-level, .node-evidence, .ach-when,
+  .camp-now, .cv-avail b, .stat-num em { font-size: 11px; }
+  .rarity, .branch-count, .branch-next, .tree-toggle, .legend-item,
+  .legend-lock, .filter, .ach-proof, .quest-tags span, .camp-tags span,
+  .sheet-chips span { font-size: 11px; }
+  .panel-label, .section-tally, .quest-state, .quest-due, .quest-next,
+  .quest-reward, .goal-target, .goal-pct, .artifact-type, .artifact-meta,
+  .artifact-note, .degree-note, .hud-xp-text, .artifact-stats code { font-size: 11.5px; }
+  /* Nested spans the class selectors above do not reach. */
+  .quest-foot span, .quest-foot b, .unit-key summary span, .unit-key-row code,
+  .filter b, .contact-facts .fact span, .contact-link span, .cv-avail span,
+  .cv-skill-group h3, .cv-foot span,
+  .cv-dates, .cv-loc, .cv-ref em, .cv-tech, .cv-keys summary,
+  .cv-keys summary span { font-size: 11.5px; }
+  /* The radar axis keys sit in fixed SVG space, so they get a smaller
+     bump than the flowing text — enough to read, not enough to collide. */
+  .radar-label { font-size: 10px; }
+}
+
+/* ── Touch targets ────────────────────────────────────────
+   These sat at 29–30px tall. WCAG 2.2 clears 24px, but a 30px control
+   is still an awkward thumb target; 44px is the size a finger expects. */
+@media (hover: none) {
+  .hud-btn, .hud-dl, .hud-burger, .filter, .tree-toggle {
+    min-height: 44px; display: inline-flex; align-items: center; justify-content: center;
+  }
+  .branch-head { min-height: 52px; }
+  .node { min-height: 46px; }
+  .hud-nav a { padding-top: 10px; padding-bottom: 10px; }
 }

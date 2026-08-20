@@ -495,7 +495,11 @@ function renderCV(data) {
     `<a href="${esc(p.links.linkedin)}" target="_blank" rel="noopener">${esc(p.links.linkedin.replace('https://', ''))}</a>`,
     `<a href="${esc(p.links.github)}" target="_blank" rel="noopener">${esc(p.links.github.replace('https://', ''))}</a>`,
     `<span>${esc(p.location)}</span>`
-  ].filter(Boolean).join('<i aria-hidden="true">·</i>');
+    /* The spaces around the separator matter: joined tight, the whole
+       contact line is one unbreakable run of inline elements with no
+       wrap opportunity, and on a phone it forced the page 180px wider
+       than the screen. */
+  ].filter(Boolean).join(' <i aria-hidden="true">·</i> ');
 
   /* The download sits in the top bar beside the view toggle, so it is
      reachable from anywhere on the page rather than only at the top. */
