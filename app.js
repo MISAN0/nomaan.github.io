@@ -297,17 +297,27 @@ function renderSkills(skills, codex, meta) {
       </summary>
       ${b.note ? `<p class="branch-note">${esc(b.note)}</p>` : ''}
       <div class="branch-nodes">
-        ${nodes.map(s => `
-          <div class="node ${s.level === 0 ? 'locked' : ''}"
-               data-tip="${esc(LEVEL_WORD[s.level])}${
-                 s.evidence ? ' · ' + esc(expandEvidence(s.evidence, codex)) : ''}">
+        ${nodes.map(s => {
+          const full = s.evidence ? expandEvidence(s.evidence, codex) : '';
+          /* A button, not a div: hover is mouse-only, so on a phone the
+             evidence behind every rating was unreachable. This also
+             makes the tree keyboard-navigable for free. */
+          return `
+          <button type="button" class="node ${s.level === 0 ? 'locked' : ''}"
+               aria-expanded="false"
+               data-tip="${esc(LEVEL_WORD[s.level])}${full ? ' · ' + esc(full) : ''}">
             <span class="node-name">${esc(s.name)}</span>
             <span class="node-level">${esc(LEVEL_WORD[s.level])}</span>
             ${s.evidence ? `<span class="node-evidence">${esc(s.evidence)}</span>` : ''}
             <span class="node-pips" role="img" aria-label="${esc(LEVEL_WORD[s.level])}, ${s.level} of 5">${
               Array.from({ length: 5 }, (_, k) => `<i class="${k < s.level ? 'on' : ''}"></i>`).join('')
             }</span>
-          </div>`).join('')}
+            <span class="node-detail"><span>${
+              full ? `<b>${esc(LEVEL_WORD[s.level])}</b> — evidence: ${esc(full)}`
+                   : `<b>${esc(LEVEL_WORD[s.level])}</b>`
+            }</span></span>
+          </button>`;
+        }).join('')}
       </div>
       ${next.length ? `<p class="branch-next">Learning next: ${next.map(s => esc(s.name)).join(', ')}</p>` : ''}
     </details>`;
@@ -330,6 +340,20 @@ function renderSkills(skills, codex, meta) {
   treeEl.addEventListener('toggle', sync, true);
   sync();
   treeEl.before(toggle);
+
+  /* One skill open at a time — a branch with nine of them expanded at
+     once is just the wall of text the collapse was meant to avoid. */
+  treeEl.addEventListener('click', e => {
+    const node = e.target.closest('.node');
+    if (!node) return;
+    const opening = !node.classList.contains('open');
+    treeEl.querySelectorAll('.node.open').forEach(n => {
+      n.classList.remove('open');
+      n.setAttribute('aria-expanded', 'false');
+    });
+    node.classList.toggle('open', opening);
+    node.setAttribute('aria-expanded', String(opening));
+  });
 
   /* Collapsed by default, so the codes can be looked up without the key
      taking any room on the page. */
@@ -627,7 +651,7 @@ function initTooltips() {
   tip.hidden = true;
   document.body.appendChild(tip);
 
-  let showTimer, hideTimer, active = null, warm = false, warmTimer;
+  let showTimer, hideTimer, active = null, pending = null, warm = false, warmTimer;
 
   const place = target => {
     const r = target.getBoundingClientRect();
@@ -650,6 +674,10 @@ function initTooltips() {
   };
 
   const show = target => {
+    pending = null;
+    // An expanded skill already prints its detail; a tooltip saying the
+    // same thing on top of it is just a second copy.
+    if (target.classList.contains('open')) return;
     tip.textContent = target.dataset.tip;
     tip.hidden = false;
     place(target);
@@ -673,16 +701,21 @@ function initTooltips() {
   };
 
   document.addEventListener('pointerover', e => {
-    if (e.pointerType !== 'mouse') return;      // touch has the unit key instead
+    if (e.pointerType !== 'mouse') return;      // touch taps the skill instead
     const target = e.target.closest('[data-tip]');
     if (!target || target === active) return;
+    /* pointerover fires again for every child span inside the skill, so
+       without this the countdown restarted each time the cursor crossed
+       one and the tooltip never got to the end of its delay. */
+    if (target === pending) return;
     clearTimeout(showTimer);
+    pending = target;
     showTimer = setTimeout(() => show(target), warm ? 0 : 380);
   });
 
   document.addEventListener('pointerout', e => {
     const target = e.target.closest('[data-tip]');
-    if (target && !target.contains(e.relatedTarget)) hide();
+    if (target && !target.contains(e.relatedTarget)) { pending = null; hide(); }
   });
 
   window.addEventListener('scroll', () => { if (active) hide(); }, { passive: true });
