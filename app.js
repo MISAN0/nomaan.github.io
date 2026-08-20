@@ -535,7 +535,11 @@ function renderCV(data) {
 
       <section class="cv-sec">
         <h2>Professional Summary</h2>
-        <p class="cv-summary">${esc(cv.summary)}</p>
+        ${/* Written as an array of short paragraphs rather than one block:
+             a recruiter scans this in a few seconds, and eight unbroken
+             lines is the shape people skip. A plain string still works. */
+          (Array.isArray(cv.summary) ? cv.summary : [cv.summary])
+            .map(para => `<p class="cv-summary">${esc(para)}</p>`).join('')}
       </section>
 
       <section class="cv-sec">
@@ -625,9 +629,16 @@ function renderCV(data) {
         <p class="cv-ref-note">Contact details available on request.</p>
       </section>` : ''}
 
+      <!-- Every term here also appears in the sections above; the block
+           exists so a keyword search over the page finds them all. It is
+           collapsed because as a visible slab of grey it was 134
+           characters to a line and nobody was reading it. The text stays
+           in the document either way. -->
       <section class="cv-sec cv-sec-keywords">
-        <h2>Technical Keywords</h2>
-        <p class="cv-keywords">${cv.keywords.map(esc).join(' · ')}</p>
+        <details class="cv-keys">
+          <summary>Keyword index <span>${cv.keywords.length} terms</span></summary>
+          <p class="cv-keywords">${cv.keywords.map(esc).join(' · ')}</p>
+        </details>
       </section>
 
       <footer class="cv-foot">

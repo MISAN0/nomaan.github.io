@@ -669,7 +669,15 @@ const DATA = {
 
     headline: "ICT Graduate — Cyber Security & Computer Science",
 
-    summary: "Final-year Information and Communication Technology student at the University of Tasmania, majoring in Computer Science and Cyber Security and graduating December 2026. Builds and secures software end to end: REST APIs hardened with TLS and security headers, a Python tool that audits APIs for information disclosure, and machine learning models evaluated on imbalanced real-world data. Brings three years of concurrent frontline security operations, including regulated maritime access control at TasPorts, delivered alongside full-time study. Seeking a graduate or entry-level ICT role — service desk, technical support, cyber security or networking — where analytical thinking and a security-first mindset add value from day one.",
+    /* Short paragraphs, not one block — a recruiter gives this a few
+       seconds, and an eight-line slab is the shape people skip. A plain
+       string still renders correctly if you'd rather write it that way. */
+    summary: [
+      "Final-year Information and Communication Technology student at the University of Tasmania, majoring in Computer Science and Cyber Security, graduating December 2026.",
+      "Builds and secures software end to end: REST APIs hardened with TLS and security headers, a Python tool that audits APIs for information disclosure, and machine learning models evaluated on imbalanced real-world data.",
+      "Alongside full-time study, three years of frontline security operations — including regulated maritime access control at TasPorts.",
+      "Looking for a graduate or entry-level ICT role in service desk, technical support, cyber security or networking."
+    ],
 
     // Accomplishments only. No grades, marks or academic results.
     highlights: [
