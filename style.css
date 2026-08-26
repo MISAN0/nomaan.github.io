@@ -12,7 +12,13 @@
 
   --txt:       #e8eaf6;
   --txt-dim:   #9aa0c0;
-  --txt-mute:  #6b7196;
+  /* Was #6b7196: 3.48:1 on --panel-2, 3.75:1 on --panel, 4.14:1 on
+     --bg. Every one of those is under the 4.5:1 this site commits to,
+     and the token is used on the citation text that is the whole
+     argument of the page. #868caf clears 5.02:1 on the worst of the
+     three while staying visibly below --txt-dim, so the hierarchy
+     between muted and dim survives. */
+  --txt-mute:  #868caf;
 
   --cyan:      #35e6d0;
   --violet:    #8b7cff;
@@ -106,6 +112,28 @@ body {
 }
 
 main { position: relative; z-index: 1; }
+
+
+/* ── Skip link ────────────────────────────────────────────
+   95 focusable elements, and without this a keyboard user tabs through
+   the brand, the XP bar and six nav items before reaching content, on
+   every single visit. */
+.skip-link {
+  /* fixed, not absolute: body carries overflow-x: hidden, which the
+     spec turns into overflow-y: auto, making body a scroll container
+     that clips an absolutely-positioned child parked off-screen. The
+     link would have been unreachable. */
+  position: fixed; left: 12px; top: -100px; z-index: 100;
+  padding: 12px 18px; border-radius: 10px;
+  background: var(--cyan); color: #0a0b12;
+  font-family: var(--mono); font-size: var(--t-small); font-weight: 500;
+  text-decoration: none; transition: top 160ms var(--ease-out);
+}
+/* :focus, not :focus-visible. A skip link exists only for keyboard
+   users, so there is no case where it is focused and should stay
+   hidden, and :focus-visible does not reliably match programmatic
+   focus. Verified by focusing it and reading the computed top. */
+.skip-link:focus { top: 12px; outline: 2px solid var(--txt); outline-offset: 3px; }
 
 /* ── HUD ────────────────────────────────────────────────── */
 .hud {
