@@ -94,21 +94,15 @@ body {
 }
 
 /* ── Ambient background ─────────────────────────────────── */
+/* Was a full-viewport grid overlay plus three radial colour washes:
+   two decorative layers carrying no information, and between them the
+   most recognisable signature of a generated dark UI. One soft wash
+   behind the masthead survives, to keep the page from reading as a
+   flat black rectangle. */
 .fx-grid, .fx-glow { position: fixed; inset: 0; pointer-events: none; z-index: 0; }
-.fx-grid {
-  background-image:
-    linear-gradient(var(--line) 1px, transparent 1px),
-    linear-gradient(90deg, var(--line) 1px, transparent 1px);
-  background-size: 56px 56px;
-  opacity: .28;
-  mask-image: radial-gradient(ellipse 90% 60% at 50% 0%, #000 20%, transparent 75%);
-  -webkit-mask-image: radial-gradient(ellipse 90% 60% at 50% 0%, #000 20%, transparent 75%);
-}
+.fx-grid { display: none; }
 .fx-glow {
-  background:
-    radial-gradient(560px circle at 12% 4%,  rgba(139,124,255,.22), transparent 60%),
-    radial-gradient(520px circle at 88% 16%, rgba(53,230,208,.16),  transparent 60%),
-    radial-gradient(640px circle at 60% 92%, rgba(255,95,191,.12),  transparent 60%);
+  background: radial-gradient(900px 480px at 22% -8%, rgba(139,124,255,.10), transparent 70%);
 }
 
 main { position: relative; z-index: 1; }
@@ -126,7 +120,7 @@ main { position: relative; z-index: 1; }
 .hud-sigil {
   font-family: var(--mono); font-weight: 700; letter-spacing: .12em; font-size: var(--t-body);
   padding: 5px 9px; border: 1px solid var(--line-2); border-radius: 8px;
-  background: linear-gradient(135deg, rgba(139,124,255,.22), rgba(53,230,208,.14));
+  background: var(--panel-2);
 }
 .hud-lvl { font-family: var(--mono); font-size: var(--t-micro); color: var(--txt-mute); letter-spacing: .1em; }
 .hud-lvl b { color: var(--cyan); font-size: var(--t-body); }
@@ -138,7 +132,6 @@ main { position: relative; z-index: 1; }
   transform: scaleX(0); transform-origin: left;
   background: linear-gradient(90deg, var(--cyan), var(--violet), var(--magenta));
   transition: transform 700ms var(--ease-out);
-  box-shadow: 0 0 14px rgba(139,124,255,.7);
 }
 .hud-xp-text { font-family: var(--mono); font-size: var(--t-micro); color: var(--txt-mute); white-space: nowrap; }
 
@@ -178,7 +171,7 @@ main { position: relative; z-index: 1; }
   grid-template-columns: 260px 1fr 300px;
   background: linear-gradient(160deg, var(--panel), var(--bg-2));
   border: 1px solid var(--line-2); border-radius: 22px; padding: 28px;
-  box-shadow: 0 30px 80px -40px rgba(0,0,0,.9);
+  box-shadow: 0 18px 40px -32px rgba(0,0,0,.7);
 }
 .portrait-frame {
   position: relative; border-radius: 16px; overflow: hidden;
@@ -189,8 +182,9 @@ main { position: relative; z-index: 1; }
 .portrait-frame.no-photo img { display: none; }
 .portrait-scan {
   position: absolute; inset: 0;
-  background: repeating-linear-gradient(0deg, rgba(255,255,255,.045) 0 1px, transparent 1px 4px);
-  mix-blend-mode: overlay;
+  /* The CRT scanline was costume: it made a photograph of a person
+     look like equipment. The photo is the warmest object on the page. */
+  display: none;
 }
 .portrait-status {
   display: inline-flex; align-items: center; gap: 7px; margin-top: 12px;
@@ -200,17 +194,9 @@ main { position: relative; z-index: 1; }
 .portrait-status::before {
   content: ''; width: 7px; height: 7px; border-radius: 99px; background: var(--lime); flex: none;
 }
-/* Ring pulses on transform + opacity rather than box-shadow, which
-   repaints on every frame of an infinite loop. */
-.portrait-status::after {
-  content: ''; position: absolute; left: 0; top: 50%; width: 7px; height: 7px;
-  margin-top: -3.5px; border-radius: 99px; border: 1px solid var(--lime);
-  transform-origin: center; animation: pulse 2.6s var(--ease-out) infinite;
-  pointer-events: none;
-}
-@keyframes pulse {
-  0%   { transform: scale(1); opacity: .55; }
-  70%  { transform: scale(2.6); opacity: 0; }
+/* The pulse is gone. It animated forever to imply live, changing data
+   behind a string that never changes, which is decoration wearing the
+   costume of information. A static dot states the same fact honestly. */
   100% { transform: scale(2.6); opacity: 0; }
 }
 
@@ -237,7 +223,6 @@ main { position: relative; z-index: 1; }
   display: block; height: 100%; width: 100%;
   transform: scaleX(0); transform-origin: left;
   background: linear-gradient(90deg, var(--cyan), var(--lime));
-  box-shadow: 0 0 14px rgba(139,239,90,.5);
   transition: transform 700ms var(--ease-out);
 }
 .degree-note { display: block; margin-top: 7px; font-family: var(--mono); font-size: var(--t-micro); color: var(--txt-mute); }
@@ -283,10 +268,12 @@ main { position: relative; z-index: 1; }
   background: var(--panel); border: 1px solid var(--line-2); overflow: hidden;
   transition: border-color 200ms ease, transform 200ms var(--ease-out);
 }
-.quest::before { content: ''; position: absolute; inset: 0 auto 0 0; width: 3px; background: var(--magenta); }
-.quest.is-done::before { background: var(--lime); }
-.quest.is-paused::before { background: var(--txt-mute); }
-.quest.is-queued::before { background: var(--violet); }
+/* The status is already written on the card in words; colouring that
+   label carries the same signal without a 3px stripe down the edge. */
+.quest .quest-state { color: var(--magenta); }
+.quest.is-done .quest-state { color: var(--lime); }
+.quest.is-paused .quest-state { color: var(--txt-mute); }
+.quest.is-queued .quest-state { color: var(--violet); }
 .quest.is-queued { border-style: dashed; }
 .quest:hover { transform: translateY(-3px); border-color: var(--magenta); }
 .quest.is-queued:hover { border-color: var(--violet); }
@@ -319,7 +306,6 @@ main { position: relative; z-index: 1; }
 .quest-objectives .done { color: var(--txt); }
 .quest-objectives .done i {
   background: var(--lime); border-color: var(--lime);
-  box-shadow: 0 0 10px rgba(139,239,90,.35);
 }
 
 .quest-tags { display: flex; flex-wrap: wrap; gap: 6px; margin: 14px 0 16px; }
@@ -382,7 +368,7 @@ main { position: relative; z-index: 1; }
 .goal-steps li { display: grid; grid-template-columns: 14px 1fr; align-items: start; gap: 10px; font-size: var(--t-small); color: var(--txt-mute); line-height: 1.45; }
 .goal-steps i { width: 14px; height: 14px; margin-top: 3px; border-radius: 4px; border: 1px solid var(--line-2); flex: none; }
 .goal-steps .done { color: var(--txt); }
-.goal-steps .done i { background: var(--lime); border-color: var(--lime); box-shadow: 0 0 10px rgba(139,239,90,.4); }
+.goal-steps .done i { background: var(--lime); border-color: var(--lime); }
 .goal-bar { height: 6px; border-radius: 99px; background: var(--panel-2); overflow: hidden; }
 .goal-bar i {
   display: block; height: 100%; width: 100%;
@@ -490,7 +476,7 @@ main { position: relative; z-index: 1; }
 .node.locked .node-level { color: var(--amber); }
 .node-pips { grid-column: 2; grid-row: 2; display: flex; gap: 3px; align-self: center; justify-content: flex-end; }
 .node-pips i { width: 6px; height: 6px; border-radius: 99px; background: var(--line-2); }
-.node-pips i.on { background: currentColor; box-shadow: 0 0 8px currentColor; }
+.node-pips i.on { background: currentColor; }
 .branch[data-branch="Programming"]         .node-pips i.on { color: var(--violet); }
 .branch[data-branch="Cyber Security"]      .node-pips i.on { color: var(--magenta); }
 .branch[data-branch="Networking"]          .node-pips i.on { color: var(--cyan); }
@@ -562,7 +548,7 @@ main { position: relative; z-index: 1; }
 .rarity { font-family: var(--mono); font-size: var(--t-micro); letter-spacing: .14em; text-transform: uppercase; padding: 3px 9px; border-radius: 6px; }
 .r-legendary { border-color: rgba(255,182,72,.5); }
 .r-legendary .rarity { color: var(--amber); background: rgba(255,182,72,.12); }
-.r-legendary:hover { border-color: var(--amber); box-shadow: 0 0 40px -12px rgba(255,182,72,.55); }
+.r-legendary:hover { border-color: var(--amber); }
 .r-epic .rarity { color: var(--violet); background: rgba(139,124,255,.14); }
 .r-epic:hover { border-color: var(--violet); }
 .r-rare .rarity { color: var(--cyan); background: rgba(53,230,208,.12); }
@@ -640,7 +626,7 @@ main { position: relative; z-index: 1; }
 
 .ach.t-gold   { border-color: rgba(255,182,72,.45); background: linear-gradient(160deg, rgba(255,182,72,.09), var(--panel)); }
 .ach.t-gold   .ach-icon { color: var(--amber); }
-.ach.t-gold:hover { box-shadow: 0 0 40px -14px rgba(255,182,72,.6); border-color: var(--amber); }
+.ach.t-gold:hover { border-color: var(--amber); }
 .ach.t-silver { border-color: rgba(154,160,192,.4); }
 .ach.t-silver .ach-icon { color: var(--txt-dim); }
 .ach.t-silver:hover { border-color: var(--txt-dim); }
