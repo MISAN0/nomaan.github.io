@@ -43,6 +43,10 @@ function renderSheet(data, xp) {
 
   $('#hudLevel').textContent = xp.level;
   $('#hudXpText').textContent = `${xp.total} / ${xp.nextXp} XP`;
+  /* --p is written to the element as well as the transform, so the
+     prerendered HTML can express the fill level without JavaScript
+     (see the noscript block in index.html). */
+  $('#hudXpFill').style.setProperty('--p', xp.pct / 100);
   requestAnimationFrame(() => { $('#hudXpFill').style.transform = `scaleX(${xp.pct / 100})`; });
 
   const img = $('#avatar');
@@ -68,6 +72,7 @@ function renderSheet(data, xp) {
   $('#degreeVal').textContent = xp.degreePct + '% complete';
   $('#degreeNote').textContent =
     `${xp.donePts} of ${xp.coursePts} credit points passed · ${data.academic.degreeName}, graduating ${data.academic.graduating}`;
+  $('#degreeFill').style.setProperty('--p', xp.degreePct / 100);
   requestAnimationFrame(() => { $('#degreeFill').style.transform = `scaleX(${xp.degreePct / 100})`; });
 
   $('#ghLink').href = p.links.github;
@@ -326,6 +331,9 @@ function renderSkills(skills, codex, meta) {
   /* One control for all eight, because opening them one at a time to
      read the whole tree is eight clicks. */
   const treeEl = $('#skillTree');
+  // Prerendering runs this against a document that may already contain a
+  // toggle from the previous build; without this the button doubles.
+  treeEl.parentElement.querySelectorAll('.tree-toggle').forEach(n => n.remove());
   const toggle = el('button', 'tree-toggle');
   const sync = () => {
     const anyClosed = [...treeEl.querySelectorAll('.branch')].some(d => !d.open);
@@ -830,19 +838,34 @@ function wireChrome() {
   });
 }
 
-/* ---------- Boot ---------- */
-(function init() {
-  const xp = xpModel(DATA);
-  renderSheet(DATA, xp);
-  renderRadar(DATA.attributes);
-  renderQuests(DATA.quests);
-  renderGoals(DATA.goals);
-  renderSkills(DATA.skills, DATA.codex, DATA.skillBranches);
-  renderArtifacts(DATA.artifacts);
-  renderCampaign(DATA.campaign);
-  renderAchievements(DATA.achievements);
-  renderCV(DATA);
+/* ============================================================
+   BOOT
+   Split in two on purpose. `renderAll` is pure data-to-DOM and
+   nothing else, so the prerender build can run it under jsdom and
+   bake the result into index.html. Everything that needs a real
+   browser — observers, listeners, tooltips — lives in the second
+   half and never runs at build time.
+   ============================================================ */
+function renderAll(data) {
+  const xp = xpModel(data);
+  renderSheet(data, xp);
+  renderRadar(data.attributes);
+  renderQuests(data.quests);
+  renderGoals(data.goals);
+  renderSkills(data.skills, data.codex, data.skillBranches);
+  renderArtifacts(data.artifacts);
+  renderCampaign(data.campaign);
+  renderAchievements(data.achievements);
+  renderCV(data);
+}
+
+if (typeof window !== 'undefined') window.renderAll = renderAll;
+
+/* PRERENDER_ONLY is set by the build script so it can call renderAll
+   without booting the interactive layer. */
+if (typeof PRERENDER_ONLY === 'undefined') {
+  renderAll(DATA);
   observeReveals();
   wireChrome();
   initTooltips();
-})();
+}

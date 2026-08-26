@@ -12,3 +12,6 @@ _test/
 
 # local tooling
 .claude-flow/
+
+# Build tooling only; the published site is the static files.
+node_modules/

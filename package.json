@@ -1,0 +1,13 @@
+{
+  "name": "nomaan-portfolio",
+  "private": true,
+  "version": "1.0.0",
+  "description": "Personal site. The published output is plain static files; this manifest exists only for the prerender build.",
+  "scripts": {
+    "prerender": "node scripts/prerender.mjs",
+    "serve": "python -m http.server 5178"
+  },
+  "devDependencies": {
+    "jsdom": "^24.0.0"
+  }
+}
