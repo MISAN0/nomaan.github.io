@@ -14,7 +14,7 @@ const DATA = {
      It is deliberately manual: a build date would claim the content is
      current when only the code changed.                                */
   meta: {
-    updated: "14 August 2026"   // EDIT when you update the site
+    updated: "18 September 2026"   // EDIT when you update the site
   },
 
   /* ---------- Character ---------- */
@@ -27,7 +27,7 @@ const DATA = {
     avatar: "photo.jpg",
     status: "Open to graduate, ICT support and help desk roles",
     // one-liner under the name
-    tagline: "A computer enthusiast on the road to mastery — levelling up through cyber security, networking, and AI, one lab at a time.",
+    tagline: "A computer enthusiast on the road to mastery, levelling up through cyber security, networking, and AI, one lab at a time.",
     links: {
       github: "https://github.com/MISAN0",
       linkedin: "https://linkedin.com/in/nomaan00",
@@ -45,13 +45,13 @@ const DATA = {
     { key: "CYBER", label: "Cyber Security", value: 8,
       desc: "Network defence, API security, ethical hacking, incident response, digital forensics" },
     { key: "NET",   label: "Networking", value: 7,
-      desc: "TCP/IP, routing and switching, subnetting and VLSM, LAN/WAN configuration — CCNA in progress" },
+      desc: "TCP/IP, routing and switching, subnetting and VLSM, LAN/WAN configuration (CCNA in progress)" },
     { key: "PROG",  label: "Programming", value: 7,
-      desc: "Python, C, Java, C# and Bash — data structures, algorithms, automated testing" },
+      desc: "Python, C, Java, C# and Bash: data structures, algorithms, automated testing" },
     { key: "AI",    label: "AI & Machine Learning", value: 7,
       desc: "Neural networks, deep learning, natural language processing, reinforcement learning" },
     { key: "DATA",  label: "Data Engineering", value: 7,
-      desc: "SQL, Pandas, PySpark and Hadoop — wrangling, statistics, visualisation at scale" },
+      desc: "SQL, Pandas, PySpark and Hadoop: wrangling, statistics, visualisation at scale" },
     { key: "SYS",   label: "Systems & Servers", value: 8,
       desc: "Linux administration, operating system internals, server hardening, cloud fundamentals" },
     { key: "COMM",  label: "Communication", value: 8,
@@ -71,11 +71,11 @@ const DATA = {
       role: "Cisco certification",
       rank: "A",
       reward: 400,
-      blurb: "Routing and switching on Cisco IOS: VLANs and trunking, spanning tree, OSPF, IPv4 and IPv6 addressing, NAT and DHCP, access control lists, and device hardening — configured and troubleshot in the CLI, not just read about.",
+      blurb: "Routing and switching on Cisco IOS: VLANs and trunking, spanning tree, OSPF, IPv4 and IPv6 addressing, NAT and DHCP, access control lists, and device hardening, configured and troubleshot in the CLI rather than just read about.",
       tags: ["Cisco IOS", "Routing & Switching", "OSPF", "Subnetting"],
       status: "active",
       due: "Oct 2026",
-      next: "Section 5 — TCP/UDP and the transport layer",
+      next: "Section 5: TCP/UDP and the transport layer",
       objectives: [
         { label: "Subnet any prefix in under 60 seconds", done: true },
         { label: "Network fundamentals and switching", done: true },
@@ -89,13 +89,13 @@ const DATA = {
       role: "Personal project",
       rank: "B",
       reward: 150,
-      blurb: "The site you are reading. Static HTML, CSS and JavaScript with no build step and no framework — every panel renders from a single data file.",
+      blurb: "The site you are reading. Static HTML, CSS and JavaScript with no build step and no framework; every panel renders from a single data file.",
       tags: ["JavaScript", "CSS", "SVG", "Design"],
       status: "active",
       due: "Ongoing",
       next: "Refine each section, then keep it current",
       objectives: [
-        { label: "Data-driven rebuild — one file drives the site", done: true },
+        { label: "Data-driven rebuild: one file drives the site", done: true },
         { label: "Live on a custom domain", done: true },
         { label: "Plain CV view for recruiters", done: true },
         { label: "Refine every section", done: false }
@@ -123,7 +123,7 @@ const DATA = {
       role: "Open source",
       rank: "B",
       reward: 200,
-      blurb: "Move the projects in the Artifacts section out of local folders and onto public GitHub repositories — credentials stripped, READMEs written, and licences attached, so the code can be read rather than described.",
+      blurb: "Move the projects in the Artifacts section out of local folders and onto public GitHub repositories, with credentials stripped, READMEs written and licences attached, so the code can be read rather than described.",
       tags: ["Git", "GitHub", "Documentation", "Code Review"],
       status: "active",
       due: "Ongoing",
@@ -140,7 +140,7 @@ const DATA = {
       role: "Job search",
       rank: "A",
       reward: 300,
-      blurb: "The search for the first ICT role. Service desk, technical support, or a junior position anywhere across ICT — applications going out, interviews prepared for, and every rejection turned into a fix.",
+      blurb: "The search for the first ICT role. Service desk, technical support, or a junior position anywhere across ICT: applications going out, interviews prepared for, and every rejection turned into a fix.",
       tags: ["Service Desk", "Technical Support", "Interviews"],
       status: "active",
       due: "2026 / 2027",
@@ -218,7 +218,7 @@ const DATA = {
       title: "Become the person on call",
       horizon: "Longer term",
       target: "2028 onward",
-      detail: "Move off the service desk and into a security operations or network team — triaging real alerts, reading real packet captures, and owning a slice of the infrastructure. Long enough in that seat to be the one others escalate to, rather than the one escalating.",
+      detail: "Move off the service desk and into a security operations or network team: triaging real alerts, reading real packet captures, and owning a slice of the infrastructure. Long enough in that seat to be the one others escalate to, rather than the one escalating.",
       why: "Support teaches you the systems. Operations is where you defend them.",
       steps: [
         { label: "Two years of hands-on ICT experience", done: false },
@@ -247,21 +247,21 @@ const DATA = {
      end, without a note.                                               */
   skillBranches: [
     { name: "Cyber Security", open: true,
-      note: "Defensive and offensive work across the same systems — finding the weakness, then closing it." },
+      note: "Defensive and offensive work across the same systems: finding the weakness, then closing it." },
     { name: "Networking", open: true,
       note: "The layer everything else runs on. Addressing, routing and switching, learnt in the CLI." },
     { name: "Systems & Servers",
       note: "What happens under the application: processes, memory, filesystems, and the servers they run on." },
     { name: "Programming",
-      note: "Languages picked up per problem rather than per fashion — systems work in C, everything else in Python." },
+      note: "Languages picked up per problem rather than per fashion: systems work in C, everything else in Python." },
     { name: "Web & APIs",
       note: "Building services and then attacking them: authentication, transport security, and what an API leaks." },
     { name: "AI & Machine Learning",
-      note: "Models trained and evaluated properly — on the metrics that survive imbalanced data, not on accuracy." },
+      note: "Models trained and evaluated properly, on the metrics that survive imbalanced data, not on accuracy." },
     { name: "Data Engineering",
       note: "Moving analysis from one machine to a cluster, and querying what lands there." },
     { name: "Practice & Process",
-      note: "How the work gets planned, documented and handed over — the half that is not code." }
+      note: "How the work gets planned, documented and handed over: the half that is not code." }
   ],
 
   skills: [
@@ -355,15 +355,15 @@ const DATA = {
       type: "Cyber Security Tool",
       year: "2026",
       team: "Solo",
-      blurb: "Audits REST API endpoints for information disclosure — exposed OpenAPI and Swagger documentation, permissive CORS policies, missing security headers — and emits structured JSON reports for triage.",
+      blurb: "Audits REST API endpoints for information disclosure (exposed OpenAPI and Swagger documentation, permissive CORS policies, missing security headers) and emits structured JSON reports for triage.",
       highlights: [
         "Built on my own research into what publicly exposed API specifications leak",
         "Findings framed against the OWASP API Security Top 10 and MITRE CWE-200",
         "Machine-readable output, so results can feed a pipeline rather than a person"
       ],
       stats: ["Python", "REST APIs", "OpenAPI", "OWASP"],
-      code: "private",
-      repo: ""
+      code: "published",
+      repo: "https://github.com/MISAN0/api-exposure-auditor"
     },
     {
       name: "OpenAPI Exposure Research",
@@ -440,7 +440,7 @@ const DATA = {
       type: "Web Application",
       year: "2024",
       team: "Solo",
-      blurb: "A database-backed PHP application with user registration and login, session handling, content creation, search, and an archive — around a thousand lines, built without a framework.",
+      blurb: "A database-backed PHP application with user registration and login, session handling, content creation, search, and an archive: around a thousand lines, built without a framework.",
       highlights: [
         "Registration and authentication with server-side validation on every route",
         "MySQL schema behind the create, search, archive and post views",
@@ -459,7 +459,7 @@ const DATA = {
       team: "Solo",
       blurb: "Dijkstra and A-star written from scratch in C over a custom graph structure, with a heuristic function and explicit closed-set tracking.",
       highlights: [
-        "No library containers — the graph, queue and sets are all hand-built",
+        "No library containers: the graph, queue and sets are all hand-built",
         "Two search strategies over one structure, so their behaviour is directly comparable",
         "Built alongside binary search trees, hash tables and priority queues"
       ],
@@ -491,7 +491,7 @@ const DATA = {
       type: "Systems",
       year: "2024",
       team: "Solo",
-      blurb: "A POSIX shell toolset for employee record management — menu-driven search, add and delete, with log rotation and a user access-deny list.",
+      blurb: "A POSIX shell toolset for employee record management: menu-driven search, add and delete, with log rotation and a user access-deny list.",
       highlights: [
         "Portable POSIX shell rather than bash-only syntax",
         "Access control enforced through a deny list at the entry point",
@@ -525,7 +525,7 @@ const DATA = {
       type: "Security Analysis",
       year: "2025",
       team: "Team",
-      blurb: "Breakdowns of real intrusions — NotPetya and the Sony Pictures compromise — traced from initial access through to impact, with a response plan built on the Australian Cyber Security Centre template.",
+      blurb: "Breakdowns of real intrusions, NotPetya and the Sony Pictures compromise, traced from initial access through to impact, with a response plan built on the Australian Cyber Security Centre template.",
       highlights: [
         "Attack paths reconstructed from public incident reporting",
         "Man-in-the-middle attack analysis with practical defences",
@@ -667,7 +667,7 @@ const DATA = {
     file: "Mir-Salman-Nomaan-CV.pdf",
     fileLabel: "PDF · 1 page",
 
-    headline: "ICT Graduate — Cyber Security & Computer Science",
+    headline: "ICT Graduate · Cyber Security & Computer Science",
 
     /* Short paragraphs, not one block — a recruiter gives this a few
        seconds, and an eight-line slab is the shape people skip. A plain
@@ -675,7 +675,7 @@ const DATA = {
     summary: [
       "Final-year Information and Communication Technology student at the University of Tasmania, majoring in Computer Science and Cyber Security, graduating December 2026.",
       "Builds and secures software end to end: REST APIs hardened with TLS and security headers, a Python tool that audits APIs for information disclosure, and machine learning models evaluated on imbalanced real-world data.",
-      "Alongside full-time study, three years of frontline security operations — including regulated maritime access control at TasPorts.",
+      "Alongside full-time study, three years of frontline security operations, including regulated maritime access control at TasPorts.",
       "Looking for a graduate or entry-level ICT role in service desk, technical support, cyber security or networking."
     ],
 
@@ -776,7 +776,7 @@ const DATA = {
   achievements: [
     {
       icon: "◆", name: "Breaker and Builder", tier: "gold", when: "2025 – 2026",
-      desc: "Works both sides of security — finds the weakness, then closes it",
+      desc: "Works both sides of security: finds the weakness, then closes it",
       proof: "Ethical hacking and hardened, secure-by-default builds"
     },
     {
@@ -818,6 +818,11 @@ const DATA = {
       icon: "▲", name: "Shipped It", tier: "bronze", when: "2026",
       desc: "Built and published this site on its own domain",
       proof: "Static, no framework, one data file"
+    },
+    {
+      icon: "⌥", name: "Open Source", tier: "bronze", when: "Mar 2026",
+      desc: "First project published for anyone to read and run",
+      proof: "API Exposure Auditor on GitHub"
     }
   ]
 };

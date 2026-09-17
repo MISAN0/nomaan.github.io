@@ -3,29 +3,35 @@
    ============================================================ */
 
 :root {
-  --bg:        #0a0b12;
-  --bg-2:      #10121d;
-  --panel:     #141726;
-  --panel-2:   #1a1e30;
-  --line:      #262b42;
-  --line-2:    #343a58;
+  /* Neutrals are tinted warm rather than blue. The stated personality
+     is warm, honest, approachable; a blue-black ground is the reflex
+     for "technical" and reads cold before a word is read. Chroma is
+     low (a tint, not a colour) so the accents still carry the page. */
+  --bg:        #0f0d11;
+  --bg-2:      #151219;
+  --panel:     #1a171f;
+  --panel-2:   #221e29;
+  --line:      #2f2a38;
+  --line-2:    #3f3849;
 
-  --txt:       #e8eaf6;
-  --txt-dim:   #9aa0c0;
+  --txt:       #efe9e6;
+  --txt-dim:   #b0a7b6;
   /* Was #6b7196: 3.48:1 on --panel-2, 3.75:1 on --panel, 4.14:1 on
      --bg. Every one of those is under the 4.5:1 this site commits to,
      and the token is used on the citation text that is the whole
      argument of the page. #868caf clears 5.02:1 on the worst of the
      three while staying visibly below --txt-dim, so the hierarchy
      between muted and dim survives. */
-  --txt-mute:  #868caf;
+  --txt-mute:  #918799;
 
-  --cyan:      #35e6d0;
-  --violet:    #8b7cff;
-  --magenta:   #ff5fbf;
-  --amber:     #ffb648;
-  --lime:      #8bef5a;
-  --red:       #ff5f6d;
+  /* Accents pulled back from full neon by roughly a fifth. Same hues,
+     so nothing on the page changes meaning; less glare on the eye. */
+  --cyan:      #4fd9c8;
+  --violet:    #9d90f2;
+  --magenta:   #ec72b9;
+  --amber:     #f1b866;
+  --lime:      #a3de74;
+  --red:       #ef6f78;
 
   --radius:    14px;
 
@@ -125,7 +131,7 @@ main { position: relative; z-index: 1; }
      link would have been unreachable. */
   position: fixed; left: 12px; top: -100px; z-index: 100;
   padding: 12px 18px; border-radius: 10px;
-  background: var(--cyan); color: #0a0b12;
+  background: var(--cyan); color: var(--bg);
   font-family: var(--mono); font-size: var(--t-small); font-weight: 500;
   text-decoration: none; transition: top 160ms var(--ease-out);
 }
@@ -140,7 +146,7 @@ main { position: relative; z-index: 1; }
   position: sticky; top: 0; z-index: 50;
   display: flex; align-items: center; gap: 18px;
   padding: 12px 22px;
-  background: rgba(10,11,18,.82);
+  background: rgba(15,13,17,.82);
   backdrop-filter: blur(14px);
   border-bottom: 1px solid var(--line);
 }
@@ -170,8 +176,8 @@ main { position: relative; z-index: 1; }
 }
 .hud-nav a:hover { color: var(--txt); background: var(--panel-2); }
 .hud-nav a.on { color: var(--cyan); border-color: var(--line-2); background: var(--panel); }
-.hud-nav a.is-cta { color: #0a0b12; background: var(--cyan); font-weight: 600; }
-.hud-nav a.is-cta:hover { background: #6ff2e2; }
+.hud-nav a.is-cta { color: var(--bg); background: var(--cyan); font-weight: 600; }
+.hud-nav a.is-cta:hover { background: #7ae3d5; }
 
 .hud-btn {
   font-family: var(--mono); font-size: var(--t-micro); letter-spacing: .06em;
@@ -179,10 +185,35 @@ main { position: relative; z-index: 1; }
   border-radius: 8px; padding: 7px 11px; cursor: pointer; transition: color 160ms ease, background-color 160ms ease, border-color 160ms ease, transform 160ms var(--ease-out);
 }
 .hud-btn:hover { color: var(--txt); border-color: var(--cyan); }
-.hud-btn[aria-pressed="true"] { color: #0a0b12; background: var(--amber); border-color: var(--amber); }
+.hud-btn[aria-pressed="true"] { color: var(--bg); background: var(--amber); border-color: var(--amber); }
 
 .hud-burger { display: none; flex-direction: column; gap: 4px; background: none; border: 0; cursor: pointer; padding: 8px; }
 .hud-burger span { width: 20px; height: 2px; background: var(--txt); border-radius: 2px; }
+
+
+/* ── Recruiter offer ──────────────────────────────────────
+   Recruiters are the primary audience and they land on the character
+   sheet, with the document written for them behind a small button top
+   right. This is shown once, inline, dismissable, never modal. */
+.cv-offer {
+  position: relative; z-index: 1;
+  display: flex; flex-wrap: wrap; align-items: center; gap: 10px 16px;
+  max-width: 1180px; margin: 14px auto 0; padding: 12px 18px;
+  background: var(--panel); border: 1px solid var(--line-2); border-radius: 12px;
+  font-size: var(--t-small); color: var(--txt-dim);
+  animation: rise 400ms var(--ease-out) both;
+}
+.cv-offer p { flex: 1 1 320px; margin: 0; }
+.cv-offer p b { color: var(--txt); font-weight: 600; }
+.cv-offer-actions { display: flex; gap: 8px; }
+.cv-offer .btn { padding: 8px 14px; font-size: var(--t-small); }
+.cv-offer-x {
+  background: none; border: 0; color: var(--txt-mute); cursor: pointer;
+  font-size: var(--t-small); padding: 8px 10px; border-radius: 8px;
+}
+.cv-offer-x:hover { color: var(--txt); background: var(--panel-2); }
+@media (max-width: 860px) { .cv-offer { margin: 10px 14px 0; } }
+body.plain .cv-offer { display: none; }
 
 /* ── Sections ───────────────────────────────────────────── */
 .section { max-width: 1180px; margin: 0 auto; padding: 96px 22px; }
@@ -261,8 +292,8 @@ main { position: relative; z-index: 1; }
   border: 1px solid var(--line-2); color: var(--txt); background: var(--panel-2); transition: color 160ms ease, background-color 160ms ease, border-color 160ms ease, transform 160ms var(--ease-out);
 }
 .btn:hover { border-color: var(--cyan); transform: translateY(-1px); }
-.btn-primary { background: var(--cyan); color: #0a0b12; border-color: var(--cyan); font-weight: 600; }
-.btn-primary:hover { background: #6ff2e2; }
+.btn-primary { background: var(--cyan); color: var(--bg); border-color: var(--cyan); font-weight: 600; }
+.btn-primary:hover { background: #7ae3d5; }
 
 .sheet-stats { border-left: 1px solid var(--line); padding-left: 24px; }
 .radar { width: 100%; height: auto; margin: 8px 0 12px; }
@@ -635,7 +666,9 @@ main { position: relative; z-index: 1; }
 }
 
 /* ── Achievements ───────────────────────────────────────── */
-.achievements { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 12px; }
+/* minmax(200px): ten cards fit five across at the content width, so
+   the grid closes on two full rows instead of stranding a card. */
+.achievements { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 12px; }
 .ach {
   display: grid; gap: 5px; align-content: start;
   padding: 18px; border-radius: var(--radius);
@@ -940,7 +973,7 @@ body.view-in  .hud + *, body.view-in  main, body.view-in  .cv-doc {
 .hud { border-bottom: 0; }
 .hud::after {
   content: ''; position: absolute; left: 0; right: 0; top: 100%; height: 14px;
-  background: linear-gradient(rgba(10,11,18,.55), transparent);
+  background: linear-gradient(rgba(15,13,17,.55), transparent);
   pointer-events: none;
 }
 body.plain .hud::after { background: linear-gradient(rgba(236,234,227,.7), transparent); }

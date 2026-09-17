@@ -22,7 +22,12 @@ function xpModel(data) {
   const unitTotal = data.codex.reduce((sum, u) => sum + unitXp(u), 0);
   const artifactXp = data.artifacts.length * 60;
   const campaignXp = data.campaign.length * 80;
-  const total = unitTotal + artifactXp + campaignXp;
+  /* Quest rewards were printed on every card and never counted, so the
+     "+400 XP" was a promise the model could not keep. A quest pays out
+     once its status is "done". */
+  const questXp = data.quests.filter(q => q.status === 'done')
+    .reduce((sum, q) => sum + (q.reward ?? 0), 0);
+  const total = unitTotal + artifactXp + campaignXp + questXp;
 
   const level = Math.max(1, Math.floor(Math.sqrt(total) / 10));
   const floorXp = Math.pow(level * 10, 2);
@@ -34,7 +39,7 @@ function xpModel(data) {
   const coursePts = data.academic.coursePoints;
   const degreePct = Math.round((donePts / coursePts) * 1000) / 10;
 
-  return { total, level, floorXp, nextXp, pct, unitTotal, donePts, coursePts, degreePct };
+  return { total, level, floorXp, nextXp, pct, unitTotal, questXp, donePts, coursePts, degreePct };
 }
 
 /* ---------- HUD + character sheet ---------- */
@@ -254,7 +259,7 @@ function expandEvidence(evidence, codex) {
   return String(evidence).split('·').map(part => {
     const code = part.trim();
     const unit = codex.find(u => u.code === code);
-    return unit ? `${code} — ${unit.name}` : code;
+    return unit ? `${code}: ${unit.name}` : code;
   }).join(' · ');
 }
 
@@ -318,7 +323,7 @@ function renderSkills(skills, codex, meta) {
               Array.from({ length: 5 }, (_, k) => `<i class="${k < s.level ? 'on' : ''}"></i>`).join('')
             }</span>
             <span class="node-detail"><span>${
-              full ? `<b>${esc(LEVEL_WORD[s.level])}</b> — evidence: ${esc(full)}`
+              full ? `<b>${esc(LEVEL_WORD[s.level])}</b>. Evidence: ${esc(full)}`
                    : `<b>${esc(LEVEL_WORD[s.level])}</b>`
             }</span></span>
           </button>`;
@@ -391,7 +396,7 @@ function artifactCode(a) {
     return `<a class="artifact-link" href="${esc(a.repo)}" target="_blank" rel="noopener">Inspect the code ↗</a>`;
   }
   if (a.code === 'writeup') {
-    return `<span class="artifact-note">Written work — available on request</span>`;
+    return `<span class="artifact-note">Written work, available on request</span>`;
   }
   return `<span class="artifact-note">Code being prepared for GitHub</span>`;
 }
@@ -581,7 +586,7 @@ function renderCV(data) {
         ${projects.map(a => `
           <div class="cv-proj">
             <div class="cv-role-head">
-              <h3>${esc(a.name)} <span class="cv-org">— ${esc(a.type)}</span></h3>
+              <h3>${esc(a.name)} <span class="cv-org">· ${esc(a.type)}</span></h3>
               <span class="cv-dates">${esc(a.year)}</span>
             </div>
             <p>${esc(a.blurb)}</p>
@@ -593,7 +598,7 @@ function renderCV(data) {
         <h2>Education</h2>
         <div class="cv-role">
           <div class="cv-role-head">
-            <h3>Bachelor of Information and Communication Technology<span class="cv-org"> — University of Tasmania</span></h3>
+            <h3>Bachelor of Information and Communication Technology<span class="cv-org"> · University of Tasmania</span></h3>
             <span class="cv-dates">2023 – ${esc(ac.graduating)}</span>
           </div>
           <p class="cv-loc">Hobart, Tasmania · Double major: Computer Science and Cyber Security</p>
@@ -604,7 +609,7 @@ function renderCV(data) {
       <section class="cv-sec">
         <h2>Certifications</h2>
         <ul class="cv-list cv-list-tight">
-          ${certs.map(c => `<li><b>${esc(c.title)}</b> — in progress, targeting ${esc(c.due)}</li>`).join('')}
+          ${certs.map(c => `<li><b>${esc(c.title)}</b>: in progress, targeting ${esc(c.due)}</li>`).join('')}
         </ul>
       </section>
 
@@ -613,7 +618,7 @@ function renderCV(data) {
         ${cv.experience.map(e => `
           <div class="cv-role">
             <div class="cv-role-head">
-              <h3>${esc(e.role)} <span class="cv-org">— ${esc(e.org)}</span></h3>
+              <h3>${esc(e.role)} <span class="cv-org">· ${esc(e.org)}</span></h3>
               <span class="cv-dates">${esc(e.period)}</span>
             </div>
             <p class="cv-loc">${esc(e.location)}</p>
@@ -817,6 +822,22 @@ function wireChrome() {
   const saved = localStorage.getItem('cvMode') === '1';
   apply(saved);
 
+  /* Recruiters are the primary audience and this is the character
+     sheet, not the document written for them. On a first visit with no
+     stored preference, offer the recruiter view once, inline, and never
+     again after any answer. Choosing a view is itself an answer. */
+  const offer = $('#cvOffer');
+  const offerSeen = () => localStorage.setItem('cvOffer', '1');
+  if (offer && !saved && !localStorage.getItem('cvOffer')) {
+    offer.hidden = false;
+    offer.querySelector('[data-offer="yes"]').addEventListener('click', () => {
+      offerSeen(); offer.hidden = true; plain.click();
+    });
+    offer.querySelector('[data-offer="no"]').addEventListener('click', () => {
+      offerSeen(); offer.hidden = true;
+    });
+  }
+
   /* The two views are the same person seen two ways, so the swap gets a
      short cross-fade rather than a hard cut. */
   plain.addEventListener('click', () => {
@@ -826,6 +847,8 @@ function wireChrome() {
     const swap = () => {
       apply(on);
       localStorage.setItem('cvMode', on ? '1' : '0');
+      localStorage.setItem('cvOffer', '1');
+      if (offer) offer.hidden = true;
       window.scrollTo({ top: 0, behavior: 'auto' });
       document.body.classList.remove('view-out');
       document.body.classList.add('view-in');
