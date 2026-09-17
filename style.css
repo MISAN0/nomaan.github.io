@@ -1053,7 +1053,8 @@ body.plain .hud { border-bottom: 1px solid var(--rule); }
    These sat at 29–30px tall. WCAG 2.2 clears 24px, but a 30px control
    is still an awkward thumb target; 44px is the size a finger expects. */
 @media (hover: none) {
-  .hud-btn, .hud-dl, .hud-burger, .filter, .tree-toggle {
+  .hud-btn, .hud-dl, .hud-burger, .filter, .tree-toggle,
+  .cv-offer .btn, .cv-offer-x {
     min-height: 44px; display: inline-flex; align-items: center; justify-content: center;
   }
   .branch-head { min-height: 52px; }
