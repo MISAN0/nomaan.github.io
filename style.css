@@ -1,5 +1,5 @@
 /* ============================================================
-   Character-sheet portfolio — dark HUD, colour-coded panels.
+   Portfolio: a working record. Dark, warm, colour-coded panels.
    ============================================================ */
 
 :root {
@@ -100,7 +100,7 @@ body {
   .reveal { transform: none !important; }
   .reveal.in { transform: none !important; }
   .sheet-chips li { animation: none; opacity: 1; }
-  .hud-xp-fill, .degree-bar i, .quest-bar i, .goal-bar i { transition: none !important; }
+  .hud-progress-fill, .degree-bar i, .quest-bar i, .goal-bar i { transition: none !important; }
   .portrait-status::after { display: none; }
   *:active { transform: none !important; }
 }
@@ -156,18 +156,16 @@ main { position: relative; z-index: 1; }
   padding: 5px 9px; border: 1px solid var(--line-2); border-radius: 8px;
   background: var(--panel-2);
 }
-.hud-lvl { font-family: var(--mono); font-size: var(--t-micro); color: var(--txt-mute); letter-spacing: .1em; }
-.hud-lvl b { color: var(--cyan); font-size: var(--t-body); }
 
-.hud-xp { flex: 1 1 200px; max-width: 340px; display: flex; align-items: center; gap: 10px; }
-.hud-xp-track { flex: 1; height: 7px; border-radius: 99px; background: var(--panel-2); overflow: hidden; border: 1px solid var(--line); }
-.hud-xp-fill {
+.hud-progress { flex: 1 1 220px; max-width: 360px; display: flex; align-items: center; gap: 10px; }
+.hud-progress-track { flex: 1; height: 7px; border-radius: 99px; background: var(--panel-2); overflow: hidden; border: 1px solid var(--line); }
+.hud-progress-fill {
   height: 100%; width: 100%;
   transform: scaleX(0); transform-origin: left;
-  background: linear-gradient(90deg, var(--cyan), var(--violet), var(--magenta));
+  background: linear-gradient(90deg, var(--cyan), var(--lime));
   transition: transform 700ms var(--ease-out);
 }
-.hud-xp-text { font-family: var(--mono); font-size: var(--t-micro); color: var(--txt-mute); white-space: nowrap; }
+.hud-progress-text { font-family: var(--mono); font-size: var(--t-micro); color: var(--txt-mute); white-space: nowrap; }
 
 .hud-nav { display: flex; gap: 4px; margin-left: auto; }
 .hud-nav a {
@@ -227,7 +225,7 @@ body.plain .cv-offer { display: none; }
 .sheet { max-width: 1180px; margin: 0 auto; padding: 54px 22px 20px; }
 .sheet-card {
   display: grid; gap: 28px;
-  grid-template-columns: 260px 1fr 300px;
+  grid-template-columns: 260px 1fr;
   background: linear-gradient(160deg, var(--panel), var(--bg-2));
   border: 1px solid var(--line-2); border-radius: 22px; padding: 28px;
   box-shadow: 0 18px 40px -32px rgba(0,0,0,.7);
@@ -295,26 +293,7 @@ body.plain .cv-offer { display: none; }
 .btn-primary { background: var(--cyan); color: var(--bg); border-color: var(--cyan); font-weight: 600; }
 .btn-primary:hover { background: #7ae3d5; }
 
-.sheet-stats { border-left: 1px solid var(--line); padding-left: 24px; }
-.radar { width: 100%; height: auto; margin: 8px 0 12px; }
-.radar-ring { fill: none; stroke: var(--line-2); stroke-width: 1; }
-.radar-spoke { stroke: var(--line); stroke-width: 1; }
-.radar-shape { fill: rgba(53,230,208,.18); stroke: var(--cyan); stroke-width: 2; stroke-linejoin: round; }
-.radar-dot { fill: var(--cyan); }
-.radar-label { fill: var(--txt-mute); font-family: var(--mono); font-size: var(--t-micro); letter-spacing: .1em; }
 
-.stat-list { list-style: none; display: grid; gap: 14px; }
-.stat-list li {
-  display: grid; grid-template-columns: 46px 1fr auto; align-items: baseline;
-  column-gap: 8px; row-gap: 5px; font-size: var(--t-small);
-}
-.stat-key { font-family: var(--mono); font-size: var(--t-micro); color: var(--cyan); letter-spacing: .08em; }
-.stat-label { color: var(--txt); font-size: var(--t-small); }
-.stat-bar { grid-column: 1 / -1; height: 5px; border-radius: 99px; background: var(--panel-2); overflow: hidden; }
-.stat-bar i { display: block; height: 100%; width: var(--w); background: linear-gradient(90deg, var(--violet), var(--cyan)); }
-.stat-num { font-family: var(--mono); font-size: var(--t-small); text-align: right; color: var(--txt); }
-.stat-num em { font-style: normal; font-size: var(--t-micro); color: var(--txt-mute); }
-.stat-desc { grid-column: 1 / -1; font-size: var(--t-micro); line-height: 1.45; color: var(--txt-mute); }
 
 /* ── Reveal ─────────────────────────────────────────────── */
 .reveal { opacity: 0; transform: translateY(14px); transition: opacity 420ms ease, transform 420ms var(--ease-out); transition-delay: calc(min(var(--i, 0), 5) * 40ms); }
@@ -344,12 +323,6 @@ body.plain .cv-offer { display: none; }
 
 .quest-head { display: flex; align-items: center; justify-content: space-between; gap: 10px; margin: 12px 0 2px; }
 .quest-title { font-family: var(--display); font-size: var(--t-lead); letter-spacing: -.01em; }
-.quest-rank {
-  flex: none; width: 26px; height: 26px; border-radius: 8px;
-  display: grid; place-items: center;
-  font-family: var(--mono); font-size: var(--t-small); font-weight: 700;
-  color: var(--amber); background: rgba(255,182,72,.12); border: 1px solid rgba(255,182,72,.4);
-}
 .quest-role { font-family: var(--mono); font-size: var(--t-micro); color: var(--cyan); margin-bottom: 10px; }
 .quest-blurb { font-size: var(--t-body); color: var(--txt-dim); }
 
@@ -390,7 +363,6 @@ body.plain .cv-offer { display: none; }
   font-family: var(--mono); font-size: var(--t-micro); color: var(--txt-mute);
 }
 .quest-next { min-width: 0; }
-.quest-reward { flex: none; color: var(--amber); }
 
 .section-tally {
   font-family: var(--mono); font-size: var(--t-micro); letter-spacing: .08em;
@@ -545,7 +517,6 @@ body.plain .cv-offer { display: none; }
 .branch[data-branch="Web & APIs"]          .node-pips i.on { color: var(--lime); }
 .branch[data-branch="Practice & Process"]  .node-pips i.on { color: #a9b4d6; }
 .node.locked { opacity: .55; border-style: dashed; }
-.node.locked .node-name::after { content: ' 🔒'; font-size: var(--t-micro); }
 
 /* Legend — the pips are meaningless without it */
 .legend {
@@ -558,7 +529,6 @@ body.plain .cv-offer { display: none; }
 }
 .legend .node-pips i.on { color: var(--cyan); }
 .legend-locked { color: var(--txt-mute); }
-.legend-lock { font-size: var(--t-micro); }
 
 /* ── Unit key: collapsed, so codes can be looked up for free ── */
 .unit-key { margin-top: 18px; border: 1px solid var(--line); border-radius: 10px; background: var(--panel); }
@@ -604,15 +574,6 @@ body.plain .cv-offer { display: none; }
 }
 .artifact:hover { transform: translateY(-3px); }
 .artifact-top { display: flex; justify-content: space-between; align-items: center; }
-.rarity { font-family: var(--mono); font-size: var(--t-micro); letter-spacing: .14em; text-transform: uppercase; padding: 3px 9px; border-radius: 6px; }
-.r-legendary { border-color: rgba(255,182,72,.5); }
-.r-legendary .rarity { color: var(--amber); background: rgba(255,182,72,.12); }
-.r-legendary:hover { border-color: var(--amber); }
-.r-epic .rarity { color: var(--violet); background: rgba(139,124,255,.14); }
-.r-epic:hover { border-color: var(--violet); }
-.r-rare .rarity { color: var(--cyan); background: rgba(53,230,208,.12); }
-.r-rare:hover { border-color: var(--cyan); }
-.r-common .rarity { color: var(--txt-mute); background: var(--panel-2); }
 .artifact-type { font-family: var(--mono); font-size: var(--t-micro); color: var(--txt-mute); }
 .artifact { display: flex; flex-direction: column; }
 .artifact-name { font-family: var(--display); font-size: var(--t-lead); margin: 12px 0 3px; letter-spacing: -.01em; }
@@ -668,31 +629,7 @@ body.plain .cv-offer { display: none; }
 /* ── Achievements ───────────────────────────────────────── */
 /* minmax(200px): ten cards fit five across at the content width, so
    the grid closes on two full rows instead of stranding a card. */
-.achievements { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 12px; }
-.ach {
-  display: grid; gap: 5px; align-content: start;
-  padding: 18px; border-radius: var(--radius);
-  background: var(--panel); border: 1px solid var(--line-2); transition: border-color 200ms ease, box-shadow 200ms ease, transform 200ms var(--ease-out);
-}
-.ach:hover { transform: translateY(-3px); }
-.ach-top { display: flex; align-items: center; justify-content: space-between; gap: 10px; margin-bottom: 4px; }
-.ach-icon { font-size: var(--t-lead); line-height: 1; }
-.ach-when { font-family: var(--mono); font-size: var(--t-micro); letter-spacing: .1em; color: var(--txt-mute); }
-.ach-name { font-family: var(--display); font-size: var(--t-body); font-weight: 600; letter-spacing: -.01em; }
-.ach-desc { font-size: var(--t-small); color: var(--txt-dim); line-height: 1.45; }
-.ach-proof {
-  font-family: var(--mono); font-size: var(--t-micro); color: var(--txt-mute);
-  margin-top: 6px; padding-top: 8px; border-top: 1px solid var(--line);
-}
 
-.ach.t-gold   { border-color: rgba(255,182,72,.45); background: linear-gradient(160deg, rgba(255,182,72,.09), var(--panel)); }
-.ach.t-gold   .ach-icon { color: var(--amber); }
-.ach.t-gold:hover { border-color: var(--amber); }
-.ach.t-silver { border-color: rgba(154,160,192,.4); }
-.ach.t-silver .ach-icon { color: var(--txt-dim); }
-.ach.t-silver:hover { border-color: var(--txt-dim); }
-.ach.t-bronze .ach-icon { color: #c98a5e; }
-.ach.t-bronze:hover { border-color: #c98a5e; }
 
 /* ── Contact ────────────────────────────────────────────── */
 .section-contact { padding-bottom: 120px; }
@@ -755,9 +692,8 @@ body.plain .hud {
   background: rgba(244,242,237,.92);
   border-bottom: 1px solid var(--rule);
 }
-body.plain .hud-xp, body.plain .hud-nav, body.plain .hud-burger { display: none; }
+body.plain .hud-progress, body.plain .hud-nav, body.plain .hud-burger { display: none; }
 body.plain .hud-sigil { background: var(--paper-2); border-color: var(--rule); color: var(--ink); }
-body.plain .hud-lvl { display: none; }
 body.plain .hud-brand { color: var(--ink); }
 body.plain .hud-btn {
   color: var(--accent); background: transparent; border-color: var(--rule);
@@ -911,20 +847,19 @@ body.plain #hudDownload { display: inline-flex; }
 .quest:active,
 .goal:active,
 .artifact:active,
-.ach:active,
 .contact-link:active { transform: translateY(-1px) scale(0.995); }
 
 .node:active { transform: translateX(3px) scale(0.99); }
 
 .btn, .hud-btn, .hud-dl, .chip, .unit-key summary,
-.quest, .goal, .artifact, .ach, .contact-link, .node {
+.quest, .goal, .artifact, .contact-link, .node {
   -webkit-tap-highlight-color: transparent;
 }
 
 /* Touch taps latch :hover, leaving cards stuck in their lifted state.
    Neutralise movement-based hover where there is no real pointer. */
 @media (hover: none) {
-  .quest:hover, .goal:hover, .artifact:hover, .ach:hover,
+  .quest:hover, .goal:hover, .artifact:hover,
   .contact-link:hover, .btn:hover, .node:hover,
   .cv-download:hover { transform: none; }
 }
@@ -982,12 +917,10 @@ body.plain .hud { border-bottom: 1px solid var(--rule); }
 /* ── Responsive ─────────────────────────────────────────── */
 @media (max-width: 1040px) {
   .sheet-card { grid-template-columns: 220px 1fr; }
-  .sheet-stats { grid-column: 1 / -1; border-left: 0; border-top: 1px solid var(--line); padding: 22px 0 0; }
-  .radar { max-width: 260px; }
 }
 @media (max-width: 860px) {
   .hud { flex-wrap: wrap; gap: 12px; }
-  .hud-xp { order: 3; max-width: none; flex-basis: 100%; }
+  .hud-progress { order: 3; max-width: none; flex-basis: 100%; }
   .hud-burger { display: flex; margin-left: auto; }
   .hud-nav {
     order: 4; flex-basis: 100%; flex-direction: column; margin-left: 0;
@@ -1030,23 +963,20 @@ body.plain .hud { border-bottom: 1px solid var(--rule); }
   /* ── Small text floor ────────────────────────────────
      A 9px mono label is legible on a 27-inch monitor and not on a
      phone held at arm's length. Nothing drops below 11px here. */
-  .stat-key, .goal-horizon, .node-level, .node-evidence, .ach-when,
-  .camp-now, .cv-avail b, .stat-num em { font-size: var(--t-micro); }
-  .rarity, .branch-count, .branch-next, .tree-toggle, .legend-item,
-  .legend-lock, .filter, .ach-proof, .quest-tags span, .camp-tags span,
+  .goal-horizon, .node-level, .node-evidence,
+  .camp-now, .cv-avail b { font-size: var(--t-micro); }
+  .branch-count, .branch-next, .tree-toggle, .legend-item,
+  .filter, .quest-tags span, .camp-tags span,
   .sheet-chips span { font-size: var(--t-micro); }
   .panel-label, .section-tally, .quest-state, .quest-due, .quest-next,
-  .quest-reward, .goal-target, .goal-pct, .artifact-type, .artifact-meta,
-  .artifact-note, .degree-note, .hud-xp-text, .artifact-stats code { font-size: var(--t-micro); }
+  .goal-target, .goal-pct, .artifact-type, .artifact-meta,
+  .artifact-note, .degree-note, .hud-progress-text, .artifact-stats code { font-size: var(--t-micro); }
   /* Nested spans the class selectors above do not reach. */
   .quest-foot span, .quest-foot b, .unit-key summary span, .unit-key-row code,
   .filter b, .contact-facts .fact span, .contact-link span, .cv-avail span,
   .cv-skill-group h3, .cv-foot span,
   .cv-dates, .cv-loc, .cv-ref em, .cv-tech, .cv-keys summary,
   .cv-keys summary span { font-size: var(--t-micro); }
-  /* The radar axis keys sit in fixed SVG space, so they get a smaller
-     bump than the flowing text — enough to read, not enough to collide. */
-  .radar-label { font-size: var(--t-micro); }
 }
 
 /* ── Touch targets ────────────────────────────────────────

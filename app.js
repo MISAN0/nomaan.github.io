@@ -12,47 +12,27 @@ const el = (tag, cls, html) => {
 };
 const esc = s => String(s).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
 
-/* ---------- XP model ----------
-   Total XP = unit grades + artifacts + campaign entries.
-   Level curve: level n starts at (n*10)^2 XP, so levels get
-   steadily more expensive instead of arriving every unit.      */
-const unitXp = u => u.grade === 'IP' ? 0 : (u.mark ?? GRADE_XP[u.grade] ?? 0);
-
-function xpModel(data) {
-  const unitTotal = data.codex.reduce((sum, u) => sum + unitXp(u), 0);
-  const artifactXp = data.artifacts.length * 60;
-  const campaignXp = data.campaign.length * 80;
-  /* Quest rewards were printed on every card and never counted, so the
-     "+400 XP" was a promise the model could not keep. A quest pays out
-     once its status is "done". */
-  const questXp = data.quests.filter(q => q.status === 'done')
-    .reduce((sum, q) => sum + (q.reward ?? 0), 0);
-  const total = unitTotal + artifactXp + campaignXp + questXp;
-
-  const level = Math.max(1, Math.floor(Math.sqrt(total) / 10));
-  const floorXp = Math.pow(level * 10, 2);
-  const nextXp = Math.pow((level + 1) * 10, 2);
-  const pct = Math.min(100, ((total - floorXp) / (nextXp - floorXp)) * 100);
-
-  // Degree progress straight from credit points on the record.
+/* ---------- Progress ----------
+   The only number computed here is degree progress, straight from the
+   credit points on the record. There used to be an XP total and a
+   level derived from it; both were invented, so both are gone. */
+function progressModel(data) {
   const donePts = data.codex.filter(u => u.grade !== 'IP').reduce((s, u) => s + (u.pts ?? 0), 0);
   const coursePts = data.academic.coursePoints;
   const degreePct = Math.round((donePts / coursePts) * 1000) / 10;
-
-  return { total, level, floorXp, nextXp, pct, unitTotal, questXp, donePts, coursePts, degreePct };
+  return { donePts, coursePts, degreePct };
 }
 
-/* ---------- HUD + character sheet ---------- */
+/* ---------- HUD + masthead ---------- */
 function renderSheet(data, xp) {
   const p = data.player;
 
-  $('#hudLevel').textContent = xp.level;
-  $('#hudXpText').textContent = `${xp.total} / ${xp.nextXp} XP`;
+  $('#hudDegText').textContent = `Graduating ${data.academic.graduating} · ${xp.degreePct}%`;
   /* --p is written to the element as well as the transform, so the
      prerendered HTML can express the fill level without JavaScript
      (see the noscript block in index.html). */
-  $('#hudXpFill').style.setProperty('--p', xp.pct / 100);
-  requestAnimationFrame(() => { $('#hudXpFill').style.transform = `scaleX(${xp.pct / 100})`; });
+  $('#hudDegFill').style.setProperty('--p', xp.degreePct / 100);
+  requestAnimationFrame(() => { $('#hudDegFill').style.transform = `scaleX(${xp.degreePct / 100})`; });
 
   const img = $('#avatar');
   img.src = p.avatar;
@@ -65,7 +45,6 @@ function renderSheet(data, xp) {
   $('#playerTagline').textContent = p.tagline;
 
   const chips = [
-    ['Level', xp.level],
     ['University units passed', data.codex.filter(u => u.grade !== 'IP').length],
     ['Graduating', data.academic.graduating],
     ['Based in', p.location]
@@ -83,14 +62,6 @@ function renderSheet(data, xp) {
   $('#ghLink').href = p.links.github;
   $('#liLink').href = p.links.linkedin;
 
-  $('#statList').innerHTML = data.attributes.map((a, i) => `
-    <li style="--i:${i}">
-      <span class="stat-key">${esc(a.key)}</span>
-      <span class="stat-label">${esc(a.label)}</span>
-      <span class="stat-num">${a.value}<em>/10</em></span>
-      <span class="stat-bar"><i style="--w:${a.value * 10}%"></i></span>
-      <span class="stat-desc">${esc(a.desc)}</span>
-    </li>`).join('');
 
   /* Email renders only once it is set, so the card never shows an empty
      row or a mailto: link that goes nowhere. */
@@ -116,47 +87,12 @@ function renderSheet(data, xp) {
   $('#footHint').textContent = `${p.location} · Last updated ${data.meta.updated}`;
 }
 
-/* ---------- Radar chart ---------- */
-function renderRadar(attrs) {
-  const svg = $('#radar');
-  // Wider than tall so the outer key labels have room either side.
-  const cx = 130, cy = 108, R = 76, n = attrs.length;
-  const pt = (i, r) => {
-    const a = (Math.PI * 2 * i) / n - Math.PI / 2;
-    return [cx + Math.cos(a) * r, cy + Math.sin(a) * r];
-  };
-  let out = '';
-
-  for (let ring = 1; ring <= 4; ring++) {
-    const r = (R * ring) / 4;
-    const pts = attrs.map((_, i) => pt(i, r).join(',')).join(' ');
-    out += `<polygon points="${pts}" class="radar-ring"/>`;
-  }
-  attrs.forEach((_, i) => {
-    const [x, y] = pt(i, R);
-    out += `<line x1="${cx}" y1="${cy}" x2="${x}" y2="${y}" class="radar-spoke"/>`;
-  });
-
-  const shape = attrs.map((a, i) => pt(i, (R * a.value) / 10).join(',')).join(' ');
-  out += `<polygon points="${shape}" class="radar-shape"/>`;
-  attrs.forEach((a, i) => {
-    const [x, y] = pt(i, (R * a.value) / 10);
-    out += `<circle cx="${x}" cy="${y}" r="3" class="radar-dot"/>`;
-  });
-  attrs.forEach((a, i) => {
-    const [x, y] = pt(i, R + 20);
-    out += `<text x="${x}" y="${y}" class="radar-label" text-anchor="middle" dominant-baseline="middle">${esc(a.key)}</text>`;
-  });
-
-  svg.innerHTML = out;
-}
-
 /* ---------- Quests ---------- */
 const QUEST_STATE = {
-  active: '◈ In progress',
-  queued: '◇ Queued',
-  paused: '❚❚ Paused',
-  done:   '✔ Complete'
+  active: 'In progress',
+  queued: 'Queued',
+  paused: 'Paused',
+  done:   'Complete'
 };
 
 /* Progress comes from the objectives, so the bar can never disagree with
@@ -189,7 +125,6 @@ function renderQuests(quests) {
 
       <div class="quest-head">
         <h3 class="quest-title">${esc(q.title)}</h3>
-        ${q.rank ? `<span class="quest-rank" title="Difficulty rank">${esc(q.rank)}</span>` : ''}
       </div>
       <p class="quest-role">${esc(q.role)}</p>
       <p class="quest-blurb">${esc(q.blurb)}</p>
@@ -211,7 +146,6 @@ function renderQuests(quests) {
       </div>
       <div class="quest-meta">
         <span class="quest-next">Next: ${esc(q.next)}</span>
-        ${q.reward ? `<span class="quest-reward">+${q.reward} XP</span>` : ''}
       </div>
     </article>`;
   }).join('');
@@ -282,7 +216,7 @@ function renderSkills(skills, codex, meta) {
           `<i class="${k < l ? 'on' : ''}"></i>`).join('')}</span>
         ${esc(LEVEL_WORD[l])}
       </span>`).join('')}
-    <span class="legend-item legend-locked"><span class="legend-lock">🔒</span> Learning next</span>`;
+    <span class="legend-item legend-locked">Next to learn</span>`;
 
   const branches = branchOrder(skills, meta);
   $('#skillTree').innerHTML = branches.map((b, bi) => {
@@ -417,9 +351,8 @@ function renderArtifacts(list) {
     ${cats.map(c => `<button class="filter" data-cat="${esc(c)}">${esc(c)} <b>${count(c)}</b></button>`).join('')}` : '';
 
   $('#artifactList').innerHTML = list.map((a, i) => `
-    <article class="artifact reveal r-${esc(a.rarity)}" style="--i:${Math.min(i, 8)}" data-cat="${esc(a.cat || '')}">
+    <article class="artifact reveal" style="--i:${Math.min(i, 8)}" data-cat="${esc(a.cat || '')}">
       <div class="artifact-top">
-        <span class="rarity">${esc(a.rarity)}</span>
         <span class="artifact-type">${esc(a.type)}</span>
       </div>
 
@@ -475,24 +408,6 @@ function renderCampaign(list) {
     </article>`).join('');
 }
 
-/* ---------- Achievements ---------- */
-function renderAchievements(list) {
-  const byTier = t => list.filter(a => a.tier === t).length;
-  $('#achTally').textContent =
-    `${byTier('gold')} gold · ${byTier('silver')} silver · ${byTier('bronze')} bronze`;
-
-  $('#achievementList').innerHTML = list.map((a, i) => `
-    <div class="ach reveal t-${esc(a.tier)}" style="--i:${Math.min(i, 8)}">
-      <div class="ach-top">
-        <span class="ach-icon">${esc(a.icon)}</span>
-        <span class="ach-when">${esc(a.when)}</span>
-      </div>
-      <span class="ach-name">${esc(a.name)}</span>
-      <span class="ach-desc">${esc(a.desc)}</span>
-      <span class="ach-proof">${esc(a.proof)}</span>
-    </div>`).join('');
-}
-
 /* ============================================================
    CV MODE
    A separate document for a hiring audience, built from the same
@@ -531,7 +446,7 @@ function renderCV(data) {
   })).filter(g => g.items.length);
 
   const certs = data.quests.filter(q => /certification/i.test(q.role));
-  const projects = data.artifacts.filter(a => a.rarity !== 'rare').slice(0, 5);
+  const projects = data.artifacts.slice(0, 5);
 
   document.getElementById('cvDoc').innerHTML = `
     <article class="cv-paper">
@@ -870,15 +785,13 @@ function wireChrome() {
    half and never runs at build time.
    ============================================================ */
 function renderAll(data) {
-  const xp = xpModel(data);
+  const xp = progressModel(data);
   renderSheet(data, xp);
-  renderRadar(data.attributes);
   renderQuests(data.quests);
   renderGoals(data.goals);
   renderSkills(data.skills, data.codex, data.skillBranches);
   renderArtifacts(data.artifacts);
   renderCampaign(data.campaign);
-  renderAchievements(data.achievements);
   renderCV(data);
 }
 

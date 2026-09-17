@@ -1,8 +1,8 @@
 /* ============================================================
    PORTFOLIO DATA — this is the only file you need to edit.
    Everything on the site is rendered from this object.
-   XP / level / attribute bars are COMPUTED from the data below,
-   so you never have to keep two numbers in sync.
+   Progress bars are COMPUTED from the data below, so you never have
+   to keep two numbers in sync.
 
    Anything marked  // EDIT  is a placeholder — replace it.
    ============================================================ */
@@ -17,7 +17,7 @@ const DATA = {
     updated: "18 September 2026"   // EDIT when you update the site
   },
 
-  /* ---------- Character ---------- */
+  /* ---------- Person ---------- */
   player: {
     name: "Mir Salman Nomaan",
     handle: "MISAN0",
@@ -27,7 +27,7 @@ const DATA = {
     avatar: "photo.jpg",
     status: "Open to graduate, ICT support and help desk roles",
     // one-liner under the name
-    tagline: "A computer enthusiast on the road to mastery, levelling up through cyber security, networking, and AI, one lab at a time.",
+    tagline: "A computer enthusiast on the road to mastery, working through cyber security, networking, and AI, one lab at a time.",
     links: {
       github: "https://github.com/MISAN0",
       linkedin: "https://linkedin.com/in/nomaan00",
@@ -37,31 +37,9 @@ const DATA = {
     }
   },
 
-  /* ---------- Attributes (0–10) — drives the radar chart ----------
-     key   = short label on the radar (keep to 5 characters or fewer)
-     label = full name shown in the list
-     desc  = what the score actually covers, so nobody has to guess     */
-  attributes: [
-    { key: "CYBER", label: "Cyber Security", value: 8,
-      desc: "Network defence, API security, ethical hacking, incident response, digital forensics" },
-    { key: "NET",   label: "Networking", value: 7,
-      desc: "TCP/IP, routing and switching, subnetting and VLSM, LAN/WAN configuration (CCNA in progress)" },
-    { key: "PROG",  label: "Programming", value: 7,
-      desc: "Python, C, Java, C# and Bash: data structures, algorithms, automated testing" },
-    { key: "AI",    label: "AI & Machine Learning", value: 7,
-      desc: "Neural networks, deep learning, natural language processing, reinforcement learning" },
-    { key: "DATA",  label: "Data Engineering", value: 7,
-      desc: "SQL, Pandas, PySpark and Hadoop: wrangling, statistics, visualisation at scale" },
-    { key: "SYS",   label: "Systems & Servers", value: 8,
-      desc: "Linux administration, operating system internals, server hardening, cloud fundamentals" },
-    { key: "COMM",  label: "Communication", value: 8,
-      desc: "Technical writing, documentation, teamwork, and client-facing project work" }
-  ],
 
-  /* ---------- Active quests ----------
+  /* ---------- In progress ----------
      status:     active | queued | paused | done
-     rank:       S / A / B / C — how demanding the quest is
-     reward:     XP added to the running total once it is finished
      objectives: the checkpoints inside the quest; progress is calculated
                  from these, so tick one and the bar moves on its own
      Deliberately kept general — no live coursework or client work here.  */
@@ -69,8 +47,6 @@ const DATA = {
     {
       title: "CCNA 200-301",
       role: "Cisco certification",
-      rank: "A",
-      reward: 400,
       blurb: "Routing and switching on Cisco IOS: VLANs and trunking, spanning tree, OSPF, IPv4 and IPv6 addressing, NAT and DHCP, access control lists, and device hardening, configured and troubleshot in the CLI rather than just read about.",
       tags: ["Cisco IOS", "Routing & Switching", "OSPF", "Subnetting"],
       status: "active",
@@ -87,8 +63,6 @@ const DATA = {
     {
       title: "This Portfolio",
       role: "Personal project",
-      rank: "B",
-      reward: 150,
       blurb: "The site you are reading. Static HTML, CSS and JavaScript with no build step and no framework; every panel renders from a single data file.",
       tags: ["JavaScript", "CSS", "SVG", "Design"],
       status: "active",
@@ -104,8 +78,6 @@ const DATA = {
     {
       title: "CompTIA Security+ SY0-701",
       role: "Cyber security certification",
-      rank: "A",
-      reward: 400,
       blurb: "The vendor-neutral security baseline: threat actors and attack types, cryptography and PKI, identity and access management, secure network and cloud architecture, incident response, digital forensics, and risk and compliance frameworks.",
       tags: ["Threat Analysis", "Cryptography", "IAM", "Incident Response"],
       status: "active",
@@ -121,8 +93,6 @@ const DATA = {
     {
       title: "Open the Vault",
       role: "Open source",
-      rank: "B",
-      reward: 200,
       blurb: "Move the projects in the Artifacts section out of local folders and onto public GitHub repositories, with credentials stripped, READMEs written and licences attached, so the code can be read rather than described.",
       tags: ["Git", "GitHub", "Documentation", "Code Review"],
       status: "active",
@@ -138,8 +108,6 @@ const DATA = {
     {
       title: "First Contact",
       role: "Job search",
-      rank: "A",
-      reward: 300,
       blurb: "The search for the first ICT role. Service desk, technical support, or a junior position anywhere across ICT: applications going out, interviews prepared for, and every rejection turned into a fix.",
       tags: ["Service Desk", "Technical Support", "Interviews"],
       status: "active",
@@ -156,8 +124,6 @@ const DATA = {
     {
       title: "The Home Lab",
       role: "Hands-on practice",
-      rank: "B",
-      reward: 250,
       blurb: "A small lab to practise on hardware that is allowed to break: virtualised hosts, a segmented network, a firewall in front of it, and a log collector behind it. Somewhere to actually run the attacks and defences the units only describe.",
       tags: ["Virtualisation", "Firewalls", "VLANs", "Logging"],
       status: "queued",
@@ -235,8 +201,7 @@ const DATA = {
      evidence: where the skill came from. A unit code, a certification,
             or a project. This is the citation behind the rating, and it
             is what stops the tree being a list of unbacked claims.
-     Branch names mirror the attributes on the character sheet, so the
-     radar and the tree tell the same story.                            */
+     Branch names are the headings the CV groups skills under.                            */
   /* ---------- Skill branches ----------
      Sets the ORDER the branches appear in and gives each one a line of
      context, so a reader knows what the group is before reading 9 names.
@@ -338,8 +303,8 @@ const DATA = {
     { name: "SFIA Framework",          branch: "Practice & Process", level: 3, evidence: "KIT105" }
   ],
 
-  /* ---------- Artifacts (projects) ----------
-     rarity: legendary | epic | rare — how substantial the build is.
+  /* ---------- Projects ----------
+     Ordered by importance; the first few are what the CV shows.
      code:   "published" once the repository is public and `repo` is set,
              "private" while it still lives on disk, "writeup" for work
              whose output is a document rather than a program.
@@ -351,7 +316,6 @@ const DATA = {
     {
       name: "API Exposure Auditor",
       cat: "Security",
-      rarity: "legendary",
       type: "Cyber Security Tool",
       year: "2026",
       team: "Solo",
@@ -368,7 +332,6 @@ const DATA = {
     {
       name: "OpenAPI Exposure Research",
       cat: "Security",
-      rarity: "epic",
       type: "Security Research",
       year: "2026",
       team: "Solo",
@@ -385,7 +348,6 @@ const DATA = {
     {
       name: "Hardened Node.js API Server",
       cat: "Web & APIs",
-      rarity: "epic",
       type: "Backend",
       year: "2025",
       team: "Solo",
@@ -402,7 +364,6 @@ const DATA = {
     {
       name: "Spam Detection Classifier",
       cat: "AI & Data",
-      rarity: "epic",
       type: "Machine Learning",
       year: "2025",
       team: "Solo",
@@ -419,7 +380,6 @@ const DATA = {
     {
       name: "Distributed Data Pipelines",
       cat: "AI & Data",
-      rarity: "epic",
       type: "Data Engineering",
       year: "2026",
       team: "Solo",
@@ -436,7 +396,6 @@ const DATA = {
     {
       name: "Full-Stack Web Application",
       cat: "Web & APIs",
-      rarity: "epic",
       type: "Web Application",
       year: "2024",
       team: "Solo",
@@ -453,7 +412,6 @@ const DATA = {
     {
       name: "Graph Pathfinding Engine",
       cat: "Software",
-      rarity: "rare",
       type: "Algorithms",
       year: "2025",
       team: "Solo",
@@ -470,7 +428,6 @@ const DATA = {
     {
       name: "Steganography & Cipher Tool",
       cat: "Security",
-      rarity: "rare",
       type: "Cryptography",
       year: "2023",
       team: "Solo",
@@ -487,7 +444,6 @@ const DATA = {
     {
       name: "UNIX Records Manager",
       cat: "Systems",
-      rarity: "rare",
       type: "Systems",
       year: "2024",
       team: "Solo",
@@ -504,7 +460,6 @@ const DATA = {
     {
       name: "Game AI & Pathfinding",
       cat: "Software",
-      rarity: "rare",
       type: "Game Development",
       year: "2024",
       team: "Solo",
@@ -521,7 +476,6 @@ const DATA = {
     {
       name: "Incident Response & Threat Analysis",
       cat: "Security",
-      rarity: "rare",
       type: "Security Analysis",
       year: "2025",
       team: "Team",
@@ -766,63 +720,5 @@ const DATA = {
       "Pandas", "PySpark", "Hadoop", "Data Visualisation",
       "Agile", "Scrum", "PRINCE2", "Technical Documentation", "Stakeholder Communication"
     ]
-  },
-
-  /* ---------- Achievements ----------
-     Earned only. Anything still ahead lives in `quests` and `goals`;
-     repeating it here as a locked tile would be the third copy.
-     tier: gold | silver | bronze — how hard it was to earn.
-     proof: the fact behind the badge, so it is checkable.            */
-  achievements: [
-    {
-      icon: "◆", name: "Breaker and Builder", tier: "gold", when: "2025 – 2026",
-      desc: "Works both sides of security: finds the weakness, then closes it",
-      proof: "Ethical hacking and hardened, secure-by-default builds"
-    },
-    {
-      icon: "✦", name: "From First Principles", tier: "gold", when: "2025",
-      desc: "Built the fundamentals by hand instead of importing them",
-      proof: "Dijkstra, A-star, hash tables and priority queues in C"
-    },
-    {
-      icon: "◈", name: "Published Researcher", tier: "gold", when: "2026",
-      desc: "A structured security study built on peer-reviewed sources",
-      proof: "13 sources, OWASP and MITRE CWE mapped"
-    },
-    {
-      icon: "⚔", name: "Dual Wield", tier: "silver", when: "2023 – now",
-      desc: "Full-time study carried alongside two jobs",
-      proof: "Three years, no break in enrolment"
-    },
-    {
-      icon: "🛡", name: "Critical Infrastructure", tier: "silver", when: "2023 – 2025",
-      desc: "Security operations on a regulated port",
-      proof: "Maritime security at TasPorts"
-    },
-    {
-      icon: "◇", name: "Polyglot", tier: "silver", when: "2023 – 2026",
-      desc: "Shipped working code in seven languages",
-      proof: "Python, C, Java, C#, PHP, JavaScript, Bash"
-    },
-    {
-      icon: "⬢", name: "Deep Learner", tier: "silver", when: "2025",
-      desc: "Trained neural networks beyond the tutorial level",
-      proof: "CNNs, LSTMs, GANs and reinforcement learning agents"
-    },
-    {
-      icon: "⬡", name: "Scaled Up", tier: "bronze", when: "2026",
-      desc: "Took an analysis from one machine to a cluster",
-      proof: "PySpark and Hadoop over multi-table data"
-    },
-    {
-      icon: "▲", name: "Shipped It", tier: "bronze", when: "2026",
-      desc: "Built and published this site on its own domain",
-      proof: "Static, no framework, one data file"
-    },
-    {
-      icon: "⌥", name: "Open Source", tier: "bronze", when: "Mar 2026",
-      desc: "First project published for anyone to read and run",
-      proof: "API Exposure Auditor on GitHub"
-    }
-  ]
+  }
 };

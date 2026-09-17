@@ -6,10 +6,10 @@ brand
 
 Per-surface override, confirmed as a genuine split rather than a fuzzy default:
 
-- **Interactive character sheet** (`index.html` `main`, the default view): **brand**. The design is the product. Expression, personality and memorability are the job.
-- **Recruiter view** (`#cvDoc`, `body.plain`): **product**. The design serves a scanning task. Legibility, hierarchy and speed of comprehension win over expression every time. No RPG language, no neon, no motion that delays reading.
+- **The full record** (`index.html` `main`, the default view): **brand**. The design is the product. Expression, personality and memorability are the job, carried by typography, evidence and voice rather than by a game layer.
+- **Recruiter view** (`#cvDoc`, `body.plain`): **product**. The design serves a scanning task. Legibility, hierarchy and speed of comprehension win over expression every time. No motion that delays reading.
 
-When a change touches both, they are governed separately. A decision that improves the character sheet is not automatically right for the CV, and vice versa.
+When a change touches both, they are governed separately. A decision that improves the full record is not automatically right for the CV, and vice versa.
 
 ## Users
 
@@ -17,7 +17,7 @@ Two audiences, recruiter first.
 
 **Primary: recruiters and HR screeners.** Non-technical, moving fast, filtering a stack of candidates. They need to establish in seconds that this person is a final-year ICT student in Hobart, graduating December 2026, looking for a first role. They are reading the recruiter view.
 
-**Secondary: technical hiring managers.** They go further, and they read the evidence. The unit codes behind each skill rating, the project detail, what was built by hand versus imported. They are reading the character sheet.
+**Secondary: technical hiring managers.** They go further, and they read the evidence. The unit codes behind each skill rating, the project detail, what was built by hand versus imported. They are reading the full record.
 
 **Critical context: this is a companion, not a discovery channel.** Visitors arrive from a CV or a LinkedIn profile that has already been sent. They know the name before they land. The site does not need to introduce anyone. Its job is to confirm what the application claimed and expand on it with proof that would not fit on one page.
 
@@ -42,15 +42,15 @@ Warmth is the quality currently least present in the interface, and the one most
 All four were named explicitly. In rough priority order:
 
 1. **Generic AI-built portfolio.** Gradient hero, three identical feature cards, a big-number stat row, Inter everywhere. If a reader could say "a template made that" the site has failed at its only differentiating job.
-2. **Overdone gamification.** The RPG framing tipping into juvenile or gimmicky. The conceit only works while every game element maps to a real, verifiable fact. The moment XP or a badge is decorative, the framing reads as a costume and undermines the honesty above. This is the sharpest constraint on the site: the concept and the anti-reference are the same thing viewed from two sides.
+2. **Gamification.** The site began as an RPG character sheet: XP, levels, quests, rarity tiers, achievement badges. It was removed in September 2026 because the invented numbers (a level formula, self-rated attributes) contradicted the citation principle, and the vocabulary made a recruiter translate. Every mechanism that was computed from a fact survived under a plain name. Nothing game-shaped comes back.
 3. **Dense unreadable dump.** Everything visible at once with nothing prioritised. The reader should never be left to do the sorting.
 4. **Corporate consultancy site.** Stock imagery, safe navy, empty superlatives, personality sanded off. The recruiter view must stay professional without becoming this.
 
 ## Design Principles
 
 1. **Cite, don't claim.** Every rating, badge and number points at its source. If a fact cannot be backed, it does not go on the page.
-2. **The game layer must be load-bearing.** Every RPG element maps to real data and is computed from it. Decorative gamification is the failure mode, not the feature.
-3. **Two documents, two rulebooks.** The character sheet and the recruiter view are separate artefacts sharing one data source. Never restyle one into the other.
+2. **Every number is computed from a fact.** Degree progress from credit points, checkpoint progress from ticked items, skill ratings with a citation. If a number cannot be derived from something on the record, it does not appear.
+3. **Two documents, two rulebooks.** The full record and the recruiter view are separate artefacts sharing one data source: same voice, different depth. Never restyle one into the other.
 4. **Progressive depth.** The surface is scannable in seconds; detail is available on demand and never mandatory. Collapse, disclose, filter.
 5. **Warmth is a feature, not decoration.** The person should be legible through the interface, not buried under the system.
 
