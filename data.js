@@ -1,58 +1,46 @@
-/* ============================================================
-   PORTFOLIO DATA — this is the only file you need to edit.
-   Everything on the site is rendered from this object.
-   Progress bars are COMPUTED from the data below, so you never have
-   to keep two numbers in sync.
-
-   Anything marked  // EDIT  is a placeholder — replace it.
-   ============================================================ */
+/* PORTFOLIO DATA: the only file you need to edit. Progress is computed
+   from the checkpoints, so there are never two numbers to keep in sync.
+   After editing: npm run prerender. If the CV changed, also rebuild the
+   PDF with portfolio_private/site-cv/makecv.py.                        */
 
 const DATA = {
 
-  /* ---------- Site meta ----------
-     Bump `updated` whenever you change anything real on this page.
-     It is deliberately manual: a build date would claim the content is
-     current when only the code changed.                                */
+  /* Bump whenever something real changes. Deliberately manual: a build
+     date would claim the content is current when only code changed. */
   meta: {
-    updated: "18 September 2026"   // EDIT when you update the site
+    updated: "14 November 2026",
+    site: "https://mirsalmannomaan.com",
+    source: "https://github.com/MISAN0/nomaan.github.io"
   },
 
-  /* ---------- Person ---------- */
-  player: {
+  person: {
     name: "Mir Salman Nomaan",
-    handle: "MISAN0",
-    class: "ICT Student",
-    subclass: "Cyber Security & Computer Science",
+    short: "Nomaan",
     location: "Hobart, Tasmania",
-    avatar: "photo.jpg",
-    status: "Open to graduate, ICT support and help desk roles",
-    // one-liner under the name
-    tagline: "A computer enthusiast on the road to mastery, working through cyber security, networking, and AI, one lab at a time.",
+    avatar: "/photo.jpg",
+    eyebrow: "Computer Science & Cyber Security · University of Tasmania",
+    // The hook. His line, from the master CV: keep it.
+    hook: "Most of what I can fix now, I broke myself first.",
+    intro: "Graduating in December 2026 with every unit of a Bachelor of ICT complete, and three years of security work on a regulated port alongside the degree.",
+    available: "Available now · full time · Hobart",
+    seeking: "Service desk, IT support, cyber security, networking, systems and data roles.",
     links: {
+      email: "mirsalmannomaan@gmail.com",
       github: "https://github.com/MISAN0",
-      linkedin: "https://linkedin.com/in/nomaan00",
-      // EDIT: add an address here and the contact card gains an email
-      // row. Left empty it is simply not rendered — no dead link.
-      email: "mirsalmannomaan@gmail.com"
+      linkedin: "https://linkedin.com/in/nomaan00"
     }
   },
 
-
-  /* ---------- In progress ----------
-     status:     active | queued | paused | done
-     objectives: the checkpoints inside the quest; progress is calculated
-                 from these, so tick one and the bar moves on its own
-     Deliberately kept general — no live coursework or client work here.  */
-  quests: [
+  /* ---------- Now / Next ----------
+     `now` items carry checkpoints and the bar is computed from them.
+     `next` items are one line each: no progress to fake.            */
+  now: [
     {
       title: "CCNA 200-301",
-      role: "Cisco certification",
-      blurb: "Routing and switching on Cisco IOS: VLANs and trunking, spanning tree, OSPF, IPv4 and IPv6 addressing, NAT and DHCP, access control lists, and device hardening, configured and troubleshot in the CLI rather than just read about.",
-      tags: ["Cisco IOS", "Routing & Switching", "OSPF", "Subnetting"],
-      status: "active",
-      due: "Oct 2026",
-      next: "Section 5: TCP/UDP and the transport layer",
-      objectives: [
+      kind: "Cisco certification",
+      target: "Exam early 2027",
+      why: "Routing and switching on Cisco IOS, configured and troubleshot in the CLI rather than read about.",
+      steps: [
         { label: "Subnet any prefix in under 60 seconds", done: true },
         { label: "Network fundamentals and switching", done: true },
         { label: "VLANs, trunking and spanning tree", done: false },
@@ -61,630 +49,421 @@ const DATA = {
       ]
     },
     {
-      title: "This Portfolio",
-      role: "Personal project",
-      blurb: "The site you are reading. Static HTML, CSS and JavaScript with no build step and no framework; every panel renders from a single data file.",
-      tags: ["JavaScript", "CSS", "SVG", "Design"],
-      status: "active",
-      due: "Ongoing",
-      next: "Refine each section, then keep it current",
-      objectives: [
-        { label: "Data-driven rebuild: one file drives the site", done: true },
-        { label: "Live on a custom domain", done: true },
-        { label: "Plain CV view for recruiters", done: true },
-        { label: "Refine every section", done: false }
-      ]
-    },
-    {
-      title: "CompTIA Security+ SY0-701",
-      role: "Cyber security certification",
-      blurb: "The vendor-neutral security baseline: threat actors and attack types, cryptography and PKI, identity and access management, secure network and cloud architecture, incident response, digital forensics, and risk and compliance frameworks.",
-      tags: ["Threat Analysis", "Cryptography", "IAM", "Incident Response"],
-      status: "active",
-      due: "Dec 2026",
-      next: "Threats, vulnerabilities and mitigations",
-      objectives: [
-        { label: "General security concepts", done: true },
-        { label: "Threats, vulnerabilities and mitigations", done: true },
-        { label: "Security architecture and operations", done: false },
-        { label: "Practice exams at 80% twice running", done: false }
-      ]
-    },
-    {
-      title: "Open the Vault",
-      role: "Open source",
-      blurb: "Move the projects in the Artifacts section out of local folders and onto public GitHub repositories, with credentials stripped, READMEs written and licences attached, so the code can be read rather than described.",
-      tags: ["Git", "GitHub", "Documentation", "Code Review"],
-      status: "active",
-      due: "Ongoing",
-      next: "Scrub credentials, then publish the first repository",
-      objectives: [
-        { label: "Audit every project for keys, certificates and connection strings", done: false },
-        { label: "README and licence written for each repository", done: false },
-        { label: "First three repositories public", done: false },
-        { label: "Every artifact on this page links to its source", done: false }
-      ]
-    },
-    {
-      title: "First Contact",
-      role: "Job search",
-      blurb: "The search for the first ICT role. Service desk, technical support, or a junior position anywhere across ICT: applications going out, interviews prepared for, and every rejection turned into a fix.",
-      tags: ["Service Desk", "Technical Support", "Interviews"],
-      status: "active",
-      due: "2026 / 2027",
-      next: "Applications out to Hobart and remote graduate intakes",
-      objectives: [
+      title: "First role in ICT",
+      kind: "Job search",
+      target: "Now",
+      why: "Support, security, networking, systems or data. The way into the industry is through the door; specialisation comes after.",
+      steps: [
         { label: "Portfolio live on its own domain", done: true },
         { label: "One-page CV written and downloadable", done: true },
-        { label: "Applications sent", done: false },
-        { label: "Interview reached", done: false },
+        { label: "Applications sent", done: true },
+        { label: "Interview for an ICT role", done: false },
         { label: "Offer signed", done: false }
       ]
     },
     {
-      title: "The Home Lab",
-      role: "Hands-on practice",
-      blurb: "A small lab to practise on hardware that is allowed to break: virtualised hosts, a segmented network, a firewall in front of it, and a log collector behind it. Somewhere to actually run the attacks and defences the units only describe.",
-      tags: ["Virtualisation", "Firewalls", "VLANs", "Logging"],
-      status: "queued",
-      due: "2027",
-      next: "Hypervisor host and the first two virtual machines",
-      objectives: [
-        { label: "Hypervisor host running", done: false },
-        { label: "Segmented VLANs behind a firewall", done: false },
-        { label: "Linux and Windows servers to attack and defend", done: false },
-        { label: "Central logging and alerting", done: false }
+      title: "Publishing the code",
+      kind: "Open source",
+      target: "Ongoing",
+      why: "Moving the projects below out of local folders so the code can be read rather than described.",
+      steps: [
+        { label: "First repository public, with README and licence", done: true },
+        { label: "Credentials audit across the rest", done: false },
+        { label: "Three repositories public", done: false },
+        { label: "Every project here links to its source", done: false }
       ]
     }
   ],
 
-  /* ---------- Objectives: the long arc ----------
-     These are OUTCOMES, not tasks. Day-to-day milestones belong in
-     `quests` above — anything appearing in both places is duplication.
-     horizon: short phrase placing the goal in time, shown as a badge.
-     why:     one line on why the goal is worth having.                 */
-  goals: [
-    {
-      title: "Finish the degree",
-      horizon: "In progress",
-      target: "Dec 2026",
-      detail: "Bachelor of Information and Communication Technology at the University of Tasmania, double major in Computer Science and Cyber Security. 262.5 of 300 credit points cleared.",
-      why: "The foundation everything else is built on.",
-      steps: [
-        { label: "21 units passed", done: true },
-        { label: "Final two units, including the capstone", done: false },
-        { label: "Graduate", done: false }
-      ]
-    },
-    {
-      title: "Get certified",
-      horizon: "In progress",
-      target: "Oct & Dec 2026",
-      detail: "Networking first, then security. Vendor certifications that stand on their own in front of an employer, independent of the degree.",
-      why: "A degree shows I can learn. A certification shows I can do the work.",
-      steps: [
-        { label: "CCNA 200-301", done: false },
-        { label: "CompTIA Security+ SY0-701", done: false },
-        { label: "CySA+ or a cloud security certification", done: false }
-      ]
-    },
-    {
-      title: "First role in ICT",
-      horizon: "Next",
-      target: "2026 / 2027",
-      detail: "Service desk, technical support, or a junior role anywhere across ICT, cyber security, networking, or AI. Australia-based, and ready to start at the bottom of a good team.",
-      why: "The fastest way into the industry is through the door. Specialisation comes after.",
-      steps: [
-        { label: "Portfolio live", done: true },
-        { label: "CV ready and applications out", done: false },
-        { label: "First ICT role", done: false }
-      ]
-    },
-    {
-      title: "Become the person on call",
-      horizon: "Longer term",
-      target: "2028 onward",
-      detail: "Move off the service desk and into a security operations or network team: triaging real alerts, reading real packet captures, and owning a slice of the infrastructure. Long enough in that seat to be the one others escalate to, rather than the one escalating.",
-      why: "Support teaches you the systems. Operations is where you defend them.",
-      steps: [
-        { label: "Two years of hands-on ICT experience", done: false },
-        { label: "Move into a SOC, network or infrastructure team", done: false },
-        { label: "CySA+ or CCNP Security on top of real work", done: false },
-        { label: "Own an incident end to end", done: false }
-      ]
-    }
+  next: [
+    { title: "Graduation", when: "Dec 2026", why: "Coursework finished in October; the degree is conferred in December." },
+    { title: "CompTIA Security+", when: "After CCNA", why: "Postponed so the CCNA gets full attention. Networking first, then security." },
+    { title: "Security or network operations", when: "2028 onward", why: "Support teaches you the systems. Operations is where you defend them." }
   ],
 
-  /* ---------- Skill tree ----------
+  /* ---------- Skills ----------
      level: 1 Aware · 2 Familiar · 3 Working · 4 Confident · 5 Strong
-            0 renders as a locked node — the next thing being unlocked.
-     evidence: where the skill came from. A unit code, a certification,
-            or a project. This is the citation behind the rating, and it
-            is what stops the tree being a list of unbacked claims.
-     Branch names are the headings the CV groups skills under.                            */
-  /* ---------- Skill branches ----------
-     Sets the ORDER the branches appear in and gives each one a line of
-     context, so a reader knows what the group is before reading 9 names.
-     `open: true` leaves that branch expanded on load; the rest start
-     collapsed so the whole tree fits on one screen.
-     A branch listed here but absent from `skills` is simply skipped, and
-     a branch used in `skills` but missing here still renders — at the
-     end, without a note.                                               */
+            0 = next to learn.
+     evidence: the unit, certification or project behind the rating.
+     aka: extra names used to match a skill to the projects that used it
+          (matching is otherwise on the project's `stack`).            */
   skillBranches: [
-    { name: "Cyber Security", open: true,
-      note: "Defensive and offensive work across the same systems: finding the weakness, then closing it." },
-    { name: "Networking", open: true,
-      note: "The layer everything else runs on. Addressing, routing and switching, learnt in the CLI." },
-    { name: "Systems & Servers",
-      note: "What happens under the application: processes, memory, filesystems, and the servers they run on." },
-    { name: "Programming",
-      note: "Languages picked up per problem rather than per fashion: systems work in C, everything else in Python." },
-    { name: "Web & APIs",
-      note: "Building services and then attacking them: authentication, transport security, and what an API leaks." },
-    { name: "AI & Machine Learning",
-      note: "Models trained and evaluated properly, on the metrics that survive imbalanced data, not on accuracy." },
-    { name: "Data Engineering",
-      note: "Moving analysis from one machine to a cluster, and querying what lands there." },
-    { name: "Practice & Process",
-      note: "How the work gets planned, documented and handed over: the half that is not code." }
+    { name: "Cyber Security", open: true, note: "Defensive and offensive work across the same systems: finding the weakness, then closing it." },
+    { name: "Networking", open: true, note: "The layer everything else runs on. Addressing, routing and switching, learnt in the CLI." },
+    { name: "Systems & Servers", note: "What happens under the application: processes, memory, filesystems, and the servers they run on." },
+    { name: "Programming", note: "Languages picked up per problem rather than per fashion: systems work in C, everything else in Python." },
+    { name: "Web & APIs", note: "Building services and then attacking them: authentication, transport security, and what an API leaks." },
+    { name: "AI & Machine Learning", note: "Models trained and evaluated properly, on the metrics that survive imbalanced data, not on accuracy." },
+    { name: "Data Engineering", note: "Moving analysis from one machine to a cluster, and querying what lands there." },
+    { name: "Practice & Process", note: "How the work gets planned, documented and handed over: the half that is not code." }
   ],
 
   skills: [
-    { name: "Python",                  branch: "Programming", level: 5, evidence: "KIT101 · KIT315" },
-    { name: "C",                       branch: "Programming", level: 4, evidence: "KIT205 · KIT107" },
-    { name: "Bash / Shell",            branch: "Programming", level: 4, evidence: "KIT213" },
-    { name: "Git & GitHub",            branch: "Programming", level: 4, evidence: "Projects" },
-    { name: "Java",                    branch: "Programming", level: 3, evidence: "KIT101" },
-    { name: "C# / Unity",              branch: "Programming", level: 3, evidence: "KIT208 · KIT307" },
-    { name: "pytest",                  branch: "Programming", level: 3, evidence: "Projects" },
-    { name: "Docker",                  branch: "Programming", level: 2, evidence: "Self-taught" },
+    { name: "Python", branch: "Programming", level: 5, evidence: "KIT101 · KIT315" },
+    { name: "C", branch: "Programming", level: 4, evidence: "KIT205 · KIT107" },
+    { name: "Bash / Shell", branch: "Programming", level: 4, evidence: "KIT213" },
+    { name: "Git & GitHub", branch: "Programming", level: 4, evidence: "Projects" },
+    { name: "Java", branch: "Programming", level: 3, evidence: "KIT101" },
+    { name: "C# / Unity", branch: "Programming", level: 3, evidence: "KIT208 · KIT307" },
+    { name: "pytest", branch: "Programming", level: 3, evidence: "Projects" },
+    { name: "Docker", branch: "Programming", level: 2, evidence: "Self-taught" },
 
-    { name: "REST APIs",               branch: "Web & APIs", level: 4, evidence: "KIT214 · KIT304" },
-    { name: "HTTP & JSON",             branch: "Web & APIs", level: 4, evidence: "KIT214" },
-    { name: "Node.js & Express",       branch: "Web & APIs", level: 4, evidence: "KIT214" },
-    { name: "FastAPI",                 branch: "Web & APIs", level: 4, evidence: "Projects" },
-    { name: "Authentication",          branch: "Web & APIs", level: 4, evidence: "KIT214" },
-    { name: "PHP & MySQL",             branch: "Web & APIs", level: 3, evidence: "KIT202" },
-    { name: "Input Validation",        branch: "Web & APIs", level: 3, evidence: "KIT214" },
-    { name: "Web Scraping",            branch: "Web & APIs", level: 3, evidence: "KIT214" },
-    { name: "Firebase",                branch: "Web & APIs", level: 2, evidence: "KIT305" },
+    { name: "REST APIs", branch: "Web & APIs", level: 4, evidence: "KIT214 · KIT304" },
+    { name: "HTTP & JSON", branch: "Web & APIs", level: 4, evidence: "KIT214" },
+    { name: "Node.js & Express", branch: "Web & APIs", level: 4, evidence: "KIT214" },
+    { name: "FastAPI", branch: "Web & APIs", level: 4, evidence: "Projects" },
+    { name: "Authentication", branch: "Web & APIs", level: 4, evidence: "KIT214", aka: ["Sessions"] },
+    { name: "PHP & MySQL", branch: "Web & APIs", level: 3, evidence: "KIT202" },
+    { name: "Input Validation", branch: "Web & APIs", level: 3, evidence: "KIT214" },
+    { name: "Web Scraping", branch: "Web & APIs", level: 3, evidence: "KIT214", aka: ["Cheerio"] },
+    { name: "Firebase", branch: "Web & APIs", level: 2, evidence: "KIT305" },
 
-    { name: "Network Security",        branch: "Cyber Security", level: 4, evidence: "KIT111 · KIT215" },
-    { name: "API Security",            branch: "Cyber Security", level: 4, evidence: "KIT304" },
-    { name: "OWASP API Top 10",        branch: "Cyber Security", level: 3, evidence: "KIT304 research" },
-    { name: "Threat Modelling",        branch: "Cyber Security", level: 3, evidence: "KIT304 research" },
-    { name: "Cryptography",            branch: "Cyber Security", level: 3, evidence: "KIT103 · KIT214" },
-    { name: "TLS & Certificates",      branch: "Cyber Security", level: 3, evidence: "KIT214" },
-    { name: "Digital Forensics",       branch: "Cyber Security", level: 3, evidence: "KIT325" },
-    { name: "Incident Response",       branch: "Cyber Security", level: 3, evidence: "KIT325" },
-    { name: "MITM Analysis",           branch: "Cyber Security", level: 3, evidence: "KIT325" },
-    { name: "Ethical Hacking",         branch: "Cyber Security", level: 3, evidence: "KIT215" },
-    { name: "Cloud Security",          branch: "Cyber Security", level: 0, evidence: "Next unlock" },
+    { name: "Network Security", branch: "Cyber Security", level: 4, evidence: "KIT111 · KIT215" },
+    { name: "API Security", branch: "Cyber Security", level: 4, evidence: "KIT304", aka: ["OWASP"] },
+    { name: "OWASP API Top 10", branch: "Cyber Security", level: 3, evidence: "KIT304 research" },
+    { name: "Threat Modelling", branch: "Cyber Security", level: 3, evidence: "KIT304 research", aka: ["Threat Analysis"] },
+    { name: "Cryptography", branch: "Cyber Security", level: 3, evidence: "KIT103 · KIT214" },
+    { name: "TLS & Certificates", branch: "Cyber Security", level: 3, evidence: "KIT214" },
+    { name: "Digital Forensics", branch: "Cyber Security", level: 3, evidence: "KIT325", aka: ["Forensics"] },
+    { name: "Incident Response", branch: "Cyber Security", level: 3, evidence: "KIT325" },
+    { name: "MITM Analysis", branch: "Cyber Security", level: 3, evidence: "KIT325", aka: ["MITM"] },
+    { name: "Ethical Hacking", branch: "Cyber Security", level: 3, evidence: "KIT215" },
+    { name: "Cloud Security", branch: "Cyber Security", level: 0, evidence: "Next to learn" },
 
-    { name: "TCP/IP",                  branch: "Networking", level: 4, evidence: "KIT111 · KIT213" },
-    { name: "Subnetting & VLSM",       branch: "Networking", level: 4, evidence: "CCNA" },
+    { name: "TCP/IP", branch: "Networking", level: 4, evidence: "KIT111 · KIT213" },
+    { name: "Subnetting & VLSM", branch: "Networking", level: 4, evidence: "CCNA" },
     { name: "LAN / WAN Configuration", branch: "Networking", level: 3, evidence: "KIT111" },
-    { name: "Routing & Switching",     branch: "Networking", level: 3, evidence: "CCNA" },
-    { name: "Cisco IOS",               branch: "Networking", level: 2, evidence: "CCNA" },
-    { name: "OSPF",                    branch: "Networking", level: 0, evidence: "Next unlock" },
+    { name: "Routing & Switching", branch: "Networking", level: 3, evidence: "CCNA" },
+    { name: "Cisco IOS", branch: "Networking", level: 2, evidence: "CCNA" },
+    { name: "OSPF", branch: "Networking", level: 0, evidence: "Next to learn" },
 
-    { name: "Linux",                   branch: "Systems & Servers", level: 4, evidence: "KIT213" },
+    { name: "Linux", branch: "Systems & Servers", level: 4, evidence: "KIT213" },
     { name: "Operating System Internals", branch: "Systems & Servers", level: 4, evidence: "KIT213" },
-    { name: "Server Administration",   branch: "Systems & Servers", level: 3, evidence: "KIT304" },
-    { name: "Server Hardening",        branch: "Systems & Servers", level: 3, evidence: "KIT304" },
-    { name: "Cloud Computing",         branch: "Systems & Servers", level: 3, evidence: "KIT318" },
-    { name: "Kubernetes",              branch: "Systems & Servers", level: 0, evidence: "Next unlock" },
+    { name: "Server Administration", branch: "Systems & Servers", level: 3, evidence: "KIT304" },
+    { name: "Server Hardening", branch: "Systems & Servers", level: 3, evidence: "KIT304", aka: ["Helmet"] },
+    { name: "Cloud Computing", branch: "Systems & Servers", level: 3, evidence: "KIT318" },
+    { name: "Kubernetes", branch: "Systems & Servers", level: 0, evidence: "Next to learn" },
 
-    { name: "scikit-learn",            branch: "AI & Machine Learning", level: 4, evidence: "KIT315" },
-    { name: "TensorFlow & Keras",      branch: "AI & Machine Learning", level: 4, evidence: "KIT315" },
-    { name: "CNNs & LSTMs",            branch: "AI & Machine Learning", level: 4, evidence: "KIT315" },
-    { name: "PyTorch",                 branch: "AI & Machine Learning", level: 3, evidence: "KIT315" },
-    { name: "Natural Language Processing", branch: "AI & Machine Learning", level: 3, evidence: "KIT315" },
-    { name: "GANs & Autoencoders",     branch: "AI & Machine Learning", level: 3, evidence: "KIT315" },
-    { name: "Reinforcement Learning",  branch: "AI & Machine Learning", level: 3, evidence: "KIT315" },
-    { name: "XGBoost",                 branch: "AI & Machine Learning", level: 2, evidence: "KIT315" },
-    { name: "OpenCV",                  branch: "AI & Machine Learning", level: 2, evidence: "KIT315" },
+    { name: "scikit-learn", branch: "AI & Machine Learning", level: 4, evidence: "KIT315" },
+    { name: "TensorFlow & Keras", branch: "AI & Machine Learning", level: 4, evidence: "KIT315" },
+    { name: "CNNs & LSTMs", branch: "AI & Machine Learning", level: 4, evidence: "KIT315" },
+    { name: "PyTorch", branch: "AI & Machine Learning", level: 3, evidence: "KIT315" },
+    { name: "Natural Language Processing", branch: "AI & Machine Learning", level: 3, evidence: "KIT315", aka: ["NLP"] },
+    { name: "GANs & Autoencoders", branch: "AI & Machine Learning", level: 3, evidence: "KIT315" },
+    { name: "Reinforcement Learning", branch: "AI & Machine Learning", level: 3, evidence: "KIT315" },
+    { name: "Local LLMs", branch: "AI & Machine Learning", level: 3, evidence: "Projects", aka: ["Ollama"] },
+    { name: "XGBoost", branch: "AI & Machine Learning", level: 2, evidence: "KIT315" },
+    { name: "OpenCV", branch: "AI & Machine Learning", level: 2, evidence: "KIT315" },
 
-    { name: "SQL",                     branch: "Data Engineering", level: 4, evidence: "KIT102 · KIT214" },
-    { name: "Pandas",                  branch: "Data Engineering", level: 4, evidence: "KIT102 · KIT318" },
-    { name: "PySpark",                 branch: "Data Engineering", level: 3, evidence: "KIT318" },
-    { name: "Hadoop & MapReduce",      branch: "Data Engineering", level: 3, evidence: "KIT318" },
-    { name: "Spark MLlib",             branch: "Data Engineering", level: 3, evidence: "KIT318" },
-    { name: "Statistics",              branch: "Data Engineering", level: 3, evidence: "KMA153" },
-    { name: "Data Visualisation",      branch: "Data Engineering", level: 3, evidence: "KIT102 · KIT315" },
-    { name: "Kafka",                   branch: "Data Engineering", level: 0, evidence: "Next unlock" },
+    { name: "SQL", branch: "Data Engineering", level: 4, evidence: "KIT102 · KIT214", aka: ["MySQL", "SQLite"] },
+    { name: "Pandas", branch: "Data Engineering", level: 4, evidence: "KIT102 · KIT318" },
+    { name: "PySpark", branch: "Data Engineering", level: 3, evidence: "KIT318" },
+    { name: "Hadoop & MapReduce", branch: "Data Engineering", level: 3, evidence: "KIT318" },
+    { name: "Spark MLlib", branch: "Data Engineering", level: 3, evidence: "KIT318" },
+    { name: "Statistics", branch: "Data Engineering", level: 3, evidence: "KMA153" },
+    { name: "Data Visualisation", branch: "Data Engineering", level: 3, evidence: "KIT102 · KIT315" },
+    { name: "Kafka", branch: "Data Engineering", level: 0, evidence: "Next to learn" },
 
-    { name: "Technical Writing",       branch: "Practice & Process", level: 4, evidence: "KIT105" },
-    { name: "Agile & Scrum",           branch: "Practice & Process", level: 4, evidence: "KIT203 · KIT219" },
-    { name: "Research & Analysis",     branch: "Practice & Process", level: 4, evidence: "KIT304 research" },
-    { name: "UML Modelling",           branch: "Practice & Process", level: 3, evidence: "KIT219" },
-    { name: "UX Evaluation",           branch: "Practice & Process", level: 3, evidence: "KIT219" },
-    { name: "PRINCE2",                 branch: "Practice & Process", level: 3, evidence: "KIT203" },
-    { name: "SFIA Framework",          branch: "Practice & Process", level: 3, evidence: "KIT105" }
+    { name: "Technical Writing", branch: "Practice & Process", level: 4, evidence: "KIT105 · KIT300" },
+    { name: "Agile & Scrum", branch: "Practice & Process", level: 4, evidence: "KIT203 · KIT300" },
+    { name: "Research & Analysis", branch: "Practice & Process", level: 4, evidence: "KIT304 research", aka: ["Research"] },
+    { name: "UML Modelling", branch: "Practice & Process", level: 3, evidence: "KIT219" },
+    { name: "UX Evaluation", branch: "Practice & Process", level: 3, evidence: "KIT219" },
+    { name: "PRINCE2", branch: "Practice & Process", level: 3, evidence: "KIT203" },
+    { name: "SFIA Framework", branch: "Practice & Process", level: 3, evidence: "KIT105" }
   ],
 
   /* ---------- Projects ----------
-     Ordered by importance; the first few are what the CV shows.
-     code:   "published" once the repository is public and `repo` is set,
-             "private" while it still lives on disk, "writeup" for work
-             whose output is a document rather than a program.
-     repo:   full URL. Leave empty until the repository actually exists —
-             the card renders a "code coming" note instead of a dead link.
-     TO DO:  as each repository goes up on GitHub, set code to "published"
-             and paste the URL into `repo`. Nothing else needs changing.  */
-  artifacts: [
+     Ordered by importance. `featured` ones get the large treatment and
+     the first five go on the CV. `story` = the case study, as pairs of
+     [label, text]. code: "public" (needs `repo`), "private", "writeup".
+     The capstone is under an NDA: describe the role and the outcome,
+     never the client's design.                                       */
+  projects: [
     {
-      name: "API Exposure Auditor",
-      cat: "Security",
-      type: "Cyber Security Tool",
-      year: "2026",
-      team: "Solo",
-      blurb: "Audits REST API endpoints for information disclosure (exposed OpenAPI and Swagger documentation, permissive CORS policies, missing security headers) and emits structured JSON reports for triage.",
-      highlights: [
-        "Built on my own research into what publicly exposed API specifications leak",
-        "Findings framed against the OWASP API Security Top 10 and MITRE CWE-200",
-        "Machine-readable output, so results can feed a pipeline rather than a person"
+      id: "api-exposure-auditor", featured: true,
+      name: "API Exposure Auditor", cat: "Security", type: "Security tool",
+      year: "2026", team: "Solo",
+      blurb: "Checks an API for the mistakes that tell an attacker how it works before they send a single request: public Swagger and OpenAPI documentation, permissive CORS, missing security headers, chatty errors.",
+      story: [
+        ["Problem", "Published API documentation and loose server settings hand an attacker a map. Most teams never check what their own API gives away."],
+        ["Approach", "Read thirteen sources first, mapped the risks to the OWASP API Security Top 10 and CWE-200, then wrote one check per risk."],
+        ["Result", "Run against OWASP Juice Shop, a deliberately vulnerable test app, it reported 12 findings: 6 medium, 6 low, each with evidence. Output is a JSON report a pipeline can read."]
       ],
-      stats: ["Python", "REST APIs", "OpenAPI", "OWASP"],
-      code: "published",
-      repo: "https://github.com/MISAN0/api-exposure-auditor"
+      image: { src: "/img/auditor-scan.webp", w: 800, h: 1063, alt: "Terminal output of a scan against OWASP Juice Shop: exposed Swagger and OpenAPI endpoints, open health and metrics endpoints, missing security headers and a permissive CORS policy, ending with 0 high, 6 medium and 6 low findings." },
+      stack: ["Python", "REST APIs", "OpenAPI", "OWASP"],
+      code: "public", repo: "https://github.com/MISAN0/api-exposure-auditor"
     },
     {
-      name: "OpenAPI Exposure Research",
-      cat: "Security",
-      type: "Security Research",
-      year: "2026",
-      team: "Solo",
-      blurb: "A structured investigation into the information disclosure risk created by publicly exposed Swagger and OpenAPI endpoints in production APIs, and what actually reduces it.",
+      id: "industry-capstone", featured: true,
+      name: "Agent trust demo", cat: "Software", type: "Industry capstone · under NDA",
+      year: "2026", team: "Team of six · documentation lead",
+      blurb: "A working demo for an industry client in AI agent trust, built over a semester with a real client, real deadlines and a public showcase at the end.",
+      story: [
+        ["Brief", "The client wanted a demo that worked, and the documents that let someone else run it and build on it."],
+        ["My part", "Led the documentation: requirements, sprint reports, the user manual, the reference manual, and the poster and leaflet for the public showcase."],
+        ["Result", "Delivered in October 2026. The final release shipped with 564 automated tests passing. The code stays private under the NDA."]
+      ],
+      stack: ["Python", "FastAPI", "pytest", "Agile & Scrum", "Technical Writing"],
+      code: "private"
+    },
+    {
+      id: "nous", featured: true,
+      name: "NOUS", cat: "AI & Data", type: "Personal AI switchboard",
+      year: "2026", team: "Solo",
+      blurb: "A small local model reads each prompt and decides where it goes: Claude, Codex, or a local Llama model for the easy questions. The answer streams back into one dashboard.",
+      highlights: [
+        "Routing done by a 4-billion-parameter model running locally, so the decision costs nothing",
+        "Server on Hono with SQLite storage; front end in React and Vite",
+        "Grew a WhatsApp assistant on a spare SIM that answers through the same router"
+      ],
+      stack: ["Node.js", "Hono", "SQLite", "React", "Ollama"],
+      code: "private"
+    },
+    {
+      id: "openapi-research", name: "OpenAPI Exposure Research", cat: "Security", type: "Security research",
+      year: "2026", team: "Solo",
+      blurb: "How publicly exposed Swagger and OpenAPI endpoints leak information in production APIs, and what actually reduces it.",
       highlights: [
         "Thirteen sources: ten peer-reviewed papers plus OWASP, MITRE CWE and the OpenAPI specification",
         "Traced how specification-driven fuzzers turn a published schema into an attack surface",
         "Produced the risk framing the API Exposure Auditor was then built against"
       ],
-      stats: ["Research", "OWASP API Top 10", "CWE-200", "Threat Analysis"],
-      code: "writeup",
-      repo: ""
+      stack: ["Research", "OWASP API Top 10", "CWE-200", "Threat Analysis"],
+      code: "writeup"
     },
     {
-      name: "Hardened Node.js API Server",
-      cat: "Web & APIs",
-      type: "Backend",
-      year: "2025",
-      team: "Solo",
-      blurb: "An Express API served over HTTPS using its own TLS certificates, hardened with Helmet security headers, an explicit CORS policy, and request logging.",
+      id: "hardened-node-api", name: "Hardened Node.js API Server", cat: "Web & APIs", type: "Backend",
+      year: "2025", team: "Solo",
+      blurb: "An Express API served over HTTPS with its own TLS certificates, hardened with Helmet security headers, an explicit CORS policy and request logging.",
       highlights: [
         "TLS terminated by the application itself rather than assumed from a proxy",
         "Secure defaults applied deliberately: headers, origin policy, audit logging",
         "Paired with a Cheerio scraper that normalises fetched pages into JSON"
       ],
-      stats: ["Node.js", "Express", "Helmet", "TLS", "Cheerio"],
-      code: "private",
-      repo: ""
+      stack: ["Node.js", "Express", "Helmet", "TLS", "Cheerio"],
+      code: "private"
     },
     {
-      name: "Spam Detection Classifier",
-      cat: "AI & Data",
-      type: "Machine Learning",
-      year: "2025",
-      team: "Solo",
-      blurb: "A text classifier trained on a deliberately imbalanced spam dataset, evaluated on the metrics that survive class imbalance rather than on raw accuracy.",
+      id: "spam-classifier", name: "Spam Detection Classifier", cat: "AI & Data", type: "Machine learning",
+      year: "2025", team: "Solo",
+      blurb: "A text classifier trained on a deliberately imbalanced spam dataset, judged on the metrics that survive class imbalance rather than on raw accuracy.",
       highlights: [
-        "Class weighting applied so the minority class is not simply ignored",
+        "Class weighting so the minority class is not simply ignored",
         "Assessed on ROC and precision-recall curves with confusion matrices",
         "Seeds fixed throughout, so a rerun reproduces the reported numbers"
       ],
-      stats: ["TensorFlow", "Keras", "NLP", "scikit-learn"],
-      code: "private",
-      repo: ""
+      stack: ["TensorFlow", "Keras", "NLP", "scikit-learn"],
+      code: "private"
     },
     {
-      name: "Distributed Data Pipelines",
-      cat: "AI & Data",
-      type: "Data Engineering",
-      year: "2026",
-      team: "Solo",
-      blurb: "PySpark pipelines over multi-table flight and weather data, taking the same analysis from a single machine to a distributed engine.",
+      id: "data-pipelines", name: "Distributed Data Pipelines", cat: "AI & Data", type: "Data engineering",
+      year: "2026", team: "Solo",
+      blurb: "PySpark pipelines over multi-table flight and weather data, taking the same analysis from one machine to a distributed engine.",
       highlights: [
         "SparkSession and cluster configuration tuned for the workload",
         "VectorAssembler feature pipelines feeding Spark MLlib classifiers",
         "MapReduce fundamentals implemented directly, not just called"
       ],
-      stats: ["PySpark", "Hadoop", "MapReduce", "Spark MLlib"],
-      code: "private",
-      repo: ""
+      stack: ["PySpark", "Hadoop", "MapReduce", "Spark MLlib"],
+      code: "private"
     },
     {
-      name: "Full-Stack Web Application",
-      cat: "Web & APIs",
-      type: "Web Application",
-      year: "2024",
-      team: "Solo",
-      blurb: "A database-backed PHP application with user registration and login, session handling, content creation, search, and an archive: around a thousand lines, built without a framework.",
+      id: "php-web-app", name: "Full-Stack Web Application", cat: "Web & APIs", type: "Web application",
+      year: "2024", team: "Solo",
+      blurb: "A database-backed PHP application with registration and login, sessions, content creation, search and an archive: about a thousand lines, no framework.",
       highlights: [
-        "Registration and authentication with server-side validation on every route",
+        "Server-side validation on every route",
         "MySQL schema behind the create, search, archive and post views",
         "Shared header and footer components rather than copied markup"
       ],
-      stats: ["PHP", "MySQL", "JavaScript", "Sessions"],
-      code: "private",
-      repo: ""
+      stack: ["PHP", "MySQL", "JavaScript", "Sessions"],
+      code: "private"
     },
     {
-      name: "Graph Pathfinding Engine",
-      cat: "Software",
-      type: "Algorithms",
-      year: "2025",
-      team: "Solo",
+      id: "graph-pathfinding", name: "Graph Pathfinding Engine", cat: "Software", type: "Algorithms",
+      year: "2025", team: "Solo",
       blurb: "Dijkstra and A-star written from scratch in C over a custom graph structure, with a heuristic function and explicit closed-set tracking.",
       highlights: [
         "No library containers: the graph, queue and sets are all hand-built",
-        "Two search strategies over one structure, so their behaviour is directly comparable",
+        "Two search strategies over one structure, so their behaviour compares directly",
         "Built alongside binary search trees, hash tables and priority queues"
       ],
-      stats: ["C", "Dijkstra", "A-star", "Data Structures"],
-      code: "private",
-      repo: ""
+      stack: ["C", "Dijkstra", "A-star", "Data Structures"],
+      code: "private"
     },
     {
-      name: "Steganography & Cipher Tool",
-      cat: "Security",
-      type: "Cryptography",
-      year: "2023",
-      team: "Solo",
-      blurb: "Hides a message inside a carrier by encoding characters to binary and applying a multiplicative cipher over modular arithmetic, with a matching decoder.",
-      highlights: [
-        "Encryption and extraction implemented as exact inverses of one another",
-        "Modular arithmetic chosen so each key maps reversibly across the symbol set",
-        "Written test cases drive the implementation rather than following it"
-      ],
-      stats: ["Python", "Cryptography", "Modular Arithmetic"],
-      code: "private",
-      repo: ""
-    },
-    {
-      name: "UNIX Records Manager",
-      cat: "Systems",
-      type: "Systems",
-      year: "2024",
-      team: "Solo",
-      blurb: "A POSIX shell toolset for employee record management: menu-driven search, add and delete, with log rotation and a user access-deny list.",
-      highlights: [
-        "Portable POSIX shell rather than bash-only syntax",
-        "Access control enforced through a deny list at the entry point",
-        "Log management handled by the tool instead of left to grow"
-      ],
-      stats: ["Shell", "POSIX", "Linux", "Access Control"],
-      code: "private",
-      repo: ""
-    },
-    {
-      name: "Game AI & Pathfinding",
-      cat: "Software",
-      type: "Game Development",
-      year: "2024",
-      team: "Solo",
-      blurb: "A Unity game with hand-written agent AI: A-star navigation across a generated node graph, seek and wander steering behaviours, and path-following agents.",
-      highlights: [
-        "Node graph generated from the level rather than placed by hand",
-        "Steering behaviours composed instead of scripted per enemy",
-        "Shipped with a playable build and a development log"
-      ],
-      stats: ["C#", "Unity", "A-star", "Steering AI"],
-      code: "private",
-      repo: ""
-    },
-    {
-      name: "Incident Response & Threat Analysis",
-      cat: "Security",
-      type: "Security Analysis",
-      year: "2025",
-      team: "Team",
-      blurb: "Breakdowns of real intrusions, NotPetya and the Sony Pictures compromise, traced from initial access through to impact, with a response plan built on the Australian Cyber Security Centre template.",
+      id: "incident-response", name: "Incident Response & Threat Analysis", cat: "Security", type: "Security analysis",
+      year: "2025", team: "Team",
+      blurb: "NotPetya and the Sony Pictures compromise traced from initial access to impact, with a response plan built on the Australian Cyber Security Centre template.",
       highlights: [
         "Attack paths reconstructed from public incident reporting",
         "Man-in-the-middle attack analysis with practical defences",
         "Response plan mapped to a recognised national framework"
       ],
-      stats: ["Incident Response", "MITM", "ACSC", "Forensics"],
-      code: "writeup",
-      repo: ""
+      stack: ["Incident Response", "MITM", "ACSC", "Forensics"],
+      code: "writeup"
+    },
+    {
+      id: "unix-records", name: "UNIX Records Manager", cat: "Systems", type: "Systems",
+      year: "2024", team: "Solo",
+      blurb: "A POSIX shell toolset for employee records: menu-driven search, add and delete, with log rotation and a user access-deny list.",
+      highlights: [
+        "Portable POSIX shell rather than bash-only syntax",
+        "Access control enforced through a deny list at the entry point",
+        "Log management handled by the tool instead of left to grow"
+      ],
+      stack: ["Shell", "POSIX", "Linux", "Access Control"],
+      code: "private"
+    },
+    {
+      id: "game-ai", name: "Game AI & Pathfinding", cat: "Software", type: "Game development",
+      year: "2024", team: "Solo",
+      blurb: "A Unity game with hand-written agent AI: A-star navigation across a generated node graph, seek and wander steering, and path-following agents.",
+      highlights: [
+        "Node graph generated from the level rather than placed by hand",
+        "Steering behaviours composed instead of scripted per enemy",
+        "Shipped with a playable build and a development log"
+      ],
+      stack: ["C#", "Unity", "A-star", "Steering AI"],
+      code: "private"
+    },
+    {
+      id: "stego-cipher", name: "Steganography & Cipher Tool", cat: "Security", type: "Cryptography",
+      year: "2023", team: "Solo",
+      blurb: "Hides a message inside a carrier by encoding characters to binary and applying a multiplicative cipher over modular arithmetic, with a matching decoder.",
+      highlights: [
+        "Encryption and extraction written as exact inverses of one another",
+        "Keys chosen so each one maps reversibly across the symbol set",
+        "Test cases written first, driving the implementation"
+      ],
+      stack: ["Python", "Cryptography", "Modular Arithmetic"],
+      code: "private"
     }
   ],
 
-  /* ---------- Codex: every unit, straight off the faculty record ----------
-     mark  = the actual mark, and the mark IS the XP for that unit.
-     grade = HD / DN / CR / PP, or IP for currently enrolled. The grade
-             scale is spelled out in `gradeScale` below, because these
-             codes mean nothing outside Australia.
-     pts   = credit points (KIT300 is a 25pt double unit).
-     theme = groups the unit with the matching skill-tree branch.          */
-  codex: [
-    { code: "KIT101", name: "Programming Fundamentals",             grade: "CR", mark: 60, year: 2023, sem: 1, pts: 12.5, theme: "Programming" },
-    { code: "KIT105", name: "ICT Professional Practices",           grade: "HD", mark: 83, year: 2023, sem: 1, pts: 12.5, theme: "Professional" },
-    { code: "KIT111", name: "Data Networks & Security",             grade: "DN", mark: 76, year: 2023, sem: 1, pts: 12.5, theme: "Networking" },
-    { code: "KIT118", name: "Cybersecurity Policies & Practices",   grade: "HD", mark: 80, year: 2023, sem: 1, pts: 12.5, theme: "Cyber Security" },
-    { code: "KIT102", name: "Introduction to Data Science",         grade: "HD", mark: 85, year: 2023, sem: 2, pts: 12.5, theme: "Data & AI" },
-    { code: "KIT103", name: "Computational Science",                grade: "PP", mark: 57, year: 2023, sem: 2, pts: 12.5, theme: "Programming" },
-    { code: "KIT107", name: "Programming",                          grade: "PP", mark: 55, year: 2023, sem: 2, pts: 12.5, theme: "Programming" },
-    { code: "KMA153", name: "Data Handling & Statistics 1",         grade: "DN", mark: 75, year: 2023, sem: 2, pts: 12.5, theme: "Data & AI" },
+  /* ---------- Units ----------
+     Names for the codes the skills cite, plus credit points so the
+     education line is computed. No marks or grades: academic results
+     are deliberately not published, and that includes this file,
+     which anyone can read.                                           */
+  units: [
+    ["KIT101", "Programming Fundamentals", 12.5], ["KIT105", "ICT Professional Practices", 12.5],
+    ["KIT111", "Data Networks & Security", 12.5], ["KIT118", "Cybersecurity Policies & Practices", 12.5],
+    ["KIT102", "Introduction to Data Science", 12.5], ["KIT103", "Computational Science", 12.5],
+    ["KIT107", "Programming", 12.5], ["KMA153", "Data Handling & Statistics 1", 12.5],
+    ["KIT202", "Web Programming Fundamentals", 12.5], ["KIT203", "ICT Project Management & Modelling", 12.5],
+    ["KIT208", "Virtual & Mixed Reality Technology", 12.5], ["KIT213", "Operating Systems", 12.5],
+    ["KIT215", "Cybersecurity & Ethical Hacking", 12.5], ["KIT219", "Development Methodologies & UX", 12.5],
+    ["KIT205", "Data Structures & Algorithms", 12.5], ["KIT305", "Mobile Application Development", 12.5],
+    ["KIT214", "Intelligent & Secure Web Development", 12.5], ["KIT315", "Machine Learning & Applications", 12.5],
+    ["KIT325", "Advanced Cybersecurity & eForensics", 12.5], ["KIT304", "Server Administration & Security Assurance", 12.5],
+    ["KIT318", "Big Data & Cloud Computing", 12.5], ["KIT300", "ICT Project (industry capstone)", 25],
+    ["KIT307", "Computer Graphics & Animation", 12.5]
+  ].map(([code, name, pts]) => ({ code, name, pts, done: true })),
 
-    { code: "KIT202", name: "Web Programming Fundamentals",         grade: "DN", mark: 72, year: 2024, sem: 1, pts: 12.5, theme: "Web" },
-    { code: "KIT203", name: "ICT Project Management & Modelling",   grade: "DN", mark: 72, year: 2024, sem: 1, pts: 12.5, theme: "Professional" },
-    { code: "KIT208", name: "Virtual & Mixed Reality Technology",   grade: "DN", mark: 71, year: 2024, sem: 2, pts: 12.5, theme: "Programming" },
-    { code: "KIT213", name: "Operating Systems",                    grade: "HD", mark: 91, year: 2024, sem: 2, pts: 12.5, theme: "Systems" },
-    { code: "KIT215", name: "Cybersecurity & Ethical Hacking",      grade: "CR", mark: 66, year: 2024, sem: 2, pts: 12.5, theme: "Cyber Security" },
-    { code: "KIT219", name: "Development Methodologies & UX",       grade: "CR", mark: 64, year: 2024, sem: 2, pts: 12.5, theme: "Professional" },
-
-    { code: "KIT205", name: "Data Structures & Algorithms",         grade: "PP", mark: 56, year: 2025, sem: 1, pts: 12.5, theme: "Programming" },
-    { code: "KIT305", name: "Mobile Application Development",       grade: "CR", mark: 62, year: 2025, sem: 1, pts: 12.5, theme: "Programming" },
-    { code: "KIT214", name: "Intelligent & Secure Web Development", grade: "HD", mark: 80, year: 2025, sem: 2, pts: 12.5, theme: "Web" },
-    { code: "KIT315", name: "Machine Learning & Applications",      grade: "DN", mark: 72, year: 2025, sem: 2, pts: 12.5, theme: "Data & AI" },
-    { code: "KIT325", name: "Advanced Cybersecurity & eForensics",  grade: "DN", mark: 79, year: 2025, sem: 2, pts: 12.5, theme: "Cyber Security" },
-
-    { code: "KIT304", name: "Server Administration & Security Assurance", grade: "DN", mark: 74, year: 2026, sem: 1, pts: 12.5, theme: "Systems" },
-    { code: "KIT318", name: "Big Data & Cloud Computing",           grade: "DN", mark: 73, year: 2026, sem: 1, pts: 12.5, theme: "Data & AI" },
-
-    { code: "KIT300", name: "ICT Project (Capstone)",               grade: "IP", year: 2026, sem: 2, pts: 25, theme: "Professional" },
-    { code: "KIT307", name: "Computer Graphics & Animation",        grade: "IP", year: 2026, sem: 2, pts: 12.5, theme: "Programming" }
-  ],
-
-  /* ---------- Academic record: shown as HUD chips ---------- */
-  academic: {
-    // Kept for reference only — deliberately not rendered anywhere on
-    // the site. Academic results are not published.
-    gpa: 5.04,
-    gpaScale: 7,
-    coursePoints: 300,      // total credit points in the degree
-    gpaDate: "24 Jun 2026",
-    graduating: "Dec 2026",
-    degreeName: "Bachelor of ICT"
+  education: {
+    degree: "Bachelor of Information and Communication Technology",
+    school: "University of Tasmania",
+    majors: "Computer Science and Cyber Security",
+    period: "2023 – 2026",
+    coursePoints: 300,
+    completed: "October 2026",
+    graduating: "December 2026",
+    lines: [
+      "Double major: Computer Science and Cyber Security",
+      "Industry capstone with a real client, under an NDA, as documentation lead"
+    ]
   },
 
-  /* ---------- Grade scale ----------
-     Australian grade codes are meaningless to a reader outside the
-     system, so the site prints the name and the mark range.            */
-  gradeScale: [
-    { code: "HD", name: "High Distinction", range: "80–100" },
-    { code: "DN", name: "Distinction",      range: "70–79"  },
-    { code: "CR", name: "Credit",           range: "60–69"  },
-    { code: "PP", name: "Pass",             range: "50–59"  },
-    { code: "IP", name: "In progress",      range: "enrolled now" }
-  ],
-
-  /* ---------- Campaign log: work and study ----------
-     current: true keeps a "Now" marker on the entry.
-     Keep `lines` to three at most — this is a summary, not a duty
-     statement.                                                        */
-  campaign: [
+  /* ---------- Work ----------
+     Facts from the master CV (portfolio_private/master/resume.md).
+     The TasPorts posting is continuous; only the employer changed.  */
+  work: [
     {
-      title: "Bachelor of Information and Communication Technology",
-      org: "University of Tasmania · Hobart",
-      period: "2023 – Dec 2026",
-      kind: "edu",
-      current: true,
+      role: "Security Officer", org: "Kevlar Security Solutions", period: "Dec 2024 – Present", current: true,
       lines: [
-        "Double major: Computer Science and Cyber Security",
-        "Coursework across cyber security, networking, systems, software and data",
-        "262.5 of 300 credit points completed"
-      ],
-      tags: ["Cyber Security", "Computer Science"]
+        "Retail security, asset protection, events and crowd control across several client sites",
+        "Access control on TasPorts, a regulated maritime site, under an MSIC clearance",
+        "Incident reports and escalation to management or emergency services"
+      ]
     },
     {
-      title: "Security Officer",
-      org: "Kevlar Security Services · Hobart",
-      period: "2023 – Present",
-      kind: "work",
-      current: true,
+      role: "Security Officer", org: "MA Services Group", period: "Dec 2023 – Dec 2025",
       lines: [
-        "Crowd control at sporting events, concerts, music festivals, clubs and pubs",
-        "Static guarding and access control across maritime, construction, mall and office sites",
-        "Venue control for local festivals"
-      ],
-      tags: ["Crowd Control", "Access Control", "Static Guarding", "Maritime"]
+        "First security role, across a range of sites",
+        "Posted to TasPorts from Nov 2024; retained on site when the contract moved to Kevlar"
+      ]
     },
     {
-      title: "Security Officer",
-      org: "MA Security · Hobart",
-      period: "Dec 2023 – Dec 2025",
-      kind: "work",
+      role: "Retail Team Member", org: "Coles Supermarket", period: "Oct 2023 – Present", current: true,
       lines: [
-        "Maritime security at TasPorts, working to regulated port access controls",
-        "Retail security, asset protection and undercover loss prevention",
-        "Crowd control across licensed and public venues"
-      ],
-      tags: ["Maritime · TasPorts", "Asset Protection", "Undercover", "Retail"]
-    },
-    {
-      title: "Retail Team Member",
-      org: "Coles Supermarket · Hobart",
-      period: "Oct 2023 – Present",
-      kind: "work",
-      current: true,
-      lines: [
-        "Customer service and fast issue resolution in a high-volume store",
-        "Team operations, stock accuracy and floor organisation"
-      ],
-      tags: ["Customer Service", "Operations"]
+        "Customer service through peak trading in a high-volume store",
+        "Sorting the problem while the person is still standing there"
+      ]
     }
   ],
 
   /* ============================================================
-     CV MODE — the recruiter document.
-     A separate document, not a restyled version of the game page.
-     Everything here is written for a hiring audience: plain language,
-     quantified where possible, and ordered the way a recruiter reads.
+     CV: the recruiter document at /cv/. Plain language, ordered the
+     way a recruiter reads. Also the source for the PDF.
      ============================================================ */
   cv: {
-    // EDIT: drop a PDF in this folder and put its filename here. The
-    // download button appears only when this is set, so it can never
-    // link to a missing file.
-    file: "Mir-Salman-Nomaan-CV.pdf",
-    fileLabel: "PDF · 1 page",
+    file: "/Mir-Salman-Nomaan-CV.pdf",
+    headline: "Computer Science & Cyber Security · Graduating December 2026",
 
-    headline: "ICT Graduate · Cyber Security & Computer Science",
-
-    /* Short paragraphs, not one block — a recruiter gives this a few
-       seconds, and an eight-line slab is the shape people skip. A plain
-       string still renders correctly if you'd rather write it that way. */
+    // Hook first, never "I have…" or "Final-year student…".
     summary: [
-      "Final-year Information and Communication Technology student at the University of Tasmania, majoring in Computer Science and Cyber Security, graduating December 2026.",
-      "Builds and secures software end to end: REST APIs hardened with TLS and security headers, a Python tool that audits APIs for information disclosure, and machine learning models evaluated on imbalanced real-world data.",
-      "Alongside full-time study, three years of frontline security operations, including regulated maritime access control at TasPorts.",
-      "Looking for a graduate or entry-level ICT role in service desk, technical support, cyber security or networking."
+      "Most of what I can fix now, I broke myself first: Linux on my own machines, my own home network, and once an old Celeron desktop brought online through USB tethering off a 2G phone.",
+      "Graduating in December 2026 with every unit of a Bachelor of ICT from the University of Tasmania complete, majoring in Computer Science and Cyber Security.",
+      "Three years of security work alongside the degree, including access control on a regulated port under an MSIC clearance.",
+      "Available now, full time, for service desk, IT support, cyber security, networking, systems or data roles."
     ],
 
     // Accomplishments only. No grades, marks or academic results.
     highlights: [
-      "Delivered three years of frontline security operations while studying full time, with no break in enrolment",
-      "Built a Python security auditing tool from original research spanning 13 academic and industry sources",
-      "Developed a full-stack web application of roughly 1,000 lines without relying on a framework",
-      "Shipped production-style code in seven programming languages across 11 documented projects",
-      "Implemented Dijkstra and A-star pathfinding from first principles, with no external libraries",
-      "Trained and evaluated deep learning models, including convolutional, recurrent and generative networks"
+      "Led documentation for a six-person industry capstone under NDA, from requirements to the user and reference manuals",
+      "Built and published a Python tool that audits APIs for information disclosure, grounded in 13 academic and industry sources",
+      "Built a personal AI switchboard that routes each prompt to the right model through a small local one",
+      "Three years of security operations alongside full-time study, with no break in enrolment",
+      "Implemented Dijkstra and A-star from first principles in C, with no external libraries"
+    ],
+
+    certs: [
+      "CCNA 200-301: in study, exam targeted early 2027"
     ],
 
     softSkills: [
       "Communication under pressure", "Team collaboration", "Problem solving",
-      "Attention to detail", "Time management", "Customer service",
-      "Conflict de-escalation", "Technical documentation", "Adaptability"
+      "Attention to detail", "Customer service", "Conflict de-escalation",
+      "Technical documentation", "Adaptability"
     ],
 
     experience: [
       {
-        role: "Security Officer",
-        org: "Kevlar Security Services",
-        location: "Hobart, Tasmania",
-        period: "2023 – Present",
+        role: "Security Officer", org: "Kevlar Security Solutions", location: "Tasmania", period: "Dec 2024 – Present",
         bullets: [
-          "Manage crowd control at sporting events, concerts, festivals and licensed venues, maintaining public safety across large crowds",
-          "Enforce access control and static guarding across maritime, construction, retail and commercial office sites",
-          "Execute incident response and escalation procedures under pressure, documenting events for client reporting"
+          "Cover retail security, asset protection, events and crowd control across several client sites, each with its own procedures and reporting lines",
+          "Control access to restricted zones at TasPorts, a regulated maritime site, holding an MSIC clearance",
+          "Respond to incidents, write incident reports and escalate to management or emergency services"
         ]
       },
       {
-        role: "Security Officer",
-        org: "MA Security",
-        location: "Hobart, Tasmania",
-        period: "Dec 2023 – Dec 2025",
+        role: "Security Officer", org: "MA Services Group", location: "Tasmania", period: "Dec 2023 – Dec 2025",
         bullets: [
-          "Delivered maritime security at TasPorts, enforcing regulated access controls across critical port infrastructure",
-          "Conducted asset protection and undercover loss prevention, identifying and de-escalating theft incidents",
-          "Monitored surveillance systems and maintained accurate incident records for client review"
+          "First security role, covering a range of sites before a posting to TasPorts in Nov 2024",
+          "Retained on site when the TasPorts contract transferred to Kevlar in Dec 2025"
         ]
       },
       {
-        role: "Retail Team Member",
-        org: "Coles Supermarket",
-        location: "Hobart, Tasmania",
-        period: "Oct 2023 – Present",
+        role: "Retail Team Member", org: "Coles Supermarket", location: "Hobart, Tasmania", period: "Oct 2023 – Present",
         bullets: [
-          "Resolve customer issues in a high-volume retail environment while meeting service standards",
-          "Maintain stock accuracy and floor presentation as part of a rotating team"
+          "Customer service through peak trading in a high-volume store",
+          "Handle complaints and refusals without escalating them"
         ]
       }
     ],
 
-    // Coursework named without grades — relevance, not results.
     coursework: [
       "Intelligent and Secure Web Development", "Advanced Cyber Security and eForensics",
       "Cyber Security and Ethical Hacking", "Cyber Security Policies and Practices",
@@ -694,26 +473,22 @@ const DATA = {
       "Data Structures and Algorithms", "ICT Project Management and Modelling"
     ],
 
-    activities: [],
-
-    /* Referees are listed by name and role only. Their phone numbers and
-       email addresses are other people's personal information and are
-       deliberately not published on a public page — they go in the
-       application, on request. */
+    /* Names and roles only. Referees' phone numbers and emails are other
+       people's personal information and stay off a public page.       */
     references: [
       { name: "Dr James Montgomery", role: "Senior Lecturer in ICT", org: "University of Tasmania" },
       { name: "Azaz Gondal", role: "ICT Academic Staff & Cyber Security Analyst", org: "University of Tasmania · Intuit" },
       { name: "Samuel Horton", role: "ICT Academic Staff", org: "University of Tasmania" },
-      { name: "M Haneef", role: "Security Manager", org: "Kevlar Security Services" }
+      { name: "M Haneef", role: "Security Manager", org: "Kevlar Security Solutions" }
     ],
 
     keywords: [
       "Cyber Security", "Information Security", "Network Security", "Application Security",
       "Incident Response", "Risk Assessment", "Threat Analysis", "Vulnerability Assessment",
-      "Digital Forensics", "Penetration Testing", "Access Control", "OWASP", "TCP/IP",
-      "Routing and Switching", "Subnetting", "Cisco IOS", "Firewalls", "TLS", "Encryption",
-      "Linux", "Windows", "Server Administration", "System Hardening", "Help Desk",
-      "Cloud Computing", "Virtualisation", "Technical Support", "Service Desk", "Troubleshooting",
+      "Digital Forensics", "Access Control", "OWASP", "TCP/IP", "Routing and Switching",
+      "Subnetting", "Cisco IOS", "TLS", "Encryption", "Linux", "Windows",
+      "Server Administration", "System Hardening", "Help Desk", "Service Desk",
+      "Technical Support", "Troubleshooting", "Cloud Computing",
       "Python", "Java", "C", "C#", "JavaScript", "PHP", "Bash", "SQL", "Git",
       "REST APIs", "Node.js", "Express", "FastAPI", "MySQL", "Docker",
       "Machine Learning", "Deep Learning", "TensorFlow", "PyTorch", "Data Analysis",

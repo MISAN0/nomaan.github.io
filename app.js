@@ -1,807 +1,486 @@
 /* ============================================================
-   Renders the whole site from DATA (data.js).
-   No build step, no dependencies.
+   Renders the page from DATA (data.js). No framework, no build
+   beyond the prerender. Two halves on purpose:
+   - render*: pure data-to-DOM, run at build time under jsdom so the
+     page has a body without JavaScript
+   - wire*:   listeners, URL handling, tooltips; browser only
+   The recruiter document is rendered by cv.js.
    ============================================================ */
 
 const $ = sel => document.querySelector(sel);
-const el = (tag, cls, html) => {
-  const n = document.createElement(tag);
-  if (cls) n.className = cls;
-  if (html != null) n.innerHTML = html;
-  return n;
-};
 const esc = s => String(s).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+const slug = s => String(s).toLowerCase().replace(/&/g, 'and').replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
+const ext = href => /^https?:/.test(href) ? ' target="_blank" rel="noopener"' : '';
 
-/* ---------- Progress ----------
-   The only number computed here is degree progress, straight from the
-   credit points on the record. There used to be an XP total and a
-   level derived from it; both were invented, so both are gone. */
-function progressModel(data) {
-  const donePts = data.codex.filter(u => u.grade !== 'IP').reduce((s, u) => s + (u.pts ?? 0), 0);
-  const coursePts = data.academic.coursePoints;
-  const degreePct = Math.round((donePts / coursePts) * 1000) / 10;
-  return { donePts, coursePts, degreePct };
-}
+const LEVEL_WORD = ['Next to learn', 'Aware', 'Familiar', 'Working', 'Confident', 'Strong'];
+const pips = n => `<span class="pips" role="img" aria-label="${esc(LEVEL_WORD[n])}, ${n} of 5">${
+  Array.from({ length: 5 }, (_, k) => `<i class="${k < n ? 'on' : ''}"></i>`).join('')}</span>`;
 
-/* ---------- HUD + masthead ---------- */
-function renderSheet(data, xp) {
-  const p = data.player;
+/* Progress is computed from ticked checkpoints, never typed in. */
+const progress = steps => {
+  const done = steps.filter(s => s.done).length;
+  return { done, total: steps.length, pct: Math.round((done / steps.length) * 100) };
+};
 
-  $('#hudDegText').textContent = `Graduating ${data.academic.graduating} · ${xp.degreePct}%`;
-  /* --p is written to the element as well as the transform, so the
-     prerendered HTML can express the fill level without JavaScript
-     (see the noscript block in index.html). */
-  $('#hudDegFill').style.setProperty('--p', xp.degreePct / 100);
-  requestAnimationFrame(() => { $('#hudDegFill').style.transform = `scaleX(${xp.degreePct / 100})`; });
-
+/* ---------- Hero ---------- */
+function renderHero(data) {
+  const p = data.person;
   const img = $('#avatar');
   img.src = p.avatar;
-  img.alt = p.name;
-  img.addEventListener('error', () => img.closest('.portrait-frame').classList.add('no-photo'));
-
-  $('#playerStatus').textContent = p.status;
-  $('#playerClass').innerHTML = `${esc(p.class)} <span class="dim">/ ${esc(p.subclass)}</span>`;
-  $('#playerName').textContent = p.name;
-  $('#playerTagline').textContent = p.tagline;
-
-  const chips = [
-    ['University units passed', data.codex.filter(u => u.grade !== 'IP').length],
-    ['Graduating', data.academic.graduating],
-    ['Based in', p.location]
-  ];
-  $('#playerChips').innerHTML = chips
-    .map(([k, v], i) => `<li style="--i:${i}"><span>${esc(k)}</span><b>${esc(v)}</b></li>`)
-    .join('');
-
-  $('#degreeVal').textContent = xp.degreePct + '% complete';
-  $('#degreeNote').textContent =
-    `${xp.donePts} of ${xp.coursePts} credit points passed · ${data.academic.degreeName}, graduating ${data.academic.graduating}`;
-  $('#degreeFill').style.setProperty('--p', xp.degreePct / 100);
-  requestAnimationFrame(() => { $('#degreeFill').style.transform = `scaleX(${xp.degreePct / 100})`; });
-
-  $('#ghLink').href = p.links.github;
-  $('#liLink').href = p.links.linkedin;
-
-
-  /* Email renders only once it is set, so the card never shows an empty
-     row or a mailto: link that goes nowhere. */
-  const contacts = [
-    p.links.email ? {
-      label: 'Email', value: p.links.email, href: 'mailto:' + p.links.email
-    } : null,
-    { label: 'LinkedIn', value: p.links.linkedin.replace('https://', ''), href: p.links.linkedin },
-    { label: 'GitHub', value: p.links.github.replace('https://', ''), href: p.links.github }
-  ].filter(Boolean);
-
-  $('#contactLinks').innerHTML = contacts.map(c => `
-    <a class="contact-link" href="${esc(c.href)}"${c.href.startsWith('mailto:') ? '' : ' target="_blank" rel="noopener"'}>
-      <span>${esc(c.label)}</span><b>${esc(c.value)}</b>
-    </a>`).join('');
-
-  $('#contactFacts').innerHTML = [
-    ['Open to', p.status.replace(/^Open to /, '')],
-    ['Based in', p.location],
-    ['Graduating', data.academic.graduating]
-  ].map(([k, v]) => `<div class="fact"><span>${esc(k)}</span><b>${esc(v)}</b></div>`).join('');
-
-  $('#footHint').textContent = `${p.location} · Last updated ${data.meta.updated}`;
+  img.alt = `Portrait of ${p.name}`;
+  $('#heroEyebrow').textContent = p.eyebrow;
+  $('#heroName').textContent = p.name;
+  $('#heroHook').textContent = p.hook;
+  $('#heroIntro').textContent = p.intro;
+  $('#heroAvail').textContent = p.available;
+  $('#heroSeeking').textContent = p.seeking;
+  $('#heroActions').innerHTML = `
+    <a class="btn btn-primary" href="${esc(data.cv.file)}" download>Download CV</a>
+    <a class="btn" href="/cv/" data-view-link>Recruiter view</a>
+    <a class="btn btn-quiet" href="${esc(p.links.github)}"${ext(p.links.github)}>GitHub ↗</a>
+    <a class="btn btn-quiet" href="${esc(p.links.linkedin)}"${ext(p.links.linkedin)}>LinkedIn ↗</a>`;
 }
 
-/* ---------- Quests ---------- */
-const QUEST_STATE = {
-  active: 'In progress',
-  queued: 'Queued',
-  paused: 'Paused',
-  done:   'Complete'
-};
-
-/* Progress comes from the objectives, so the bar can never disagree with
-   the checklist printed directly above it. */
-function questProgress(q) {
-  if (!q.objectives || !q.objectives.length) return q.progress ?? 0;
-  const done = q.objectives.filter(o => o.done).length;
-  return Math.round((done / q.objectives.length) * 100);
+/* ---------- Projects ---------- */
+function codeLine(pr) {
+  if (pr.code === 'public' && pr.repo) {
+    return `<a class="plink" href="${esc(pr.repo)}"${ext(pr.repo)}>Read the code on GitHub ↗</a>`;
+  }
+  if (pr.code === 'writeup') return `<span class="pnote">Written work, available on request</span>`;
+  return '';
 }
 
-function renderQuests(quests) {
-  const count = s => quests.filter(q => q.status === s).length;
-  const tally = [
-    [count('active'), 'active'],
-    [count('queued'), 'queued'],
-    [count('done'), 'complete']
-  ].filter(([n]) => n > 0).map(([n, label]) => `${n} ${label}`).join(' · ');
-  $('#questTally').textContent = tally;
+const stackLine = pr => `<p class="stack">${pr.stack.map(esc).join(' · ')}</p>`;
 
-  $('#questList').innerHTML = quests.map((q, i) => {
-    const pct = questProgress(q);
-    const done = (q.objectives || []).filter(o => o.done).length;
-    const total = (q.objectives || []).length;
-    return `
-    <article class="quest reveal is-${esc(q.status)}" style="--i:${i}">
-      <div class="quest-top">
-        <span class="quest-state">${QUEST_STATE[q.status] || q.status}</span>
-        <span class="quest-due">${esc(q.due)}</span>
-      </div>
+function renderProjects(data) {
+  const list = data.projects;
+  const pub = list.filter(pr => pr.code === 'public' && pr.repo).length;
+  $('#projectsSub').textContent =
+    `${list.length} projects. Source is public where it is linked (${pub} so far); the rest is going up one repository at a time.`;
 
-      <div class="quest-head">
-        <h3 class="quest-title">${esc(q.title)}</h3>
-      </div>
-      <p class="quest-role">${esc(q.role)}</p>
-      <p class="quest-blurb">${esc(q.blurb)}</p>
+  /* Filter by category, not type: every project has a different type, so
+     a type filter would be a button per card. */
+  const cats = [...new Set(list.map(pr => pr.cat))];
+  const count = c => list.filter(pr => pr.cat === c).length;
+  $('#projectFilters').innerHTML = `
+    <button type="button" class="filter on" data-cat="all" aria-pressed="true">All <b>${list.length}</b></button>
+    ${cats.map(c => `<button type="button" class="filter" data-cat="${slug(c)}" aria-pressed="false">${esc(c)} <b>${count(c)}</b></button>`).join('')}`;
 
-      ${total ? `
-      <ul class="quest-objectives">
-        ${q.objectives.map(o => `<li class="${o.done ? 'done' : ''}"><i></i>${esc(o.label)}</li>`).join('')}
-      </ul>` : ''}
+  $('#projectFeatured').innerHTML = list.filter(pr => pr.featured).map(pr => `
+    <article class="pfeat${pr.image ? ' has-image' : ''}" id="p-${pr.id}" data-cat="${slug(pr.cat)}">
+      <div class="pfeat-body">
+        <p class="ptype">${esc(pr.type)}</p>
+        <h3>${esc(pr.name)}</h3>
+        <p class="pmeta">${esc(pr.year)} · ${esc(pr.team)}</p>
+        <p class="pblurb">${esc(pr.blurb)}</p>
+        ${pr.story ? `<dl class="story">${pr.story.map(([k, v]) => `<dt>${esc(k)}</dt><dd>${esc(v)}</dd>`).join('')}</dl>` : ''}
+        ${pr.highlights ? `<ul class="points">${pr.highlights.map(h => `<li>${esc(h)}</li>`).join('')}</ul>` : ''}
+        ${stackLine(pr)}
+        ${codeLine(pr)}
+      </div>
+      ${pr.image ? `
+      <figure class="pshot">
+        <img src="${esc(pr.image.src)}" width="${pr.image.w}" height="${pr.image.h}" alt="${esc(pr.image.alt)}" loading="lazy" decoding="async">
+      </figure>` : ''}
+    </article>`).join('');
 
-      <div class="quest-tags">${q.tags.map(t => `<span>${esc(t)}</span>`).join('')}</div>
-
-      <div class="quest-bar" role="progressbar" aria-valuenow="${pct}" aria-valuemin="0" aria-valuemax="100"
-           aria-label="${esc(q.title)} progress">
-        <i style="--p:${pct / 100}"></i>
+  /* The rest as one-line rows that open, so thirteen projects are not a
+     wall of equal cards. */
+  $('#projectRows').innerHTML = list.filter(pr => !pr.featured).map(pr => `
+    <details class="prow" id="p-${pr.id}" data-cat="${slug(pr.cat)}">
+      <summary>
+        <span class="prow-name">${esc(pr.name)}</span>
+        <span class="prow-type">${esc(pr.type)}</span>
+        <span class="prow-year">${esc(pr.year)}</span>
+      </summary>
+      <div class="prow-body">
+        <p class="pblurb">${esc(pr.blurb)}</p>
+        <ul class="points">${pr.highlights.map(h => `<li>${esc(h)}</li>`).join('')}</ul>
+        ${stackLine(pr)}
+        ${codeLine(pr)}
       </div>
-      <div class="quest-foot">
-        <span>${total ? `${done} of ${total} objectives` : 'In progress'}</span>
-        <b>${pct}%</b>
-      </div>
-      <div class="quest-meta">
-        <span class="quest-next">Next: ${esc(q.next)}</span>
-      </div>
-    </article>`;
-  }).join('');
+    </details>`).join('');
 }
 
-/* ---------- Goals ---------- */
-function renderGoals(goals) {
-  const allSteps = goals.reduce((n, g) => n + g.steps.length, 0);
-  const allDone = goals.reduce((n, g) => n + g.steps.filter(s => s.done).length, 0);
-  $('#goalTally').textContent = `${allDone} of ${allSteps} checkpoints cleared`;
+/* ---------- Skills ---------- */
+function unitName(code, units) {
+  const u = units.find(x => x.code === code);
+  return u ? `${code}: ${u.name}` : code;
+}
+const expandEvidence = (ev, units) => String(ev).split('·').map(c => unitName(c.trim(), units)).join(' · ');
 
-  $('#goalList').innerHTML = goals.map((g, i) => {
-    const done = g.steps.filter(s => s.done).length;
-    const pct = Math.round((done / g.steps.length) * 100);
-    const state = pct === 100 ? 'is-done' : done > 0 ? 'is-started' : 'is-open';
-    return `
-    <article class="goal reveal ${state}" style="--i:${i}">
-      <div class="goal-top">
-        <span class="goal-horizon">${esc(g.horizon)}</span>
-        <span class="goal-target">${esc(g.target)}</span>
-      </div>
-
-      <h3 class="goal-title">${esc(g.title)}</h3>
-      <p class="goal-why">${esc(g.why)}</p>
-      <p class="goal-detail">${esc(g.detail)}</p>
-
-      <ol class="goal-steps">
-        ${g.steps.map(s => `<li class="${s.done ? 'done' : ''}"><i></i>${esc(s.label)}</li>`).join('')}
-      </ol>
-
-      <div class="goal-bar" role="progressbar" aria-valuenow="${pct}" aria-valuemin="0" aria-valuemax="100"
-           aria-label="${esc(g.title)} progress"><i style="--p:${pct / 100}"></i></div>
-      <span class="goal-pct">${done} of ${g.steps.length} checkpoints</span>
-    </article>`;
-  }).join('');
+/* A skill is linked to every project whose stack names it (or one of its
+   `aka` names), so the evidence points at real work, not only at units. */
+function projectsUsing(skill, projects) {
+  const names = new Set();
+  [skill.name, ...(skill.aka || [])].forEach(n => {
+    names.add(n.toLowerCase());
+    n.split(/\s*(?:&|\/)\s*/).forEach(t => t && names.add(t.trim().toLowerCase()));
+  });
+  return projects.filter(pr => pr.stack.some(s => names.has(s.toLowerCase())));
 }
 
-/* ---------- Skill tree ---------- */
-const LEVEL_WORD = ['Not started', 'Aware', 'Familiar', 'Working', 'Confident', 'Strong'];
-
-/* Evidence is written as unit codes to stay compact. Expand them to
-   "KIT213 — Operating Systems" for the tooltip and the key below the
-   tree, so a reader is never left guessing what a code means. */
-function expandEvidence(evidence, codex) {
-  return String(evidence).split('·').map(part => {
-    const code = part.trim();
-    const unit = codex.find(u => u.code === code);
-    return unit ? `${code}: ${unit.name}` : code;
-  }).join(' · ');
-}
-
-/* Branch order and the one-line note come from DATA.skillBranches.
-   Any branch used in `skills` but missing from that list still renders,
-   at the end, so adding a skill can never make it disappear. */
 function branchOrder(skills, meta) {
   const used = [...new Set(skills.map(s => s.branch))];
-  const listed = (meta || []).filter(b => used.includes(b.name));
-  const rest = used.filter(u => !listed.some(b => b.name === u)).map(name => ({ name }));
-  return [...listed, ...rest];
+  const listed = meta.filter(b => used.includes(b.name));
+  return [...listed, ...used.filter(u => !listed.some(b => b.name === u)).map(name => ({ name }))];
 }
 
-function renderSkills(skills, codex, meta) {
-  // Legend first — pips mean nothing without it.
-  $('#skillLegend').innerHTML = `
-    ${[1, 2, 3, 4, 5].map(l => `
-      <span class="legend-item">
-        <span class="node-pips">${Array.from({ length: 5 }, (_, k) =>
-          `<i class="${k < l ? 'on' : ''}"></i>`).join('')}</span>
-        ${esc(LEVEL_WORD[l])}
-      </span>`).join('')}
-    <span class="legend-item legend-locked">Next to learn</span>`;
+function renderSkills(data) {
+  const { skills, units, projects } = data;
+  $('#skillLegend').innerHTML = [1, 2, 3, 4, 5]
+    .map(l => `<span class="legend-item">${pips(l)} ${esc(LEVEL_WORD[l])}</span>`).join('');
 
-  const branches = branchOrder(skills, meta);
-  $('#skillTree').innerHTML = branches.map((b, bi) => {
-    // Strongest first, so the top of each card is the most useful part.
+  $('#skillTree').innerHTML = branchOrder(skills, data.skillBranches).map(b => {
     const nodes = skills.filter(s => s.branch === b.name)
       .sort((a, x) => x.level - a.level || a.name.localeCompare(x.name));
     const live = nodes.filter(s => s.level > 0);
-    const next = nodes.filter(s => s.level === 0);
-    const strong = live.filter(s => s.level >= 4).length;
-
-    /* A <details> rather than a div: eight branches of nine skills is a
-       wall of text on arrival, and the browser gives us open/close,
-       keyboard support and find-in-page for free. */
     return `
-    <details class="branch reveal" style="--i:${bi}" data-branch="${esc(b.name)}"${b.open ? ' open' : ''}>
+    <details class="branch"${b.open ? ' open' : ''}>
       <summary class="branch-head">
-        <h3 class="branch-name">${esc(b.name)}</h3>
-        <span class="branch-count" title="${live.length} skills, ${strong} at Confident or above">
-          ${live.length}${strong ? ` · ${strong} strong` : ''}
-        </span>
-        <span class="branch-chev" aria-hidden="true"></span>
+        <h3>${esc(b.name)}</h3>
+        <span class="branch-count">${live.length} skills</span>
       </summary>
       ${b.note ? `<p class="branch-note">${esc(b.note)}</p>` : ''}
-      <div class="branch-nodes">
+      <div class="nodes">
         ${nodes.map(s => {
-          const full = s.evidence ? expandEvidence(s.evidence, codex) : '';
-          /* A button, not a div: hover is mouse-only, so on a phone the
-             evidence behind every rating was unreachable. This also
-             makes the tree keyboard-navigable for free. */
+          const full = s.level ? expandEvidence(s.evidence, units) : '';
+          const used = projectsUsing(s, projects);
+          /* Button and detail are siblings: the detail holds links, and a
+             link inside a button is invalid nested interactive content. */
           return `
-          <button type="button" class="node ${s.level === 0 ? 'locked' : ''}"
-               aria-expanded="false"
-               data-tip="${esc(LEVEL_WORD[s.level])}${full ? ' · ' + esc(full) : ''}">
-            <span class="node-name">${esc(s.name)}</span>
-            <span class="node-level">${esc(LEVEL_WORD[s.level])}</span>
-            ${s.evidence ? `<span class="node-evidence">${esc(s.evidence)}</span>` : ''}
-            <span class="node-pips" role="img" aria-label="${esc(LEVEL_WORD[s.level])}, ${s.level} of 5">${
-              Array.from({ length: 5 }, (_, k) => `<i class="${k < s.level ? 'on' : ''}"></i>`).join('')
-            }</span>
-            <span class="node-detail"><span>${
-              full ? `<b>${esc(LEVEL_WORD[s.level])}</b>. Evidence: ${esc(full)}`
-                   : `<b>${esc(LEVEL_WORD[s.level])}</b>`
-            }</span></span>
-          </button>`;
+          <div class="node${s.level ? '' : ' next'}">
+            <button type="button" class="node-head" aria-expanded="false"
+                    data-tip="${esc(LEVEL_WORD[s.level])}${full ? ' · ' + esc(full) : ''}">
+              <span class="node-name">${esc(s.name)}</span>
+              <span class="node-level">${esc(LEVEL_WORD[s.level])}</span>
+              ${s.level ? `<span class="node-ev">${esc(s.evidence)}</span>` : ''}
+              ${pips(s.level)}
+            </button>
+            <div class="node-detail"><p>${
+              s.level ? `Evidence: ${esc(full)}.` : 'Not started yet.'
+            }${used.length ? ` Used in ${used.map(pr => `<a href="#p-${pr.id}">${esc(pr.name)}</a>`).join(', ')}.` : ''}</p></div>
+          </div>`;
         }).join('')}
       </div>
-      ${next.length ? `<p class="branch-next">Learning next: ${next.map(s => esc(s.name)).join(', ')}</p>` : ''}
     </details>`;
   }).join('');
 
-  /* One control for all eight, because opening them one at a time to
-     read the whole tree is eight clicks. */
-  const treeEl = $('#skillTree');
-  // Prerendering runs this against a document that may already contain a
-  // toggle from the previous build; without this the button doubles.
-  treeEl.parentElement.querySelectorAll('.tree-toggle').forEach(n => n.remove());
-  const toggle = el('button', 'tree-toggle');
-  const sync = () => {
-    const anyClosed = [...treeEl.querySelectorAll('.branch')].some(d => !d.open);
-    toggle.textContent = anyClosed ? 'Expand all branches' : 'Collapse all branches';
-    toggle.dataset.action = anyClosed ? 'open' : 'close';
-  };
-  toggle.addEventListener('click', () => {
-    const open = toggle.dataset.action === 'open';
-    treeEl.querySelectorAll('.branch').forEach(d => { d.open = open; });
-    sync();
-  });
-  treeEl.addEventListener('toggle', sync, true);
-  sync();
-  treeEl.before(toggle);
-
-  /* One skill open at a time — a branch with nine of them expanded at
-     once is just the wall of text the collapse was meant to avoid. */
-  treeEl.addEventListener('click', e => {
-    const node = e.target.closest('.node');
-    if (!node) return;
-    const opening = !node.classList.contains('open');
-    treeEl.querySelectorAll('.node.open').forEach(n => {
-      n.classList.remove('open');
-      n.setAttribute('aria-expanded', 'false');
-    });
-    node.classList.toggle('open', opening);
-    node.setAttribute('aria-expanded', String(opening));
-  });
-
-  /* Collapsed by default, so the codes can be looked up without the key
-     taking any room on the page. */
-  const used = new Set();
-  skills.forEach(s => String(s.evidence || '').split('·')
-    .forEach(c => used.add(c.trim())));
-  const units = codex.filter(u => used.has(u.code))
-    .sort((a, b) => a.code.localeCompare(b.code));
-
+  const cited = new Set();
+  skills.forEach(s => String(s.evidence).split('·').forEach(c => cited.add(c.trim())));
+  const key = units.filter(u => cited.has(u.code)).sort((a, b) => a.code.localeCompare(b.code));
   $('#unitKey').innerHTML = `
     <details class="unit-key">
-      <summary>What the unit codes mean <span>${units.length} units</span></summary>
+      <summary>What the unit codes mean <span>${key.length} units</span></summary>
       <div class="unit-key-grid">
-        ${units.map(u => `
-          <div class="unit-key-row">
-            <code>${esc(u.code)}</code><span>${esc(u.name)}</span>
-          </div>`).join('')}
+        ${key.map(u => `<div><code>${esc(u.code)}</code><span>${esc(u.name)}</span></div>`).join('')}
       </div>
     </details>`;
 }
 
-/* ---------- Artifacts ---------- */
-/* Footer of an artifact card: a real link once the repo exists, an
-   honest placeholder until then. Never a dead link. */
-function artifactCode(a) {
-  if (a.code === 'published' && a.repo) {
-    return `<a class="artifact-link" href="${esc(a.repo)}" target="_blank" rel="noopener">Inspect the code ↗</a>`;
-  }
-  if (a.code === 'writeup') {
-    return `<span class="artifact-note">Written work, available on request</span>`;
-  }
-  return `<span class="artifact-note">Code being prepared for GitHub</span>`;
+/* ---------- Now / Next ---------- */
+function renderNow(data) {
+  $('#nowList').innerHTML = data.now.map(n => {
+    const pr = progress(n.steps);
+    return `
+    <article class="now-item">
+      <div class="now-top">
+        <h3>${esc(n.title)}</h3>
+        <span class="now-meta">${esc(n.kind)} · ${esc(n.target)}</span>
+      </div>
+      <p class="now-why">${esc(n.why)}</p>
+      <div class="bar" role="progressbar" aria-valuenow="${pr.pct}" aria-valuemin="0" aria-valuemax="100"
+           aria-label="${esc(n.title)}: ${pr.done} of ${pr.total} checkpoints"><i style="width:${pr.pct}%"></i></div>
+      <details class="steps">
+        <summary>${pr.done} of ${pr.total} checkpoints</summary>
+        <ul>${n.steps.map(s => `<li class="${s.done ? 'done' : ''}">${esc(s.label)}</li>`).join('')}</ul>
+      </details>
+    </article>`;
+  }).join('');
+
+  $('#nextList').innerHTML = `<h3 class="next-title">Next</h3>` + data.next.map(n => `
+    <div class="next-item">
+      <span class="next-when">${esc(n.when)}</span>
+      <p class="next-name">${esc(n.title)}</p>
+      <p class="next-why">${esc(n.why)}</p>
+    </div>`).join('');
 }
 
-function renderArtifacts(list) {
-  const published = list.filter(a => a.code === 'published' && a.repo).length;
-  const tally = $('#artifactTally');
-  const baseTally = `${list.length} projects · ${published} on GitHub`;
-  tally.textContent = baseTally;
-
-  /* Filter by category rather than by `type`: every project has a
-     different type, so a type filter would be eleven buttons that each
-     match one card. Categories stay useful as the list grows. */
-  const cats = [...new Set(list.map(a => a.cat).filter(Boolean))];
-  const count = c => list.filter(a => a.cat === c).length;
-  $('#artifactFilters').innerHTML = cats.length ? `
-    <button class="filter on" data-cat="all">All <b>${list.length}</b></button>
-    ${cats.map(c => `<button class="filter" data-cat="${esc(c)}">${esc(c)} <b>${count(c)}</b></button>`).join('')}` : '';
-
-  $('#artifactList').innerHTML = list.map((a, i) => `
-    <article class="artifact reveal" style="--i:${Math.min(i, 8)}" data-cat="${esc(a.cat || '')}">
-      <div class="artifact-top">
-        <span class="artifact-type">${esc(a.type)}</span>
+/* ---------- Work and study ---------- */
+function renderWork(data) {
+  $('#workList').innerHTML = `<h3 class="col-title">Work</h3>` + data.work.map(j => `
+    <article class="job">
+      <p class="job-period">${esc(j.period)}${j.current ? ' <span class="now-pill">Now</span>' : ''}</p>
+      <div>
+        <h4>${esc(j.role)}</h4>
+        <p class="job-org">${esc(j.org)}</p>
+        <ul>${j.lines.map(l => `<li>${esc(l)}</li>`).join('')}</ul>
       </div>
-
-      <h3 class="artifact-name">${esc(a.name)}</h3>
-      <p class="artifact-meta">${esc(a.year)} · ${esc(a.team)}</p>
-      <p class="artifact-blurb">${esc(a.blurb)}</p>
-
-      ${a.highlights && a.highlights.length ? `
-        <ul class="artifact-points">
-          ${a.highlights.map(h => `<li>${esc(h)}</li>`).join('')}
-        </ul>` : ''}
-
-      <div class="artifact-stats">${a.stats.map(s => `<code>${esc(s)}</code>`).join('')}</div>
-      <div class="artifact-foot">${artifactCode(a)}</div>
     </article>`).join('');
 
-  const filters = $('#artifactFilters');
-  const cards = [...$('#artifactList').children];
-  filters.addEventListener('click', e => {
-    const btn = e.target.closest('.filter');
-    if (!btn) return;
-    const cat = btn.dataset.cat;
-    filters.querySelectorAll('.filter').forEach(b => b.classList.toggle('on', b === btn));
-
-    let shown = 0;
-    cards.forEach(card => {
-      const match = cat === 'all' || card.dataset.cat === cat;
-      card.hidden = !match;
-      // A hidden card never intersects, so the scroll observer would
-      // leave it at opacity 0 when the filter brings it back.
-      if (match) { shown++; card.classList.add('in'); }
-    });
-    tally.textContent = cat === 'all' ? baseTally : `Showing ${shown} of ${list.length} projects`;
-  });
-}
-
-/* ---------- Campaign ---------- */
-function renderCampaign(list) {
-  $('#campaignList').innerHTML = list.map((c, i) => `
-    <article class="camp reveal k-${esc(c.kind)}" style="--i:${i}">
-      <div class="camp-side">
-        <span class="camp-period">${esc(c.period)}</span>
-        ${c.current ? '<span class="camp-now">Now</span>' : ''}
-      </div>
-      <div class="camp-body">
-        <h3 class="camp-title">${esc(c.title)}</h3>
-        <p class="camp-org">${esc(c.org)}</p>
-        <ul class="camp-lines">${c.lines.map(l => `<li>${esc(l)}</li>`).join('')}</ul>
-        ${c.tags && c.tags.length
-          ? `<div class="camp-tags">${c.tags.map(t => `<span>${esc(t)}</span>`).join('')}</div>`
-          : ''}
-      </div>
-    </article>`).join('');
-}
-
-/* ============================================================
-   CV MODE
-   A separate document for a hiring audience, built from the same
-   data. Not a restyle of the game page: different sections,
-   different order, different language.
-   ============================================================ */
-function renderCV(data) {
-  const p = data.player, cv = data.cv, ac = data.academic;
-
-  /* --- Contact line: only what is actually set --- */
-  const contact = [
-    p.links.email ? `<a href="mailto:${esc(p.links.email)}">${esc(p.links.email)}</a>` : '',
-    `<a href="${esc(p.links.linkedin)}" target="_blank" rel="noopener">${esc(p.links.linkedin.replace('https://', ''))}</a>`,
-    `<a href="${esc(p.links.github)}" target="_blank" rel="noopener">${esc(p.links.github.replace('https://', ''))}</a>`,
-    `<span>${esc(p.location)}</span>`
-    /* The spaces around the separator matter: joined tight, the whole
-       contact line is one unbreakable run of inline elements with no
-       wrap opportunity, and on a phone it forced the page 180px wider
-       than the screen. */
-  ].filter(Boolean).join(' <i aria-hidden="true">·</i> ');
-
-  /* The download sits in the top bar beside the view toggle, so it is
-     reachable from anywhere on the page rather than only at the top. */
-  document.getElementById('hudDownload').innerHTML = cv.file
-    ? `<a class="hud-dl" href="${esc(cv.file)}" download>
-         <span aria-hidden="true">↓</span> Download CV
-       </a>`
-    : '';
-
-  /* --- Technical skills, grouped, from the skill tree --- */
-  const branches = [...new Set(data.skills.map(s => s.branch))];
-  const skillGroups = branches.map(b => ({
-    name: b,
-    items: data.skills.filter(s => s.branch === b && s.level >= 3)
-      .sort((a, x) => x.level - a.level).map(s => s.name)
-  })).filter(g => g.items.length);
-
-  const certs = data.quests.filter(q => /certification/i.test(q.role));
-  const projects = data.artifacts.slice(0, 5);
-
-  document.getElementById('cvDoc').innerHTML = `
-    <article class="cv-paper">
-
-      <header class="cv-head">
-        <div class="cv-head-main">
-          <h1 class="cv-name">${esc(p.name)}</h1>
-          <p class="cv-headline">${esc(cv.headline)}</p>
-          <p class="cv-contact">${contact}</p>
-        </div>
-      </header>
-
-      <div class="cv-avail">
-        <span><b>Graduating</b> ${esc(ac.graduating)}</span>
-        <span><b>Seeking</b> ${esc(p.status.replace(/^Open to /, ''))}</span>
-        <span><b>Location</b> ${esc(p.location)}</span>
-      </div>
-
-      <section class="cv-sec">
-        <h2>Professional Summary</h2>
-        ${/* Written as an array of short paragraphs rather than one block:
-             a recruiter scans this in a few seconds, and eight unbroken
-             lines is the shape people skip. A plain string still works. */
-          (Array.isArray(cv.summary) ? cv.summary : [cv.summary])
-            .map(para => `<p class="cv-summary">${esc(para)}</p>`).join('')}
-      </section>
-
-      <section class="cv-sec">
-        <h2>Selected Achievements</h2>
-        <ul class="cv-list cv-list-tight">
-          ${cv.highlights.map(h => `<li>${esc(h)}</li>`).join('')}
-        </ul>
-      </section>
-
-      <section class="cv-sec">
-        <h2>Technical Skills</h2>
-        <div class="cv-skills">
-          ${skillGroups.map(g => `
-            <div class="cv-skill-group">
-              <h3>${esc(g.name)}</h3>
-              <p>${g.items.map(esc).join(' · ')}</p>
-            </div>`).join('')}
-        </div>
-        <div class="cv-skill-group cv-soft">
-          <h3>Professional Skills</h3>
-          <p>${cv.softSkills.map(esc).join(' · ')}</p>
-        </div>
-      </section>
-
-      <section class="cv-sec">
-        <h2>Selected Projects</h2>
-        ${projects.map(a => `
-          <div class="cv-proj">
-            <div class="cv-role-head">
-              <h3>${esc(a.name)} <span class="cv-org">· ${esc(a.type)}</span></h3>
-              <span class="cv-dates">${esc(a.year)}</span>
-            </div>
-            <p>${esc(a.blurb)}</p>
-            <p class="cv-tech"><b>Technologies:</b> ${a.stats.map(esc).join(', ')}</p>
-          </div>`).join('')}
-      </section>
-
-      <section class="cv-sec">
-        <h2>Education</h2>
-        <div class="cv-role">
-          <div class="cv-role-head">
-            <h3>Bachelor of Information and Communication Technology<span class="cv-org"> · University of Tasmania</span></h3>
-            <span class="cv-dates">2023 – ${esc(ac.graduating)}</span>
-          </div>
-          <p class="cv-loc">Hobart, Tasmania · Double major: Computer Science and Cyber Security</p>
-          <p class="cv-course"><b>Relevant coursework:</b> ${cv.coursework.map(esc).join(', ')}</p>
-        </div>
-      </section>
-
-      <section class="cv-sec">
-        <h2>Certifications</h2>
-        <ul class="cv-list cv-list-tight">
-          ${certs.map(c => `<li><b>${esc(c.title)}</b>: in progress, targeting ${esc(c.due)}</li>`).join('')}
-        </ul>
-      </section>
-
-      <section class="cv-sec">
-        <h2>Professional Experience</h2>
-        ${cv.experience.map(e => `
-          <div class="cv-role">
-            <div class="cv-role-head">
-              <h3>${esc(e.role)} <span class="cv-org">· ${esc(e.org)}</span></h3>
-              <span class="cv-dates">${esc(e.period)}</span>
-            </div>
-            <p class="cv-loc">${esc(e.location)}</p>
-            <ul class="cv-list">${e.bullets.map(b => `<li>${esc(b)}</li>`).join('')}</ul>
-          </div>`).join('')}
-      </section>
-
-      ${cv.activities && cv.activities.length ? `
-      <section class="cv-sec">
-        <h2>Activities &amp; Involvement</h2>
-        <ul class="cv-list">${cv.activities.map(a => `<li>${esc(a)}</li>`).join('')}</ul>
-      </section>` : ''}
-
-      ${cv.references && cv.references.length ? `
-      <section class="cv-sec">
-        <h2>References</h2>
-        <div class="cv-refs">
-          ${cv.references.map(r => `
-            <div class="cv-ref">
-              <b>${esc(r.name)}</b>
-              <span>${esc(r.role)}</span>
-              <em>${esc(r.org)}</em>
-            </div>`).join('')}
-        </div>
-        <p class="cv-ref-note">Contact details available on request.</p>
-      </section>` : ''}
-
-      <!-- Every term here also appears in the sections above; the block
-           exists so a keyword search over the page finds them all. It is
-           collapsed because as a visible slab of grey it was 134
-           characters to a line and nobody was reading it. The text stays
-           in the document either way. -->
-      <section class="cv-sec cv-sec-keywords">
-        <details class="cv-keys">
-          <summary>Keyword index <span>${cv.keywords.length} terms</span></summary>
-          <p class="cv-keywords">${cv.keywords.map(esc).join(' · ')}</p>
-        </details>
-      </section>
-
-      <footer class="cv-foot">
-        <span>${esc(p.name)} · ${esc(p.location)}</span>
-        <span>Last updated ${esc(data.meta.updated)}</span>
-      </footer>
+  const e = data.education;
+  const done = data.units.filter(u => u.done).reduce((s, u) => s + u.pts, 0);
+  $('#eduBlock').innerHTML = `
+    <h3 class="col-title">Study</h3>
+    <article class="edu-card">
+      <p class="job-period">${esc(e.period)}</p>
+      <h4>${esc(e.degree)}</h4>
+      <p class="job-org">${esc(e.school)} · Hobart</p>
+      <ul>
+        <li>Coursework complete: ${done} of ${e.coursePoints} credit points (${esc(e.completed)})</li>
+        <li>Graduating ${esc(e.graduating)}</li>
+        ${e.lines.map(l => `<li>${esc(l)}</li>`).join('')}
+      </ul>
     </article>`;
 }
 
+/* ---------- Contact + footer ---------- */
+function renderContact(data) {
+  const p = data.person, l = p.links;
+  $('#contactSub').textContent =
+    `${p.available.replace(/ · /g, ', ')}. If you have a role in ICT, or a question about anything on this page, I would like to hear from you.`;
+  $('#contactLinks').innerHTML = `
+    <div class="contact-row">
+      <span class="contact-label">Email</span>
+      <a href="mailto:${esc(l.email)}">${esc(l.email)}</a>
+      <button type="button" class="copy-btn" data-copy="${esc(l.email)}">Copy</button>
+    </div>
+    <div class="contact-row">
+      <span class="contact-label">LinkedIn</span>
+      <a href="${esc(l.linkedin)}"${ext(l.linkedin)}>${esc(l.linkedin.replace('https://', ''))}</a>
+    </div>
+    <div class="contact-row">
+      <span class="contact-label">GitHub</span>
+      <a href="${esc(l.github)}"${ext(l.github)}>${esc(l.github.replace('https://', ''))}</a>
+    </div>
+    <p class="contact-cta"><a class="btn btn-primary" href="${esc(data.cv.file)}" download>Download CV</a></p>
+    <p class="sr-only" aria-live="polite" id="copyStatus"></p>`;
+
+  $('#siteFoot').innerHTML = `
+    <span>© 2026 ${esc(p.name)} · ${esc(p.location)}</span>
+    <span>Last updated ${esc(data.meta.updated)} · Built from one data file ·
+      <a href="${esc(data.meta.source)}"${ext(data.meta.source)}>View source ↗</a></span>`;
+}
+
 /* ============================================================
-   TOOLTIPS
-   Native title= waits about a second, cannot be styled, and never
-   appears on touch. This is the same idea done properly: a delay
-   before the first one so passing the cursor over a card does not
-   trigger it, then no delay and no animation while moving between
-   neighbours — which is what makes a row of them feel instant.
+   Browser-only wiring
    ============================================================ */
-function initTooltips() {
-  const tip = el('div', 'tip');
-  tip.setAttribute('role', 'tooltip');
-  tip.hidden = true;
-  document.body.appendChild(tip);
 
-  let showTimer, hideTimer, active = null, pending = null, warm = false, warmTimer;
+/* Filters write the URL, so a filtered view can be linked:
+   /#projects/security */
+function wireFilters() {
+  const bar = $('#projectFilters');
+  const items = [...document.querySelectorAll('.pfeat, .prow')];
+  const apply = cat => {
+    if (!bar.querySelector(`[data-cat="${cat}"]`)) cat = 'all';
+    bar.querySelectorAll('.filter').forEach(b => {
+      const on = b.dataset.cat === cat;
+      b.classList.toggle('on', on);
+      b.setAttribute('aria-pressed', String(on));
+    });
+    items.forEach(it => { it.hidden = cat !== 'all' && it.dataset.cat !== cat; });
+    $('#rowsTitle').hidden = !document.querySelector('.prow:not([hidden])');
+    $('#projectFeatured').hidden = !document.querySelector('.pfeat:not([hidden])');
+  };
+  bar.addEventListener('click', e => {
+    const b = e.target.closest('.filter');
+    if (!b) return;
+    apply(b.dataset.cat);
+    history.replaceState(null, '', b.dataset.cat === 'all' ? '#projects' : `#projects/${b.dataset.cat}`);
+  });
+  return apply;
+}
 
-  const place = target => {
-    const r = target.getBoundingClientRect();
-    tip.style.transform = 'none';           // measure unrotated
-    const t = tip.getBoundingClientRect();
-    const margin = 8;
-    let left = r.left + r.width / 2 - t.width / 2;
-    left = Math.max(10, Math.min(left, window.innerWidth - t.width - 10));
+function wireSkills() {
+  const tree = $('#skillTree'), toggle = $('#treeToggle');
+  const sync = () => {
+    const anyClosed = [...tree.querySelectorAll('.branch')].some(d => !d.open);
+    toggle.textContent = anyClosed ? 'Expand all' : 'Collapse all';
+  };
+  toggle.addEventListener('click', () => {
+    const open = toggle.textContent === 'Expand all';
+    tree.querySelectorAll('.branch').forEach(d => { d.open = open; });
+    sync();
+  });
+  tree.addEventListener('toggle', sync, true);
+  sync();
 
-    // Above by default; below when there is no room up top.
-    const above = r.top > t.height + margin + 10;
-    const top = above ? r.top - t.height - margin : r.bottom + margin;
-    tip.classList.toggle('below', !above);
+  /* One skill open at a time; a link inside an open skill navigates. */
+  tree.addEventListener('click', e => {
+    const head = e.target.closest('.node-head');
+    if (!head) return;
+    const node = head.parentElement;
+    const opening = !node.classList.contains('open');
+    tree.querySelectorAll('.node.open').forEach(n => {
+      n.classList.remove('open'); n.querySelector('.node-head').setAttribute('aria-expanded', 'false');
+    });
+    node.classList.toggle('open', opening);
+    head.setAttribute('aria-expanded', String(opening));
+  });
+}
 
-    tip.style.left = `${Math.round(left)}px`;
-    tip.style.top = `${Math.round(top)}px`;
-    // Point the scale origin at the trigger, not the tooltip's centre.
-    const originX = Math.round(r.left + r.width / 2 - left);
-    tip.style.setProperty('--tip-origin-x', `${originX}px`);
+function wireCopy() {
+  document.addEventListener('click', async e => {
+    const b = e.target.closest('[data-copy]');
+    if (!b) return;
+    try { await navigator.clipboard.writeText(b.dataset.copy); }
+    catch { return; }
+    b.textContent = 'Copied';
+    $('#copyStatus').textContent = 'Email address copied';
+    setTimeout(() => { b.textContent = 'Copy'; }, 1600);
+  });
+}
+
+/* Hash handling: filtered project links, deep links to a project row,
+   and the section ids the old layout used. */
+const LEGACY = { quests: 'now', goals: 'now', artifacts: 'projects', campaign: 'work' };
+function followHash(applyFilter) {
+  let h = decodeURIComponent(location.hash.slice(1));
+  if (!h) return;
+  if (LEGACY[h]) { h = LEGACY[h]; history.replaceState(null, '', '#' + h); }
+  if (h.startsWith('projects/')) { applyFilter(h.split('/')[1]); h = 'projects'; }
+  const target = document.getElementById(h);
+  if (!target) return;
+  if (target.tagName === 'DETAILS') target.open = true;
+  target.scrollIntoView();
+}
+
+/* The recruiter view lives at /cv/ so it can be linked from an
+   application. The toggle is a real link: without script it navigates
+   to the prerendered /cv/ page, with script it swaps in place. */
+const isCvUrl = () => /^\/cv\/?$/.test(location.pathname) ||
+  new URLSearchParams(location.search).get('view') === 'cv';
+
+function wireView() {
+  const toggle = $('#viewToggle'), offer = $('#cvOffer');
+  const apply = on => {
+    document.body.classList.toggle('plain', on);
+    toggle.textContent = on ? 'Full record' : 'Recruiter view';
+    toggle.href = on ? '/' : '/cv/';
+    document.title = on ? 'Mir Salman Nomaan · CV' : 'Mir Salman Nomaan';
+  };
+  const go = on => {
+    localStorage.setItem('cvOffer', '1');
+    if (offer) offer.hidden = true;
+    const swap = () => {
+      history.pushState(null, '', on ? '/cv/' : '/');
+      apply(on);
+      window.scrollTo(0, 0);
+      document.body.classList.remove('view-out');
+    };
+    if (matchMedia('(prefers-reduced-motion: reduce)').matches) return swap();
+    document.body.classList.add('view-out');
+    setTimeout(swap, 120);
   };
 
-  const show = target => {
+  apply(isCvUrl());
+  document.addEventListener('click', e => {
+    const a = e.target.closest('#viewToggle, [data-view-link], [data-offer="yes"]');
+    if (!a || e.metaKey || e.ctrlKey || e.shiftKey) return;
+    e.preventDefault();
+    go(a.id === 'viewToggle' ? !document.body.classList.contains('plain') : true);
+  });
+  window.addEventListener('popstate', () => apply(isCvUrl()));
+
+  /* First visit only: offer the CV to the reader it was written for. */
+  if (offer && !isCvUrl() && !localStorage.getItem('cvOffer')) {
+    offer.hidden = false;
+    offer.querySelector('[data-offer="no"]').addEventListener('click', () => {
+      localStorage.setItem('cvOffer', '1'); offer.hidden = true;
+    });
+  }
+}
+
+/* Nav: the active section is the last one whose top has passed under the
+   bar. Position-based, because tall sections never show a set ratio. */
+function wireNav() {
+  const links = [...document.querySelectorAll('.hud-nav a')];
+  const sections = [...document.querySelectorAll('main section[id]')];
+  let ticking = false;
+  const mark = () => {
+    ticking = false;
+    let cur = null;
+    for (const s of sections) if (s.getBoundingClientRect().top <= 120) cur = s;
+    if (innerHeight + scrollY >= document.documentElement.scrollHeight - 2) cur = sections[sections.length - 1];
+    links.forEach(l => l.classList.toggle('on', !!cur && l.getAttribute('href') === '#' + cur.id));
+  };
+  addEventListener('scroll', () => { if (!ticking) { ticking = true; requestAnimationFrame(mark); } }, { passive: true });
+  mark();
+
+  const burger = $('#burger'), nav = $('#hudNav');
+  burger.addEventListener('click', () => burger.setAttribute('aria-expanded', String(nav.classList.toggle('open'))));
+  nav.addEventListener('click', e => {
+    if (e.target.tagName === 'A') { nav.classList.remove('open'); burger.setAttribute('aria-expanded', 'false'); }
+  });
+}
+
+/* Tooltips on skills for mouse users: a delay before the first, then
+   instant while moving between neighbours. Touch uses tap-to-open. */
+function wireTooltips() {
+  const tip = document.createElement('div');
+  tip.className = 'tip'; tip.setAttribute('role', 'tooltip'); tip.hidden = true;
+  document.body.appendChild(tip);
+  let timer, pending = null, active = null, warm = false, warmTimer;
+  const show = t => {
     pending = null;
-    // An expanded skill already prints its detail; a tooltip saying the
-    // same thing on top of it is just a second copy.
-    if (target.classList.contains('open')) return;
-    tip.textContent = target.dataset.tip;
-    tip.hidden = false;
-    place(target);
-    // Warm: skip the entrance so neighbours feel immediate.
+    if (t.closest('.node')?.classList.contains('open')) return;
+    tip.textContent = t.dataset.tip; tip.hidden = false;
+    const r = t.getBoundingClientRect(), w = tip.getBoundingClientRect();
+    const left = Math.max(10, Math.min(r.left + r.width / 2 - w.width / 2, innerWidth - w.width - 10));
+    const above = r.top > w.height + 18;
+    tip.classList.toggle('below', !above);
+    tip.style.left = `${Math.round(left)}px`;
+    tip.style.top = `${Math.round(above ? r.top - w.height - 8 : r.bottom + 8)}px`;
     tip.classList.toggle('instant', warm);
     requestAnimationFrame(() => tip.classList.add('on'));
-    active = target;
-    warm = true;
-    clearTimeout(warmTimer);
+    active = t; warm = true; clearTimeout(warmTimer);
   };
-
   const hide = () => {
-    clearTimeout(showTimer);
-    tip.classList.remove('on');
-    active = null;
-    clearTimeout(hideTimer);
-    hideTimer = setTimeout(() => { tip.hidden = true; }, 140);
-    // Stay warm briefly, so moving to the next node is instant.
-    clearTimeout(warmTimer);
-    warmTimer = setTimeout(() => { warm = false; }, 400);
+    clearTimeout(timer); tip.classList.remove('on'); active = null;
+    setTimeout(() => { if (!active) tip.hidden = true; }, 140);
+    clearTimeout(warmTimer); warmTimer = setTimeout(() => { warm = false; }, 400);
   };
-
   document.addEventListener('pointerover', e => {
-    if (e.pointerType !== 'mouse') return;      // touch taps the skill instead
-    const target = e.target.closest('[data-tip]');
-    if (!target || target === active) return;
-    /* pointerover fires again for every child span inside the skill, so
-       without this the countdown restarted each time the cursor crossed
-       one and the tooltip never got to the end of its delay. */
-    if (target === pending) return;
-    clearTimeout(showTimer);
-    pending = target;
-    showTimer = setTimeout(() => show(target), warm ? 0 : 380);
+    if (e.pointerType !== 'mouse') return;
+    const t = e.target.closest('[data-tip]');
+    if (!t || t === active || t === pending) return;
+    clearTimeout(timer); pending = t;
+    timer = setTimeout(() => show(t), warm ? 0 : 380);
   });
-
   document.addEventListener('pointerout', e => {
-    const target = e.target.closest('[data-tip]');
-    if (target && !target.contains(e.relatedTarget)) { pending = null; hide(); }
+    const t = e.target.closest('[data-tip]');
+    if (t && !t.contains(e.relatedTarget)) { pending = null; hide(); }
   });
-
-  window.addEventListener('scroll', () => { if (active) hide(); }, { passive: true });
+  addEventListener('scroll', () => { if (active) hide(); }, { passive: true });
   document.addEventListener('keydown', e => { if (e.key === 'Escape') hide(); });
 }
 
-/* ---------- Scroll reveal ---------- */
-let revealObserver;
-function observeReveals() {
-  if (!revealObserver) {
-    revealObserver = new IntersectionObserver(entries => {
-      entries.forEach(e => {
-        if (e.isIntersecting) {
-          e.target.classList.add('in');
-          revealObserver.unobserve(e.target);
-        }
-      });
-    }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
-  }
-  document.querySelectorAll('.reveal:not(.in)').forEach(n => revealObserver.observe(n));
-}
-
-/* ---------- Nav: active section + mobile menu + CV mode ---------- */
-function wireChrome() {
-  const links = [...document.querySelectorAll('.hud-nav a')];
-  const sections = [...document.querySelectorAll('main section[id]')];
-
-  /* Position-based, not IntersectionObserver with a ratio threshold:
-     the skill tree is several screens tall, so it could never show 35%
-     of itself at once and its nav link never lit up. The active section
-     is simply the last one whose top has passed under the HUD. */
-  let ticking = false;
-  const markActive = () => {
-    ticking = false;
-    const line = 140;                       // just below the HUD
-    let current = sections[0];
-    for (const s of sections) {
-      if (s.getBoundingClientRect().top <= line) current = s;
-    }
-    // At the very bottom the last section wins, however short it is.
-    if (window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 2) {
-      current = sections[sections.length - 1];
-    }
-    links.forEach(l => l.classList.toggle('on', l.getAttribute('href') === '#' + current.id));
-  };
-  const onScroll = () => {
-    if (ticking) return;
-    ticking = true;
-    requestAnimationFrame(markActive);
-  };
-  window.addEventListener('scroll', onScroll, { passive: true });
-  window.addEventListener('resize', onScroll, { passive: true });
-  markActive();
-
-  const burger = $('#burger'), nav = $('#hudNav');
-  burger.addEventListener('click', () => {
-    const open = nav.classList.toggle('open');
-    burger.setAttribute('aria-expanded', open);
-  });
-  nav.addEventListener('click', e => {
-    if (e.target.tagName === 'A') {
-      nav.classList.remove('open');
-      burger.setAttribute('aria-expanded', 'false');
-    }
-  });
-
-  const plain = $('#plainToggle');
-  const label = on => { plain.textContent = on ? 'Interactive view' : 'Recruiter view'; };
-
-  const apply = on => {
-    document.body.classList.toggle('plain', on);
-    plain.setAttribute('aria-pressed', on);
-    label(on);
-  };
-
-  const saved = localStorage.getItem('cvMode') === '1';
-  apply(saved);
-
-  /* Recruiters are the primary audience and this is the character
-     sheet, not the document written for them. On a first visit with no
-     stored preference, offer the recruiter view once, inline, and never
-     again after any answer. Choosing a view is itself an answer. */
-  const offer = $('#cvOffer');
-  const offerSeen = () => localStorage.setItem('cvOffer', '1');
-  if (offer && !saved && !localStorage.getItem('cvOffer')) {
-    offer.hidden = false;
-    offer.querySelector('[data-offer="yes"]').addEventListener('click', () => {
-      offerSeen(); offer.hidden = true; plain.click();
-    });
-    offer.querySelector('[data-offer="no"]').addEventListener('click', () => {
-      offerSeen(); offer.hidden = true;
-    });
-  }
-
-  /* The two views are the same person seen two ways, so the swap gets a
-     short cross-fade rather than a hard cut. */
-  plain.addEventListener('click', () => {
-    const on = !document.body.classList.contains('plain');
-    const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
-
-    const swap = () => {
-      apply(on);
-      localStorage.setItem('cvMode', on ? '1' : '0');
-      localStorage.setItem('cvOffer', '1');
-      if (offer) offer.hidden = true;
-      window.scrollTo({ top: 0, behavior: 'auto' });
-      document.body.classList.remove('view-out');
-      document.body.classList.add('view-in');
-      setTimeout(() => document.body.classList.remove('view-in'), 260);
-    };
-
-    if (reduce) return swap();
-    document.body.classList.add('view-out');
-    setTimeout(swap, 120);
-  });
-}
-
 /* ============================================================
-   BOOT
-   Split in two on purpose. `renderAll` is pure data-to-DOM and
-   nothing else, so the prerender build can run it under jsdom and
-   bake the result into index.html. Everything that needs a real
-   browser — observers, listeners, tooltips — lives in the second
-   half and never runs at build time.
+   Boot. renderAll is what the prerender runs; it needs renderCV from
+   cv.js, which loads after this file, so the browser boot waits for
+   DOMContentLoaded.
    ============================================================ */
 function renderAll(data) {
-  const xp = progressModel(data);
-  renderSheet(data, xp);
-  renderQuests(data.quests);
-  renderGoals(data.goals);
-  renderSkills(data.skills, data.codex, data.skillBranches);
-  renderArtifacts(data.artifacts);
-  renderCampaign(data.campaign);
+  renderHero(data);
+  renderProjects(data);
+  renderSkills(data);
+  renderNow(data);
+  renderWork(data);
+  renderContact(data);
   renderCV(data);
 }
-
 if (typeof window !== 'undefined') window.renderAll = renderAll;
 
-/* PRERENDER_ONLY is set by the build script so it can call renderAll
-   without booting the interactive layer. */
 if (typeof PRERENDER_ONLY === 'undefined') {
-  renderAll(DATA);
-  observeReveals();
-  wireChrome();
-  initTooltips();
+  document.addEventListener('DOMContentLoaded', () => {
+    renderAll(DATA);
+    const applyFilter = wireFilters();
+    wireSkills();
+    wireCopy();
+    wireView();
+    wireNav();
+    wireTooltips();
+    followHash(applyFilter);
+    addEventListener('hashchange', () => followHash(applyFilter));
+  });
 }

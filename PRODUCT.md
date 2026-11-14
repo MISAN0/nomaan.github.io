@@ -7,7 +7,7 @@ brand
 Per-surface override, confirmed as a genuine split rather than a fuzzy default:
 
 - **The full record** (`index.html` `main`, the default view): **brand**. The design is the product. Expression, personality and memorability are the job, carried by typography, evidence and voice rather than by a game layer.
-- **Recruiter view** (`#cvDoc`, `body.plain`): **product**. The design serves a scanning task. Legibility, hierarchy and speed of comprehension win over expression every time. No motion that delays reading.
+- **Recruiter view** (`/cv/`, `#cvDoc`, `body.plain`): **product**. The design serves a scanning task. Legibility, hierarchy and speed of comprehension win over expression every time. No motion that delays reading.
 
 When a change touches both, they are governed separately. A decision that improves the full record is not automatically right for the CV, and vice versa.
 
@@ -15,7 +15,7 @@ When a change touches both, they are governed separately. A decision that improv
 
 Two audiences, recruiter first.
 
-**Primary: recruiters and HR screeners.** Non-technical, moving fast, filtering a stack of candidates. They need to establish in seconds that this person is a final-year ICT student in Hobart, graduating December 2026, looking for a first role. They are reading the recruiter view.
+**Primary: recruiters and HR screeners.** Non-technical, moving fast, filtering a stack of candidates. They need to establish in seconds that this person has finished an ICT degree (graduating December 2026), is in Hobart, and is available now for a first role. They read the recruiter view at `/cv/`, or the PDF.
 
 **Secondary: technical hiring managers.** They go further, and they read the evidence. The unit codes behind each skill rating, the project detail, what was built by hand versus imported. They are reading the full record.
 
@@ -66,3 +66,7 @@ Concretely, held to:
 - `prefers-reduced-motion` honoured as gentler motion, not absent motion. Movement and overshoot are dropped, opacity transitions are kept because they aid comprehension.
 - No information carried by colour alone. Skill levels carry a word as well as coloured pips; quest state carries a label as well as a tint.
 - Text floor of 11px on mobile. A 9px mono label is legible on a monitor and not on a phone.
+
+## Structure (rebuilt 14 Nov 2026)
+
+Proof first. Hero (name, the hook "Most of what I can fix now, I broke myself first", availability as the headline fact), then Projects (three featured with case studies, the rest as rows), Skills with evidence (each skill links to the projects that used it), Now and next, Work and study, Contact. Light by default, dark by system preference; the recruiter view stays on warm paper in both. Printing any page prints the CV.

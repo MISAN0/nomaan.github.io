@@ -2,140 +2,131 @@
 <html lang="en"><head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Mir Salman Nomaan, final-year ICT student at the University of Tasmania majoring in Computer Science and Cyber Security. Skills with the unit or project behind each one, projects, and what is in progress.">
-  <meta name="theme-color" content="#0a0b12">
   <title>Mir Salman Nomaan</title>
+  <meta name="description" content="Mir Salman Nomaan: Computer Science and Cyber Security, University of Tasmania, graduating December 2026. Available now for ICT roles in Hobart. Projects, and the unit or project behind every skill.">
+  <meta name="color-scheme" content="light dark">
+  <meta name="theme-color" content="#f6f3ee" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#0f0d11" media="(prefers-color-scheme: dark)">
+  <link rel="canonical" href="https://mirsalmannomaan.com/">
+
+  <meta property="og:type" content="profile">
+  <meta property="og:site_name" content="Mir Salman Nomaan">
+  <meta property="og:title" content="Mir Salman Nomaan · Computer Science &amp; Cyber Security">
+  <meta property="og:description" content="Graduating December 2026 from the University of Tasmania. Available now, full time, in Hobart. Projects, and the evidence behind every skill.">
+  <meta property="og:url" content="https://mirsalmannomaan.com/">
+  <meta property="og:image" content="https://mirsalmannomaan.com/og.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Mir Salman Nomaan. Most of what I can fix now, I broke myself first.">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="/favicon.ico" sizes="32x32">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
   <link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible+Next:wght@300..800&amp;family=Bricolage+Grotesque:opsz,wght@12..96,400..800&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="/style.css">
+  <link rel="stylesheet" href="/cv.css">
 
-  <!-- The page content is baked into this file by `npm run prerender`,
-       so it reads without JavaScript. These rules undo the two things
-       that would otherwise hide it: scroll-reveal starts at opacity 0
-       waiting for an observer, and the two script-driven bars start at
-       scaleX(0). Everything else degrades on its own — <details> opens
-       natively and the CV view is reachable by printing. -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "Mir Salman Nomaan",
+    "alternateName": "Nomaan",
+    "url": "https://mirsalmannomaan.com/",
+    "image": "https://mirsalmannomaan.com/photo.jpg",
+    "address": { "@type": "PostalAddress", "addressLocality": "Hobart", "addressRegion": "TAS", "addressCountry": "AU" },
+    "alumniOf": { "@type": "CollegeOrUniversity", "name": "University of Tasmania" },
+    "knowsAbout": ["Cyber security", "Networking", "Linux", "Python", "Technical support"],
+    "sameAs": ["https://github.com/MISAN0", "https://linkedin.com/in/nomaan00"]
+  }
+  </script>
+
+  <!-- The page body is baked into this file by `npm run prerender`, so it
+       reads without JavaScript. Only the controls that need script are
+       hidden here. -->
   <noscript>
     <style>
-      .reveal { opacity: 1 !important; transform: none !important; }
-      .hud-progress-fill, .degree-bar i { transform: scaleX(var(--p, 0)) !important; }
-      .tree-toggle, .hud-burger { display: none !important; }
+      .tree-toggle, .hud-burger, .copy-btn { display: none !important; }
     </style>
   </noscript>
 </head>
 <body>
-<a class="skip-link" href="#quests">Skip to content</a>
+<a class="skip-link" href="#main">Skip to content</a>
 
-<div class="fx-grid" aria-hidden="true"></div>
-<div class="fx-glow" aria-hidden="true"></div>
-
-<!-- ── HUD bar ─────────────────────────────────────────── -->
 <header class="hud">
-  <a class="hud-brand" href="#top">
-    <span class="hud-sigil">MSN</span>
-  </a>
-
-  <div class="hud-progress" title="Degree progress, computed from credit points passed">
-    <div class="hud-progress-track"><div class="hud-progress-fill" id="hudDegFill" style="--p: 0.875; transform: scaleX(0.875);"></div></div>
-    <span class="hud-progress-text" id="hudDegText">Graduating Dec 2026 · 87.5%</span>
+  <div class="hud-in">
+    <a class="brand" href="/">Nomaan</a>
+    <nav class="hud-nav" id="hudNav" aria-label="Sections">
+      <a href="#projects">Projects</a>
+      <a href="#skills">Skills</a>
+      <a href="#now">Now</a>
+      <a href="#work">Work</a>
+      <a href="#contact">Contact</a>
+    </nav>
+    <div class="hud-actions">
+      <a class="btn btn-sm btn-primary" href="/Mir-Salman-Nomaan-CV.pdf" download="">Download CV</a>
+      <a class="btn btn-sm" id="viewToggle" href="/cv/">Recruiter view</a>
+    </div>
+    <button class="hud-burger" id="burger" type="button" aria-label="Menu" aria-expanded="false" aria-controls="hudNav"><span></span><span></span><span></span></button>
   </div>
-
-  <nav class="hud-nav" id="hudNav">
-    <a href="#quests">In progress</a>
-    <a href="#goals">Goals</a>
-    <a href="#skills">Skills</a>
-    <a href="#artifacts">Projects</a>
-    <a href="#campaign">Work</a>
-    <a href="#contact" class="is-cta">Contact</a>
-  </nav>
-
-  <span id="hudDownload"><a class="hud-dl" href="Mir-Salman-Nomaan-CV.pdf" download="">
-         <span aria-hidden="true">↓</span> Download CV
-       </a></span>
-  <button class="hud-btn" id="plainToggle" aria-pressed="false" title="Switch between the one-page CV and the full record">Recruiter view</button>
-  <button class="hud-burger" id="burger" aria-label="Menu" aria-expanded="false"><span></span><span></span><span></span></button>
 </header>
 
-<!-- ── CV document: shown only in recruiter view ───────── -->
 <!-- Recruiter offer: unhidden by app.js on a first visit only -->
 <div id="cvOffer" class="cv-offer" role="region" aria-label="Recruiter view offer" hidden="">
-  <p><b>Hiring?</b> There is a one-page recruiter version of this page: plain document, one page, CV download at the top.</p>
+  <p><b>Hiring?</b> There is a one-page version of this page: a plain CV, with a PDF to download.</p>
   <div class="cv-offer-actions">
-    <button type="button" class="btn btn-primary" data-offer="yes">Open recruiter view</button>
+    <a class="btn btn-sm btn-primary" href="/cv/" data-offer="yes">Open the CV</a>
     <button type="button" class="cv-offer-x" data-offer="no">Stay here</button>
   </div>
 </div>
 
+<!-- CV document: shown at /cv/, and whenever the page is printed -->
 <div id="cvDoc" class="cv-doc">
     <article class="cv-paper">
-
       <header class="cv-head">
         <div class="cv-head-main">
           <h1 class="cv-name">Mir Salman Nomaan</h1>
-          <p class="cv-headline">ICT Graduate · Cyber Security &amp; Computer Science</p>
+          <p class="cv-headline">Computer Science &amp; Cyber Security · Graduating December 2026</p>
           <p class="cv-contact"><a href="mailto:mirsalmannomaan@gmail.com">mirsalmannomaan@gmail.com</a> <i aria-hidden="true">·</i> <a href="https://linkedin.com/in/nomaan00" target="_blank" rel="noopener">linkedin.com/in/nomaan00</a> <i aria-hidden="true">·</i> <a href="https://github.com/MISAN0" target="_blank" rel="noopener">github.com/MISAN0</a> <i aria-hidden="true">·</i> <span>Hobart, Tasmania</span></p>
         </div>
+        <a class="btn btn-primary cv-dl" href="/Mir-Salman-Nomaan-CV.pdf" download="">Download PDF</a>
       </header>
 
       <div class="cv-avail">
-        <span><b>Graduating</b> Dec 2026</span>
-        <span><b>Seeking</b> graduate, ICT support and help desk roles</span>
+        <span><b>Available</b> Now, full time</span>
+        <span><b>Graduating</b> December 2026</span>
         <span><b>Location</b> Hobart, Tasmania</span>
       </div>
 
       <section class="cv-sec">
-        <h2>Professional Summary</h2>
-        <p class="cv-summary">Final-year Information and Communication Technology student at the University of Tasmania, majoring in Computer Science and Cyber Security, graduating December 2026.</p><p class="cv-summary">Builds and secures software end to end: REST APIs hardened with TLS and security headers, a Python tool that audits APIs for information disclosure, and machine learning models evaluated on imbalanced real-world data.</p><p class="cv-summary">Alongside full-time study, three years of frontline security operations, including regulated maritime access control at TasPorts.</p><p class="cv-summary">Looking for a graduate or entry-level ICT role in service desk, technical support, cyber security or networking.</p>
+        <h2>Profile</h2>
+        <p class="cv-summary">Most of what I can fix now, I broke myself first: Linux on my own machines, my own home network, and once an old Celeron desktop brought online through USB tethering off a 2G phone.</p><p class="cv-summary">Graduating in December 2026 with every unit of a Bachelor of ICT from the University of Tasmania complete, majoring in Computer Science and Cyber Security.</p><p class="cv-summary">Three years of security work alongside the degree, including access control on a regulated port under an MSIC clearance.</p><p class="cv-summary">Available now, full time, for service desk, IT support, cyber security, networking, systems or data roles.</p>
       </section>
 
       <section class="cv-sec">
         <h2>Selected Achievements</h2>
-        <ul class="cv-list cv-list-tight">
-          <li>Delivered three years of frontline security operations while studying full time, with no break in enrolment</li><li>Built a Python security auditing tool from original research spanning 13 academic and industry sources</li><li>Developed a full-stack web application of roughly 1,000 lines without relying on a framework</li><li>Shipped production-style code in seven programming languages across 11 documented projects</li><li>Implemented Dijkstra and A-star pathfinding from first principles, with no external libraries</li><li>Trained and evaluated deep learning models, including convolutional, recurrent and generative networks</li>
-        </ul>
+        <ul class="cv-list cv-list-tight"><li>Led documentation for a six-person industry capstone under NDA, from requirements to the user and reference manuals</li><li>Built and published a Python tool that audits APIs for information disclosure, grounded in 13 academic and industry sources</li><li>Built a personal AI switchboard that routes each prompt to the right model through a small local one</li><li>Three years of security operations alongside full-time study, with no break in enrolment</li><li>Implemented Dijkstra and A-star from first principles in C, with no external libraries</li></ul>
       </section>
 
       <section class="cv-sec">
         <h2>Technical Skills</h2>
         <div class="cv-skills">
           
-            <div class="cv-skill-group">
-              <h3>Programming</h3>
-              <p>Python · C · Bash / Shell · Git &amp; GitHub · Java · C# / Unity · pytest</p>
-            </div>
-            <div class="cv-skill-group">
-              <h3>Web &amp; APIs</h3>
-              <p>REST APIs · HTTP &amp; JSON · Node.js &amp; Express · FastAPI · Authentication · PHP &amp; MySQL · Input Validation · Web Scraping</p>
-            </div>
-            <div class="cv-skill-group">
-              <h3>Cyber Security</h3>
-              <p>Network Security · API Security · OWASP API Top 10 · Threat Modelling · Cryptography · TLS &amp; Certificates · Digital Forensics · Incident Response · MITM Analysis · Ethical Hacking</p>
-            </div>
-            <div class="cv-skill-group">
-              <h3>Networking</h3>
-              <p>TCP/IP · Subnetting &amp; VLSM · LAN / WAN Configuration · Routing &amp; Switching</p>
-            </div>
-            <div class="cv-skill-group">
-              <h3>Systems &amp; Servers</h3>
-              <p>Linux · Operating System Internals · Server Administration · Server Hardening · Cloud Computing</p>
-            </div>
-            <div class="cv-skill-group">
-              <h3>AI &amp; Machine Learning</h3>
-              <p>scikit-learn · TensorFlow &amp; Keras · CNNs &amp; LSTMs · PyTorch · Natural Language Processing · GANs &amp; Autoencoders · Reinforcement Learning</p>
-            </div>
-            <div class="cv-skill-group">
-              <h3>Data Engineering</h3>
-              <p>SQL · Pandas · PySpark · Hadoop &amp; MapReduce · Spark MLlib · Statistics · Data Visualisation</p>
-            </div>
-            <div class="cv-skill-group">
-              <h3>Practice &amp; Process</h3>
-              <p>Technical Writing · Agile &amp; Scrum · Research &amp; Analysis · UML Modelling · UX Evaluation · PRINCE2 · SFIA Framework</p>
-            </div>
+            <div class="cv-skill-group"><h3>Programming</h3><p>Python · C · Bash / Shell · Git &amp; GitHub · Java · C# / Unity · pytest</p></div>
+            <div class="cv-skill-group"><h3>Web &amp; APIs</h3><p>REST APIs · HTTP &amp; JSON · Node.js &amp; Express · FastAPI · Authentication · PHP &amp; MySQL · Input Validation · Web Scraping</p></div>
+            <div class="cv-skill-group"><h3>Cyber Security</h3><p>Network Security · API Security · OWASP API Top 10 · Threat Modelling · Cryptography · TLS &amp; Certificates · Digital Forensics · Incident Response · MITM Analysis · Ethical Hacking</p></div>
+            <div class="cv-skill-group"><h3>Networking</h3><p>TCP/IP · Subnetting &amp; VLSM · LAN / WAN Configuration · Routing &amp; Switching</p></div>
+            <div class="cv-skill-group"><h3>Systems &amp; Servers</h3><p>Linux · Operating System Internals · Server Administration · Server Hardening · Cloud Computing</p></div>
+            <div class="cv-skill-group"><h3>AI &amp; Machine Learning</h3><p>scikit-learn · TensorFlow &amp; Keras · CNNs &amp; LSTMs · PyTorch · Natural Language Processing · GANs &amp; Autoencoders · Reinforcement Learning · Local LLMs</p></div>
+            <div class="cv-skill-group"><h3>Data Engineering</h3><p>SQL · Pandas · PySpark · Hadoop &amp; MapReduce · Spark MLlib · Statistics · Data Visualisation</p></div>
+            <div class="cv-skill-group"><h3>Practice &amp; Process</h3><p>Technical Writing · Agile &amp; Scrum · Research &amp; Analysis · UML Modelling · UX Evaluation · PRINCE2 · SFIA Framework</p></div>
         </div>
         <div class="cv-skill-group cv-soft">
-          <h3>Professional Skills</h3>
-          <p>Communication under pressure · Team collaboration · Problem solving · Attention to detail · Time management · Customer service · Conflict de-escalation · Technical documentation · Adaptability</p>
+          <h3>Professional Skills</h3><p>Communication under pressure · Team collaboration · Problem solving · Attention to detail · Customer service · Conflict de-escalation · Technical documentation · Adaptability</p>
         </div>
       </section>
 
@@ -143,1384 +134,1156 @@
         <h2>Selected Projects</h2>
         
           <div class="cv-proj">
-            <div class="cv-role-head">
-              <h3>API Exposure Auditor <span class="cv-org">· Cyber Security Tool</span></h3>
-              <span class="cv-dates">2026</span>
-            </div>
-            <p>Audits REST API endpoints for information disclosure (exposed OpenAPI and Swagger documentation, permissive CORS policies, missing security headers) and emits structured JSON reports for triage.</p>
+            
+    <div class="cv-role-head">
+      <h3>API Exposure Auditor <span class="cv-org">· Security tool</span></h3>
+      <span class="cv-dates">2026</span>
+    </div>
+            <p>Checks an API for the mistakes that tell an attacker how it works before they send a single request: public Swagger and OpenAPI documentation, permissive CORS, missing security headers, chatty errors.</p>
             <p class="cv-tech"><b>Technologies:</b> Python, REST APIs, OpenAPI, OWASP</p>
           </div>
           <div class="cv-proj">
-            <div class="cv-role-head">
-              <h3>OpenAPI Exposure Research <span class="cv-org">· Security Research</span></h3>
-              <span class="cv-dates">2026</span>
-            </div>
-            <p>A structured investigation into the information disclosure risk created by publicly exposed Swagger and OpenAPI endpoints in production APIs, and what actually reduces it.</p>
+            
+    <div class="cv-role-head">
+      <h3>Agent trust demo <span class="cv-org">· Industry capstone · under NDA</span></h3>
+      <span class="cv-dates">2026</span>
+    </div>
+            <p>A working demo for an industry client in AI agent trust, built over a semester with a real client, real deadlines and a public showcase at the end.</p>
+            <p class="cv-tech"><b>Technologies:</b> Python, FastAPI, pytest, Agile &amp; Scrum, Technical Writing</p>
+          </div>
+          <div class="cv-proj">
+            
+    <div class="cv-role-head">
+      <h3>NOUS <span class="cv-org">· Personal AI switchboard</span></h3>
+      <span class="cv-dates">2026</span>
+    </div>
+            <p>A small local model reads each prompt and decides where it goes: Claude, Codex, or a local Llama model for the easy questions. The answer streams back into one dashboard.</p>
+            <p class="cv-tech"><b>Technologies:</b> Node.js, Hono, SQLite, React, Ollama</p>
+          </div>
+          <div class="cv-proj">
+            
+    <div class="cv-role-head">
+      <h3>OpenAPI Exposure Research <span class="cv-org">· Security research</span></h3>
+      <span class="cv-dates">2026</span>
+    </div>
+            <p>How publicly exposed Swagger and OpenAPI endpoints leak information in production APIs, and what actually reduces it.</p>
             <p class="cv-tech"><b>Technologies:</b> Research, OWASP API Top 10, CWE-200, Threat Analysis</p>
           </div>
           <div class="cv-proj">
-            <div class="cv-role-head">
-              <h3>Hardened Node.js API Server <span class="cv-org">· Backend</span></h3>
-              <span class="cv-dates">2025</span>
-            </div>
-            <p>An Express API served over HTTPS using its own TLS certificates, hardened with Helmet security headers, an explicit CORS policy, and request logging.</p>
+            
+    <div class="cv-role-head">
+      <h3>Hardened Node.js API Server <span class="cv-org">· Backend</span></h3>
+      <span class="cv-dates">2025</span>
+    </div>
+            <p>An Express API served over HTTPS with its own TLS certificates, hardened with Helmet security headers, an explicit CORS policy and request logging.</p>
             <p class="cv-tech"><b>Technologies:</b> Node.js, Express, Helmet, TLS, Cheerio</p>
-          </div>
-          <div class="cv-proj">
-            <div class="cv-role-head">
-              <h3>Spam Detection Classifier <span class="cv-org">· Machine Learning</span></h3>
-              <span class="cv-dates">2025</span>
-            </div>
-            <p>A text classifier trained on a deliberately imbalanced spam dataset, evaluated on the metrics that survive class imbalance rather than on raw accuracy.</p>
-            <p class="cv-tech"><b>Technologies:</b> TensorFlow, Keras, NLP, scikit-learn</p>
-          </div>
-          <div class="cv-proj">
-            <div class="cv-role-head">
-              <h3>Distributed Data Pipelines <span class="cv-org">· Data Engineering</span></h3>
-              <span class="cv-dates">2026</span>
-            </div>
-            <p>PySpark pipelines over multi-table flight and weather data, taking the same analysis from a single machine to a distributed engine.</p>
-            <p class="cv-tech"><b>Technologies:</b> PySpark, Hadoop, MapReduce, Spark MLlib</p>
           </div>
       </section>
 
       <section class="cv-sec">
         <h2>Education</h2>
         <div class="cv-role">
-          <div class="cv-role-head">
-            <h3>Bachelor of Information and Communication Technology<span class="cv-org"> · University of Tasmania</span></h3>
-            <span class="cv-dates">2023 – Dec 2026</span>
-          </div>
-          <p class="cv-loc">Hobart, Tasmania · Double major: Computer Science and Cyber Security</p>
+          
+    <div class="cv-role-head">
+      <h3>Bachelor of Information and Communication Technology <span class="cv-org">· University of Tasmania</span></h3>
+      <span class="cv-dates">2023 – 2026</span>
+    </div>
+          <p class="cv-loc">Hobart, Tasmania · Double major: Computer Science and Cyber Security · Coursework complete October 2026, graduating December 2026</p>
           <p class="cv-course"><b>Relevant coursework:</b> Intelligent and Secure Web Development, Advanced Cyber Security and eForensics, Cyber Security and Ethical Hacking, Cyber Security Policies and Practices, Data Networks and Security, Server Administration and Security Assurance, Operating Systems, Big Data and Cloud Computing, Machine Learning and Applications, Introduction to Data Science, Data Structures and Algorithms, ICT Project Management and Modelling</p>
         </div>
       </section>
 
       <section class="cv-sec">
         <h2>Certifications</h2>
-        <ul class="cv-list cv-list-tight">
-          <li><b>CCNA 200-301</b>: in progress, targeting Oct 2026</li><li><b>CompTIA Security+ SY0-701</b>: in progress, targeting Dec 2026</li>
-        </ul>
+        <ul class="cv-list cv-list-tight"><li>CCNA 200-301: in study, exam targeted early 2027</li></ul>
       </section>
 
       <section class="cv-sec">
         <h2>Professional Experience</h2>
         
           <div class="cv-role">
-            <div class="cv-role-head">
-              <h3>Security Officer <span class="cv-org">· Kevlar Security Services</span></h3>
-              <span class="cv-dates">2023 – Present</span>
-            </div>
-            <p class="cv-loc">Hobart, Tasmania</p>
-            <ul class="cv-list"><li>Manage crowd control at sporting events, concerts, festivals and licensed venues, maintaining public safety across large crowds</li><li>Enforce access control and static guarding across maritime, construction, retail and commercial office sites</li><li>Execute incident response and escalation procedures under pressure, documenting events for client reporting</li></ul>
+            
+    <div class="cv-role-head">
+      <h3>Security Officer <span class="cv-org">· Kevlar Security Solutions</span></h3>
+      <span class="cv-dates">Dec 2024 – Present</span>
+    </div>
+            <p class="cv-loc cv-where">Tasmania</p>
+            <ul class="cv-list"><li>Cover retail security, asset protection, events and crowd control across several client sites, each with its own procedures and reporting lines</li><li>Control access to restricted zones at TasPorts, a regulated maritime site, holding an MSIC clearance</li><li>Respond to incidents, write incident reports and escalate to management or emergency services</li></ul>
           </div>
           <div class="cv-role">
-            <div class="cv-role-head">
-              <h3>Security Officer <span class="cv-org">· MA Security</span></h3>
-              <span class="cv-dates">Dec 2023 – Dec 2025</span>
-            </div>
-            <p class="cv-loc">Hobart, Tasmania</p>
-            <ul class="cv-list"><li>Delivered maritime security at TasPorts, enforcing regulated access controls across critical port infrastructure</li><li>Conducted asset protection and undercover loss prevention, identifying and de-escalating theft incidents</li><li>Monitored surveillance systems and maintained accurate incident records for client review</li></ul>
+            
+    <div class="cv-role-head">
+      <h3>Security Officer <span class="cv-org">· MA Services Group</span></h3>
+      <span class="cv-dates">Dec 2023 – Dec 2025</span>
+    </div>
+            <p class="cv-loc cv-where">Tasmania</p>
+            <ul class="cv-list"><li>First security role, covering a range of sites before a posting to TasPorts in Nov 2024</li><li>Retained on site when the TasPorts contract transferred to Kevlar in Dec 2025</li></ul>
           </div>
           <div class="cv-role">
-            <div class="cv-role-head">
-              <h3>Retail Team Member <span class="cv-org">· Coles Supermarket</span></h3>
-              <span class="cv-dates">Oct 2023 – Present</span>
-            </div>
-            <p class="cv-loc">Hobart, Tasmania</p>
-            <ul class="cv-list"><li>Resolve customer issues in a high-volume retail environment while meeting service standards</li><li>Maintain stock accuracy and floor presentation as part of a rotating team</li></ul>
+            
+    <div class="cv-role-head">
+      <h3>Retail Team Member <span class="cv-org">· Coles Supermarket</span></h3>
+      <span class="cv-dates">Oct 2023 – Present</span>
+    </div>
+            <p class="cv-loc cv-where">Hobart, Tasmania</p>
+            <ul class="cv-list"><li>Customer service through peak trading in a high-volume store</li><li>Handle complaints and refusals without escalating them</li></ul>
           </div>
       </section>
 
-      
-
-      
       <section class="cv-sec">
         <h2>References</h2>
         <div class="cv-refs">
           
-            <div class="cv-ref">
-              <b>Dr James Montgomery</b>
-              <span>Senior Lecturer in ICT</span>
-              <em>University of Tasmania</em>
-            </div>
-            <div class="cv-ref">
-              <b>Azaz Gondal</b>
-              <span>ICT Academic Staff &amp; Cyber Security Analyst</span>
-              <em>University of Tasmania · Intuit</em>
-            </div>
-            <div class="cv-ref">
-              <b>Samuel Horton</b>
-              <span>ICT Academic Staff</span>
-              <em>University of Tasmania</em>
-            </div>
-            <div class="cv-ref">
-              <b>M Haneef</b>
-              <span>Security Manager</span>
-              <em>Kevlar Security Services</em>
-            </div>
+            <div class="cv-ref"><b>Dr James Montgomery</b><span>Senior Lecturer in ICT</span><em>University of Tasmania</em></div>
+            <div class="cv-ref"><b>Azaz Gondal</b><span>ICT Academic Staff &amp; Cyber Security Analyst</span><em>University of Tasmania · Intuit</em></div>
+            <div class="cv-ref"><b>Samuel Horton</b><span>ICT Academic Staff</span><em>University of Tasmania</em></div>
+            <div class="cv-ref"><b>M Haneef</b><span>Security Manager</span><em>Kevlar Security Solutions</em></div>
         </div>
         <p class="cv-ref-note">Contact details available on request.</p>
       </section>
 
-      <!-- Every term here also appears in the sections above; the block
-           exists so a keyword search over the page finds them all. It is
-           collapsed because as a visible slab of grey it was 134
-           characters to a line and nobody was reading it. The text stays
-           in the document either way. -->
+      <!-- Every term here also appears above; the block exists so a keyword
+           search over the page finds them all. Collapsed, not removed. -->
       <section class="cv-sec cv-sec-keywords">
         <details class="cv-keys">
-          <summary>Keyword index <span>58 terms</span></summary>
-          <p class="cv-keywords">Cyber Security · Information Security · Network Security · Application Security · Incident Response · Risk Assessment · Threat Analysis · Vulnerability Assessment · Digital Forensics · Penetration Testing · Access Control · OWASP · TCP/IP · Routing and Switching · Subnetting · Cisco IOS · Firewalls · TLS · Encryption · Linux · Windows · Server Administration · System Hardening · Help Desk · Cloud Computing · Virtualisation · Technical Support · Service Desk · Troubleshooting · Python · Java · C · C# · JavaScript · PHP · Bash · SQL · Git · REST APIs · Node.js · Express · FastAPI · MySQL · Docker · Machine Learning · Deep Learning · TensorFlow · PyTorch · Data Analysis · Pandas · PySpark · Hadoop · Data Visualisation · Agile · Scrum · PRINCE2 · Technical Documentation · Stakeholder Communication</p>
+          <summary>Keyword index <span>55 terms</span></summary>
+          <p class="cv-keywords">Cyber Security · Information Security · Network Security · Application Security · Incident Response · Risk Assessment · Threat Analysis · Vulnerability Assessment · Digital Forensics · Access Control · OWASP · TCP/IP · Routing and Switching · Subnetting · Cisco IOS · TLS · Encryption · Linux · Windows · Server Administration · System Hardening · Help Desk · Service Desk · Technical Support · Troubleshooting · Cloud Computing · Python · Java · C · C# · JavaScript · PHP · Bash · SQL · Git · REST APIs · Node.js · Express · FastAPI · MySQL · Docker · Machine Learning · Deep Learning · TensorFlow · PyTorch · Data Analysis · Pandas · PySpark · Hadoop · Data Visualisation · Agile · Scrum · PRINCE2 · Technical Documentation · Stakeholder Communication</p>
         </details>
       </section>
 
       <footer class="cv-foot">
         <span>Mir Salman Nomaan · Hobart, Tasmania</span>
-        <span>Last updated 18 September 2026</span>
+        <span>Last updated 14 November 2026</span>
       </footer>
     </article></div>
 
-<main id="top">
+<main id="main">
 
-  <!-- ── Masthead ─────────────────────────────────────── -->
-  <section class="sheet" id="home">
-    <div class="sheet-card">
-      <div class="sheet-portrait">
-        <div class="portrait-frame">
-          <img id="avatar" src="photo.jpg" alt="Mir Salman Nomaan" width="480" height="560">
-          <span class="portrait-scan" aria-hidden="true"></span>
-        </div>
-        <span class="portrait-status" id="playerStatus">Open to graduate, ICT support and help desk roles</span>
-      </div>
-
-      <div class="sheet-body">
-        <p class="sheet-eyebrow" id="playerClass">ICT Student <span class="dim">/ Cyber Security &amp; Computer Science</span></p>
-        <h1 class="sheet-name" id="playerName">Mir Salman Nomaan</h1>
-        <p class="sheet-tagline" id="playerTagline">A computer enthusiast on the road to mastery, working through cyber security, networking, and AI, one lab at a time.</p>
-
-        <ul class="sheet-chips" id="playerChips"><li style="--i:0"><span>University units passed</span><b>21</b></li><li style="--i:1"><span>Graduating</span><b>Dec 2026</b></li><li style="--i:2"><span>Based in</span><b>Hobart, Tasmania</b></li></ul>
-
-        <div class="degree" id="degree">
-          <div class="degree-head"><span class="panel-label">Degree progress</span><b id="degreeVal">87.5% complete</b></div>
-          <div class="degree-bar"><i id="degreeFill" style="--p: 0.875;"></i></div>
-          <span class="degree-note" id="degreeNote">262.5 of 300 credit points passed · Bachelor of ICT, graduating Dec 2026</span>
-        </div>
-
-        <div class="sheet-actions">
-          <a class="btn btn-primary" href="#quests">What is in progress</a>
-          <a class="btn" id="ghLink" target="_blank" rel="noopener" href="https://github.com/MISAN0">GitHub ↗</a>
-          <a class="btn" id="liLink" target="_blank" rel="noopener" href="https://linkedin.com/in/nomaan00">LinkedIn ↗</a>
-        </div>
-      </div>
+  <section class="hero wrap" id="home">
+    <figure class="hero-photo">
+      <img id="avatar" src="/photo.jpg" alt="Portrait of Mir Salman Nomaan" width="400" height="500">
+    </figure>
+    <div class="hero-text">
+      <p class="eyebrow" id="heroEyebrow">Computer Science &amp; Cyber Security · University of Tasmania</p>
+      <h1 class="hero-name" id="heroName">Mir Salman Nomaan</h1>
+      <p class="hero-hook" id="heroHook">Most of what I can fix now, I broke myself first.</p>
+      <p class="hero-intro" id="heroIntro">Graduating in December 2026 with every unit of a Bachelor of ICT complete, and three years of security work on a regulated port alongside the degree.</p>
+      <p class="avail"><span class="avail-dot" aria-hidden="true"></span><strong id="heroAvail">Available now · full time · Hobart</strong><span id="heroSeeking">Service desk, IT support, cyber security, networking, systems and data roles.</span></p>
+      <div class="hero-actions" id="heroActions">
+    <a class="btn btn-primary" href="/Mir-Salman-Nomaan-CV.pdf" download="">Download CV</a>
+    <a class="btn" href="/cv/" data-view-link="">Recruiter view</a>
+    <a class="btn btn-quiet" href="https://github.com/MISAN0" target="_blank" rel="noopener">GitHub ↗</a>
+    <a class="btn btn-quiet" href="https://linkedin.com/in/nomaan00" target="_blank" rel="noopener">LinkedIn ↗</a></div>
     </div>
   </section>
 
-  <!-- ── Quest log ─────────────────────────────────────── -->
-  <section class="section" id="quests">
+  <section class="section wrap" id="projects">
     <header class="section-head">
-      <h2 class="section-title"><span class="title-idx">01</span> In progress</h2>
-      <p class="section-sub">Certifications, projects and the job search, tracked against checkpoints. <span id="questTally" class="section-tally">5 active · 1 queued</span></p>
+      <h2>Projects</h2>
+      <p class="sub" id="projectsSub">13 projects. Source is public where it is linked (1 so far); the rest is going up one repository at a time.</p>
     </header>
-    <div class="quests" id="questList">
-    <article class="quest reveal is-active" style="--i:0">
-      <div class="quest-top">
-        <span class="quest-state">In progress</span>
-        <span class="quest-due">Oct 2026</span>
+    <div class="filters" id="projectFilters" role="group" aria-label="Filter projects by category">
+    <button type="button" class="filter on" data-cat="all" aria-pressed="true">All <b>13</b></button>
+    <button type="button" class="filter" data-cat="security" aria-pressed="false">Security <b>4</b></button><button type="button" class="filter" data-cat="software" aria-pressed="false">Software <b>3</b></button><button type="button" class="filter" data-cat="ai-and-data" aria-pressed="false">AI &amp; Data <b>3</b></button><button type="button" class="filter" data-cat="web-and-apis" aria-pressed="false">Web &amp; APIs <b>2</b></button><button type="button" class="filter" data-cat="systems" aria-pressed="false">Systems <b>1</b></button></div>
+    <div class="featured" id="projectFeatured">
+    <article class="pfeat has-image" id="p-api-exposure-auditor" data-cat="security">
+      <div class="pfeat-body">
+        <p class="ptype">Security tool</p>
+        <h3>API Exposure Auditor</h3>
+        <p class="pmeta">2026 · Solo</p>
+        <p class="pblurb">Checks an API for the mistakes that tell an attacker how it works before they send a single request: public Swagger and OpenAPI documentation, permissive CORS, missing security headers, chatty errors.</p>
+        <dl class="story"><dt>Problem</dt><dd>Published API documentation and loose server settings hand an attacker a map. Most teams never check what their own API gives away.</dd><dt>Approach</dt><dd>Read thirteen sources first, mapped the risks to the OWASP API Security Top 10 and CWE-200, then wrote one check per risk.</dd><dt>Result</dt><dd>Run against OWASP Juice Shop, a deliberately vulnerable test app, it reported 12 findings: 6 medium, 6 low, each with evidence. Output is a JSON report a pipeline can read.</dd></dl>
+        
+        <p class="stack">Python · REST APIs · OpenAPI · OWASP</p>
+        <a class="plink" href="https://github.com/MISAN0/api-exposure-auditor" target="_blank" rel="noopener">Read the code on GitHub ↗</a>
       </div>
-
-      <div class="quest-head">
-        <h3 class="quest-title">CCNA 200-301</h3>
-      </div>
-      <p class="quest-role">Cisco certification</p>
-      <p class="quest-blurb">Routing and switching on Cisco IOS: VLANs and trunking, spanning tree, OSPF, IPv4 and IPv6 addressing, NAT and DHCP, access control lists, and device hardening, configured and troubleshot in the CLI rather than just read about.</p>
-
       
-      <ul class="quest-objectives">
-        <li class="done"><i></i>Subnet any prefix in under 60 seconds</li><li class="done"><i></i>Network fundamentals and switching</li><li class=""><i></i>VLANs, trunking and spanning tree</li><li class=""><i></i>OSPFv2 configured and troubleshot from scratch</li><li class=""><i></i>Practice exams at 85% twice running</li>
-      </ul>
-
-      <div class="quest-tags"><span>Cisco IOS</span><span>Routing &amp; Switching</span><span>OSPF</span><span>Subnetting</span></div>
-
-      <div class="quest-bar" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" aria-label="CCNA 200-301 progress">
-        <i style="--p:0.4"></i>
-      </div>
-      <div class="quest-foot">
-        <span>2 of 5 objectives</span>
-        <b>40%</b>
-      </div>
-      <div class="quest-meta">
-        <span class="quest-next">Next: Section 5: TCP/UDP and the transport layer</span>
-      </div>
+      <figure class="pshot">
+        <img src="/img/auditor-scan.webp" width="800" height="1063" alt="Terminal output of a scan against OWASP Juice Shop: exposed Swagger and OpenAPI endpoints, open health and metrics endpoints, missing security headers and a permissive CORS policy, ending with 0 high, 6 medium and 6 low findings." loading="lazy" decoding="async">
+      </figure>
     </article>
-    <article class="quest reveal is-active" style="--i:1">
-      <div class="quest-top">
-        <span class="quest-state">In progress</span>
-        <span class="quest-due">Ongoing</span>
+    <article class="pfeat" id="p-industry-capstone" data-cat="software">
+      <div class="pfeat-body">
+        <p class="ptype">Industry capstone · under NDA</p>
+        <h3>Agent trust demo</h3>
+        <p class="pmeta">2026 · Team of six · documentation lead</p>
+        <p class="pblurb">A working demo for an industry client in AI agent trust, built over a semester with a real client, real deadlines and a public showcase at the end.</p>
+        <dl class="story"><dt>Brief</dt><dd>The client wanted a demo that worked, and the documents that let someone else run it and build on it.</dd><dt>My part</dt><dd>Led the documentation: requirements, sprint reports, the user manual, the reference manual, and the poster and leaflet for the public showcase.</dd><dt>Result</dt><dd>Delivered in October 2026. The final release shipped with 564 automated tests passing. The code stays private under the NDA.</dd></dl>
+        
+        <p class="stack">Python · FastAPI · pytest · Agile &amp; Scrum · Technical Writing</p>
+        
       </div>
-
-      <div class="quest-head">
-        <h3 class="quest-title">This Portfolio</h3>
-      </div>
-      <p class="quest-role">Personal project</p>
-      <p class="quest-blurb">The site you are reading. Static HTML, CSS and JavaScript with no build step and no framework; every panel renders from a single data file.</p>
-
       
-      <ul class="quest-objectives">
-        <li class="done"><i></i>Data-driven rebuild: one file drives the site</li><li class="done"><i></i>Live on a custom domain</li><li class="done"><i></i>Plain CV view for recruiters</li><li class=""><i></i>Refine every section</li>
-      </ul>
-
-      <div class="quest-tags"><span>JavaScript</span><span>CSS</span><span>SVG</span><span>Design</span></div>
-
-      <div class="quest-bar" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" aria-label="This Portfolio progress">
-        <i style="--p:0.75"></i>
-      </div>
-      <div class="quest-foot">
-        <span>3 of 4 objectives</span>
-        <b>75%</b>
-      </div>
-      <div class="quest-meta">
-        <span class="quest-next">Next: Refine each section, then keep it current</span>
-      </div>
     </article>
-    <article class="quest reveal is-active" style="--i:2">
-      <div class="quest-top">
-        <span class="quest-state">In progress</span>
-        <span class="quest-due">Dec 2026</span>
+    <article class="pfeat" id="p-nous" data-cat="ai-and-data">
+      <div class="pfeat-body">
+        <p class="ptype">Personal AI switchboard</p>
+        <h3>NOUS</h3>
+        <p class="pmeta">2026 · Solo</p>
+        <p class="pblurb">A small local model reads each prompt and decides where it goes: Claude, Codex, or a local Llama model for the easy questions. The answer streams back into one dashboard.</p>
+        
+        <ul class="points"><li>Routing done by a 4-billion-parameter model running locally, so the decision costs nothing</li><li>Server on Hono with SQLite storage; front end in React and Vite</li><li>Grew a WhatsApp assistant on a spare SIM that answers through the same router</li></ul>
+        <p class="stack">Node.js · Hono · SQLite · React · Ollama</p>
+        
       </div>
-
-      <div class="quest-head">
-        <h3 class="quest-title">CompTIA Security+ SY0-701</h3>
-      </div>
-      <p class="quest-role">Cyber security certification</p>
-      <p class="quest-blurb">The vendor-neutral security baseline: threat actors and attack types, cryptography and PKI, identity and access management, secure network and cloud architecture, incident response, digital forensics, and risk and compliance frameworks.</p>
-
       
-      <ul class="quest-objectives">
-        <li class="done"><i></i>General security concepts</li><li class="done"><i></i>Threats, vulnerabilities and mitigations</li><li class=""><i></i>Security architecture and operations</li><li class=""><i></i>Practice exams at 80% twice running</li>
-      </ul>
-
-      <div class="quest-tags"><span>Threat Analysis</span><span>Cryptography</span><span>IAM</span><span>Incident Response</span></div>
-
-      <div class="quest-bar" role="progressbar" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100" aria-label="CompTIA Security+ SY0-701 progress">
-        <i style="--p:0.5"></i>
-      </div>
-      <div class="quest-foot">
-        <span>2 of 4 objectives</span>
-        <b>50%</b>
-      </div>
-      <div class="quest-meta">
-        <span class="quest-next">Next: Threats, vulnerabilities and mitigations</span>
-      </div>
-    </article>
-    <article class="quest reveal is-active" style="--i:3">
-      <div class="quest-top">
-        <span class="quest-state">In progress</span>
-        <span class="quest-due">Ongoing</span>
-      </div>
-
-      <div class="quest-head">
-        <h3 class="quest-title">Open the Vault</h3>
-      </div>
-      <p class="quest-role">Open source</p>
-      <p class="quest-blurb">Move the projects in the Artifacts section out of local folders and onto public GitHub repositories, with credentials stripped, READMEs written and licences attached, so the code can be read rather than described.</p>
-
-      
-      <ul class="quest-objectives">
-        <li class=""><i></i>Audit every project for keys, certificates and connection strings</li><li class=""><i></i>README and licence written for each repository</li><li class=""><i></i>First three repositories public</li><li class=""><i></i>Every artifact on this page links to its source</li>
-      </ul>
-
-      <div class="quest-tags"><span>Git</span><span>GitHub</span><span>Documentation</span><span>Code Review</span></div>
-
-      <div class="quest-bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" aria-label="Open the Vault progress">
-        <i style="--p:0"></i>
-      </div>
-      <div class="quest-foot">
-        <span>0 of 4 objectives</span>
-        <b>0%</b>
-      </div>
-      <div class="quest-meta">
-        <span class="quest-next">Next: Scrub credentials, then publish the first repository</span>
-      </div>
-    </article>
-    <article class="quest reveal is-active" style="--i:4">
-      <div class="quest-top">
-        <span class="quest-state">In progress</span>
-        <span class="quest-due">2026 / 2027</span>
-      </div>
-
-      <div class="quest-head">
-        <h3 class="quest-title">First Contact</h3>
-      </div>
-      <p class="quest-role">Job search</p>
-      <p class="quest-blurb">The search for the first ICT role. Service desk, technical support, or a junior position anywhere across ICT: applications going out, interviews prepared for, and every rejection turned into a fix.</p>
-
-      
-      <ul class="quest-objectives">
-        <li class="done"><i></i>Portfolio live on its own domain</li><li class="done"><i></i>One-page CV written and downloadable</li><li class=""><i></i>Applications sent</li><li class=""><i></i>Interview reached</li><li class=""><i></i>Offer signed</li>
-      </ul>
-
-      <div class="quest-tags"><span>Service Desk</span><span>Technical Support</span><span>Interviews</span></div>
-
-      <div class="quest-bar" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" aria-label="First Contact progress">
-        <i style="--p:0.4"></i>
-      </div>
-      <div class="quest-foot">
-        <span>2 of 5 objectives</span>
-        <b>40%</b>
-      </div>
-      <div class="quest-meta">
-        <span class="quest-next">Next: Applications out to Hobart and remote graduate intakes</span>
-      </div>
-    </article>
-    <article class="quest reveal is-queued" style="--i:5">
-      <div class="quest-top">
-        <span class="quest-state">Queued</span>
-        <span class="quest-due">2027</span>
-      </div>
-
-      <div class="quest-head">
-        <h3 class="quest-title">The Home Lab</h3>
-      </div>
-      <p class="quest-role">Hands-on practice</p>
-      <p class="quest-blurb">A small lab to practise on hardware that is allowed to break: virtualised hosts, a segmented network, a firewall in front of it, and a log collector behind it. Somewhere to actually run the attacks and defences the units only describe.</p>
-
-      
-      <ul class="quest-objectives">
-        <li class=""><i></i>Hypervisor host running</li><li class=""><i></i>Segmented VLANs behind a firewall</li><li class=""><i></i>Linux and Windows servers to attack and defend</li><li class=""><i></i>Central logging and alerting</li>
-      </ul>
-
-      <div class="quest-tags"><span>Virtualisation</span><span>Firewalls</span><span>VLANs</span><span>Logging</span></div>
-
-      <div class="quest-bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" aria-label="The Home Lab progress">
-        <i style="--p:0"></i>
-      </div>
-      <div class="quest-foot">
-        <span>0 of 4 objectives</span>
-        <b>0%</b>
-      </div>
-      <div class="quest-meta">
-        <span class="quest-next">Next: Hypervisor host and the first two virtual machines</span>
-      </div>
     </article></div>
+    <h3 class="rows-title" id="rowsTitle">More projects</h3>
+    <div class="prows" id="projectRows">
+    <details class="prow" id="p-openapi-research" data-cat="security">
+      <summary>
+        <span class="prow-name">OpenAPI Exposure Research</span>
+        <span class="prow-type">Security research</span>
+        <span class="prow-year">2026</span>
+      </summary>
+      <div class="prow-body">
+        <p class="pblurb">How publicly exposed Swagger and OpenAPI endpoints leak information in production APIs, and what actually reduces it.</p>
+        <ul class="points"><li>Thirteen sources: ten peer-reviewed papers plus OWASP, MITRE CWE and the OpenAPI specification</li><li>Traced how specification-driven fuzzers turn a published schema into an attack surface</li><li>Produced the risk framing the API Exposure Auditor was then built against</li></ul>
+        <p class="stack">Research · OWASP API Top 10 · CWE-200 · Threat Analysis</p>
+        <span class="pnote">Written work, available on request</span>
+      </div>
+    </details>
+    <details class="prow" id="p-hardened-node-api" data-cat="web-and-apis">
+      <summary>
+        <span class="prow-name">Hardened Node.js API Server</span>
+        <span class="prow-type">Backend</span>
+        <span class="prow-year">2025</span>
+      </summary>
+      <div class="prow-body">
+        <p class="pblurb">An Express API served over HTTPS with its own TLS certificates, hardened with Helmet security headers, an explicit CORS policy and request logging.</p>
+        <ul class="points"><li>TLS terminated by the application itself rather than assumed from a proxy</li><li>Secure defaults applied deliberately: headers, origin policy, audit logging</li><li>Paired with a Cheerio scraper that normalises fetched pages into JSON</li></ul>
+        <p class="stack">Node.js · Express · Helmet · TLS · Cheerio</p>
+        
+      </div>
+    </details>
+    <details class="prow" id="p-spam-classifier" data-cat="ai-and-data">
+      <summary>
+        <span class="prow-name">Spam Detection Classifier</span>
+        <span class="prow-type">Machine learning</span>
+        <span class="prow-year">2025</span>
+      </summary>
+      <div class="prow-body">
+        <p class="pblurb">A text classifier trained on a deliberately imbalanced spam dataset, judged on the metrics that survive class imbalance rather than on raw accuracy.</p>
+        <ul class="points"><li>Class weighting so the minority class is not simply ignored</li><li>Assessed on ROC and precision-recall curves with confusion matrices</li><li>Seeds fixed throughout, so a rerun reproduces the reported numbers</li></ul>
+        <p class="stack">TensorFlow · Keras · NLP · scikit-learn</p>
+        
+      </div>
+    </details>
+    <details class="prow" id="p-data-pipelines" data-cat="ai-and-data">
+      <summary>
+        <span class="prow-name">Distributed Data Pipelines</span>
+        <span class="prow-type">Data engineering</span>
+        <span class="prow-year">2026</span>
+      </summary>
+      <div class="prow-body">
+        <p class="pblurb">PySpark pipelines over multi-table flight and weather data, taking the same analysis from one machine to a distributed engine.</p>
+        <ul class="points"><li>SparkSession and cluster configuration tuned for the workload</li><li>VectorAssembler feature pipelines feeding Spark MLlib classifiers</li><li>MapReduce fundamentals implemented directly, not just called</li></ul>
+        <p class="stack">PySpark · Hadoop · MapReduce · Spark MLlib</p>
+        
+      </div>
+    </details>
+    <details class="prow" id="p-php-web-app" data-cat="web-and-apis">
+      <summary>
+        <span class="prow-name">Full-Stack Web Application</span>
+        <span class="prow-type">Web application</span>
+        <span class="prow-year">2024</span>
+      </summary>
+      <div class="prow-body">
+        <p class="pblurb">A database-backed PHP application with registration and login, sessions, content creation, search and an archive: about a thousand lines, no framework.</p>
+        <ul class="points"><li>Server-side validation on every route</li><li>MySQL schema behind the create, search, archive and post views</li><li>Shared header and footer components rather than copied markup</li></ul>
+        <p class="stack">PHP · MySQL · JavaScript · Sessions</p>
+        
+      </div>
+    </details>
+    <details class="prow" id="p-graph-pathfinding" data-cat="software">
+      <summary>
+        <span class="prow-name">Graph Pathfinding Engine</span>
+        <span class="prow-type">Algorithms</span>
+        <span class="prow-year">2025</span>
+      </summary>
+      <div class="prow-body">
+        <p class="pblurb">Dijkstra and A-star written from scratch in C over a custom graph structure, with a heuristic function and explicit closed-set tracking.</p>
+        <ul class="points"><li>No library containers: the graph, queue and sets are all hand-built</li><li>Two search strategies over one structure, so their behaviour compares directly</li><li>Built alongside binary search trees, hash tables and priority queues</li></ul>
+        <p class="stack">C · Dijkstra · A-star · Data Structures</p>
+        
+      </div>
+    </details>
+    <details class="prow" id="p-incident-response" data-cat="security">
+      <summary>
+        <span class="prow-name">Incident Response &amp; Threat Analysis</span>
+        <span class="prow-type">Security analysis</span>
+        <span class="prow-year">2025</span>
+      </summary>
+      <div class="prow-body">
+        <p class="pblurb">NotPetya and the Sony Pictures compromise traced from initial access to impact, with a response plan built on the Australian Cyber Security Centre template.</p>
+        <ul class="points"><li>Attack paths reconstructed from public incident reporting</li><li>Man-in-the-middle attack analysis with practical defences</li><li>Response plan mapped to a recognised national framework</li></ul>
+        <p class="stack">Incident Response · MITM · ACSC · Forensics</p>
+        <span class="pnote">Written work, available on request</span>
+      </div>
+    </details>
+    <details class="prow" id="p-unix-records" data-cat="systems">
+      <summary>
+        <span class="prow-name">UNIX Records Manager</span>
+        <span class="prow-type">Systems</span>
+        <span class="prow-year">2024</span>
+      </summary>
+      <div class="prow-body">
+        <p class="pblurb">A POSIX shell toolset for employee records: menu-driven search, add and delete, with log rotation and a user access-deny list.</p>
+        <ul class="points"><li>Portable POSIX shell rather than bash-only syntax</li><li>Access control enforced through a deny list at the entry point</li><li>Log management handled by the tool instead of left to grow</li></ul>
+        <p class="stack">Shell · POSIX · Linux · Access Control</p>
+        
+      </div>
+    </details>
+    <details class="prow" id="p-game-ai" data-cat="software">
+      <summary>
+        <span class="prow-name">Game AI &amp; Pathfinding</span>
+        <span class="prow-type">Game development</span>
+        <span class="prow-year">2024</span>
+      </summary>
+      <div class="prow-body">
+        <p class="pblurb">A Unity game with hand-written agent AI: A-star navigation across a generated node graph, seek and wander steering, and path-following agents.</p>
+        <ul class="points"><li>Node graph generated from the level rather than placed by hand</li><li>Steering behaviours composed instead of scripted per enemy</li><li>Shipped with a playable build and a development log</li></ul>
+        <p class="stack">C# · Unity · A-star · Steering AI</p>
+        
+      </div>
+    </details>
+    <details class="prow" id="p-stego-cipher" data-cat="security">
+      <summary>
+        <span class="prow-name">Steganography &amp; Cipher Tool</span>
+        <span class="prow-type">Cryptography</span>
+        <span class="prow-year">2023</span>
+      </summary>
+      <div class="prow-body">
+        <p class="pblurb">Hides a message inside a carrier by encoding characters to binary and applying a multiplicative cipher over modular arithmetic, with a matching decoder.</p>
+        <ul class="points"><li>Encryption and extraction written as exact inverses of one another</li><li>Keys chosen so each one maps reversibly across the symbol set</li><li>Test cases written first, driving the implementation</li></ul>
+        <p class="stack">Python · Cryptography · Modular Arithmetic</p>
+        
+      </div>
+    </details></div>
   </section>
 
-  <!-- ── Goals ─────────────────────────────────────────── -->
-  <section class="section" id="goals">
+  <section class="section wrap" id="skills">
     <header class="section-head">
-      <h2 class="section-title"><span class="title-idx">02</span> Where this is going</h2>
-      <p class="section-sub">The long arc: outcomes rather than tasks, and roughly when. <span id="goalTally" class="section-tally">2 of 13 checkpoints cleared</span></p>
+      <h2>Skills, with evidence</h2>
+      <p class="sub">Every rating names the unit, certification or project it came from, so it is a citation rather than a claim. Open a skill to see the evidence and the projects that used it.</p>
     </header>
-    <div class="goals" id="goalList">
-    <article class="goal reveal is-started" style="--i:0">
-      <div class="goal-top">
-        <span class="goal-horizon">In progress</span>
-        <span class="goal-target">Dec 2026</span>
-      </div>
-
-      <h3 class="goal-title">Finish the degree</h3>
-      <p class="goal-why">The foundation everything else is built on.</p>
-      <p class="goal-detail">Bachelor of Information and Communication Technology at the University of Tasmania, double major in Computer Science and Cyber Security. 262.5 of 300 credit points cleared.</p>
-
-      <ol class="goal-steps">
-        <li class="done"><i></i>21 units passed</li><li class=""><i></i>Final two units, including the capstone</li><li class=""><i></i>Graduate</li>
-      </ol>
-
-      <div class="goal-bar" role="progressbar" aria-valuenow="33" aria-valuemin="0" aria-valuemax="100" aria-label="Finish the degree progress"><i style="--p:0.33"></i></div>
-      <span class="goal-pct">1 of 3 checkpoints</span>
-    </article>
-    <article class="goal reveal is-open" style="--i:1">
-      <div class="goal-top">
-        <span class="goal-horizon">In progress</span>
-        <span class="goal-target">Oct &amp; Dec 2026</span>
-      </div>
-
-      <h3 class="goal-title">Get certified</h3>
-      <p class="goal-why">A degree shows I can learn. A certification shows I can do the work.</p>
-      <p class="goal-detail">Networking first, then security. Vendor certifications that stand on their own in front of an employer, independent of the degree.</p>
-
-      <ol class="goal-steps">
-        <li class=""><i></i>CCNA 200-301</li><li class=""><i></i>CompTIA Security+ SY0-701</li><li class=""><i></i>CySA+ or a cloud security certification</li>
-      </ol>
-
-      <div class="goal-bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" aria-label="Get certified progress"><i style="--p:0"></i></div>
-      <span class="goal-pct">0 of 3 checkpoints</span>
-    </article>
-    <article class="goal reveal is-started" style="--i:2">
-      <div class="goal-top">
-        <span class="goal-horizon">Next</span>
-        <span class="goal-target">2026 / 2027</span>
-      </div>
-
-      <h3 class="goal-title">First role in ICT</h3>
-      <p class="goal-why">The fastest way into the industry is through the door. Specialisation comes after.</p>
-      <p class="goal-detail">Service desk, technical support, or a junior role anywhere across ICT, cyber security, networking, or AI. Australia-based, and ready to start at the bottom of a good team.</p>
-
-      <ol class="goal-steps">
-        <li class="done"><i></i>Portfolio live</li><li class=""><i></i>CV ready and applications out</li><li class=""><i></i>First ICT role</li>
-      </ol>
-
-      <div class="goal-bar" role="progressbar" aria-valuenow="33" aria-valuemin="0" aria-valuemax="100" aria-label="First role in ICT progress"><i style="--p:0.33"></i></div>
-      <span class="goal-pct">1 of 3 checkpoints</span>
-    </article>
-    <article class="goal reveal is-open" style="--i:3">
-      <div class="goal-top">
-        <span class="goal-horizon">Longer term</span>
-        <span class="goal-target">2028 onward</span>
-      </div>
-
-      <h3 class="goal-title">Become the person on call</h3>
-      <p class="goal-why">Support teaches you the systems. Operations is where you defend them.</p>
-      <p class="goal-detail">Move off the service desk and into a security operations or network team: triaging real alerts, reading real packet captures, and owning a slice of the infrastructure. Long enough in that seat to be the one others escalate to, rather than the one escalating.</p>
-
-      <ol class="goal-steps">
-        <li class=""><i></i>Two years of hands-on ICT experience</li><li class=""><i></i>Move into a SOC, network or infrastructure team</li><li class=""><i></i>CySA+ or CCNP Security on top of real work</li><li class=""><i></i>Own an incident end to end</li>
-      </ol>
-
-      <div class="goal-bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" aria-label="Become the person on call progress"><i style="--p:0"></i></div>
-      <span class="goal-pct">0 of 4 checkpoints</span>
-    </article></div>
-  </section>
-
-  <!-- ── Skill tree ────────────────────────────────────── -->
-  <section class="section" id="skills">
-    <header class="section-head">
-      <h2 class="section-title"><span class="title-idx">03</span> Skills, with evidence</h2>
-      <p class="section-sub">Every skill carries the unit, certification, or project it came from, so the rating is a citation, not a claim.</p>
-      <div class="legend" id="skillLegend">
-    
-      <span class="legend-item">
-        <span class="node-pips"><i class="on"></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i></span>
-        Aware
-      </span>
-      <span class="legend-item">
-        <span class="node-pips"><i class="on"></i><i class="on"></i><i class=""></i><i class=""></i><i class=""></i></span>
-        Familiar
-      </span>
-      <span class="legend-item">
-        <span class="node-pips"><i class="on"></i><i class="on"></i><i class="on"></i><i class=""></i><i class=""></i></span>
-        Working
-      </span>
-      <span class="legend-item">
-        <span class="node-pips"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class=""></i></span>
-        Confident
-      </span>
-      <span class="legend-item">
-        <span class="node-pips"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i></span>
-        Strong
-      </span>
-    <span class="legend-item legend-locked">Next to learn</span></div>
-    </header>
-    <button class="tree-toggle" data-action="open">Expand all branches</button><div class="tree" id="skillTree">
-    <details class="branch reveal" style="--i:0" data-branch="Cyber Security" open="">
+    <div class="skill-tools">
+      <div class="legend" id="skillLegend"><span class="legend-item"><span class="pips" role="img" aria-label="Aware, 1 of 5"><i class="on"></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i></span> Aware</span><span class="legend-item"><span class="pips" role="img" aria-label="Familiar, 2 of 5"><i class="on"></i><i class="on"></i><i class=""></i><i class=""></i><i class=""></i></span> Familiar</span><span class="legend-item"><span class="pips" role="img" aria-label="Working, 3 of 5"><i class="on"></i><i class="on"></i><i class="on"></i><i class=""></i><i class=""></i></span> Working</span><span class="legend-item"><span class="pips" role="img" aria-label="Confident, 4 of 5"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class=""></i></span> Confident</span><span class="legend-item"><span class="pips" role="img" aria-label="Strong, 5 of 5"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i></span> Strong</span></div>
+      <button type="button" class="tree-toggle" id="treeToggle">Expand all</button>
+    </div>
+    <div class="tree" id="skillTree">
+    <details class="branch" open="">
       <summary class="branch-head">
-        <h3 class="branch-name">Cyber Security</h3>
-        <span class="branch-count" title="10 skills, 2 at Confident or above">
-          10 · 2 strong
-        </span>
-        <span class="branch-chev" aria-hidden="true"></span>
+        <h3>Cyber Security</h3>
+        <span class="branch-count">10 skills</span>
       </summary>
       <p class="branch-note">Defensive and offensive work across the same systems: finding the weakness, then closing it.</p>
-      <div class="branch-nodes">
+      <div class="nodes">
         
-          <button type="button" class="node " aria-expanded="false" data-tip="Confident · KIT304: Server Administration &amp; Security Assurance">
-            <span class="node-name">API Security</span>
-            <span class="node-level">Confident</span>
-            <span class="node-evidence">KIT304</span>
-            <span class="node-pips" role="img" aria-label="Confident, 4 of 5"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class=""></i></span>
-            <span class="node-detail"><span><b>Confident</b>. Evidence: KIT304: Server Administration &amp; Security Assurance</span></span>
-          </button>
-          <button type="button" class="node " aria-expanded="false" data-tip="Confident · KIT111: Data Networks &amp; Security · KIT215: Cybersecurity &amp; Ethical Hacking">
-            <span class="node-name">Network Security</span>
-            <span class="node-level">Confident</span>
-            <span class="node-evidence">KIT111 · KIT215</span>
-            <span class="node-pips" role="img" aria-label="Confident, 4 of 5"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class=""></i></span>
-            <span class="node-detail"><span><b>Confident</b>. Evidence: KIT111: Data Networks &amp; Security · KIT215: Cybersecurity &amp; Ethical Hacking</span></span>
-          </button>
-          <button type="button" class="node " aria-expanded="false" data-tip="Working · KIT103: Computational Science · KIT214: Intelligent &amp; Secure Web Development">
-            <span class="node-name">Cryptography</span>
-            <span class="node-level">Working</span>
-            <span class="node-evidence">KIT103 · KIT214</span>
-            <span class="node-pips" role="img" aria-label="Working, 3 of 5"><i class="on"></i><i class="on"></i><i class="on"></i><i class=""></i><i class=""></i></span>
-            <span class="node-detail"><span><b>Working</b>. Evidence: KIT103: Computational Science · KIT214: Intelligent &amp; Secure Web Development</span></span>
-          </button>
-          <button type="button" class="node " aria-expanded="false" data-tip="Working · KIT325: Advanced Cybersecurity &amp; eForensics">
-            <span class="node-name">Digital Forensics</span>
-            <span class="node-level">Working</span>
-            <span class="node-evidence">KIT325</span>
-            <span class="node-pips" role="img" aria-label="Working, 3 of 5"><i class="on"></i><i class="on"></i><i class="on"></i><i class=""></i><i class=""></i></span>
-            <span class="node-detail"><span><b>Working</b>. Evidence: KIT325: Advanced Cybersecurity &amp; eForensics</span></span>
-          </button>
-          <button type="button" class="node " aria-expanded="false" data-tip="Working · KIT215: Cybersecurity &amp; Ethical Hacking">
-            <span class="node-name">Ethical Hacking</span>
-            <span class="node-level">Working</span>
-            <span class="node-evidence">KIT215</span>
-            <span class="node-pips" role="img" aria-label="Working, 3 of 5"><i class="on"></i><i class="on"></i><i class="on"></i><i class=""></i><i class=""></i></span>
-            <span class="node-detail"><span><b>Working</b>. Evidence: KIT215: Cybersecurity &amp; Ethical Hacking</span></span>
-          </button>
-          <button type="button" class="node " aria-expanded="false" data-tip="Working · KIT325: Advanced Cybersecurity &amp; eForensics">
-            <span class="node-name">Incident Response</span>
-            <span class="node-level">Working</span>
-            <span class="node-evidence">KIT325</span>
-            <span class="node-pips" role="img" aria-label="Working, 3 of 5"><i class="on"></i><i class="on"></i><i class="on"></i><i class=""></i><i class=""></i></span>
-            <span class="node-detail"><span><b>Working</b>. Evidence: KIT325: Advanced Cybersecurity &amp; eForensics</span></span>
-          </button>
-          <button type="button" class="node " aria-expanded="false" data-tip="Working · KIT325: Advanced Cybersecurity &amp; eForensics">
-            <span class="node-name">MITM Analysis</span>
-            <span class="node-level">Working</span>
-            <span class="node-evidence">KIT325</span>
-            <span class="node-pips" role="img" aria-label="Working, 3 of 5"><i class="on"></i><i class="on"></i><i class="on"></i><i class=""></i><i class=""></i></span>
-            <span class="node-detail"><span><b>Working</b>. Evidence: KIT325: Advanced Cybersecurity &amp; eForensics</span></span>
-          </button>
-          <button type="button" class="node " aria-expanded="false" data-tip="Working · KIT304 research">
-            <span class="node-name">OWASP API Top 10</span>
-            <span class="node-level">Working</span>
-            <span class="node-evidence">KIT304 research</span>
-            <span class="node-pips" role="img" aria-label="Working, 3 of 5"><i class="on"></i><i class="on"></i><i class="on"></i><i class=""></i><i class=""></i></span>
-            <span class="node-detail"><span><b>Working</b>. Evidence: KIT304 research</span></span>
-          </button>
-          <button type="button" class="node " aria-expanded="false" data-tip="Working · KIT304 research">
-            <span class="node-name">Threat Modelling</span>
-            <span class="node-level">Working</span>
-            <span class="node-evidence">KIT304 research</span>
-            <span class="node-pips" role="img" aria-label="Working, 3 of 5"><i class="on"></i><i class="on"></i><i class="on"></i><i class=""></i><i class=""></i></span>
-            <span class="node-detail"><span><b>Working</b>. Evidence: KIT304 research</span></span>
-          </button>
-          <button type="button" class="node " aria-expanded="false" data-tip="Working · KIT214: Intelligent &amp; Secure Web Development">
-            <span class="node-name">TLS &amp; Certificates</span>
-            <span class="node-level">Working</span>
-            <span class="node-evidence">KIT214</span>
-            <span class="node-pips" role="img" aria-label="Working, 3 of 5"><i class="on"></i><i class="on"></i><i class="on"></i><i class=""></i><i class=""></i></span>
-            <span class="node-detail"><span><b>Working</b>. Evidence: KIT214: Intelligent &amp; Secure Web Development</span></span>
-          </button>
-          <button type="button" class="node locked" aria-expanded="false" data-tip="Not started · Next unlock">
-            <span class="node-name">Cloud Security</span>
-            <span class="node-level">Not started</span>
-            <span class="node-evidence">Next unlock</span>
-            <span class="node-pips" role="img" aria-label="Not started, 0 of 5"><i class=""></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i></span>
-            <span class="node-detail"><span><b>Not started</b>. Evidence: Next unlock</span></span>
-          </button>
+          <div class="node">
+            <button type="button" class="node-head" aria-expanded="false" data-tip="Confident · KIT304: Server Administration &amp; Security Assurance">
+              <span class="node-name">API Security</span>
+              <span class="node-level">Confident</span>
+              <span class="node-ev">KIT304</span>
+              <span class="pips" role="img" aria-label="Confident, 4 of 5"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class=""></i></span>
+            </button>
+            <div class="node-detail"><p>Evidence: KIT304: Server Administration &amp; Security Assurance. Used in <a href="#p-api-exposure-auditor">API Exposure Auditor</a>.</p></div>
+          </div>
+          <div class="node">
+            <button type="button" class="node-head" aria-expanded="false" data-tip="Confident · KIT111: Data Networks &amp; Security · KIT215: Cybersecurity &amp; Ethical Hacking">
+              <span class="node-name">Network Security</span>
+              <span class="node-level">Confident</span>
+              <span class="node-ev">KIT111 · KIT215</span>
+              <span class="pips" role="img" aria-label="Confident, 4 of 5"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class=""></i></span>
+            </button>
+            <div class="node-detail"><p>Evidence: KIT111: Data Networks &amp; Security · KIT215: Cybersecurity &amp; Ethical Hacking.</p></div>
+          </div>
+          <div class="node">
+            <button type="button" class="node-head" aria-expanded="false" data-tip="Working · KIT103: Computational Science · KIT214: Intelligent &amp; Secure Web Development">
+              <span class="node-name">Cryptography</span>
+              <span class="node-level">Working</span>
+              <span class="node-ev">KIT103 · KIT214</span>
+              <span class="pips" role="img" aria-label="Working, 3 of 5"><i class="on"></i><i class="on"></i><i class="on"></i><i class=""></i><i class=""></i></span>
+            </button>
+            <div class="node-detail"><p>Evidence: KIT103: Computational Science · KIT214: Intelligent &amp; Secure Web Development. Used in <a href="#p-stego-cipher">Steganography &amp; Cipher Tool</a>.</p></div>
+          </div>
+          <div class="node">
+            <button type="button" class="node-head" aria-expanded="false" data-tip="Working · KIT325: Advanced Cybersecurity &amp; eForensics">
+              <span class="node-name">Digital Forensics</span>
+              <span class="node-level">Working</span>
+              <span class="node-ev">KIT325</span>
+              <span class="pips" role="img" aria-label="Working, 3 of 5"><i class="on"></i><i class="on"></i><i class="on"></i><i class=""></i><i class=""></i></span>
+            </button>
+            <div class="node-detail"><p>Evidence: KIT325: Advanced Cybersecurity &amp; eForensics. Used in <a href="#p-incident-response">Incident Response &amp; Threat Analysis</a>.</p></div>
+          </div>
+          <div class="node">
+            <button type="button" class="node-head" aria-expanded="false" data-tip="Working · KIT215: Cybersecurity &amp; Ethical Hacking">
+              <span class="node-name">Ethical Hacking</span>
+              <span class="node-level">Working</span>
+              <span class="node-ev">KIT215</span>
+              <span class="pips" role="img" aria-label="Working, 3 of 5"><i class="on"></i><i class="on"></i><i class="on"></i><i class=""></i><i class=""></i></span>
+            </button>
+            <div class="node-detail"><p>Evidence: KIT215: Cybersecurity &amp; Ethical Hacking.</p></div>
+          </div>
+          <div class="node">
+            <button type="button" class="node-head" aria-expanded="false" data-tip="Working · KIT325: Advanced Cybersecurity &amp; eForensics">
+              <span class="node-name">Incident Response</span>
+              <span class="node-level">Working</span>
+              <span class="node-ev">KIT325</span>
+              <span class="pips" role="img" aria-label="Working, 3 of 5"><i class="on"></i><i class="on"></i><i class="on"></i><i class=""></i><i class=""></i></span>
+            </button>
+            <div class="node-detail"><p>Evidence: KIT325: Advanced Cybersecurity &amp; eForensics. Used in <a href="#p-incident-response">Incident Response &amp; Threat Analysis</a>.</p></div>
+          </div>
+          <div class="node">
+            <button type="button" class="node-head" aria-expanded="false" data-tip="Working · KIT325: Advanced Cybersecurity &amp; eForensics">
+              <span class="node-name">MITM Analysis</span>
+              <span class="node-level">Working</span>
+              <span class="node-ev">KIT325</span>
+              <span class="pips" role="img" aria-label="Working, 3 of 5"><i class="on"></i><i class="on"></i><i class="on"></i><i class=""></i><i class=""></i></span>
+            </button>
+            <div class="node-detail"><p>Evidence: KIT325: Advanced Cybersecurity &amp; eForensics. Used in <a href="#p-incident-response">Incident Response &amp; Threat Analysis</a>.</p></div>
+          </div>
+          <div class="node">
+            <button type="button" class="node-head" aria-expanded="false" data-tip="Working · KIT304 research">
+              <span class="node-name">OWASP API Top 10</span>
+              <span class="node-level">Working</span>
+              <span class="node-ev">KIT304 research</span>
+              <span class="pips" role="img" aria-label="Working, 3 of 5"><i class="on"></i><i class="on"></i><i class="on"></i><i class=""></i><i class=""></i></span>
+            </button>
+            <div class="node-detail"><p>Evidence: KIT304 research. Used in <a href="#p-openapi-research">OpenAPI Exposure Research</a>.</p></div>
+          </div>
+          <div class="node">
+            <button type="button" class="node-head" aria-expanded="false" data-tip="Working · KIT304 research">
+              <span class="node-name">Threat Modelling</span>
+              <span class="node-level">Working</span>
+              <span class="node-ev">KIT304 research</span>
+              <span class="pips" role="img" aria-label="Working, 3 of 5"><i class="on"></i><i class="on"></i><i class="on"></i><i class=""></i><i class=""></i></span>
+            </button>
+            <div class="node-detail"><p>Evidence: KIT304 research. Used in <a href="#p-openapi-research">OpenAPI Exposure Research</a>.</p></div>
+          </div>
+          <div class="node">
+            <button type="button" class="node-head" aria-expanded="false" data-tip="Working · KIT214: Intelligent &amp; Secure Web Development">
+              <span class="node-name">TLS &amp; Certificates</span>
+              <span class="node-level">Working</span>
+              <span class="node-ev">KIT214</span>
+              <span class="pips" role="img" aria-label="Working, 3 of 5"><i class="on"></i><i class="on"></i><i class="on"></i><i class=""></i><i class=""></i></span>
+            </button>
+            <div class="node-detail"><p>Evidence: KIT214: Intelligent &amp; Secure Web Development. Used in <a href="#p-hardened-node-api">Hardened Node.js API Server</a>.</p></div>
+          </div>
+          <div class="node next">
+            <button type="button" class="node-head" aria-expanded="false" data-tip="Next to learn">
+              <span class="node-name">Cloud Security</span>
+              <span class="node-level">Next to learn</span>
+              
+              <span class="pips" role="img" aria-label="Next to learn, 0 of 5"><i class=""></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i></span>
+            </button>
+            <div class="node-detail"><p>Not started yet.</p></div>
+          </div>
       </div>
-      <p class="branch-next">Learning next: Cloud Security</p>
     </details>
-    <details class="branch reveal" style="--i:1" data-branch="Networking" open="">
+    <details class="branch" open="">
       <summary class="branch-head">
-        <h3 class="branch-name">Networking</h3>
-        <span class="branch-count" title="5 skills, 2 at Confident or above">
-          5 · 2 strong
-        </span>
-        <span class="branch-chev" aria-hidden="true"></span>
+        <h3>Networking</h3>
+        <span class="branch-count">5 skills</span>
       </summary>
       <p class="branch-note">The layer everything else runs on. Addressing, routing and switching, learnt in the CLI.</p>
-      <div class="branch-nodes">
+      <div class="nodes">
         
-          <button type="button" class="node " aria-expanded="false" data-tip="Confident · CCNA">
-            <span class="node-name">Subnetting &amp; VLSM</span>
-            <span class="node-level">Confident</span>
-            <span class="node-evidence">CCNA</span>
-            <span class="node-pips" role="img" aria-label="Confident, 4 of 5"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class=""></i></span>
-            <span class="node-detail"><span><b>Confident</b>. Evidence: CCNA</span></span>
-          </button>
-          <button type="button" class="node " aria-expanded="false" data-tip="Confident · KIT111: Data Networks &amp; Security · KIT213: Operating Systems">
-            <span class="node-name">TCP/IP</span>
-            <span class="node-level">Confident</span>
-            <span class="node-evidence">KIT111 · KIT213</span>
-            <span class="node-pips" role="img" aria-label="Confident, 4 of 5"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class=""></i></span>
-            <span class="node-detail"><span><b>Confident</b>. Evidence: KIT111: Data Networks &amp; Security · KIT213: Operating Systems</span></span>
-          </button>
-          <button type="button" class="node " aria-expanded="false" data-tip="Working · KIT111: Data Networks &amp; Security">
-            <span class="node-name">LAN / WAN Configuration</span>
-            <span class="node-level">Working</span>
-            <span class="node-evidence">KIT111</span>
-            <span class="node-pips" role="img" aria-label="Working, 3 of 5"><i class="on"></i><i class="on"></i><i class="on"></i><i class=""></i><i class=""></i></span>
-            <span class="node-detail"><span><b>Working</b>. Evidence: KIT111: Data Networks &amp; Security</span></span>
-          </button>
-          <button type="button" class="node " aria-expanded="false" data-tip="Working · CCNA">
-            <span class="node-name">Routing &amp; Switching</span>
-            <span class="node-level">Working</span>
-            <span class="node-evidence">CCNA</span>
-            <span class="node-pips" role="img" aria-label="Working, 3 of 5"><i class="on"></i><i class="on"></i><i class="on"></i><i class=""></i><i class=""></i></span>
-            <span class="node-detail"><span><b>Working</b>. Evidence: CCNA</span></span>
-          </button>
-          <button type="button" class="node " aria-expanded="false" data-tip="Familiar · CCNA">
-            <span class="node-name">Cisco IOS</span>
-            <span class="node-level">Familiar</span>
-            <span class="node-evidence">CCNA</span>
-            <span class="node-pips" role="img" aria-label="Familiar, 2 of 5"><i class="on"></i><i class="on"></i><i class=""></i><i class=""></i><i class=""></i></span>
-            <span class="node-detail"><span><b>Familiar</b>. Evidence: CCNA</span></span>
-          </button>
-          <button type="button" class="node locked" aria-expanded="false" data-tip="Not started · Next unlock">
-            <span class="node-name">OSPF</span>
-            <span class="node-level">Not started</span>
-            <span class="node-evidence">Next unlock</span>
-            <span class="node-pips" role="img" aria-label="Not started, 0 of 5"><i class=""></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i></span>
-            <span class="node-detail"><span><b>Not started</b>. Evidence: Next unlock</span></span>
-          </button>
+          <div class="node">
+            <button type="button" class="node-head" aria-expanded="false" data-tip="Confident · CCNA">
+              <span class="node-name">Subnetting &amp; VLSM</span>
+              <span class="node-level">Confident</span>
+              <span class="node-ev">CCNA</span>
+              <span class="pips" role="img" aria-label="Confident, 4 of 5"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class=""></i></span>
+            </button>
+            <div class="node-detail"><p>Evidence: CCNA.</p></div>
+          </div>
+          <div class="node">
+            <button type="button" class="node-head" aria-expanded="false" data-tip="Confident · KIT111: Data Networks &amp; Security · KIT213: Operating Systems">
+              <span class="node-name">TCP/IP</span>
+              <span class="node-level">Confident</span>
+              <span class="node-ev">KIT111 · KIT213</span>
+              <span class="pips" role="img" aria-label="Confident, 4 of 5"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class=""></i></span>
+            </button>
+            <div class="node-detail"><p>Evidence: KIT111: Data Networks &amp; Security · KIT213: Operating Systems.</p></div>
+          </div>
+          <div class="node">
+            <button type="button" class="node-head" aria-expanded="false" data-tip="Working · KIT111: Data Networks &amp; Security">
+              <span class="node-name">LAN / WAN Configuration</span>
+              <span class="node-level">Working</span>
+              <span class="node-ev">KIT111</span>
+              <span class="pips" role="img" aria-label="Working, 3 of 5"><i class="on"></i><i class="on"></i><i class="on"></i><i class=""></i><i class=""></i></span>
+            </button>
+            <div class="node-detail"><p>Evidence: KIT111: Data Networks &amp; Security.</p></div>
+          </div>
+          <div class="node">
+            <button type="button" class="node-head" aria-expanded="false" data-tip="Working · CCNA">
+              <span class="node-name">Routing &amp; Switching</span>
+              <span class="node-level">Working</span>
+              <span class="node-ev">CCNA</span>
+              <span class="pips" role="img" aria-label="Working, 3 of 5"><i class="on"></i><i class="on"></i><i class="on"></i><i class=""></i><i class=""></i></span>
+            </button>
+            <div class="node-detail"><p>Evidence: CCNA.</p></div>
+          </div>
+          <div class="node">
+            <button type="button" class="node-head" aria-expanded="false" data-tip="Familiar · CCNA">
+              <span class="node-name">Cisco IOS</span>
+              <span class="node-level">Familiar</span>
+              <span class="node-ev">CCNA</span>
+              <span class="pips" role="img" aria-label="Familiar, 2 of 5"><i class="on"></i><i class="on"></i><i class=""></i><i class=""></i><i class=""></i></span>
+            </button>
+            <div class="node-detail"><p>Evidence: CCNA.</p></div>
+          </div>
+          <div class="node next">
+            <button type="button" class="node-head" aria-expanded="false" data-tip="Next to learn">
+              <span class="node-name">OSPF</span>
+              <span class="node-level">Next to learn</span>
+              
+              <span class="pips" role="img" aria-label="Next to learn, 0 of 5"><i class=""></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i></span>
+            </button>
+            <div class="node-detail"><p>Not started yet.</p></div>
+          </div>
       </div>
-      <p class="branch-next">Learning next: OSPF</p>
     </details>
-    <details class="branch reveal" style="--i:2" data-branch="Systems &amp; Servers">
+    <details class="branch">
       <summary class="branch-head">
-        <h3 class="branch-name">Systems &amp; Servers</h3>
-        <span class="branch-count" title="5 skills, 2 at Confident or above">
-          5 · 2 strong
-        </span>
-        <span class="branch-chev" aria-hidden="true"></span>
+        <h3>Systems &amp; Servers</h3>
+        <span class="branch-count">5 skills</span>
       </summary>
       <p class="branch-note">What happens under the application: processes, memory, filesystems, and the servers they run on.</p>
-      <div class="branch-nodes">
+      <div class="nodes">
         
-          <button type="button" class="node " aria-expanded="false" data-tip="Confident · KIT213: Operating Systems">
-            <span class="node-name">Linux</span>
-            <span class="node-level">Confident</span>
-            <span class="node-evidence">KIT213</span>
-            <span class="node-pips" role="img" aria-label="Confident, 4 of 5"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class=""></i></span>
-            <span class="node-detail"><span><b>Confident</b>. Evidence: KIT213: Operating Systems</span></span>
-          </button>
-          <button type="button" class="node " aria-expanded="false" data-tip="Confident · KIT213: Operating Systems">
-            <span class="node-name">Operating System Internals</span>
-            <span class="node-level">Confident</span>
-            <span class="node-evidence">KIT213</span>
-            <span class="node-pips" role="img" aria-label="Confident, 4 of 5"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class=""></i></span>
-            <span class="node-detail"><span><b>Confident</b>. Evidence: KIT213: Operating Systems</span></span>
-          </button>
-          <button type="button" class="node " aria-expanded="false" data-tip="Working · KIT318: Big Data &amp; Cloud Computing">
-            <span class="node-name">Cloud Computing</span>
-            <span class="node-level">Working</span>
-            <span class="node-evidence">KIT318</span>
-            <span class="node-pips" role="img" aria-label="Working, 3 of 5"><i class="on"></i><i class="on"></i><i class="on"></i><i class=""></i><i class=""></i></span>
-            <span class="node-detail"><span><b>Working</b>. Evidence: KIT318: Big Data &amp; Cloud Computing</span></span>
-          </button>
-          <button type="button" class="node " aria-expanded="false" data-tip="Working · KIT304: Server Administration &amp; Security Assurance">
-            <span class="node-name">Server Administration</span>
-            <span class="node-level">Working</span>
-            <span class="node-evidence">KIT304</span>
-            <span class="node-pips" role="img" aria-label="Working, 3 of 5"><i class="on"></i><i class="on"></i><i class="on"></i><i class=""></i><i class=""></i></span>
-            <span class="node-detail"><span><b>Working</b>. Evidence: KIT304: Server Administration &amp; Security Assurance</span></span>
-          </button>
-          <button type="button" class="node " aria-expanded="false" data-tip="Working · KIT304: Server Administration &amp; Security Assurance">
-            <span class="node-name">Server Hardening</span>
-            <span class="node-level">Working</span>
-            <span class="node-evidence">KIT304</span>
-            <span class="node-pips" role="img" aria-label="Working, 3 of 5"><i class="on"></i><i class="on"></i><i class="on"></i><i class=""></i><i class=""></i></span>
-            <span class="node-detail"><span><b>Working</b>. Evidence: KIT304: Server Administration &amp; Security Assurance</span></span>
-          </button>
-          <button type="button" class="node locked" aria-expanded="false" data-tip="Not started · Next unlock">
-            <span class="node-name">Kubernetes</span>
-            <span class="node-level">Not started</span>
-            <span class="node-evidence">Next unlock</span>
-            <span class="node-pips" role="img" aria-label="Not started, 0 of 5"><i class=""></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i></span>
-            <span class="node-detail"><span><b>Not started</b>. Evidence: Next unlock</span></span>
-          </button>
+          <div class="node">
+            <button type="button" class="node-head" aria-expanded="false" data-tip="Confident · KIT213: Operating Systems">
+              <span class="node-name">Linux</span>
+              <span class="node-level">Confident</span>
+              <span class="node-ev">KIT213</span>
+              <span class="pips" role="img" aria-label="Confident, 4 of 5"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class=""></i></span>
+            </button>
+            <div class="node-detail"><p>Evidence: KIT213: Operating Systems. Used in <a href="#p-unix-records">UNIX Records Manager</a>.</p></div>
+          </div>
+          <div class="node">
+            <button type="button" class="node-head" aria-expanded="false" data-tip="Confident · KIT213: Operating Systems">
+              <span class="node-name">Operating System Internals</span>
+              <span class="node-level">Confident</span>
+              <span class="node-ev">KIT213</span>
+              <span class="pips" role="img" aria-label="Confident, 4 of 5"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class=""></i></span>
+            </button>
+            <div class="node-detail"><p>Evidence: KIT213: Operating Systems.</p></div>
+          </div>
+          <div class="node">
+            <button type="button" class="node-head" aria-expanded="false" data-tip="Working · KIT318: Big Data &amp; Cloud Computing">
+              <span class="node-name">Cloud Computing</span>
+              <span class="node-level">Working</span>
+              <span class="node-ev">KIT318</span>
+              <span class="pips" role="img" aria-label="Working, 3 of 5"><i class="on"></i><i class="on"></i><i class="on"></i><i class=""></i><i class=""></i></span>
+            </button>
+            <div class="node-detail"><p>Evidence: KIT318: Big Data &amp; Cloud Computing.</p></div>
+          </div>
+          <div class="node">
+            <button type="button" class="node-head" aria-expanded="false" data-tip="Working · KIT304: Server Administration &amp; Security Assurance">
+              <span class="node-name">Server Administration</span>
+              <span class="node-level">Working</span>
+              <span class="node-ev">KIT304</span>
+              <span class="pips" role="img" aria-label="Working, 3 of 5"><i class="on"></i><i class="on"></i><i class="on"></i><i class=""></i><i class=""></i></span>
+            </button>
+            <div class="node-detail"><p>Evidence: KIT304: Server Administration &amp; Security Assurance.</p></div>
+          </div>
+          <div class="node">
+            <button type="button" class="node-head" aria-expanded="false" data-tip="Working · KIT304: Server Administration &amp; Security Assurance">
+              <span class="node-name">Server Hardening</span>
+              <span class="node-level">Working</span>
+              <span class="node-ev">KIT304</span>
+              <span class="pips" role="img" aria-label="Working, 3 of 5"><i class="on"></i><i class="on"></i><i class="on"></i><i class=""></i><i class=""></i></span>
+            </button>
+            <div class="node-detail"><p>Evidence: KIT304: Server Administration &amp; Security Assurance. Used in <a href="#p-hardened-node-api">Hardened Node.js API Server</a>.</p></div>
+          </div>
+          <div class="node next">
+            <button type="button" class="node-head" aria-expanded="false" data-tip="Next to learn">
+              <span class="node-name">Kubernetes</span>
+              <span class="node-level">Next to learn</span>
+              
+              <span class="pips" role="img" aria-label="Next to learn, 0 of 5"><i class=""></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i></span>
+            </button>
+            <div class="node-detail"><p>Not started yet.</p></div>
+          </div>
       </div>
-      <p class="branch-next">Learning next: Kubernetes</p>
     </details>
-    <details class="branch reveal" style="--i:3" data-branch="Programming">
+    <details class="branch">
       <summary class="branch-head">
-        <h3 class="branch-name">Programming</h3>
-        <span class="branch-count" title="8 skills, 4 at Confident or above">
-          8 · 4 strong
-        </span>
-        <span class="branch-chev" aria-hidden="true"></span>
+        <h3>Programming</h3>
+        <span class="branch-count">8 skills</span>
       </summary>
       <p class="branch-note">Languages picked up per problem rather than per fashion: systems work in C, everything else in Python.</p>
-      <div class="branch-nodes">
+      <div class="nodes">
         
-          <button type="button" class="node " aria-expanded="false" data-tip="Strong · KIT101: Programming Fundamentals · KIT315: Machine Learning &amp; Applications">
-            <span class="node-name">Python</span>
-            <span class="node-level">Strong</span>
-            <span class="node-evidence">KIT101 · KIT315</span>
-            <span class="node-pips" role="img" aria-label="Strong, 5 of 5"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i></span>
-            <span class="node-detail"><span><b>Strong</b>. Evidence: KIT101: Programming Fundamentals · KIT315: Machine Learning &amp; Applications</span></span>
-          </button>
-          <button type="button" class="node " aria-expanded="false" data-tip="Confident · KIT213: Operating Systems">
-            <span class="node-name">Bash / Shell</span>
-            <span class="node-level">Confident</span>
-            <span class="node-evidence">KIT213</span>
-            <span class="node-pips" role="img" aria-label="Confident, 4 of 5"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class=""></i></span>
-            <span class="node-detail"><span><b>Confident</b>. Evidence: KIT213: Operating Systems</span></span>
-          </button>
-          <button type="button" class="node " aria-expanded="false" data-tip="Confident · KIT205: Data Structures &amp; Algorithms · KIT107: Programming">
-            <span class="node-name">C</span>
-            <span class="node-level">Confident</span>
-            <span class="node-evidence">KIT205 · KIT107</span>
-            <span class="node-pips" role="img" aria-label="Confident, 4 of 5"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class=""></i></span>
-            <span class="node-detail"><span><b>Confident</b>. Evidence: KIT205: Data Structures &amp; Algorithms · KIT107: Programming</span></span>
-          </button>
-          <button type="button" class="node " aria-expanded="false" data-tip="Confident · Projects">
-            <span class="node-name">Git &amp; GitHub</span>
-            <span class="node-level">Confident</span>
-            <span class="node-evidence">Projects</span>
-            <span class="node-pips" role="img" aria-label="Confident, 4 of 5"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class=""></i></span>
-            <span class="node-detail"><span><b>Confident</b>. Evidence: Projects</span></span>
-          </button>
-          <button type="button" class="node " aria-expanded="false" data-tip="Working · KIT208: Virtual &amp; Mixed Reality Technology · KIT307: Computer Graphics &amp; Animation">
-            <span class="node-name">C# / Unity</span>
-            <span class="node-level">Working</span>
-            <span class="node-evidence">KIT208 · KIT307</span>
-            <span class="node-pips" role="img" aria-label="Working, 3 of 5"><i class="on"></i><i class="on"></i><i class="on"></i><i class=""></i><i class=""></i></span>
-            <span class="node-detail"><span><b>Working</b>. Evidence: KIT208: Virtual &amp; Mixed Reality Technology · KIT307: Computer Graphics &amp; Animation</span></span>
-          </button>
-          <button type="button" class="node " aria-expanded="false" data-tip="Working · KIT101: Programming Fundamentals">
-            <span class="node-name">Java</span>
-            <span class="node-level">Working</span>
-            <span class="node-evidence">KIT101</span>
-            <span class="node-pips" role="img" aria-label="Working, 3 of 5"><i class="on"></i><i class="on"></i><i class="on"></i><i class=""></i><i class=""></i></span>
-            <span class="node-detail"><span><b>Working</b>. Evidence: KIT101: Programming Fundamentals</span></span>
-          </button>
-          <button type="button" class="node " aria-expanded="false" data-tip="Working · Projects">
-            <span class="node-name">pytest</span>
-            <span class="node-level">Working</span>
-            <span class="node-evidence">Projects</span>
-            <span class="node-pips" role="img" aria-label="Working, 3 of 5"><i class="on"></i><i class="on"></i><i class="on"></i><i class=""></i><i class=""></i></span>
-            <span class="node-detail"><span><b>Working</b>. Evidence: Projects</span></span>
-          </button>
-          <button type="button" class="node " aria-expanded="false" data-tip="Familiar · Self-taught">
-            <span class="node-name">Docker</span>
-            <span class="node-level">Familiar</span>
-            <span class="node-evidence">Self-taught</span>
-            <span class="node-pips" role="img" aria-label="Familiar, 2 of 5"><i class="on"></i><i class="on"></i><i class=""></i><i class=""></i><i class=""></i></span>
-            <span class="node-detail"><span><b>Familiar</b>. Evidence: Self-taught</span></span>
-          </button>
+          <div class="node">
+            <button type="button" class="node-head" aria-expanded="false" data-tip="Strong · KIT101: Programming Fundamentals · KIT315: Machine Learning &amp; Applications">
+              <span class="node-name">Python</span>
+              <span class="node-level">Strong</span>
+              <span class="node-ev">KIT101 · KIT315</span>
+              <span class="pips" role="img" aria-label="Strong, 5 of 5"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i></span>
+            </button>
+            <div class="node-detail"><p>Evidence: KIT101: Programming Fundamentals · KIT315: Machine Learning &amp; Applications. Used in <a href="#p-api-exposure-auditor">API Exposure Auditor</a>, <a href="#p-industry-capstone">Agent trust demo</a>, <a href="#p-stego-cipher">Steganography &amp; Cipher Tool</a>.</p></div>
+          </div>
+          <div class="node">
+            <button type="button" class="node-head" aria-expanded="false" data-tip="Confident · KIT213: Operating Systems">
+              <span class="node-name">Bash / Shell</span>
+              <span class="node-level">Confident</span>
+              <span class="node-ev">KIT213</span>
+              <span class="pips" role="img" aria-label="Confident, 4 of 5"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class=""></i></span>
+            </button>
+            <div class="node-detail"><p>Evidence: KIT213: Operating Systems. Used in <a href="#p-unix-records">UNIX Records Manager</a>.</p></div>
+          </div>
+          <div class="node">
+            <button type="button" class="node-head" aria-expanded="false" data-tip="Confident · KIT205: Data Structures &amp; Algorithms · KIT107: Programming">
+              <span class="node-name">C</span>
+              <span class="node-level">Confident</span>
+              <span class="node-ev">KIT205 · KIT107</span>
+              <span class="pips" role="img" aria-label="Confident, 4 of 5"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class=""></i></span>
+            </button>
+            <div class="node-detail"><p>Evidence: KIT205: Data Structures &amp; Algorithms · KIT107: Programming. Used in <a href="#p-graph-pathfinding">Graph Pathfinding Engine</a>.</p></div>
+          </div>
+          <div class="node">
+            <button type="button" class="node-head" aria-expanded="false" data-tip="Confident · Projects">
+              <span class="node-name">Git &amp; GitHub</span>
+              <span class="node-level">Confident</span>
+              <span class="node-ev">Projects</span>
+              <span class="pips" role="img" aria-label="Confident, 4 of 5"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class=""></i></span>
+            </button>
+            <div class="node-detail"><p>Evidence: Projects.</p></div>
+          </div>
+          <div class="node">
+            <button type="button" class="node-head" aria-expanded="false" data-tip="Working · KIT208: Virtual &amp; Mixed Reality Technology · KIT307: Computer Graphics &amp; Animation">
+              <span class="node-name">C# / Unity</span>
+              <span class="node-level">Working</span>
+              <span class="node-ev">KIT208 · KIT307</span>
+              <span class="pips" role="img" aria-label="Working, 3 of 5"><i class="on"></i><i class="on"></i><i class="on"></i><i class=""></i><i class=""></i></span>
+            </button>
+            <div class="node-detail"><p>Evidence: KIT208: Virtual &amp; Mixed Reality Technology · KIT307: Computer Graphics &amp; Animation. Used in <a href="#p-game-ai">Game AI &amp; Pathfinding</a>.</p></div>
+          </div>
+          <div class="node">
+            <button type="button" class="node-head" aria-expanded="false" data-tip="Working · KIT101: Programming Fundamentals">
+              <span class="node-name">Java</span>
+              <span class="node-level">Working</span>
+              <span class="node-ev">KIT101</span>
+              <span class="pips" role="img" aria-label="Working, 3 of 5"><i class="on"></i><i class="on"></i><i class="on"></i><i class=""></i><i class=""></i></span>
+            </button>
+            <div class="node-detail"><p>Evidence: KIT101: Programming Fundamentals.</p></div>
+          </div>
+          <div class="node">
+            <button type="button" class="node-head" aria-expanded="false" data-tip="Working · Projects">
+              <span class="node-name">pytest</span>
+              <span class="node-level">Working</span>
+              <span class="node-ev">Projects</span>
+              <span class="pips" role="img" aria-label="Working, 3 of 5"><i class="on"></i><i class="on"></i><i class="on"></i><i class=""></i><i class=""></i></span>
+            </button>
+            <div class="node-detail"><p>Evidence: Projects. Used in <a href="#p-industry-capstone">Agent trust demo</a>.</p></div>
+          </div>
+          <div class="node">
+            <button type="button" class="node-head" aria-expanded="false" data-tip="Familiar · Self-taught">
+              <span class="node-name">Docker</span>
+              <span class="node-level">Familiar</span>
+              <span class="node-ev">Self-taught</span>
+              <span class="pips" role="img" aria-label="Familiar, 2 of 5"><i class="on"></i><i class="on"></i><i class=""></i><i class=""></i><i class=""></i></span>
+            </button>
+            <div class="node-detail"><p>Evidence: Self-taught.</p></div>
+          </div>
       </div>
-      
     </details>
-    <details class="branch reveal" style="--i:4" data-branch="Web &amp; APIs">
+    <details class="branch">
       <summary class="branch-head">
-        <h3 class="branch-name">Web &amp; APIs</h3>
-        <span class="branch-count" title="9 skills, 5 at Confident or above">
-          9 · 5 strong
-        </span>
-        <span class="branch-chev" aria-hidden="true"></span>
+        <h3>Web &amp; APIs</h3>
+        <span class="branch-count">9 skills</span>
       </summary>
       <p class="branch-note">Building services and then attacking them: authentication, transport security, and what an API leaks.</p>
-      <div class="branch-nodes">
+      <div class="nodes">
         
-          <button type="button" class="node " aria-expanded="false" data-tip="Confident · KIT214: Intelligent &amp; Secure Web Development">
-            <span class="node-name">Authentication</span>
-            <span class="node-level">Confident</span>
-            <span class="node-evidence">KIT214</span>
-            <span class="node-pips" role="img" aria-label="Confident, 4 of 5"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class=""></i></span>
-            <span class="node-detail"><span><b>Confident</b>. Evidence: KIT214: Intelligent &amp; Secure Web Development</span></span>
-          </button>
-          <button type="button" class="node " aria-expanded="false" data-tip="Confident · Projects">
-            <span class="node-name">FastAPI</span>
-            <span class="node-level">Confident</span>
-            <span class="node-evidence">Projects</span>
-            <span class="node-pips" role="img" aria-label="Confident, 4 of 5"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class=""></i></span>
-            <span class="node-detail"><span><b>Confident</b>. Evidence: Projects</span></span>
-          </button>
-          <button type="button" class="node " aria-expanded="false" data-tip="Confident · KIT214: Intelligent &amp; Secure Web Development">
-            <span class="node-name">HTTP &amp; JSON</span>
-            <span class="node-level">Confident</span>
-            <span class="node-evidence">KIT214</span>
-            <span class="node-pips" role="img" aria-label="Confident, 4 of 5"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class=""></i></span>
-            <span class="node-detail"><span><b>Confident</b>. Evidence: KIT214: Intelligent &amp; Secure Web Development</span></span>
-          </button>
-          <button type="button" class="node " aria-expanded="false" data-tip="Confident · KIT214: Intelligent &amp; Secure Web Development">
-            <span class="node-name">Node.js &amp; Express</span>
-            <span class="node-level">Confident</span>
-            <span class="node-evidence">KIT214</span>
-            <span class="node-pips" role="img" aria-label="Confident, 4 of 5"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class=""></i></span>
-            <span class="node-detail"><span><b>Confident</b>. Evidence: KIT214: Intelligent &amp; Secure Web Development</span></span>
-          </button>
-          <button type="button" class="node " aria-expanded="false" data-tip="Confident · KIT214: Intelligent &amp; Secure Web Development · KIT304: Server Administration &amp; Security Assurance">
-            <span class="node-name">REST APIs</span>
-            <span class="node-level">Confident</span>
-            <span class="node-evidence">KIT214 · KIT304</span>
-            <span class="node-pips" role="img" aria-label="Confident, 4 of 5"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class=""></i></span>
-            <span class="node-detail"><span><b>Confident</b>. Evidence: KIT214: Intelligent &amp; Secure Web Development · KIT304: Server Administration &amp; Security Assurance</span></span>
-          </button>
-          <button type="button" class="node " aria-expanded="false" data-tip="Working · KIT214: Intelligent &amp; Secure Web Development">
-            <span class="node-name">Input Validation</span>
-            <span class="node-level">Working</span>
-            <span class="node-evidence">KIT214</span>
-            <span class="node-pips" role="img" aria-label="Working, 3 of 5"><i class="on"></i><i class="on"></i><i class="on"></i><i class=""></i><i class=""></i></span>
-            <span class="node-detail"><span><b>Working</b>. Evidence: KIT214: Intelligent &amp; Secure Web Development</span></span>
-          </button>
-          <button type="button" class="node " aria-expanded="false" data-tip="Working · KIT202: Web Programming Fundamentals">
-            <span class="node-name">PHP &amp; MySQL</span>
-            <span class="node-level">Working</span>
-            <span class="node-evidence">KIT202</span>
-            <span class="node-pips" role="img" aria-label="Working, 3 of 5"><i class="on"></i><i class="on"></i><i class="on"></i><i class=""></i><i class=""></i></span>
-            <span class="node-detail"><span><b>Working</b>. Evidence: KIT202: Web Programming Fundamentals</span></span>
-          </button>
-          <button type="button" class="node " aria-expanded="false" data-tip="Working · KIT214: Intelligent &amp; Secure Web Development">
-            <span class="node-name">Web Scraping</span>
-            <span class="node-level">Working</span>
-            <span class="node-evidence">KIT214</span>
-            <span class="node-pips" role="img" aria-label="Working, 3 of 5"><i class="on"></i><i class="on"></i><i class="on"></i><i class=""></i><i class=""></i></span>
-            <span class="node-detail"><span><b>Working</b>. Evidence: KIT214: Intelligent &amp; Secure Web Development</span></span>
-          </button>
-          <button type="button" class="node " aria-expanded="false" data-tip="Familiar · KIT305: Mobile Application Development">
-            <span class="node-name">Firebase</span>
-            <span class="node-level">Familiar</span>
-            <span class="node-evidence">KIT305</span>
-            <span class="node-pips" role="img" aria-label="Familiar, 2 of 5"><i class="on"></i><i class="on"></i><i class=""></i><i class=""></i><i class=""></i></span>
-            <span class="node-detail"><span><b>Familiar</b>. Evidence: KIT305: Mobile Application Development</span></span>
-          </button>
+          <div class="node">
+            <button type="button" class="node-head" aria-expanded="false" data-tip="Confident · KIT214: Intelligent &amp; Secure Web Development">
+              <span class="node-name">Authentication</span>
+              <span class="node-level">Confident</span>
+              <span class="node-ev">KIT214</span>
+              <span class="pips" role="img" aria-label="Confident, 4 of 5"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class=""></i></span>
+            </button>
+            <div class="node-detail"><p>Evidence: KIT214: Intelligent &amp; Secure Web Development. Used in <a href="#p-php-web-app">Full-Stack Web Application</a>.</p></div>
+          </div>
+          <div class="node">
+            <button type="button" class="node-head" aria-expanded="false" data-tip="Confident · Projects">
+              <span class="node-name">FastAPI</span>
+              <span class="node-level">Confident</span>
+              <span class="node-ev">Projects</span>
+              <span class="pips" role="img" aria-label="Confident, 4 of 5"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class=""></i></span>
+            </button>
+            <div class="node-detail"><p>Evidence: Projects. Used in <a href="#p-industry-capstone">Agent trust demo</a>.</p></div>
+          </div>
+          <div class="node">
+            <button type="button" class="node-head" aria-expanded="false" data-tip="Confident · KIT214: Intelligent &amp; Secure Web Development">
+              <span class="node-name">HTTP &amp; JSON</span>
+              <span class="node-level">Confident</span>
+              <span class="node-ev">KIT214</span>
+              <span class="pips" role="img" aria-label="Confident, 4 of 5"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class=""></i></span>
+            </button>
+            <div class="node-detail"><p>Evidence: KIT214: Intelligent &amp; Secure Web Development.</p></div>
+          </div>
+          <div class="node">
+            <button type="button" class="node-head" aria-expanded="false" data-tip="Confident · KIT214: Intelligent &amp; Secure Web Development">
+              <span class="node-name">Node.js &amp; Express</span>
+              <span class="node-level">Confident</span>
+              <span class="node-ev">KIT214</span>
+              <span class="pips" role="img" aria-label="Confident, 4 of 5"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class=""></i></span>
+            </button>
+            <div class="node-detail"><p>Evidence: KIT214: Intelligent &amp; Secure Web Development. Used in <a href="#p-nous">NOUS</a>, <a href="#p-hardened-node-api">Hardened Node.js API Server</a>.</p></div>
+          </div>
+          <div class="node">
+            <button type="button" class="node-head" aria-expanded="false" data-tip="Confident · KIT214: Intelligent &amp; Secure Web Development · KIT304: Server Administration &amp; Security Assurance">
+              <span class="node-name">REST APIs</span>
+              <span class="node-level">Confident</span>
+              <span class="node-ev">KIT214 · KIT304</span>
+              <span class="pips" role="img" aria-label="Confident, 4 of 5"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class=""></i></span>
+            </button>
+            <div class="node-detail"><p>Evidence: KIT214: Intelligent &amp; Secure Web Development · KIT304: Server Administration &amp; Security Assurance. Used in <a href="#p-api-exposure-auditor">API Exposure Auditor</a>.</p></div>
+          </div>
+          <div class="node">
+            <button type="button" class="node-head" aria-expanded="false" data-tip="Working · KIT214: Intelligent &amp; Secure Web Development">
+              <span class="node-name">Input Validation</span>
+              <span class="node-level">Working</span>
+              <span class="node-ev">KIT214</span>
+              <span class="pips" role="img" aria-label="Working, 3 of 5"><i class="on"></i><i class="on"></i><i class="on"></i><i class=""></i><i class=""></i></span>
+            </button>
+            <div class="node-detail"><p>Evidence: KIT214: Intelligent &amp; Secure Web Development.</p></div>
+          </div>
+          <div class="node">
+            <button type="button" class="node-head" aria-expanded="false" data-tip="Working · KIT202: Web Programming Fundamentals">
+              <span class="node-name">PHP &amp; MySQL</span>
+              <span class="node-level">Working</span>
+              <span class="node-ev">KIT202</span>
+              <span class="pips" role="img" aria-label="Working, 3 of 5"><i class="on"></i><i class="on"></i><i class="on"></i><i class=""></i><i class=""></i></span>
+            </button>
+            <div class="node-detail"><p>Evidence: KIT202: Web Programming Fundamentals. Used in <a href="#p-php-web-app">Full-Stack Web Application</a>.</p></div>
+          </div>
+          <div class="node">
+            <button type="button" class="node-head" aria-expanded="false" data-tip="Working · KIT214: Intelligent &amp; Secure Web Development">
+              <span class="node-name">Web Scraping</span>
+              <span class="node-level">Working</span>
+              <span class="node-ev">KIT214</span>
+              <span class="pips" role="img" aria-label="Working, 3 of 5"><i class="on"></i><i class="on"></i><i class="on"></i><i class=""></i><i class=""></i></span>
+            </button>
+            <div class="node-detail"><p>Evidence: KIT214: Intelligent &amp; Secure Web Development. Used in <a href="#p-hardened-node-api">Hardened Node.js API Server</a>.</p></div>
+          </div>
+          <div class="node">
+            <button type="button" class="node-head" aria-expanded="false" data-tip="Familiar · KIT305: Mobile Application Development">
+              <span class="node-name">Firebase</span>
+              <span class="node-level">Familiar</span>
+              <span class="node-ev">KIT305</span>
+              <span class="pips" role="img" aria-label="Familiar, 2 of 5"><i class="on"></i><i class="on"></i><i class=""></i><i class=""></i><i class=""></i></span>
+            </button>
+            <div class="node-detail"><p>Evidence: KIT305: Mobile Application Development.</p></div>
+          </div>
       </div>
-      
     </details>
-    <details class="branch reveal" style="--i:5" data-branch="AI &amp; Machine Learning">
+    <details class="branch">
       <summary class="branch-head">
-        <h3 class="branch-name">AI &amp; Machine Learning</h3>
-        <span class="branch-count" title="9 skills, 3 at Confident or above">
-          9 · 3 strong
-        </span>
-        <span class="branch-chev" aria-hidden="true"></span>
+        <h3>AI &amp; Machine Learning</h3>
+        <span class="branch-count">10 skills</span>
       </summary>
       <p class="branch-note">Models trained and evaluated properly, on the metrics that survive imbalanced data, not on accuracy.</p>
-      <div class="branch-nodes">
+      <div class="nodes">
         
-          <button type="button" class="node " aria-expanded="false" data-tip="Confident · KIT315: Machine Learning &amp; Applications">
-            <span class="node-name">CNNs &amp; LSTMs</span>
-            <span class="node-level">Confident</span>
-            <span class="node-evidence">KIT315</span>
-            <span class="node-pips" role="img" aria-label="Confident, 4 of 5"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class=""></i></span>
-            <span class="node-detail"><span><b>Confident</b>. Evidence: KIT315: Machine Learning &amp; Applications</span></span>
-          </button>
-          <button type="button" class="node " aria-expanded="false" data-tip="Confident · KIT315: Machine Learning &amp; Applications">
-            <span class="node-name">scikit-learn</span>
-            <span class="node-level">Confident</span>
-            <span class="node-evidence">KIT315</span>
-            <span class="node-pips" role="img" aria-label="Confident, 4 of 5"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class=""></i></span>
-            <span class="node-detail"><span><b>Confident</b>. Evidence: KIT315: Machine Learning &amp; Applications</span></span>
-          </button>
-          <button type="button" class="node " aria-expanded="false" data-tip="Confident · KIT315: Machine Learning &amp; Applications">
-            <span class="node-name">TensorFlow &amp; Keras</span>
-            <span class="node-level">Confident</span>
-            <span class="node-evidence">KIT315</span>
-            <span class="node-pips" role="img" aria-label="Confident, 4 of 5"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class=""></i></span>
-            <span class="node-detail"><span><b>Confident</b>. Evidence: KIT315: Machine Learning &amp; Applications</span></span>
-          </button>
-          <button type="button" class="node " aria-expanded="false" data-tip="Working · KIT315: Machine Learning &amp; Applications">
-            <span class="node-name">GANs &amp; Autoencoders</span>
-            <span class="node-level">Working</span>
-            <span class="node-evidence">KIT315</span>
-            <span class="node-pips" role="img" aria-label="Working, 3 of 5"><i class="on"></i><i class="on"></i><i class="on"></i><i class=""></i><i class=""></i></span>
-            <span class="node-detail"><span><b>Working</b>. Evidence: KIT315: Machine Learning &amp; Applications</span></span>
-          </button>
-          <button type="button" class="node " aria-expanded="false" data-tip="Working · KIT315: Machine Learning &amp; Applications">
-            <span class="node-name">Natural Language Processing</span>
-            <span class="node-level">Working</span>
-            <span class="node-evidence">KIT315</span>
-            <span class="node-pips" role="img" aria-label="Working, 3 of 5"><i class="on"></i><i class="on"></i><i class="on"></i><i class=""></i><i class=""></i></span>
-            <span class="node-detail"><span><b>Working</b>. Evidence: KIT315: Machine Learning &amp; Applications</span></span>
-          </button>
-          <button type="button" class="node " aria-expanded="false" data-tip="Working · KIT315: Machine Learning &amp; Applications">
-            <span class="node-name">PyTorch</span>
-            <span class="node-level">Working</span>
-            <span class="node-evidence">KIT315</span>
-            <span class="node-pips" role="img" aria-label="Working, 3 of 5"><i class="on"></i><i class="on"></i><i class="on"></i><i class=""></i><i class=""></i></span>
-            <span class="node-detail"><span><b>Working</b>. Evidence: KIT315: Machine Learning &amp; Applications</span></span>
-          </button>
-          <button type="button" class="node " aria-expanded="false" data-tip="Working · KIT315: Machine Learning &amp; Applications">
-            <span class="node-name">Reinforcement Learning</span>
-            <span class="node-level">Working</span>
-            <span class="node-evidence">KIT315</span>
-            <span class="node-pips" role="img" aria-label="Working, 3 of 5"><i class="on"></i><i class="on"></i><i class="on"></i><i class=""></i><i class=""></i></span>
-            <span class="node-detail"><span><b>Working</b>. Evidence: KIT315: Machine Learning &amp; Applications</span></span>
-          </button>
-          <button type="button" class="node " aria-expanded="false" data-tip="Familiar · KIT315: Machine Learning &amp; Applications">
-            <span class="node-name">OpenCV</span>
-            <span class="node-level">Familiar</span>
-            <span class="node-evidence">KIT315</span>
-            <span class="node-pips" role="img" aria-label="Familiar, 2 of 5"><i class="on"></i><i class="on"></i><i class=""></i><i class=""></i><i class=""></i></span>
-            <span class="node-detail"><span><b>Familiar</b>. Evidence: KIT315: Machine Learning &amp; Applications</span></span>
-          </button>
-          <button type="button" class="node " aria-expanded="false" data-tip="Familiar · KIT315: Machine Learning &amp; Applications">
-            <span class="node-name">XGBoost</span>
-            <span class="node-level">Familiar</span>
-            <span class="node-evidence">KIT315</span>
-            <span class="node-pips" role="img" aria-label="Familiar, 2 of 5"><i class="on"></i><i class="on"></i><i class=""></i><i class=""></i><i class=""></i></span>
-            <span class="node-detail"><span><b>Familiar</b>. Evidence: KIT315: Machine Learning &amp; Applications</span></span>
-          </button>
+          <div class="node">
+            <button type="button" class="node-head" aria-expanded="false" data-tip="Confident · KIT315: Machine Learning &amp; Applications">
+              <span class="node-name">CNNs &amp; LSTMs</span>
+              <span class="node-level">Confident</span>
+              <span class="node-ev">KIT315</span>
+              <span class="pips" role="img" aria-label="Confident, 4 of 5"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class=""></i></span>
+            </button>
+            <div class="node-detail"><p>Evidence: KIT315: Machine Learning &amp; Applications.</p></div>
+          </div>
+          <div class="node">
+            <button type="button" class="node-head" aria-expanded="false" data-tip="Confident · KIT315: Machine Learning &amp; Applications">
+              <span class="node-name">scikit-learn</span>
+              <span class="node-level">Confident</span>
+              <span class="node-ev">KIT315</span>
+              <span class="pips" role="img" aria-label="Confident, 4 of 5"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class=""></i></span>
+            </button>
+            <div class="node-detail"><p>Evidence: KIT315: Machine Learning &amp; Applications. Used in <a href="#p-spam-classifier">Spam Detection Classifier</a>.</p></div>
+          </div>
+          <div class="node">
+            <button type="button" class="node-head" aria-expanded="false" data-tip="Confident · KIT315: Machine Learning &amp; Applications">
+              <span class="node-name">TensorFlow &amp; Keras</span>
+              <span class="node-level">Confident</span>
+              <span class="node-ev">KIT315</span>
+              <span class="pips" role="img" aria-label="Confident, 4 of 5"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class=""></i></span>
+            </button>
+            <div class="node-detail"><p>Evidence: KIT315: Machine Learning &amp; Applications. Used in <a href="#p-spam-classifier">Spam Detection Classifier</a>.</p></div>
+          </div>
+          <div class="node">
+            <button type="button" class="node-head" aria-expanded="false" data-tip="Working · KIT315: Machine Learning &amp; Applications">
+              <span class="node-name">GANs &amp; Autoencoders</span>
+              <span class="node-level">Working</span>
+              <span class="node-ev">KIT315</span>
+              <span class="pips" role="img" aria-label="Working, 3 of 5"><i class="on"></i><i class="on"></i><i class="on"></i><i class=""></i><i class=""></i></span>
+            </button>
+            <div class="node-detail"><p>Evidence: KIT315: Machine Learning &amp; Applications.</p></div>
+          </div>
+          <div class="node">
+            <button type="button" class="node-head" aria-expanded="false" data-tip="Working · Projects">
+              <span class="node-name">Local LLMs</span>
+              <span class="node-level">Working</span>
+              <span class="node-ev">Projects</span>
+              <span class="pips" role="img" aria-label="Working, 3 of 5"><i class="on"></i><i class="on"></i><i class="on"></i><i class=""></i><i class=""></i></span>
+            </button>
+            <div class="node-detail"><p>Evidence: Projects. Used in <a href="#p-nous">NOUS</a>.</p></div>
+          </div>
+          <div class="node">
+            <button type="button" class="node-head" aria-expanded="false" data-tip="Working · KIT315: Machine Learning &amp; Applications">
+              <span class="node-name">Natural Language Processing</span>
+              <span class="node-level">Working</span>
+              <span class="node-ev">KIT315</span>
+              <span class="pips" role="img" aria-label="Working, 3 of 5"><i class="on"></i><i class="on"></i><i class="on"></i><i class=""></i><i class=""></i></span>
+            </button>
+            <div class="node-detail"><p>Evidence: KIT315: Machine Learning &amp; Applications. Used in <a href="#p-spam-classifier">Spam Detection Classifier</a>.</p></div>
+          </div>
+          <div class="node">
+            <button type="button" class="node-head" aria-expanded="false" data-tip="Working · KIT315: Machine Learning &amp; Applications">
+              <span class="node-name">PyTorch</span>
+              <span class="node-level">Working</span>
+              <span class="node-ev">KIT315</span>
+              <span class="pips" role="img" aria-label="Working, 3 of 5"><i class="on"></i><i class="on"></i><i class="on"></i><i class=""></i><i class=""></i></span>
+            </button>
+            <div class="node-detail"><p>Evidence: KIT315: Machine Learning &amp; Applications.</p></div>
+          </div>
+          <div class="node">
+            <button type="button" class="node-head" aria-expanded="false" data-tip="Working · KIT315: Machine Learning &amp; Applications">
+              <span class="node-name">Reinforcement Learning</span>
+              <span class="node-level">Working</span>
+              <span class="node-ev">KIT315</span>
+              <span class="pips" role="img" aria-label="Working, 3 of 5"><i class="on"></i><i class="on"></i><i class="on"></i><i class=""></i><i class=""></i></span>
+            </button>
+            <div class="node-detail"><p>Evidence: KIT315: Machine Learning &amp; Applications.</p></div>
+          </div>
+          <div class="node">
+            <button type="button" class="node-head" aria-expanded="false" data-tip="Familiar · KIT315: Machine Learning &amp; Applications">
+              <span class="node-name">OpenCV</span>
+              <span class="node-level">Familiar</span>
+              <span class="node-ev">KIT315</span>
+              <span class="pips" role="img" aria-label="Familiar, 2 of 5"><i class="on"></i><i class="on"></i><i class=""></i><i class=""></i><i class=""></i></span>
+            </button>
+            <div class="node-detail"><p>Evidence: KIT315: Machine Learning &amp; Applications.</p></div>
+          </div>
+          <div class="node">
+            <button type="button" class="node-head" aria-expanded="false" data-tip="Familiar · KIT315: Machine Learning &amp; Applications">
+              <span class="node-name">XGBoost</span>
+              <span class="node-level">Familiar</span>
+              <span class="node-ev">KIT315</span>
+              <span class="pips" role="img" aria-label="Familiar, 2 of 5"><i class="on"></i><i class="on"></i><i class=""></i><i class=""></i><i class=""></i></span>
+            </button>
+            <div class="node-detail"><p>Evidence: KIT315: Machine Learning &amp; Applications.</p></div>
+          </div>
       </div>
-      
     </details>
-    <details class="branch reveal" style="--i:6" data-branch="Data Engineering">
+    <details class="branch">
       <summary class="branch-head">
-        <h3 class="branch-name">Data Engineering</h3>
-        <span class="branch-count" title="7 skills, 2 at Confident or above">
-          7 · 2 strong
-        </span>
-        <span class="branch-chev" aria-hidden="true"></span>
+        <h3>Data Engineering</h3>
+        <span class="branch-count">7 skills</span>
       </summary>
       <p class="branch-note">Moving analysis from one machine to a cluster, and querying what lands there.</p>
-      <div class="branch-nodes">
+      <div class="nodes">
         
-          <button type="button" class="node " aria-expanded="false" data-tip="Confident · KIT102: Introduction to Data Science · KIT318: Big Data &amp; Cloud Computing">
-            <span class="node-name">Pandas</span>
-            <span class="node-level">Confident</span>
-            <span class="node-evidence">KIT102 · KIT318</span>
-            <span class="node-pips" role="img" aria-label="Confident, 4 of 5"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class=""></i></span>
-            <span class="node-detail"><span><b>Confident</b>. Evidence: KIT102: Introduction to Data Science · KIT318: Big Data &amp; Cloud Computing</span></span>
-          </button>
-          <button type="button" class="node " aria-expanded="false" data-tip="Confident · KIT102: Introduction to Data Science · KIT214: Intelligent &amp; Secure Web Development">
-            <span class="node-name">SQL</span>
-            <span class="node-level">Confident</span>
-            <span class="node-evidence">KIT102 · KIT214</span>
-            <span class="node-pips" role="img" aria-label="Confident, 4 of 5"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class=""></i></span>
-            <span class="node-detail"><span><b>Confident</b>. Evidence: KIT102: Introduction to Data Science · KIT214: Intelligent &amp; Secure Web Development</span></span>
-          </button>
-          <button type="button" class="node " aria-expanded="false" data-tip="Working · KIT102: Introduction to Data Science · KIT315: Machine Learning &amp; Applications">
-            <span class="node-name">Data Visualisation</span>
-            <span class="node-level">Working</span>
-            <span class="node-evidence">KIT102 · KIT315</span>
-            <span class="node-pips" role="img" aria-label="Working, 3 of 5"><i class="on"></i><i class="on"></i><i class="on"></i><i class=""></i><i class=""></i></span>
-            <span class="node-detail"><span><b>Working</b>. Evidence: KIT102: Introduction to Data Science · KIT315: Machine Learning &amp; Applications</span></span>
-          </button>
-          <button type="button" class="node " aria-expanded="false" data-tip="Working · KIT318: Big Data &amp; Cloud Computing">
-            <span class="node-name">Hadoop &amp; MapReduce</span>
-            <span class="node-level">Working</span>
-            <span class="node-evidence">KIT318</span>
-            <span class="node-pips" role="img" aria-label="Working, 3 of 5"><i class="on"></i><i class="on"></i><i class="on"></i><i class=""></i><i class=""></i></span>
-            <span class="node-detail"><span><b>Working</b>. Evidence: KIT318: Big Data &amp; Cloud Computing</span></span>
-          </button>
-          <button type="button" class="node " aria-expanded="false" data-tip="Working · KIT318: Big Data &amp; Cloud Computing">
-            <span class="node-name">PySpark</span>
-            <span class="node-level">Working</span>
-            <span class="node-evidence">KIT318</span>
-            <span class="node-pips" role="img" aria-label="Working, 3 of 5"><i class="on"></i><i class="on"></i><i class="on"></i><i class=""></i><i class=""></i></span>
-            <span class="node-detail"><span><b>Working</b>. Evidence: KIT318: Big Data &amp; Cloud Computing</span></span>
-          </button>
-          <button type="button" class="node " aria-expanded="false" data-tip="Working · KIT318: Big Data &amp; Cloud Computing">
-            <span class="node-name">Spark MLlib</span>
-            <span class="node-level">Working</span>
-            <span class="node-evidence">KIT318</span>
-            <span class="node-pips" role="img" aria-label="Working, 3 of 5"><i class="on"></i><i class="on"></i><i class="on"></i><i class=""></i><i class=""></i></span>
-            <span class="node-detail"><span><b>Working</b>. Evidence: KIT318: Big Data &amp; Cloud Computing</span></span>
-          </button>
-          <button type="button" class="node " aria-expanded="false" data-tip="Working · KMA153: Data Handling &amp; Statistics 1">
-            <span class="node-name">Statistics</span>
-            <span class="node-level">Working</span>
-            <span class="node-evidence">KMA153</span>
-            <span class="node-pips" role="img" aria-label="Working, 3 of 5"><i class="on"></i><i class="on"></i><i class="on"></i><i class=""></i><i class=""></i></span>
-            <span class="node-detail"><span><b>Working</b>. Evidence: KMA153: Data Handling &amp; Statistics 1</span></span>
-          </button>
-          <button type="button" class="node locked" aria-expanded="false" data-tip="Not started · Next unlock">
-            <span class="node-name">Kafka</span>
-            <span class="node-level">Not started</span>
-            <span class="node-evidence">Next unlock</span>
-            <span class="node-pips" role="img" aria-label="Not started, 0 of 5"><i class=""></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i></span>
-            <span class="node-detail"><span><b>Not started</b>. Evidence: Next unlock</span></span>
-          </button>
+          <div class="node">
+            <button type="button" class="node-head" aria-expanded="false" data-tip="Confident · KIT102: Introduction to Data Science · KIT318: Big Data &amp; Cloud Computing">
+              <span class="node-name">Pandas</span>
+              <span class="node-level">Confident</span>
+              <span class="node-ev">KIT102 · KIT318</span>
+              <span class="pips" role="img" aria-label="Confident, 4 of 5"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class=""></i></span>
+            </button>
+            <div class="node-detail"><p>Evidence: KIT102: Introduction to Data Science · KIT318: Big Data &amp; Cloud Computing.</p></div>
+          </div>
+          <div class="node">
+            <button type="button" class="node-head" aria-expanded="false" data-tip="Confident · KIT102: Introduction to Data Science · KIT214: Intelligent &amp; Secure Web Development">
+              <span class="node-name">SQL</span>
+              <span class="node-level">Confident</span>
+              <span class="node-ev">KIT102 · KIT214</span>
+              <span class="pips" role="img" aria-label="Confident, 4 of 5"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class=""></i></span>
+            </button>
+            <div class="node-detail"><p>Evidence: KIT102: Introduction to Data Science · KIT214: Intelligent &amp; Secure Web Development. Used in <a href="#p-nous">NOUS</a>, <a href="#p-php-web-app">Full-Stack Web Application</a>.</p></div>
+          </div>
+          <div class="node">
+            <button type="button" class="node-head" aria-expanded="false" data-tip="Working · KIT102: Introduction to Data Science · KIT315: Machine Learning &amp; Applications">
+              <span class="node-name">Data Visualisation</span>
+              <span class="node-level">Working</span>
+              <span class="node-ev">KIT102 · KIT315</span>
+              <span class="pips" role="img" aria-label="Working, 3 of 5"><i class="on"></i><i class="on"></i><i class="on"></i><i class=""></i><i class=""></i></span>
+            </button>
+            <div class="node-detail"><p>Evidence: KIT102: Introduction to Data Science · KIT315: Machine Learning &amp; Applications.</p></div>
+          </div>
+          <div class="node">
+            <button type="button" class="node-head" aria-expanded="false" data-tip="Working · KIT318: Big Data &amp; Cloud Computing">
+              <span class="node-name">Hadoop &amp; MapReduce</span>
+              <span class="node-level">Working</span>
+              <span class="node-ev">KIT318</span>
+              <span class="pips" role="img" aria-label="Working, 3 of 5"><i class="on"></i><i class="on"></i><i class="on"></i><i class=""></i><i class=""></i></span>
+            </button>
+            <div class="node-detail"><p>Evidence: KIT318: Big Data &amp; Cloud Computing. Used in <a href="#p-data-pipelines">Distributed Data Pipelines</a>.</p></div>
+          </div>
+          <div class="node">
+            <button type="button" class="node-head" aria-expanded="false" data-tip="Working · KIT318: Big Data &amp; Cloud Computing">
+              <span class="node-name">PySpark</span>
+              <span class="node-level">Working</span>
+              <span class="node-ev">KIT318</span>
+              <span class="pips" role="img" aria-label="Working, 3 of 5"><i class="on"></i><i class="on"></i><i class="on"></i><i class=""></i><i class=""></i></span>
+            </button>
+            <div class="node-detail"><p>Evidence: KIT318: Big Data &amp; Cloud Computing. Used in <a href="#p-data-pipelines">Distributed Data Pipelines</a>.</p></div>
+          </div>
+          <div class="node">
+            <button type="button" class="node-head" aria-expanded="false" data-tip="Working · KIT318: Big Data &amp; Cloud Computing">
+              <span class="node-name">Spark MLlib</span>
+              <span class="node-level">Working</span>
+              <span class="node-ev">KIT318</span>
+              <span class="pips" role="img" aria-label="Working, 3 of 5"><i class="on"></i><i class="on"></i><i class="on"></i><i class=""></i><i class=""></i></span>
+            </button>
+            <div class="node-detail"><p>Evidence: KIT318: Big Data &amp; Cloud Computing. Used in <a href="#p-data-pipelines">Distributed Data Pipelines</a>.</p></div>
+          </div>
+          <div class="node">
+            <button type="button" class="node-head" aria-expanded="false" data-tip="Working · KMA153: Data Handling &amp; Statistics 1">
+              <span class="node-name">Statistics</span>
+              <span class="node-level">Working</span>
+              <span class="node-ev">KMA153</span>
+              <span class="pips" role="img" aria-label="Working, 3 of 5"><i class="on"></i><i class="on"></i><i class="on"></i><i class=""></i><i class=""></i></span>
+            </button>
+            <div class="node-detail"><p>Evidence: KMA153: Data Handling &amp; Statistics 1.</p></div>
+          </div>
+          <div class="node next">
+            <button type="button" class="node-head" aria-expanded="false" data-tip="Next to learn">
+              <span class="node-name">Kafka</span>
+              <span class="node-level">Next to learn</span>
+              
+              <span class="pips" role="img" aria-label="Next to learn, 0 of 5"><i class=""></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i></span>
+            </button>
+            <div class="node-detail"><p>Not started yet.</p></div>
+          </div>
       </div>
-      <p class="branch-next">Learning next: Kafka</p>
     </details>
-    <details class="branch reveal" style="--i:7" data-branch="Practice &amp; Process">
+    <details class="branch">
       <summary class="branch-head">
-        <h3 class="branch-name">Practice &amp; Process</h3>
-        <span class="branch-count" title="7 skills, 3 at Confident or above">
-          7 · 3 strong
-        </span>
-        <span class="branch-chev" aria-hidden="true"></span>
+        <h3>Practice &amp; Process</h3>
+        <span class="branch-count">7 skills</span>
       </summary>
       <p class="branch-note">How the work gets planned, documented and handed over: the half that is not code.</p>
-      <div class="branch-nodes">
+      <div class="nodes">
         
-          <button type="button" class="node " aria-expanded="false" data-tip="Confident · KIT203: ICT Project Management &amp; Modelling · KIT219: Development Methodologies &amp; UX">
-            <span class="node-name">Agile &amp; Scrum</span>
-            <span class="node-level">Confident</span>
-            <span class="node-evidence">KIT203 · KIT219</span>
-            <span class="node-pips" role="img" aria-label="Confident, 4 of 5"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class=""></i></span>
-            <span class="node-detail"><span><b>Confident</b>. Evidence: KIT203: ICT Project Management &amp; Modelling · KIT219: Development Methodologies &amp; UX</span></span>
-          </button>
-          <button type="button" class="node " aria-expanded="false" data-tip="Confident · KIT304 research">
-            <span class="node-name">Research &amp; Analysis</span>
-            <span class="node-level">Confident</span>
-            <span class="node-evidence">KIT304 research</span>
-            <span class="node-pips" role="img" aria-label="Confident, 4 of 5"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class=""></i></span>
-            <span class="node-detail"><span><b>Confident</b>. Evidence: KIT304 research</span></span>
-          </button>
-          <button type="button" class="node " aria-expanded="false" data-tip="Confident · KIT105: ICT Professional Practices">
-            <span class="node-name">Technical Writing</span>
-            <span class="node-level">Confident</span>
-            <span class="node-evidence">KIT105</span>
-            <span class="node-pips" role="img" aria-label="Confident, 4 of 5"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class=""></i></span>
-            <span class="node-detail"><span><b>Confident</b>. Evidence: KIT105: ICT Professional Practices</span></span>
-          </button>
-          <button type="button" class="node " aria-expanded="false" data-tip="Working · KIT203: ICT Project Management &amp; Modelling">
-            <span class="node-name">PRINCE2</span>
-            <span class="node-level">Working</span>
-            <span class="node-evidence">KIT203</span>
-            <span class="node-pips" role="img" aria-label="Working, 3 of 5"><i class="on"></i><i class="on"></i><i class="on"></i><i class=""></i><i class=""></i></span>
-            <span class="node-detail"><span><b>Working</b>. Evidence: KIT203: ICT Project Management &amp; Modelling</span></span>
-          </button>
-          <button type="button" class="node " aria-expanded="false" data-tip="Working · KIT105: ICT Professional Practices">
-            <span class="node-name">SFIA Framework</span>
-            <span class="node-level">Working</span>
-            <span class="node-evidence">KIT105</span>
-            <span class="node-pips" role="img" aria-label="Working, 3 of 5"><i class="on"></i><i class="on"></i><i class="on"></i><i class=""></i><i class=""></i></span>
-            <span class="node-detail"><span><b>Working</b>. Evidence: KIT105: ICT Professional Practices</span></span>
-          </button>
-          <button type="button" class="node " aria-expanded="false" data-tip="Working · KIT219: Development Methodologies &amp; UX">
-            <span class="node-name">UML Modelling</span>
-            <span class="node-level">Working</span>
-            <span class="node-evidence">KIT219</span>
-            <span class="node-pips" role="img" aria-label="Working, 3 of 5"><i class="on"></i><i class="on"></i><i class="on"></i><i class=""></i><i class=""></i></span>
-            <span class="node-detail"><span><b>Working</b>. Evidence: KIT219: Development Methodologies &amp; UX</span></span>
-          </button>
-          <button type="button" class="node " aria-expanded="false" data-tip="Working · KIT219: Development Methodologies &amp; UX">
-            <span class="node-name">UX Evaluation</span>
-            <span class="node-level">Working</span>
-            <span class="node-evidence">KIT219</span>
-            <span class="node-pips" role="img" aria-label="Working, 3 of 5"><i class="on"></i><i class="on"></i><i class="on"></i><i class=""></i><i class=""></i></span>
-            <span class="node-detail"><span><b>Working</b>. Evidence: KIT219: Development Methodologies &amp; UX</span></span>
-          </button>
+          <div class="node">
+            <button type="button" class="node-head" aria-expanded="false" data-tip="Confident · KIT203: ICT Project Management &amp; Modelling · KIT300: ICT Project (industry capstone)">
+              <span class="node-name">Agile &amp; Scrum</span>
+              <span class="node-level">Confident</span>
+              <span class="node-ev">KIT203 · KIT300</span>
+              <span class="pips" role="img" aria-label="Confident, 4 of 5"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class=""></i></span>
+            </button>
+            <div class="node-detail"><p>Evidence: KIT203: ICT Project Management &amp; Modelling · KIT300: ICT Project (industry capstone). Used in <a href="#p-industry-capstone">Agent trust demo</a>.</p></div>
+          </div>
+          <div class="node">
+            <button type="button" class="node-head" aria-expanded="false" data-tip="Confident · KIT304 research">
+              <span class="node-name">Research &amp; Analysis</span>
+              <span class="node-level">Confident</span>
+              <span class="node-ev">KIT304 research</span>
+              <span class="pips" role="img" aria-label="Confident, 4 of 5"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class=""></i></span>
+            </button>
+            <div class="node-detail"><p>Evidence: KIT304 research. Used in <a href="#p-openapi-research">OpenAPI Exposure Research</a>.</p></div>
+          </div>
+          <div class="node">
+            <button type="button" class="node-head" aria-expanded="false" data-tip="Confident · KIT105: ICT Professional Practices · KIT300: ICT Project (industry capstone)">
+              <span class="node-name">Technical Writing</span>
+              <span class="node-level">Confident</span>
+              <span class="node-ev">KIT105 · KIT300</span>
+              <span class="pips" role="img" aria-label="Confident, 4 of 5"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class=""></i></span>
+            </button>
+            <div class="node-detail"><p>Evidence: KIT105: ICT Professional Practices · KIT300: ICT Project (industry capstone). Used in <a href="#p-industry-capstone">Agent trust demo</a>.</p></div>
+          </div>
+          <div class="node">
+            <button type="button" class="node-head" aria-expanded="false" data-tip="Working · KIT203: ICT Project Management &amp; Modelling">
+              <span class="node-name">PRINCE2</span>
+              <span class="node-level">Working</span>
+              <span class="node-ev">KIT203</span>
+              <span class="pips" role="img" aria-label="Working, 3 of 5"><i class="on"></i><i class="on"></i><i class="on"></i><i class=""></i><i class=""></i></span>
+            </button>
+            <div class="node-detail"><p>Evidence: KIT203: ICT Project Management &amp; Modelling.</p></div>
+          </div>
+          <div class="node">
+            <button type="button" class="node-head" aria-expanded="false" data-tip="Working · KIT105: ICT Professional Practices">
+              <span class="node-name">SFIA Framework</span>
+              <span class="node-level">Working</span>
+              <span class="node-ev">KIT105</span>
+              <span class="pips" role="img" aria-label="Working, 3 of 5"><i class="on"></i><i class="on"></i><i class="on"></i><i class=""></i><i class=""></i></span>
+            </button>
+            <div class="node-detail"><p>Evidence: KIT105: ICT Professional Practices.</p></div>
+          </div>
+          <div class="node">
+            <button type="button" class="node-head" aria-expanded="false" data-tip="Working · KIT219: Development Methodologies &amp; UX">
+              <span class="node-name">UML Modelling</span>
+              <span class="node-level">Working</span>
+              <span class="node-ev">KIT219</span>
+              <span class="pips" role="img" aria-label="Working, 3 of 5"><i class="on"></i><i class="on"></i><i class="on"></i><i class=""></i><i class=""></i></span>
+            </button>
+            <div class="node-detail"><p>Evidence: KIT219: Development Methodologies &amp; UX.</p></div>
+          </div>
+          <div class="node">
+            <button type="button" class="node-head" aria-expanded="false" data-tip="Working · KIT219: Development Methodologies &amp; UX">
+              <span class="node-name">UX Evaluation</span>
+              <span class="node-level">Working</span>
+              <span class="node-ev">KIT219</span>
+              <span class="pips" role="img" aria-label="Working, 3 of 5"><i class="on"></i><i class="on"></i><i class="on"></i><i class=""></i><i class=""></i></span>
+            </button>
+            <div class="node-detail"><p>Evidence: KIT219: Development Methodologies &amp; UX.</p></div>
+          </div>
       </div>
-      
     </details></div>
     <div id="unitKey">
     <details class="unit-key">
-      <summary>What the unit codes mean <span>21 units</span></summary>
+      <summary>What the unit codes mean <span>22 units</span></summary>
       <div class="unit-key-grid">
-        
-          <div class="unit-key-row">
-            <code>KIT101</code><span>Programming Fundamentals</span>
-          </div>
-          <div class="unit-key-row">
-            <code>KIT102</code><span>Introduction to Data Science</span>
-          </div>
-          <div class="unit-key-row">
-            <code>KIT103</code><span>Computational Science</span>
-          </div>
-          <div class="unit-key-row">
-            <code>KIT105</code><span>ICT Professional Practices</span>
-          </div>
-          <div class="unit-key-row">
-            <code>KIT107</code><span>Programming</span>
-          </div>
-          <div class="unit-key-row">
-            <code>KIT111</code><span>Data Networks &amp; Security</span>
-          </div>
-          <div class="unit-key-row">
-            <code>KIT202</code><span>Web Programming Fundamentals</span>
-          </div>
-          <div class="unit-key-row">
-            <code>KIT203</code><span>ICT Project Management &amp; Modelling</span>
-          </div>
-          <div class="unit-key-row">
-            <code>KIT205</code><span>Data Structures &amp; Algorithms</span>
-          </div>
-          <div class="unit-key-row">
-            <code>KIT208</code><span>Virtual &amp; Mixed Reality Technology</span>
-          </div>
-          <div class="unit-key-row">
-            <code>KIT213</code><span>Operating Systems</span>
-          </div>
-          <div class="unit-key-row">
-            <code>KIT214</code><span>Intelligent &amp; Secure Web Development</span>
-          </div>
-          <div class="unit-key-row">
-            <code>KIT215</code><span>Cybersecurity &amp; Ethical Hacking</span>
-          </div>
-          <div class="unit-key-row">
-            <code>KIT219</code><span>Development Methodologies &amp; UX</span>
-          </div>
-          <div class="unit-key-row">
-            <code>KIT304</code><span>Server Administration &amp; Security Assurance</span>
-          </div>
-          <div class="unit-key-row">
-            <code>KIT305</code><span>Mobile Application Development</span>
-          </div>
-          <div class="unit-key-row">
-            <code>KIT307</code><span>Computer Graphics &amp; Animation</span>
-          </div>
-          <div class="unit-key-row">
-            <code>KIT315</code><span>Machine Learning &amp; Applications</span>
-          </div>
-          <div class="unit-key-row">
-            <code>KIT318</code><span>Big Data &amp; Cloud Computing</span>
-          </div>
-          <div class="unit-key-row">
-            <code>KIT325</code><span>Advanced Cybersecurity &amp; eForensics</span>
-          </div>
-          <div class="unit-key-row">
-            <code>KMA153</code><span>Data Handling &amp; Statistics 1</span>
-          </div>
+        <div><code>KIT101</code><span>Programming Fundamentals</span></div><div><code>KIT102</code><span>Introduction to Data Science</span></div><div><code>KIT103</code><span>Computational Science</span></div><div><code>KIT105</code><span>ICT Professional Practices</span></div><div><code>KIT107</code><span>Programming</span></div><div><code>KIT111</code><span>Data Networks &amp; Security</span></div><div><code>KIT202</code><span>Web Programming Fundamentals</span></div><div><code>KIT203</code><span>ICT Project Management &amp; Modelling</span></div><div><code>KIT205</code><span>Data Structures &amp; Algorithms</span></div><div><code>KIT208</code><span>Virtual &amp; Mixed Reality Technology</span></div><div><code>KIT213</code><span>Operating Systems</span></div><div><code>KIT214</code><span>Intelligent &amp; Secure Web Development</span></div><div><code>KIT215</code><span>Cybersecurity &amp; Ethical Hacking</span></div><div><code>KIT219</code><span>Development Methodologies &amp; UX</span></div><div><code>KIT300</code><span>ICT Project (industry capstone)</span></div><div><code>KIT304</code><span>Server Administration &amp; Security Assurance</span></div><div><code>KIT305</code><span>Mobile Application Development</span></div><div><code>KIT307</code><span>Computer Graphics &amp; Animation</span></div><div><code>KIT315</code><span>Machine Learning &amp; Applications</span></div><div><code>KIT318</code><span>Big Data &amp; Cloud Computing</span></div><div><code>KIT325</code><span>Advanced Cybersecurity &amp; eForensics</span></div><div><code>KMA153</code><span>Data Handling &amp; Statistics 1</span></div>
       </div>
     </details></div>
   </section>
 
-  <!-- ── Artifacts ─────────────────────────────────────── -->
-  <section class="section" id="artifacts">
+  <section class="section wrap" id="now">
     <header class="section-head">
-      <h2 class="section-title"><span class="title-idx">04</span> Projects</h2>
-      <p class="section-sub">Things I built, what they do, and how they were built. Source is going up on GitHub project by project. <span id="artifactTally" class="section-tally">11 projects · 1 on GitHub</span></p>
-      <div class="filters" id="artifactFilters" role="group" aria-label="Filter projects by category">
-    <button class="filter on" data-cat="all">All <b>11</b></button>
-    <button class="filter" data-cat="Security">Security <b>4</b></button><button class="filter" data-cat="Web &amp; APIs">Web &amp; APIs <b>2</b></button><button class="filter" data-cat="AI &amp; Data">AI &amp; Data <b>2</b></button><button class="filter" data-cat="Software">Software <b>2</b></button><button class="filter" data-cat="Systems">Systems <b>1</b></button></div>
+      <h2>Now and next</h2>
+      <p class="sub">What is in progress, measured against checkpoints, and what comes after.</p>
     </header>
-    <div class="artifacts" id="artifactList">
-    <article class="artifact reveal" style="--i:0" data-cat="Security">
-      <div class="artifact-top">
-        <span class="artifact-type">Cyber Security Tool</span>
+    <div class="now-grid">
+      <div class="now-list" id="nowList">
+    <article class="now-item">
+      <div class="now-top">
+        <h3>CCNA 200-301</h3>
+        <span class="now-meta">Cisco certification · Exam early 2027</span>
       </div>
-
-      <h3 class="artifact-name">API Exposure Auditor</h3>
-      <p class="artifact-meta">2026 · Solo</p>
-      <p class="artifact-blurb">Audits REST API endpoints for information disclosure (exposed OpenAPI and Swagger documentation, permissive CORS policies, missing security headers) and emits structured JSON reports for triage.</p>
-
-      
-        <ul class="artifact-points">
-          <li>Built on my own research into what publicly exposed API specifications leak</li><li>Findings framed against the OWASP API Security Top 10 and MITRE CWE-200</li><li>Machine-readable output, so results can feed a pipeline rather than a person</li>
-        </ul>
-
-      <div class="artifact-stats"><code>Python</code><code>REST APIs</code><code>OpenAPI</code><code>OWASP</code></div>
-      <div class="artifact-foot"><a class="artifact-link" href="https://github.com/MISAN0/api-exposure-auditor" target="_blank" rel="noopener">Inspect the code ↗</a></div>
+      <p class="now-why">Routing and switching on Cisco IOS, configured and troubleshot in the CLI rather than read about.</p>
+      <div class="bar" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" aria-label="CCNA 200-301: 2 of 5 checkpoints"><i style="width:40%"></i></div>
+      <details class="steps">
+        <summary>2 of 5 checkpoints</summary>
+        <ul><li class="done">Subnet any prefix in under 60 seconds</li><li class="done">Network fundamentals and switching</li><li class="">VLANs, trunking and spanning tree</li><li class="">OSPFv2 configured and troubleshot from scratch</li><li class="">Practice exams at 85% twice running</li></ul>
+      </details>
     </article>
-    <article class="artifact reveal" style="--i:1" data-cat="Security">
-      <div class="artifact-top">
-        <span class="artifact-type">Security Research</span>
+    <article class="now-item">
+      <div class="now-top">
+        <h3>First role in ICT</h3>
+        <span class="now-meta">Job search · Now</span>
       </div>
-
-      <h3 class="artifact-name">OpenAPI Exposure Research</h3>
-      <p class="artifact-meta">2026 · Solo</p>
-      <p class="artifact-blurb">A structured investigation into the information disclosure risk created by publicly exposed Swagger and OpenAPI endpoints in production APIs, and what actually reduces it.</p>
-
-      
-        <ul class="artifact-points">
-          <li>Thirteen sources: ten peer-reviewed papers plus OWASP, MITRE CWE and the OpenAPI specification</li><li>Traced how specification-driven fuzzers turn a published schema into an attack surface</li><li>Produced the risk framing the API Exposure Auditor was then built against</li>
-        </ul>
-
-      <div class="artifact-stats"><code>Research</code><code>OWASP API Top 10</code><code>CWE-200</code><code>Threat Analysis</code></div>
-      <div class="artifact-foot"><span class="artifact-note">Written work, available on request</span></div>
+      <p class="now-why">Support, security, networking, systems or data. The way into the industry is through the door; specialisation comes after.</p>
+      <div class="bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" aria-label="First role in ICT: 3 of 5 checkpoints"><i style="width:60%"></i></div>
+      <details class="steps">
+        <summary>3 of 5 checkpoints</summary>
+        <ul><li class="done">Portfolio live on its own domain</li><li class="done">One-page CV written and downloadable</li><li class="done">Applications sent</li><li class="">Interview for an ICT role</li><li class="">Offer signed</li></ul>
+      </details>
     </article>
-    <article class="artifact reveal" style="--i:2" data-cat="Web &amp; APIs">
-      <div class="artifact-top">
-        <span class="artifact-type">Backend</span>
+    <article class="now-item">
+      <div class="now-top">
+        <h3>Publishing the code</h3>
+        <span class="now-meta">Open source · Ongoing</span>
       </div>
-
-      <h3 class="artifact-name">Hardened Node.js API Server</h3>
-      <p class="artifact-meta">2025 · Solo</p>
-      <p class="artifact-blurb">An Express API served over HTTPS using its own TLS certificates, hardened with Helmet security headers, an explicit CORS policy, and request logging.</p>
-
-      
-        <ul class="artifact-points">
-          <li>TLS terminated by the application itself rather than assumed from a proxy</li><li>Secure defaults applied deliberately: headers, origin policy, audit logging</li><li>Paired with a Cheerio scraper that normalises fetched pages into JSON</li>
-        </ul>
-
-      <div class="artifact-stats"><code>Node.js</code><code>Express</code><code>Helmet</code><code>TLS</code><code>Cheerio</code></div>
-      <div class="artifact-foot"><span class="artifact-note">Code being prepared for GitHub</span></div>
-    </article>
-    <article class="artifact reveal" style="--i:3" data-cat="AI &amp; Data">
-      <div class="artifact-top">
-        <span class="artifact-type">Machine Learning</span>
-      </div>
-
-      <h3 class="artifact-name">Spam Detection Classifier</h3>
-      <p class="artifact-meta">2025 · Solo</p>
-      <p class="artifact-blurb">A text classifier trained on a deliberately imbalanced spam dataset, evaluated on the metrics that survive class imbalance rather than on raw accuracy.</p>
-
-      
-        <ul class="artifact-points">
-          <li>Class weighting applied so the minority class is not simply ignored</li><li>Assessed on ROC and precision-recall curves with confusion matrices</li><li>Seeds fixed throughout, so a rerun reproduces the reported numbers</li>
-        </ul>
-
-      <div class="artifact-stats"><code>TensorFlow</code><code>Keras</code><code>NLP</code><code>scikit-learn</code></div>
-      <div class="artifact-foot"><span class="artifact-note">Code being prepared for GitHub</span></div>
-    </article>
-    <article class="artifact reveal" style="--i:4" data-cat="AI &amp; Data">
-      <div class="artifact-top">
-        <span class="artifact-type">Data Engineering</span>
-      </div>
-
-      <h3 class="artifact-name">Distributed Data Pipelines</h3>
-      <p class="artifact-meta">2026 · Solo</p>
-      <p class="artifact-blurb">PySpark pipelines over multi-table flight and weather data, taking the same analysis from a single machine to a distributed engine.</p>
-
-      
-        <ul class="artifact-points">
-          <li>SparkSession and cluster configuration tuned for the workload</li><li>VectorAssembler feature pipelines feeding Spark MLlib classifiers</li><li>MapReduce fundamentals implemented directly, not just called</li>
-        </ul>
-
-      <div class="artifact-stats"><code>PySpark</code><code>Hadoop</code><code>MapReduce</code><code>Spark MLlib</code></div>
-      <div class="artifact-foot"><span class="artifact-note">Code being prepared for GitHub</span></div>
-    </article>
-    <article class="artifact reveal" style="--i:5" data-cat="Web &amp; APIs">
-      <div class="artifact-top">
-        <span class="artifact-type">Web Application</span>
-      </div>
-
-      <h3 class="artifact-name">Full-Stack Web Application</h3>
-      <p class="artifact-meta">2024 · Solo</p>
-      <p class="artifact-blurb">A database-backed PHP application with user registration and login, session handling, content creation, search, and an archive: around a thousand lines, built without a framework.</p>
-
-      
-        <ul class="artifact-points">
-          <li>Registration and authentication with server-side validation on every route</li><li>MySQL schema behind the create, search, archive and post views</li><li>Shared header and footer components rather than copied markup</li>
-        </ul>
-
-      <div class="artifact-stats"><code>PHP</code><code>MySQL</code><code>JavaScript</code><code>Sessions</code></div>
-      <div class="artifact-foot"><span class="artifact-note">Code being prepared for GitHub</span></div>
-    </article>
-    <article class="artifact reveal" style="--i:6" data-cat="Software">
-      <div class="artifact-top">
-        <span class="artifact-type">Algorithms</span>
-      </div>
-
-      <h3 class="artifact-name">Graph Pathfinding Engine</h3>
-      <p class="artifact-meta">2025 · Solo</p>
-      <p class="artifact-blurb">Dijkstra and A-star written from scratch in C over a custom graph structure, with a heuristic function and explicit closed-set tracking.</p>
-
-      
-        <ul class="artifact-points">
-          <li>No library containers: the graph, queue and sets are all hand-built</li><li>Two search strategies over one structure, so their behaviour is directly comparable</li><li>Built alongside binary search trees, hash tables and priority queues</li>
-        </ul>
-
-      <div class="artifact-stats"><code>C</code><code>Dijkstra</code><code>A-star</code><code>Data Structures</code></div>
-      <div class="artifact-foot"><span class="artifact-note">Code being prepared for GitHub</span></div>
-    </article>
-    <article class="artifact reveal" style="--i:7" data-cat="Security">
-      <div class="artifact-top">
-        <span class="artifact-type">Cryptography</span>
-      </div>
-
-      <h3 class="artifact-name">Steganography &amp; Cipher Tool</h3>
-      <p class="artifact-meta">2023 · Solo</p>
-      <p class="artifact-blurb">Hides a message inside a carrier by encoding characters to binary and applying a multiplicative cipher over modular arithmetic, with a matching decoder.</p>
-
-      
-        <ul class="artifact-points">
-          <li>Encryption and extraction implemented as exact inverses of one another</li><li>Modular arithmetic chosen so each key maps reversibly across the symbol set</li><li>Written test cases drive the implementation rather than following it</li>
-        </ul>
-
-      <div class="artifact-stats"><code>Python</code><code>Cryptography</code><code>Modular Arithmetic</code></div>
-      <div class="artifact-foot"><span class="artifact-note">Code being prepared for GitHub</span></div>
-    </article>
-    <article class="artifact reveal" style="--i:8" data-cat="Systems">
-      <div class="artifact-top">
-        <span class="artifact-type">Systems</span>
-      </div>
-
-      <h3 class="artifact-name">UNIX Records Manager</h3>
-      <p class="artifact-meta">2024 · Solo</p>
-      <p class="artifact-blurb">A POSIX shell toolset for employee record management: menu-driven search, add and delete, with log rotation and a user access-deny list.</p>
-
-      
-        <ul class="artifact-points">
-          <li>Portable POSIX shell rather than bash-only syntax</li><li>Access control enforced through a deny list at the entry point</li><li>Log management handled by the tool instead of left to grow</li>
-        </ul>
-
-      <div class="artifact-stats"><code>Shell</code><code>POSIX</code><code>Linux</code><code>Access Control</code></div>
-      <div class="artifact-foot"><span class="artifact-note">Code being prepared for GitHub</span></div>
-    </article>
-    <article class="artifact reveal" style="--i:8" data-cat="Software">
-      <div class="artifact-top">
-        <span class="artifact-type">Game Development</span>
-      </div>
-
-      <h3 class="artifact-name">Game AI &amp; Pathfinding</h3>
-      <p class="artifact-meta">2024 · Solo</p>
-      <p class="artifact-blurb">A Unity game with hand-written agent AI: A-star navigation across a generated node graph, seek and wander steering behaviours, and path-following agents.</p>
-
-      
-        <ul class="artifact-points">
-          <li>Node graph generated from the level rather than placed by hand</li><li>Steering behaviours composed instead of scripted per enemy</li><li>Shipped with a playable build and a development log</li>
-        </ul>
-
-      <div class="artifact-stats"><code>C#</code><code>Unity</code><code>A-star</code><code>Steering AI</code></div>
-      <div class="artifact-foot"><span class="artifact-note">Code being prepared for GitHub</span></div>
-    </article>
-    <article class="artifact reveal" style="--i:8" data-cat="Security">
-      <div class="artifact-top">
-        <span class="artifact-type">Security Analysis</span>
-      </div>
-
-      <h3 class="artifact-name">Incident Response &amp; Threat Analysis</h3>
-      <p class="artifact-meta">2025 · Team</p>
-      <p class="artifact-blurb">Breakdowns of real intrusions, NotPetya and the Sony Pictures compromise, traced from initial access through to impact, with a response plan built on the Australian Cyber Security Centre template.</p>
-
-      
-        <ul class="artifact-points">
-          <li>Attack paths reconstructed from public incident reporting</li><li>Man-in-the-middle attack analysis with practical defences</li><li>Response plan mapped to a recognised national framework</li>
-        </ul>
-
-      <div class="artifact-stats"><code>Incident Response</code><code>MITM</code><code>ACSC</code><code>Forensics</code></div>
-      <div class="artifact-foot"><span class="artifact-note">Written work, available on request</span></div>
+      <p class="now-why">Moving the projects below out of local folders so the code can be read rather than described.</p>
+      <div class="bar" role="progressbar" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100" aria-label="Publishing the code: 1 of 4 checkpoints"><i style="width:25%"></i></div>
+      <details class="steps">
+        <summary>1 of 4 checkpoints</summary>
+        <ul><li class="done">First repository public, with README and licence</li><li class="">Credentials audit across the rest</li><li class="">Three repositories public</li><li class="">Every project here links to its source</li></ul>
+      </details>
     </article></div>
-  </section>
-
-  <!-- ── Campaign ──────────────────────────────────────── -->
-  <section class="section" id="campaign">
-    <header class="section-head">
-      <h2 class="section-title"><span class="title-idx">05</span> Work and study</h2>
-      <p class="section-sub">In order. Three years of security operations alongside the degree.</p>
-    </header>
-    <div class="campaign" id="campaignList">
-    <article class="camp reveal k-edu" style="--i:0">
-      <div class="camp-side">
-        <span class="camp-period">2023 – Dec 2026</span>
-        <span class="camp-now">Now</span>
-      </div>
-      <div class="camp-body">
-        <h3 class="camp-title">Bachelor of Information and Communication Technology</h3>
-        <p class="camp-org">University of Tasmania · Hobart</p>
-        <ul class="camp-lines"><li>Double major: Computer Science and Cyber Security</li><li>Coursework across cyber security, networking, systems, software and data</li><li>262.5 of 300 credit points completed</li></ul>
-        <div class="camp-tags"><span>Cyber Security</span><span>Computer Science</span></div>
-      </div>
-    </article>
-    <article class="camp reveal k-work" style="--i:1">
-      <div class="camp-side">
-        <span class="camp-period">2023 – Present</span>
-        <span class="camp-now">Now</span>
-      </div>
-      <div class="camp-body">
-        <h3 class="camp-title">Security Officer</h3>
-        <p class="camp-org">Kevlar Security Services · Hobart</p>
-        <ul class="camp-lines"><li>Crowd control at sporting events, concerts, music festivals, clubs and pubs</li><li>Static guarding and access control across maritime, construction, mall and office sites</li><li>Venue control for local festivals</li></ul>
-        <div class="camp-tags"><span>Crowd Control</span><span>Access Control</span><span>Static Guarding</span><span>Maritime</span></div>
-      </div>
-    </article>
-    <article class="camp reveal k-work" style="--i:2">
-      <div class="camp-side">
-        <span class="camp-period">Dec 2023 – Dec 2025</span>
-        
-      </div>
-      <div class="camp-body">
-        <h3 class="camp-title">Security Officer</h3>
-        <p class="camp-org">MA Security · Hobart</p>
-        <ul class="camp-lines"><li>Maritime security at TasPorts, working to regulated port access controls</li><li>Retail security, asset protection and undercover loss prevention</li><li>Crowd control across licensed and public venues</li></ul>
-        <div class="camp-tags"><span>Maritime · TasPorts</span><span>Asset Protection</span><span>Undercover</span><span>Retail</span></div>
-      </div>
-    </article>
-    <article class="camp reveal k-work" style="--i:3">
-      <div class="camp-side">
-        <span class="camp-period">Oct 2023 – Present</span>
-        <span class="camp-now">Now</span>
-      </div>
-      <div class="camp-body">
-        <h3 class="camp-title">Retail Team Member</h3>
-        <p class="camp-org">Coles Supermarket · Hobart</p>
-        <ul class="camp-lines"><li>Customer service and fast issue resolution in a high-volume store</li><li>Team operations, stock accuracy and floor organisation</li></ul>
-        <div class="camp-tags"><span>Customer Service</span><span>Operations</span></div>
-      </div>
-    </article></div>
-  </section>
-
-  <!-- ── Contact ───────────────────────────────────────── -->
-  <section class="section section-contact" id="contact">
-    <div class="contact-card">
-      <h2 class="contact-title">Get in touch.</h2>
-      <p class="contact-sub">Finishing a Computer Science and Cyber Security degree in Hobart, and looking for the first role in ICT: service desk, support, or anything that puts me next to real systems. If you have one, I would like to hear about it.</p>
-      <div class="contact-facts" id="contactFacts"><div class="fact"><span>Open to</span><b>graduate, ICT support and help desk roles</b></div><div class="fact"><span>Based in</span><b>Hobart, Tasmania</b></div><div class="fact"><span>Graduating</span><b>Dec 2026</b></div></div>
-      <div class="contact-links" id="contactLinks">
-    <a class="contact-link" href="mailto:mirsalmannomaan@gmail.com">
-      <span>Email</span><b>mirsalmannomaan@gmail.com</b>
-    </a>
-    <a class="contact-link" href="https://linkedin.com/in/nomaan00" target="_blank" rel="noopener">
-      <span>LinkedIn</span><b>linkedin.com/in/nomaan00</b>
-    </a>
-    <a class="contact-link" href="https://github.com/MISAN0" target="_blank" rel="noopener">
-      <span>GitHub</span><b>github.com/MISAN0</b>
-    </a></div>
-      <p class="contact-foot"><span>© 2026 Mir Salman Nomaan</span><span id="footHint">Hobart, Tasmania · Last updated 18 September 2026</span></p>
+      <aside class="next-list" id="nextList" aria-label="Next"><h3 class="next-title">Next</h3>
+    <div class="next-item">
+      <span class="next-when">Dec 2026</span>
+      <p class="next-name">Graduation</p>
+      <p class="next-why">Coursework finished in October; the degree is conferred in December.</p>
     </div>
+    <div class="next-item">
+      <span class="next-when">After CCNA</span>
+      <p class="next-name">CompTIA Security+</p>
+      <p class="next-why">Postponed so the CCNA gets full attention. Networking first, then security.</p>
+    </div>
+    <div class="next-item">
+      <span class="next-when">2028 onward</span>
+      <p class="next-name">Security or network operations</p>
+      <p class="next-why">Support teaches you the systems. Operations is where you defend them.</p>
+    </div></aside>
+    </div>
+  </section>
+
+  <section class="section wrap" id="work">
+    <header class="section-head">
+      <h2>Work and study</h2>
+      <p class="sub">Three years of security work alongside the degree.</p>
+    </header>
+    <div class="work-grid">
+      <div class="jobs" id="workList"><h3 class="col-title">Work</h3>
+    <article class="job">
+      <p class="job-period">Dec 2024 – Present <span class="now-pill">Now</span></p>
+      <div>
+        <h4>Security Officer</h4>
+        <p class="job-org">Kevlar Security Solutions</p>
+        <ul><li>Retail security, asset protection, events and crowd control across several client sites</li><li>Access control on TasPorts, a regulated maritime site, under an MSIC clearance</li><li>Incident reports and escalation to management or emergency services</li></ul>
+      </div>
+    </article>
+    <article class="job">
+      <p class="job-period">Dec 2023 – Dec 2025</p>
+      <div>
+        <h4>Security Officer</h4>
+        <p class="job-org">MA Services Group</p>
+        <ul><li>First security role, across a range of sites</li><li>Posted to TasPorts from Nov 2024; retained on site when the contract moved to Kevlar</li></ul>
+      </div>
+    </article>
+    <article class="job">
+      <p class="job-period">Oct 2023 – Present <span class="now-pill">Now</span></p>
+      <div>
+        <h4>Retail Team Member</h4>
+        <p class="job-org">Coles Supermarket</p>
+        <ul><li>Customer service through peak trading in a high-volume store</li><li>Sorting the problem while the person is still standing there</li></ul>
+      </div>
+    </article></div>
+      <div class="edu" id="eduBlock">
+    <h3 class="col-title">Study</h3>
+    <article class="edu-card">
+      <p class="job-period">2023 – 2026</p>
+      <h4>Bachelor of Information and Communication Technology</h4>
+      <p class="job-org">University of Tasmania · Hobart</p>
+      <ul>
+        <li>Coursework complete: 300 of 300 credit points (October 2026)</li>
+        <li>Graduating December 2026</li>
+        <li>Double major: Computer Science and Cyber Security</li><li>Industry capstone with a real client, under an NDA, as documentation lead</li>
+      </ul>
+    </article></div>
+    </div>
+  </section>
+
+  <section class="section wrap contact" id="contact">
+    <h2 class="contact-title">Get in touch.</h2>
+    <p class="contact-sub" id="contactSub">Available now, full time, Hobart. If you have a role in ICT, or a question about anything on this page, I would like to hear from you.</p>
+    <div class="contact-links" id="contactLinks">
+    <div class="contact-row">
+      <span class="contact-label">Email</span>
+      <a href="mailto:mirsalmannomaan@gmail.com">mirsalmannomaan@gmail.com</a>
+      <button type="button" class="copy-btn" data-copy="mirsalmannomaan@gmail.com">Copy</button>
+    </div>
+    <div class="contact-row">
+      <span class="contact-label">LinkedIn</span>
+      <a href="https://linkedin.com/in/nomaan00" target="_blank" rel="noopener">linkedin.com/in/nomaan00</a>
+    </div>
+    <div class="contact-row">
+      <span class="contact-label">GitHub</span>
+      <a href="https://github.com/MISAN0" target="_blank" rel="noopener">github.com/MISAN0</a>
+    </div>
+    <p class="contact-cta"><a class="btn btn-primary" href="/Mir-Salman-Nomaan-CV.pdf" download="">Download CV</a></p>
+    <p class="sr-only" aria-live="polite" id="copyStatus"></p></div>
   </section>
 
 </main>
 
-<script src="data.js"></script>
-<script src="app.js"></script></body></html>
+<footer class="site-foot">
+  <div class="wrap site-foot-in" id="siteFoot">
+    <span>© 2026 Mir Salman Nomaan · Hobart, Tasmania</span>
+    <span>Last updated 14 November 2026 · Built from one data file ·
+      <a href="https://github.com/MISAN0/nomaan.github.io" target="_blank" rel="noopener">View source ↗</a></span></div>
+</footer>
+
+<script src="/data.js"></script>
+<script src="/app.js"></script>
+<script src="/cv.js"></script></body></html>
