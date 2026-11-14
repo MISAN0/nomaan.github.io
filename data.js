@@ -7,11 +7,8 @@ const DATA = {
 
   /* Bump whenever something real changes. Deliberately manual: a build
      date would claim the content is current when only code changed. */
-  meta: {
-    updated: "14 November 2026",
-    site: "https://mirsalmannomaan.com",
-    source: "https://github.com/MISAN0/nomaan.github.io"
-  },
+  meta: { updated: "14 November 2026", site: "https://mirsalmannomaan.com",
+          source: "https://github.com/MISAN0/nomaan.github.io" },
 
   person: {
     name: "Mir Salman Nomaan",
@@ -341,7 +338,6 @@ const DATA = {
       code: "private"
     }
   ],
-
   /* ---------- Units ----------
      Names for the codes the skills cite, plus credit points so the
      education line is computed. No marks or grades: academic results
@@ -380,6 +376,8 @@ const DATA = {
      Facts from the master CV (portfolio_private/master/resume.md).
      The TasPorts posting is continuous; only the employer changed.  */
   work: [
+    { role: "Team Member", org: "Officeworks", period: "Nov 2026 – Present", current: true,
+      lines: ["Casual role in a store selling technology, printing and office supplies"] },
     {
       role: "Security Officer", org: "Kevlar Security Solutions", period: "Dec 2024 – Present", current: true,
       lines: [
@@ -440,6 +438,8 @@ const DATA = {
     ],
 
     experience: [
+      { role: "Team Member (casual)", org: "Officeworks", location: "Hobart, Tasmania", period: "Nov 2026 – Present",
+        bullets: ["Casual role in a store selling technology, printing and office supplies"] },
       {
         role: "Security Officer", org: "Kevlar Security Solutions", location: "Tasmania", period: "Dec 2024 – Present",
         bullets: [

@@ -16,6 +16,7 @@ import { readFileSync, writeFileSync, mkdirSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 import { dirname, join } from 'node:path';
 import { JSDOM } from 'jsdom';
+import { createHash } from 'node:crypto';
 
 const root = join(dirname(fileURLToPath(import.meta.url)), '..');
 const file = p => readFileSync(join(root, p), 'utf8');
@@ -41,6 +42,17 @@ if (empty.length) {
   console.error('Prerender produced empty containers, refusing to write:', empty.join(', '));
   process.exit(1);
 }
+
+/* Cache-busting: each script and stylesheet URL carries a hash of its
+   contents. GitHub Pages lets browsers keep these for ten minutes, and a
+   cached data.js would otherwise re-render the fresh page with old facts. */
+const stamp = (sel, attr) => doc.querySelectorAll(sel).forEach(n => {
+  const path = n.getAttribute(attr).split('?')[0];
+  const hash = createHash('sha256').update(file(path.slice(1))).digest('hex').slice(0, 8);
+  n.setAttribute(attr, `${path}?v=${hash}`);
+});
+stamp('script[src^="/"]', 'src');
+stamp('link[rel="stylesheet"][href^="/"]', 'href');
 
 const html = () => '<!DOCTYPE html>\n' + doc.documentElement.outerHTML + '\n';
 writeFileSync(join(root, 'index.html'), html());
