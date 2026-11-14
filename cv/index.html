@@ -2,6 +2,8 @@
 <html lang="en"><head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Honour the text size set in the phone's own accessibility settings -->
+  <meta name="text-scale" content="scale">
   <title>Mir Salman Nomaan · CV</title>
   <meta name="description" content="Mir Salman Nomaan: Computer Science and Cyber Security, University of Tasmania, graduating December 2026. Available now for ICT roles in Hobart. Projects, and the unit or project behind every skill.">
   <meta name="color-scheme" content="light dark">
@@ -27,7 +29,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
   <link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible+Next:wght@300..800&amp;family=Bricolage+Grotesque:opsz,wght@12..96,400..800&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="/style.css?v=f0a7b723">
+  <link rel="stylesheet" href="/style.css?v=af0003b2">
   <link rel="stylesheet" href="/cv.css?v=ff389d9f">
 
   <script type="application/ld+json">
@@ -270,7 +272,7 @@
 
   <section class="hero wrap" id="home">
     <figure class="hero-photo">
-      <img id="avatar" src="/photo.jpg" alt="Portrait of Mir Salman Nomaan" width="400" height="500">
+      <img id="avatar" fetchpriority="high" src="/photo.jpg" alt="Portrait of Mir Salman Nomaan" width="400" height="500">
     </figure>
     <div class="hero-text">
       <p class="eyebrow" id="heroEyebrow">Computer Science &amp; Cyber Security · University of Tasmania</p>
@@ -286,7 +288,7 @@
     </div>
   </section>
 
-  <section class="section wrap" id="projects">
+  <section class="section wrap" id="projects" tabindex="-1">
     <header class="section-head">
       <h2>Projects</h2>
       <p class="sub" id="projectsSub">13 projects. Source is public where it is linked (1 so far); the rest is going up one repository at a time.</p>
@@ -471,7 +473,7 @@
     </details></div>
   </section>
 
-  <section class="section wrap" id="skills">
+  <section class="section wrap" id="skills" tabindex="-1">
     <header class="section-head">
       <h2>Skills, with evidence</h2>
       <p class="sub">Every rating names the unit, certification or project it came from, so it is a citation rather than a claim. Open a skill to see the evidence and the projects that used it.</p>
@@ -483,7 +485,7 @@
     <div class="tree" id="skillTree">
     <details class="branch" open="">
       <summary class="branch-head">
-        <h3>Cyber Security</h3>
+        <span class="branch-label">Cyber Security</span>
         <span class="branch-count">10 skills</span>
       </summary>
       <p class="branch-note">Defensive and offensive work across the same systems: finding the weakness, then closing it.</p>
@@ -496,7 +498,7 @@
               <span class="node-ev">KIT304</span>
               <span class="pips" role="img" aria-label="Confident, 4 of 5"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class=""></i></span>
             </button>
-            <div class="node-detail"><p>Evidence: KIT304: Server Administration &amp; Security Assurance. Used in <a href="#p-api-exposure-auditor">API Exposure Auditor</a>.</p></div>
+            <div class="node-detail" hidden="until-found"><p>Evidence: KIT304: Server Administration &amp; Security Assurance. Used in <a href="#p-api-exposure-auditor">API Exposure Auditor</a>.</p></div>
           </div>
           <div class="node">
             <button type="button" class="node-head" aria-expanded="false" data-tip="Confident · KIT111: Data Networks &amp; Security · KIT215: Cybersecurity &amp; Ethical Hacking">
@@ -505,7 +507,7 @@
               <span class="node-ev">KIT111 · KIT215</span>
               <span class="pips" role="img" aria-label="Confident, 4 of 5"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class=""></i></span>
             </button>
-            <div class="node-detail"><p>Evidence: KIT111: Data Networks &amp; Security · KIT215: Cybersecurity &amp; Ethical Hacking.</p></div>
+            <div class="node-detail" hidden="until-found"><p>Evidence: KIT111: Data Networks &amp; Security · KIT215: Cybersecurity &amp; Ethical Hacking.</p></div>
           </div>
           <div class="node">
             <button type="button" class="node-head" aria-expanded="false" data-tip="Working · KIT103: Computational Science · KIT214: Intelligent &amp; Secure Web Development">
@@ -514,7 +516,7 @@
               <span class="node-ev">KIT103 · KIT214</span>
               <span class="pips" role="img" aria-label="Working, 3 of 5"><i class="on"></i><i class="on"></i><i class="on"></i><i class=""></i><i class=""></i></span>
             </button>
-            <div class="node-detail"><p>Evidence: KIT103: Computational Science · KIT214: Intelligent &amp; Secure Web Development. Used in <a href="#p-stego-cipher">Steganography &amp; Cipher Tool</a>.</p></div>
+            <div class="node-detail" hidden="until-found"><p>Evidence: KIT103: Computational Science · KIT214: Intelligent &amp; Secure Web Development. Used in <a href="#p-stego-cipher">Steganography &amp; Cipher Tool</a>.</p></div>
           </div>
           <div class="node">
             <button type="button" class="node-head" aria-expanded="false" data-tip="Working · KIT325: Advanced Cybersecurity &amp; eForensics">
@@ -523,7 +525,7 @@
               <span class="node-ev">KIT325</span>
               <span class="pips" role="img" aria-label="Working, 3 of 5"><i class="on"></i><i class="on"></i><i class="on"></i><i class=""></i><i class=""></i></span>
             </button>
-            <div class="node-detail"><p>Evidence: KIT325: Advanced Cybersecurity &amp; eForensics. Used in <a href="#p-incident-response">Incident Response &amp; Threat Analysis</a>.</p></div>
+            <div class="node-detail" hidden="until-found"><p>Evidence: KIT325: Advanced Cybersecurity &amp; eForensics. Used in <a href="#p-incident-response">Incident Response &amp; Threat Analysis</a>.</p></div>
           </div>
           <div class="node">
             <button type="button" class="node-head" aria-expanded="false" data-tip="Working · KIT215: Cybersecurity &amp; Ethical Hacking">
@@ -532,7 +534,7 @@
               <span class="node-ev">KIT215</span>
               <span class="pips" role="img" aria-label="Working, 3 of 5"><i class="on"></i><i class="on"></i><i class="on"></i><i class=""></i><i class=""></i></span>
             </button>
-            <div class="node-detail"><p>Evidence: KIT215: Cybersecurity &amp; Ethical Hacking.</p></div>
+            <div class="node-detail" hidden="until-found"><p>Evidence: KIT215: Cybersecurity &amp; Ethical Hacking.</p></div>
           </div>
           <div class="node">
             <button type="button" class="node-head" aria-expanded="false" data-tip="Working · KIT325: Advanced Cybersecurity &amp; eForensics">
@@ -541,7 +543,7 @@
               <span class="node-ev">KIT325</span>
               <span class="pips" role="img" aria-label="Working, 3 of 5"><i class="on"></i><i class="on"></i><i class="on"></i><i class=""></i><i class=""></i></span>
             </button>
-            <div class="node-detail"><p>Evidence: KIT325: Advanced Cybersecurity &amp; eForensics. Used in <a href="#p-incident-response">Incident Response &amp; Threat Analysis</a>.</p></div>
+            <div class="node-detail" hidden="until-found"><p>Evidence: KIT325: Advanced Cybersecurity &amp; eForensics. Used in <a href="#p-incident-response">Incident Response &amp; Threat Analysis</a>.</p></div>
           </div>
           <div class="node">
             <button type="button" class="node-head" aria-expanded="false" data-tip="Working · KIT325: Advanced Cybersecurity &amp; eForensics">
@@ -550,7 +552,7 @@
               <span class="node-ev">KIT325</span>
               <span class="pips" role="img" aria-label="Working, 3 of 5"><i class="on"></i><i class="on"></i><i class="on"></i><i class=""></i><i class=""></i></span>
             </button>
-            <div class="node-detail"><p>Evidence: KIT325: Advanced Cybersecurity &amp; eForensics. Used in <a href="#p-incident-response">Incident Response &amp; Threat Analysis</a>.</p></div>
+            <div class="node-detail" hidden="until-found"><p>Evidence: KIT325: Advanced Cybersecurity &amp; eForensics. Used in <a href="#p-incident-response">Incident Response &amp; Threat Analysis</a>.</p></div>
           </div>
           <div class="node">
             <button type="button" class="node-head" aria-expanded="false" data-tip="Working · KIT304 research">
@@ -559,7 +561,7 @@
               <span class="node-ev">KIT304 research</span>
               <span class="pips" role="img" aria-label="Working, 3 of 5"><i class="on"></i><i class="on"></i><i class="on"></i><i class=""></i><i class=""></i></span>
             </button>
-            <div class="node-detail"><p>Evidence: KIT304 research. Used in <a href="#p-openapi-research">OpenAPI Exposure Research</a>.</p></div>
+            <div class="node-detail" hidden="until-found"><p>Evidence: KIT304 research. Used in <a href="#p-openapi-research">OpenAPI Exposure Research</a>.</p></div>
           </div>
           <div class="node">
             <button type="button" class="node-head" aria-expanded="false" data-tip="Working · KIT304 research">
@@ -568,7 +570,7 @@
               <span class="node-ev">KIT304 research</span>
               <span class="pips" role="img" aria-label="Working, 3 of 5"><i class="on"></i><i class="on"></i><i class="on"></i><i class=""></i><i class=""></i></span>
             </button>
-            <div class="node-detail"><p>Evidence: KIT304 research. Used in <a href="#p-openapi-research">OpenAPI Exposure Research</a>.</p></div>
+            <div class="node-detail" hidden="until-found"><p>Evidence: KIT304 research. Used in <a href="#p-openapi-research">OpenAPI Exposure Research</a>.</p></div>
           </div>
           <div class="node">
             <button type="button" class="node-head" aria-expanded="false" data-tip="Working · KIT214: Intelligent &amp; Secure Web Development">
@@ -577,7 +579,7 @@
               <span class="node-ev">KIT214</span>
               <span class="pips" role="img" aria-label="Working, 3 of 5"><i class="on"></i><i class="on"></i><i class="on"></i><i class=""></i><i class=""></i></span>
             </button>
-            <div class="node-detail"><p>Evidence: KIT214: Intelligent &amp; Secure Web Development. Used in <a href="#p-hardened-node-api">Hardened Node.js API Server</a>.</p></div>
+            <div class="node-detail" hidden="until-found"><p>Evidence: KIT214: Intelligent &amp; Secure Web Development. Used in <a href="#p-hardened-node-api">Hardened Node.js API Server</a>.</p></div>
           </div>
           <div class="node next">
             <button type="button" class="node-head" aria-expanded="false" data-tip="Next to learn">
@@ -586,13 +588,13 @@
               
               <span class="pips" role="img" aria-label="Next to learn, 0 of 5"><i class=""></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i></span>
             </button>
-            <div class="node-detail"><p>Not started yet.</p></div>
+            <div class="node-detail" hidden="until-found"><p>Not started yet.</p></div>
           </div>
       </div>
     </details>
     <details class="branch" open="">
       <summary class="branch-head">
-        <h3>Networking</h3>
+        <span class="branch-label">Networking</span>
         <span class="branch-count">5 skills</span>
       </summary>
       <p class="branch-note">The layer everything else runs on. Addressing, routing and switching, learnt in the CLI.</p>
@@ -605,7 +607,7 @@
               <span class="node-ev">CCNA</span>
               <span class="pips" role="img" aria-label="Confident, 4 of 5"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class=""></i></span>
             </button>
-            <div class="node-detail"><p>Evidence: CCNA.</p></div>
+            <div class="node-detail" hidden="until-found"><p>Evidence: CCNA.</p></div>
           </div>
           <div class="node">
             <button type="button" class="node-head" aria-expanded="false" data-tip="Confident · KIT111: Data Networks &amp; Security · KIT213: Operating Systems">
@@ -614,7 +616,7 @@
               <span class="node-ev">KIT111 · KIT213</span>
               <span class="pips" role="img" aria-label="Confident, 4 of 5"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class=""></i></span>
             </button>
-            <div class="node-detail"><p>Evidence: KIT111: Data Networks &amp; Security · KIT213: Operating Systems.</p></div>
+            <div class="node-detail" hidden="until-found"><p>Evidence: KIT111: Data Networks &amp; Security · KIT213: Operating Systems.</p></div>
           </div>
           <div class="node">
             <button type="button" class="node-head" aria-expanded="false" data-tip="Working · KIT111: Data Networks &amp; Security">
@@ -623,7 +625,7 @@
               <span class="node-ev">KIT111</span>
               <span class="pips" role="img" aria-label="Working, 3 of 5"><i class="on"></i><i class="on"></i><i class="on"></i><i class=""></i><i class=""></i></span>
             </button>
-            <div class="node-detail"><p>Evidence: KIT111: Data Networks &amp; Security.</p></div>
+            <div class="node-detail" hidden="until-found"><p>Evidence: KIT111: Data Networks &amp; Security.</p></div>
           </div>
           <div class="node">
             <button type="button" class="node-head" aria-expanded="false" data-tip="Working · CCNA">
@@ -632,7 +634,7 @@
               <span class="node-ev">CCNA</span>
               <span class="pips" role="img" aria-label="Working, 3 of 5"><i class="on"></i><i class="on"></i><i class="on"></i><i class=""></i><i class=""></i></span>
             </button>
-            <div class="node-detail"><p>Evidence: CCNA.</p></div>
+            <div class="node-detail" hidden="until-found"><p>Evidence: CCNA.</p></div>
           </div>
           <div class="node">
             <button type="button" class="node-head" aria-expanded="false" data-tip="Familiar · CCNA">
@@ -641,7 +643,7 @@
               <span class="node-ev">CCNA</span>
               <span class="pips" role="img" aria-label="Familiar, 2 of 5"><i class="on"></i><i class="on"></i><i class=""></i><i class=""></i><i class=""></i></span>
             </button>
-            <div class="node-detail"><p>Evidence: CCNA.</p></div>
+            <div class="node-detail" hidden="until-found"><p>Evidence: CCNA.</p></div>
           </div>
           <div class="node next">
             <button type="button" class="node-head" aria-expanded="false" data-tip="Next to learn">
@@ -650,13 +652,13 @@
               
               <span class="pips" role="img" aria-label="Next to learn, 0 of 5"><i class=""></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i></span>
             </button>
-            <div class="node-detail"><p>Not started yet.</p></div>
+            <div class="node-detail" hidden="until-found"><p>Not started yet.</p></div>
           </div>
       </div>
     </details>
     <details class="branch">
       <summary class="branch-head">
-        <h3>Systems &amp; Servers</h3>
+        <span class="branch-label">Systems &amp; Servers</span>
         <span class="branch-count">5 skills</span>
       </summary>
       <p class="branch-note">What happens under the application: processes, memory, filesystems, and the servers they run on.</p>
@@ -669,7 +671,7 @@
               <span class="node-ev">KIT213</span>
               <span class="pips" role="img" aria-label="Confident, 4 of 5"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class=""></i></span>
             </button>
-            <div class="node-detail"><p>Evidence: KIT213: Operating Systems. Used in <a href="#p-unix-records">UNIX Records Manager</a>.</p></div>
+            <div class="node-detail" hidden="until-found"><p>Evidence: KIT213: Operating Systems. Used in <a href="#p-unix-records">UNIX Records Manager</a>.</p></div>
           </div>
           <div class="node">
             <button type="button" class="node-head" aria-expanded="false" data-tip="Confident · KIT213: Operating Systems">
@@ -678,7 +680,7 @@
               <span class="node-ev">KIT213</span>
               <span class="pips" role="img" aria-label="Confident, 4 of 5"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class=""></i></span>
             </button>
-            <div class="node-detail"><p>Evidence: KIT213: Operating Systems.</p></div>
+            <div class="node-detail" hidden="until-found"><p>Evidence: KIT213: Operating Systems.</p></div>
           </div>
           <div class="node">
             <button type="button" class="node-head" aria-expanded="false" data-tip="Working · KIT318: Big Data &amp; Cloud Computing">
@@ -687,7 +689,7 @@
               <span class="node-ev">KIT318</span>
               <span class="pips" role="img" aria-label="Working, 3 of 5"><i class="on"></i><i class="on"></i><i class="on"></i><i class=""></i><i class=""></i></span>
             </button>
-            <div class="node-detail"><p>Evidence: KIT318: Big Data &amp; Cloud Computing.</p></div>
+            <div class="node-detail" hidden="until-found"><p>Evidence: KIT318: Big Data &amp; Cloud Computing.</p></div>
           </div>
           <div class="node">
             <button type="button" class="node-head" aria-expanded="false" data-tip="Working · KIT304: Server Administration &amp; Security Assurance">
@@ -696,7 +698,7 @@
               <span class="node-ev">KIT304</span>
               <span class="pips" role="img" aria-label="Working, 3 of 5"><i class="on"></i><i class="on"></i><i class="on"></i><i class=""></i><i class=""></i></span>
             </button>
-            <div class="node-detail"><p>Evidence: KIT304: Server Administration &amp; Security Assurance.</p></div>
+            <div class="node-detail" hidden="until-found"><p>Evidence: KIT304: Server Administration &amp; Security Assurance.</p></div>
           </div>
           <div class="node">
             <button type="button" class="node-head" aria-expanded="false" data-tip="Working · KIT304: Server Administration &amp; Security Assurance">
@@ -705,7 +707,7 @@
               <span class="node-ev">KIT304</span>
               <span class="pips" role="img" aria-label="Working, 3 of 5"><i class="on"></i><i class="on"></i><i class="on"></i><i class=""></i><i class=""></i></span>
             </button>
-            <div class="node-detail"><p>Evidence: KIT304: Server Administration &amp; Security Assurance. Used in <a href="#p-hardened-node-api">Hardened Node.js API Server</a>.</p></div>
+            <div class="node-detail" hidden="until-found"><p>Evidence: KIT304: Server Administration &amp; Security Assurance. Used in <a href="#p-hardened-node-api">Hardened Node.js API Server</a>.</p></div>
           </div>
           <div class="node next">
             <button type="button" class="node-head" aria-expanded="false" data-tip="Next to learn">
@@ -714,13 +716,13 @@
               
               <span class="pips" role="img" aria-label="Next to learn, 0 of 5"><i class=""></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i></span>
             </button>
-            <div class="node-detail"><p>Not started yet.</p></div>
+            <div class="node-detail" hidden="until-found"><p>Not started yet.</p></div>
           </div>
       </div>
     </details>
     <details class="branch">
       <summary class="branch-head">
-        <h3>Programming</h3>
+        <span class="branch-label">Programming</span>
         <span class="branch-count">8 skills</span>
       </summary>
       <p class="branch-note">Languages picked up per problem rather than per fashion: systems work in C, everything else in Python.</p>
@@ -733,7 +735,7 @@
               <span class="node-ev">KIT101 · KIT315</span>
               <span class="pips" role="img" aria-label="Strong, 5 of 5"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i></span>
             </button>
-            <div class="node-detail"><p>Evidence: KIT101: Programming Fundamentals · KIT315: Machine Learning &amp; Applications. Used in <a href="#p-api-exposure-auditor">API Exposure Auditor</a>, <a href="#p-industry-capstone">Agent trust demo</a>, <a href="#p-stego-cipher">Steganography &amp; Cipher Tool</a>.</p></div>
+            <div class="node-detail" hidden="until-found"><p>Evidence: KIT101: Programming Fundamentals · KIT315: Machine Learning &amp; Applications. Used in <a href="#p-api-exposure-auditor">API Exposure Auditor</a>, <a href="#p-industry-capstone">Agent trust demo</a>, <a href="#p-stego-cipher">Steganography &amp; Cipher Tool</a>.</p></div>
           </div>
           <div class="node">
             <button type="button" class="node-head" aria-expanded="false" data-tip="Confident · KIT213: Operating Systems">
@@ -742,7 +744,7 @@
               <span class="node-ev">KIT213</span>
               <span class="pips" role="img" aria-label="Confident, 4 of 5"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class=""></i></span>
             </button>
-            <div class="node-detail"><p>Evidence: KIT213: Operating Systems. Used in <a href="#p-unix-records">UNIX Records Manager</a>.</p></div>
+            <div class="node-detail" hidden="until-found"><p>Evidence: KIT213: Operating Systems. Used in <a href="#p-unix-records">UNIX Records Manager</a>.</p></div>
           </div>
           <div class="node">
             <button type="button" class="node-head" aria-expanded="false" data-tip="Confident · KIT205: Data Structures &amp; Algorithms · KIT107: Programming">
@@ -751,7 +753,7 @@
               <span class="node-ev">KIT205 · KIT107</span>
               <span class="pips" role="img" aria-label="Confident, 4 of 5"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class=""></i></span>
             </button>
-            <div class="node-detail"><p>Evidence: KIT205: Data Structures &amp; Algorithms · KIT107: Programming. Used in <a href="#p-graph-pathfinding">Graph Pathfinding Engine</a>.</p></div>
+            <div class="node-detail" hidden="until-found"><p>Evidence: KIT205: Data Structures &amp; Algorithms · KIT107: Programming. Used in <a href="#p-graph-pathfinding">Graph Pathfinding Engine</a>.</p></div>
           </div>
           <div class="node">
             <button type="button" class="node-head" aria-expanded="false" data-tip="Confident · Projects">
@@ -760,7 +762,7 @@
               <span class="node-ev">Projects</span>
               <span class="pips" role="img" aria-label="Confident, 4 of 5"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class=""></i></span>
             </button>
-            <div class="node-detail"><p>Evidence: Projects.</p></div>
+            <div class="node-detail" hidden="until-found"><p>Evidence: Projects.</p></div>
           </div>
           <div class="node">
             <button type="button" class="node-head" aria-expanded="false" data-tip="Working · KIT208: Virtual &amp; Mixed Reality Technology · KIT307: Computer Graphics &amp; Animation">
@@ -769,7 +771,7 @@
               <span class="node-ev">KIT208 · KIT307</span>
               <span class="pips" role="img" aria-label="Working, 3 of 5"><i class="on"></i><i class="on"></i><i class="on"></i><i class=""></i><i class=""></i></span>
             </button>
-            <div class="node-detail"><p>Evidence: KIT208: Virtual &amp; Mixed Reality Technology · KIT307: Computer Graphics &amp; Animation. Used in <a href="#p-game-ai">Game AI &amp; Pathfinding</a>.</p></div>
+            <div class="node-detail" hidden="until-found"><p>Evidence: KIT208: Virtual &amp; Mixed Reality Technology · KIT307: Computer Graphics &amp; Animation. Used in <a href="#p-game-ai">Game AI &amp; Pathfinding</a>.</p></div>
           </div>
           <div class="node">
             <button type="button" class="node-head" aria-expanded="false" data-tip="Working · KIT101: Programming Fundamentals">
@@ -778,7 +780,7 @@
               <span class="node-ev">KIT101</span>
               <span class="pips" role="img" aria-label="Working, 3 of 5"><i class="on"></i><i class="on"></i><i class="on"></i><i class=""></i><i class=""></i></span>
             </button>
-            <div class="node-detail"><p>Evidence: KIT101: Programming Fundamentals.</p></div>
+            <div class="node-detail" hidden="until-found"><p>Evidence: KIT101: Programming Fundamentals.</p></div>
           </div>
           <div class="node">
             <button type="button" class="node-head" aria-expanded="false" data-tip="Working · Projects">
@@ -787,7 +789,7 @@
               <span class="node-ev">Projects</span>
               <span class="pips" role="img" aria-label="Working, 3 of 5"><i class="on"></i><i class="on"></i><i class="on"></i><i class=""></i><i class=""></i></span>
             </button>
-            <div class="node-detail"><p>Evidence: Projects. Used in <a href="#p-industry-capstone">Agent trust demo</a>.</p></div>
+            <div class="node-detail" hidden="until-found"><p>Evidence: Projects. Used in <a href="#p-industry-capstone">Agent trust demo</a>.</p></div>
           </div>
           <div class="node">
             <button type="button" class="node-head" aria-expanded="false" data-tip="Familiar · Self-taught">
@@ -796,13 +798,13 @@
               <span class="node-ev">Self-taught</span>
               <span class="pips" role="img" aria-label="Familiar, 2 of 5"><i class="on"></i><i class="on"></i><i class=""></i><i class=""></i><i class=""></i></span>
             </button>
-            <div class="node-detail"><p>Evidence: Self-taught.</p></div>
+            <div class="node-detail" hidden="until-found"><p>Evidence: Self-taught.</p></div>
           </div>
       </div>
     </details>
     <details class="branch">
       <summary class="branch-head">
-        <h3>Web &amp; APIs</h3>
+        <span class="branch-label">Web &amp; APIs</span>
         <span class="branch-count">9 skills</span>
       </summary>
       <p class="branch-note">Building services and then attacking them: authentication, transport security, and what an API leaks.</p>
@@ -815,7 +817,7 @@
               <span class="node-ev">KIT214</span>
               <span class="pips" role="img" aria-label="Confident, 4 of 5"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class=""></i></span>
             </button>
-            <div class="node-detail"><p>Evidence: KIT214: Intelligent &amp; Secure Web Development. Used in <a href="#p-php-web-app">Full-Stack Web Application</a>.</p></div>
+            <div class="node-detail" hidden="until-found"><p>Evidence: KIT214: Intelligent &amp; Secure Web Development. Used in <a href="#p-php-web-app">Full-Stack Web Application</a>.</p></div>
           </div>
           <div class="node">
             <button type="button" class="node-head" aria-expanded="false" data-tip="Confident · Projects">
@@ -824,7 +826,7 @@
               <span class="node-ev">Projects</span>
               <span class="pips" role="img" aria-label="Confident, 4 of 5"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class=""></i></span>
             </button>
-            <div class="node-detail"><p>Evidence: Projects. Used in <a href="#p-industry-capstone">Agent trust demo</a>.</p></div>
+            <div class="node-detail" hidden="until-found"><p>Evidence: Projects. Used in <a href="#p-industry-capstone">Agent trust demo</a>.</p></div>
           </div>
           <div class="node">
             <button type="button" class="node-head" aria-expanded="false" data-tip="Confident · KIT214: Intelligent &amp; Secure Web Development">
@@ -833,7 +835,7 @@
               <span class="node-ev">KIT214</span>
               <span class="pips" role="img" aria-label="Confident, 4 of 5"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class=""></i></span>
             </button>
-            <div class="node-detail"><p>Evidence: KIT214: Intelligent &amp; Secure Web Development.</p></div>
+            <div class="node-detail" hidden="until-found"><p>Evidence: KIT214: Intelligent &amp; Secure Web Development.</p></div>
           </div>
           <div class="node">
             <button type="button" class="node-head" aria-expanded="false" data-tip="Confident · KIT214: Intelligent &amp; Secure Web Development">
@@ -842,7 +844,7 @@
               <span class="node-ev">KIT214</span>
               <span class="pips" role="img" aria-label="Confident, 4 of 5"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class=""></i></span>
             </button>
-            <div class="node-detail"><p>Evidence: KIT214: Intelligent &amp; Secure Web Development. Used in <a href="#p-nous">NOUS</a>, <a href="#p-hardened-node-api">Hardened Node.js API Server</a>.</p></div>
+            <div class="node-detail" hidden="until-found"><p>Evidence: KIT214: Intelligent &amp; Secure Web Development. Used in <a href="#p-nous">NOUS</a>, <a href="#p-hardened-node-api">Hardened Node.js API Server</a>.</p></div>
           </div>
           <div class="node">
             <button type="button" class="node-head" aria-expanded="false" data-tip="Confident · KIT214: Intelligent &amp; Secure Web Development · KIT304: Server Administration &amp; Security Assurance">
@@ -851,7 +853,7 @@
               <span class="node-ev">KIT214 · KIT304</span>
               <span class="pips" role="img" aria-label="Confident, 4 of 5"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class=""></i></span>
             </button>
-            <div class="node-detail"><p>Evidence: KIT214: Intelligent &amp; Secure Web Development · KIT304: Server Administration &amp; Security Assurance. Used in <a href="#p-api-exposure-auditor">API Exposure Auditor</a>.</p></div>
+            <div class="node-detail" hidden="until-found"><p>Evidence: KIT214: Intelligent &amp; Secure Web Development · KIT304: Server Administration &amp; Security Assurance. Used in <a href="#p-api-exposure-auditor">API Exposure Auditor</a>.</p></div>
           </div>
           <div class="node">
             <button type="button" class="node-head" aria-expanded="false" data-tip="Working · KIT214: Intelligent &amp; Secure Web Development">
@@ -860,7 +862,7 @@
               <span class="node-ev">KIT214</span>
               <span class="pips" role="img" aria-label="Working, 3 of 5"><i class="on"></i><i class="on"></i><i class="on"></i><i class=""></i><i class=""></i></span>
             </button>
-            <div class="node-detail"><p>Evidence: KIT214: Intelligent &amp; Secure Web Development.</p></div>
+            <div class="node-detail" hidden="until-found"><p>Evidence: KIT214: Intelligent &amp; Secure Web Development.</p></div>
           </div>
           <div class="node">
             <button type="button" class="node-head" aria-expanded="false" data-tip="Working · KIT202: Web Programming Fundamentals">
@@ -869,7 +871,7 @@
               <span class="node-ev">KIT202</span>
               <span class="pips" role="img" aria-label="Working, 3 of 5"><i class="on"></i><i class="on"></i><i class="on"></i><i class=""></i><i class=""></i></span>
             </button>
-            <div class="node-detail"><p>Evidence: KIT202: Web Programming Fundamentals. Used in <a href="#p-php-web-app">Full-Stack Web Application</a>.</p></div>
+            <div class="node-detail" hidden="until-found"><p>Evidence: KIT202: Web Programming Fundamentals. Used in <a href="#p-php-web-app">Full-Stack Web Application</a>.</p></div>
           </div>
           <div class="node">
             <button type="button" class="node-head" aria-expanded="false" data-tip="Working · KIT214: Intelligent &amp; Secure Web Development">
@@ -878,7 +880,7 @@
               <span class="node-ev">KIT214</span>
               <span class="pips" role="img" aria-label="Working, 3 of 5"><i class="on"></i><i class="on"></i><i class="on"></i><i class=""></i><i class=""></i></span>
             </button>
-            <div class="node-detail"><p>Evidence: KIT214: Intelligent &amp; Secure Web Development. Used in <a href="#p-hardened-node-api">Hardened Node.js API Server</a>.</p></div>
+            <div class="node-detail" hidden="until-found"><p>Evidence: KIT214: Intelligent &amp; Secure Web Development. Used in <a href="#p-hardened-node-api">Hardened Node.js API Server</a>.</p></div>
           </div>
           <div class="node">
             <button type="button" class="node-head" aria-expanded="false" data-tip="Familiar · KIT305: Mobile Application Development">
@@ -887,13 +889,13 @@
               <span class="node-ev">KIT305</span>
               <span class="pips" role="img" aria-label="Familiar, 2 of 5"><i class="on"></i><i class="on"></i><i class=""></i><i class=""></i><i class=""></i></span>
             </button>
-            <div class="node-detail"><p>Evidence: KIT305: Mobile Application Development.</p></div>
+            <div class="node-detail" hidden="until-found"><p>Evidence: KIT305: Mobile Application Development.</p></div>
           </div>
       </div>
     </details>
     <details class="branch">
       <summary class="branch-head">
-        <h3>AI &amp; Machine Learning</h3>
+        <span class="branch-label">AI &amp; Machine Learning</span>
         <span class="branch-count">10 skills</span>
       </summary>
       <p class="branch-note">Models trained and evaluated properly, on the metrics that survive imbalanced data, not on accuracy.</p>
@@ -906,7 +908,7 @@
               <span class="node-ev">KIT315</span>
               <span class="pips" role="img" aria-label="Confident, 4 of 5"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class=""></i></span>
             </button>
-            <div class="node-detail"><p>Evidence: KIT315: Machine Learning &amp; Applications.</p></div>
+            <div class="node-detail" hidden="until-found"><p>Evidence: KIT315: Machine Learning &amp; Applications.</p></div>
           </div>
           <div class="node">
             <button type="button" class="node-head" aria-expanded="false" data-tip="Confident · KIT315: Machine Learning &amp; Applications">
@@ -915,7 +917,7 @@
               <span class="node-ev">KIT315</span>
               <span class="pips" role="img" aria-label="Confident, 4 of 5"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class=""></i></span>
             </button>
-            <div class="node-detail"><p>Evidence: KIT315: Machine Learning &amp; Applications. Used in <a href="#p-spam-classifier">Spam Detection Classifier</a>.</p></div>
+            <div class="node-detail" hidden="until-found"><p>Evidence: KIT315: Machine Learning &amp; Applications. Used in <a href="#p-spam-classifier">Spam Detection Classifier</a>.</p></div>
           </div>
           <div class="node">
             <button type="button" class="node-head" aria-expanded="false" data-tip="Confident · KIT315: Machine Learning &amp; Applications">
@@ -924,7 +926,7 @@
               <span class="node-ev">KIT315</span>
               <span class="pips" role="img" aria-label="Confident, 4 of 5"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class=""></i></span>
             </button>
-            <div class="node-detail"><p>Evidence: KIT315: Machine Learning &amp; Applications. Used in <a href="#p-spam-classifier">Spam Detection Classifier</a>.</p></div>
+            <div class="node-detail" hidden="until-found"><p>Evidence: KIT315: Machine Learning &amp; Applications. Used in <a href="#p-spam-classifier">Spam Detection Classifier</a>.</p></div>
           </div>
           <div class="node">
             <button type="button" class="node-head" aria-expanded="false" data-tip="Working · KIT315: Machine Learning &amp; Applications">
@@ -933,7 +935,7 @@
               <span class="node-ev">KIT315</span>
               <span class="pips" role="img" aria-label="Working, 3 of 5"><i class="on"></i><i class="on"></i><i class="on"></i><i class=""></i><i class=""></i></span>
             </button>
-            <div class="node-detail"><p>Evidence: KIT315: Machine Learning &amp; Applications.</p></div>
+            <div class="node-detail" hidden="until-found"><p>Evidence: KIT315: Machine Learning &amp; Applications.</p></div>
           </div>
           <div class="node">
             <button type="button" class="node-head" aria-expanded="false" data-tip="Working · Projects">
@@ -942,7 +944,7 @@
               <span class="node-ev">Projects</span>
               <span class="pips" role="img" aria-label="Working, 3 of 5"><i class="on"></i><i class="on"></i><i class="on"></i><i class=""></i><i class=""></i></span>
             </button>
-            <div class="node-detail"><p>Evidence: Projects. Used in <a href="#p-nous">NOUS</a>.</p></div>
+            <div class="node-detail" hidden="until-found"><p>Evidence: Projects. Used in <a href="#p-nous">NOUS</a>.</p></div>
           </div>
           <div class="node">
             <button type="button" class="node-head" aria-expanded="false" data-tip="Working · KIT315: Machine Learning &amp; Applications">
@@ -951,7 +953,7 @@
               <span class="node-ev">KIT315</span>
               <span class="pips" role="img" aria-label="Working, 3 of 5"><i class="on"></i><i class="on"></i><i class="on"></i><i class=""></i><i class=""></i></span>
             </button>
-            <div class="node-detail"><p>Evidence: KIT315: Machine Learning &amp; Applications. Used in <a href="#p-spam-classifier">Spam Detection Classifier</a>.</p></div>
+            <div class="node-detail" hidden="until-found"><p>Evidence: KIT315: Machine Learning &amp; Applications. Used in <a href="#p-spam-classifier">Spam Detection Classifier</a>.</p></div>
           </div>
           <div class="node">
             <button type="button" class="node-head" aria-expanded="false" data-tip="Working · KIT315: Machine Learning &amp; Applications">
@@ -960,7 +962,7 @@
               <span class="node-ev">KIT315</span>
               <span class="pips" role="img" aria-label="Working, 3 of 5"><i class="on"></i><i class="on"></i><i class="on"></i><i class=""></i><i class=""></i></span>
             </button>
-            <div class="node-detail"><p>Evidence: KIT315: Machine Learning &amp; Applications.</p></div>
+            <div class="node-detail" hidden="until-found"><p>Evidence: KIT315: Machine Learning &amp; Applications.</p></div>
           </div>
           <div class="node">
             <button type="button" class="node-head" aria-expanded="false" data-tip="Working · KIT315: Machine Learning &amp; Applications">
@@ -969,7 +971,7 @@
               <span class="node-ev">KIT315</span>
               <span class="pips" role="img" aria-label="Working, 3 of 5"><i class="on"></i><i class="on"></i><i class="on"></i><i class=""></i><i class=""></i></span>
             </button>
-            <div class="node-detail"><p>Evidence: KIT315: Machine Learning &amp; Applications.</p></div>
+            <div class="node-detail" hidden="until-found"><p>Evidence: KIT315: Machine Learning &amp; Applications.</p></div>
           </div>
           <div class="node">
             <button type="button" class="node-head" aria-expanded="false" data-tip="Familiar · KIT315: Machine Learning &amp; Applications">
@@ -978,7 +980,7 @@
               <span class="node-ev">KIT315</span>
               <span class="pips" role="img" aria-label="Familiar, 2 of 5"><i class="on"></i><i class="on"></i><i class=""></i><i class=""></i><i class=""></i></span>
             </button>
-            <div class="node-detail"><p>Evidence: KIT315: Machine Learning &amp; Applications.</p></div>
+            <div class="node-detail" hidden="until-found"><p>Evidence: KIT315: Machine Learning &amp; Applications.</p></div>
           </div>
           <div class="node">
             <button type="button" class="node-head" aria-expanded="false" data-tip="Familiar · KIT315: Machine Learning &amp; Applications">
@@ -987,13 +989,13 @@
               <span class="node-ev">KIT315</span>
               <span class="pips" role="img" aria-label="Familiar, 2 of 5"><i class="on"></i><i class="on"></i><i class=""></i><i class=""></i><i class=""></i></span>
             </button>
-            <div class="node-detail"><p>Evidence: KIT315: Machine Learning &amp; Applications.</p></div>
+            <div class="node-detail" hidden="until-found"><p>Evidence: KIT315: Machine Learning &amp; Applications.</p></div>
           </div>
       </div>
     </details>
     <details class="branch">
       <summary class="branch-head">
-        <h3>Data Engineering</h3>
+        <span class="branch-label">Data Engineering</span>
         <span class="branch-count">7 skills</span>
       </summary>
       <p class="branch-note">Moving analysis from one machine to a cluster, and querying what lands there.</p>
@@ -1006,7 +1008,7 @@
               <span class="node-ev">KIT102 · KIT318</span>
               <span class="pips" role="img" aria-label="Confident, 4 of 5"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class=""></i></span>
             </button>
-            <div class="node-detail"><p>Evidence: KIT102: Introduction to Data Science · KIT318: Big Data &amp; Cloud Computing.</p></div>
+            <div class="node-detail" hidden="until-found"><p>Evidence: KIT102: Introduction to Data Science · KIT318: Big Data &amp; Cloud Computing.</p></div>
           </div>
           <div class="node">
             <button type="button" class="node-head" aria-expanded="false" data-tip="Confident · KIT102: Introduction to Data Science · KIT214: Intelligent &amp; Secure Web Development">
@@ -1015,7 +1017,7 @@
               <span class="node-ev">KIT102 · KIT214</span>
               <span class="pips" role="img" aria-label="Confident, 4 of 5"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class=""></i></span>
             </button>
-            <div class="node-detail"><p>Evidence: KIT102: Introduction to Data Science · KIT214: Intelligent &amp; Secure Web Development. Used in <a href="#p-nous">NOUS</a>, <a href="#p-php-web-app">Full-Stack Web Application</a>.</p></div>
+            <div class="node-detail" hidden="until-found"><p>Evidence: KIT102: Introduction to Data Science · KIT214: Intelligent &amp; Secure Web Development. Used in <a href="#p-nous">NOUS</a>, <a href="#p-php-web-app">Full-Stack Web Application</a>.</p></div>
           </div>
           <div class="node">
             <button type="button" class="node-head" aria-expanded="false" data-tip="Working · KIT102: Introduction to Data Science · KIT315: Machine Learning &amp; Applications">
@@ -1024,7 +1026,7 @@
               <span class="node-ev">KIT102 · KIT315</span>
               <span class="pips" role="img" aria-label="Working, 3 of 5"><i class="on"></i><i class="on"></i><i class="on"></i><i class=""></i><i class=""></i></span>
             </button>
-            <div class="node-detail"><p>Evidence: KIT102: Introduction to Data Science · KIT315: Machine Learning &amp; Applications.</p></div>
+            <div class="node-detail" hidden="until-found"><p>Evidence: KIT102: Introduction to Data Science · KIT315: Machine Learning &amp; Applications.</p></div>
           </div>
           <div class="node">
             <button type="button" class="node-head" aria-expanded="false" data-tip="Working · KIT318: Big Data &amp; Cloud Computing">
@@ -1033,7 +1035,7 @@
               <span class="node-ev">KIT318</span>
               <span class="pips" role="img" aria-label="Working, 3 of 5"><i class="on"></i><i class="on"></i><i class="on"></i><i class=""></i><i class=""></i></span>
             </button>
-            <div class="node-detail"><p>Evidence: KIT318: Big Data &amp; Cloud Computing. Used in <a href="#p-data-pipelines">Distributed Data Pipelines</a>.</p></div>
+            <div class="node-detail" hidden="until-found"><p>Evidence: KIT318: Big Data &amp; Cloud Computing. Used in <a href="#p-data-pipelines">Distributed Data Pipelines</a>.</p></div>
           </div>
           <div class="node">
             <button type="button" class="node-head" aria-expanded="false" data-tip="Working · KIT318: Big Data &amp; Cloud Computing">
@@ -1042,7 +1044,7 @@
               <span class="node-ev">KIT318</span>
               <span class="pips" role="img" aria-label="Working, 3 of 5"><i class="on"></i><i class="on"></i><i class="on"></i><i class=""></i><i class=""></i></span>
             </button>
-            <div class="node-detail"><p>Evidence: KIT318: Big Data &amp; Cloud Computing. Used in <a href="#p-data-pipelines">Distributed Data Pipelines</a>.</p></div>
+            <div class="node-detail" hidden="until-found"><p>Evidence: KIT318: Big Data &amp; Cloud Computing. Used in <a href="#p-data-pipelines">Distributed Data Pipelines</a>.</p></div>
           </div>
           <div class="node">
             <button type="button" class="node-head" aria-expanded="false" data-tip="Working · KIT318: Big Data &amp; Cloud Computing">
@@ -1051,7 +1053,7 @@
               <span class="node-ev">KIT318</span>
               <span class="pips" role="img" aria-label="Working, 3 of 5"><i class="on"></i><i class="on"></i><i class="on"></i><i class=""></i><i class=""></i></span>
             </button>
-            <div class="node-detail"><p>Evidence: KIT318: Big Data &amp; Cloud Computing. Used in <a href="#p-data-pipelines">Distributed Data Pipelines</a>.</p></div>
+            <div class="node-detail" hidden="until-found"><p>Evidence: KIT318: Big Data &amp; Cloud Computing. Used in <a href="#p-data-pipelines">Distributed Data Pipelines</a>.</p></div>
           </div>
           <div class="node">
             <button type="button" class="node-head" aria-expanded="false" data-tip="Working · KMA153: Data Handling &amp; Statistics 1">
@@ -1060,7 +1062,7 @@
               <span class="node-ev">KMA153</span>
               <span class="pips" role="img" aria-label="Working, 3 of 5"><i class="on"></i><i class="on"></i><i class="on"></i><i class=""></i><i class=""></i></span>
             </button>
-            <div class="node-detail"><p>Evidence: KMA153: Data Handling &amp; Statistics 1.</p></div>
+            <div class="node-detail" hidden="until-found"><p>Evidence: KMA153: Data Handling &amp; Statistics 1.</p></div>
           </div>
           <div class="node next">
             <button type="button" class="node-head" aria-expanded="false" data-tip="Next to learn">
@@ -1069,13 +1071,13 @@
               
               <span class="pips" role="img" aria-label="Next to learn, 0 of 5"><i class=""></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i></span>
             </button>
-            <div class="node-detail"><p>Not started yet.</p></div>
+            <div class="node-detail" hidden="until-found"><p>Not started yet.</p></div>
           </div>
       </div>
     </details>
     <details class="branch">
       <summary class="branch-head">
-        <h3>Practice &amp; Process</h3>
+        <span class="branch-label">Practice &amp; Process</span>
         <span class="branch-count">7 skills</span>
       </summary>
       <p class="branch-note">How the work gets planned, documented and handed over: the half that is not code.</p>
@@ -1088,7 +1090,7 @@
               <span class="node-ev">KIT203 · KIT300</span>
               <span class="pips" role="img" aria-label="Confident, 4 of 5"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class=""></i></span>
             </button>
-            <div class="node-detail"><p>Evidence: KIT203: ICT Project Management &amp; Modelling · KIT300: ICT Project (industry capstone). Used in <a href="#p-industry-capstone">Agent trust demo</a>.</p></div>
+            <div class="node-detail" hidden="until-found"><p>Evidence: KIT203: ICT Project Management &amp; Modelling · KIT300: ICT Project (industry capstone). Used in <a href="#p-industry-capstone">Agent trust demo</a>.</p></div>
           </div>
           <div class="node">
             <button type="button" class="node-head" aria-expanded="false" data-tip="Confident · KIT304 research">
@@ -1097,7 +1099,7 @@
               <span class="node-ev">KIT304 research</span>
               <span class="pips" role="img" aria-label="Confident, 4 of 5"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class=""></i></span>
             </button>
-            <div class="node-detail"><p>Evidence: KIT304 research. Used in <a href="#p-openapi-research">OpenAPI Exposure Research</a>.</p></div>
+            <div class="node-detail" hidden="until-found"><p>Evidence: KIT304 research. Used in <a href="#p-openapi-research">OpenAPI Exposure Research</a>.</p></div>
           </div>
           <div class="node">
             <button type="button" class="node-head" aria-expanded="false" data-tip="Confident · KIT105: ICT Professional Practices · KIT300: ICT Project (industry capstone)">
@@ -1106,7 +1108,7 @@
               <span class="node-ev">KIT105 · KIT300</span>
               <span class="pips" role="img" aria-label="Confident, 4 of 5"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class=""></i></span>
             </button>
-            <div class="node-detail"><p>Evidence: KIT105: ICT Professional Practices · KIT300: ICT Project (industry capstone). Used in <a href="#p-industry-capstone">Agent trust demo</a>.</p></div>
+            <div class="node-detail" hidden="until-found"><p>Evidence: KIT105: ICT Professional Practices · KIT300: ICT Project (industry capstone). Used in <a href="#p-industry-capstone">Agent trust demo</a>.</p></div>
           </div>
           <div class="node">
             <button type="button" class="node-head" aria-expanded="false" data-tip="Working · KIT203: ICT Project Management &amp; Modelling">
@@ -1115,7 +1117,7 @@
               <span class="node-ev">KIT203</span>
               <span class="pips" role="img" aria-label="Working, 3 of 5"><i class="on"></i><i class="on"></i><i class="on"></i><i class=""></i><i class=""></i></span>
             </button>
-            <div class="node-detail"><p>Evidence: KIT203: ICT Project Management &amp; Modelling.</p></div>
+            <div class="node-detail" hidden="until-found"><p>Evidence: KIT203: ICT Project Management &amp; Modelling.</p></div>
           </div>
           <div class="node">
             <button type="button" class="node-head" aria-expanded="false" data-tip="Working · KIT105: ICT Professional Practices">
@@ -1124,7 +1126,7 @@
               <span class="node-ev">KIT105</span>
               <span class="pips" role="img" aria-label="Working, 3 of 5"><i class="on"></i><i class="on"></i><i class="on"></i><i class=""></i><i class=""></i></span>
             </button>
-            <div class="node-detail"><p>Evidence: KIT105: ICT Professional Practices.</p></div>
+            <div class="node-detail" hidden="until-found"><p>Evidence: KIT105: ICT Professional Practices.</p></div>
           </div>
           <div class="node">
             <button type="button" class="node-head" aria-expanded="false" data-tip="Working · KIT219: Development Methodologies &amp; UX">
@@ -1133,7 +1135,7 @@
               <span class="node-ev">KIT219</span>
               <span class="pips" role="img" aria-label="Working, 3 of 5"><i class="on"></i><i class="on"></i><i class="on"></i><i class=""></i><i class=""></i></span>
             </button>
-            <div class="node-detail"><p>Evidence: KIT219: Development Methodologies &amp; UX.</p></div>
+            <div class="node-detail" hidden="until-found"><p>Evidence: KIT219: Development Methodologies &amp; UX.</p></div>
           </div>
           <div class="node">
             <button type="button" class="node-head" aria-expanded="false" data-tip="Working · KIT219: Development Methodologies &amp; UX">
@@ -1142,7 +1144,7 @@
               <span class="node-ev">KIT219</span>
               <span class="pips" role="img" aria-label="Working, 3 of 5"><i class="on"></i><i class="on"></i><i class="on"></i><i class=""></i><i class=""></i></span>
             </button>
-            <div class="node-detail"><p>Evidence: KIT219: Development Methodologies &amp; UX.</p></div>
+            <div class="node-detail" hidden="until-found"><p>Evidence: KIT219: Development Methodologies &amp; UX.</p></div>
           </div>
       </div>
     </details></div>
@@ -1155,7 +1157,7 @@
     </details></div>
   </section>
 
-  <section class="section wrap" id="now">
+  <section class="section wrap" id="now" tabindex="-1">
     <header class="section-head">
       <h2>Now and next</h2>
       <p class="sub">What is in progress, measured against checkpoints, and what comes after.</p>
@@ -1217,7 +1219,7 @@
     </div>
   </section>
 
-  <section class="section wrap" id="work">
+  <section class="section wrap" id="work" tabindex="-1">
     <header class="section-head">
       <h2>Work and study</h2>
       <p class="sub">Three years of security work alongside the degree.</p>
@@ -1271,14 +1273,17 @@
     </div>
   </section>
 
-  <section class="section wrap contact" id="contact">
+  <section class="section wrap contact" id="contact" tabindex="-1">
     <h2 class="contact-title">Get in touch.</h2>
     <p class="contact-sub" id="contactSub">Available now, full time, Hobart. If you have a role in ICT, or a question about anything on this page, I would like to hear from you.</p>
     <div class="contact-links" id="contactLinks">
     <div class="contact-row">
       <span class="contact-label">Email</span>
       <a href="mailto:mirsalmannomaan@gmail.com">mirsalmannomaan@gmail.com</a>
-      <button type="button" class="copy-btn" data-copy="mirsalmannomaan@gmail.com">Copy</button>
+      <span class="copy-wrap">
+        <button type="button" class="copy-btn" data-copy="mirsalmannomaan@gmail.com">Copy</button>
+        <span class="copy-tip" role="status"></span>
+      </span>
     </div>
     <div class="contact-row">
       <span class="contact-label">LinkedIn</span>
@@ -1288,8 +1293,7 @@
       <span class="contact-label">GitHub</span>
       <a href="https://github.com/MISAN0" target="_blank" rel="noopener">github.com/MISAN0</a>
     </div>
-    <p class="contact-cta"><a class="btn btn-primary" href="/Mir-Salman-Nomaan-CV.pdf" download="">Download CV</a></p>
-    <p class="sr-only" aria-live="polite" id="copyStatus"></p></div>
+    <p class="contact-cta"><a class="btn btn-primary" href="/Mir-Salman-Nomaan-CV.pdf" download="">Download CV</a></p></div>
   </section>
 
 </main>
@@ -1302,5 +1306,6 @@
 </footer>
 
 <script src="/data.js?v=474e799b"></script>
-<script src="/app.js?v=b96b76bc"></script>
-<script src="/cv.js?v=8ddddf6d"></script></body></html>
+<script src="/app.js?v=fcf67199"></script>
+<script src="/cv.js?v=8ddddf6d"></script>
+<script src="/wire.js?v=400ce835"></script></body></html>
