@@ -36,9 +36,7 @@ function renderHero(data) {
   $('#heroSeeking').textContent = p.seeking;
   $('#heroActions').innerHTML = `
     <a class="btn btn-primary" href="${esc(data.cv.file)}" download>Download CV</a>
-    <a class="btn" href="/cv/" data-view-link>Recruiter view</a>
-    <a class="btn btn-quiet" href="${esc(p.links.github)}"${ext(p.links.github)}>GitHub ↗</a>
-    <a class="btn btn-quiet" href="${esc(p.links.linkedin)}"${ext(p.links.linkedin)}>LinkedIn ↗</a>`;
+    <a class="btn" href="/cv/" data-view-link>Recruiter view</a>`;
 }
 
 /* ---------- Projects ---------- */
